@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import './Counter.css';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
+import ReactLogo from './assets/react.svg';
 import cat from './assets/cat.jpg';
+import ViteLogo from './assets/vite.svg';
 
 function Counter() {
   const [count, setCount] = useState(0);
-  console.log('viteLogo', viteLogo);
   return (
     <>
       <div>
         <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
+          <ViteLogo />
         </a>
         <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
+          {/* <img src={cat.src} alt={'????'} /> */}
         </a>
         <a href='https://react.dev' target='_blank'>
-          <img src={cat} className='logo react' alt='React logo' />
+          {/* <img src={cat} className='logo react' alt='React logo' /> */}
+          <ReactLogo />
         </a>
       </div>
       <h1>Vite + React</h1>
