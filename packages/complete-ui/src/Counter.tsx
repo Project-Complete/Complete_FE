@@ -1,23 +1,38 @@
 import { useState } from 'react';
 import './Counter.css';
 import ReactLogo from './assets/react.svg';
-import cat from './assets/cat.jpg';
-import ViteLogo from './assets/vite.svg';
+import ImageWrapper from './ImageWrapper';
+// import Cat from './assets/cat.jpg';
+// import ViteLogo from './assets/vite.svg';
 
 function Counter() {
   const [count, setCount] = useState(0);
+  // console.log('ReactLogo', ReactLogo);
+  // console.log('ReactLogo', ReactLogo);
+  // console.log('Cat', Cat);
   return (
     <>
       <div>
         <a href='https://vitejs.dev' target='_blank'>
-          <ViteLogo />
+          {/* <ViteLogo /> */}
         </a>
         <a href='https://react.dev' target='_blank'>
-          {/* <img src={cat.src} alt={'????'} /> */}
+          {/* <img src={Cat} alt={'????'} /> */}
+          {/* <Cat /> */}
         </a>
         <a href='https://react.dev' target='_blank'>
           {/* <img src={cat} className='logo react' alt='React logo' /> */}
-          <ReactLogo />
+          {/* <ReactLogo /> */}
+          {/* {<img src={ReactLogo.src}></img>} */}
+          {/* {typeof ReactLogo === 'string' ? (
+            <img src={ReactLogo}></img>
+          ) : (
+            <ReactLogo></ReactLogo>
+          )} */}
+          <ImageWrapper image={ReactLogo} />
+          {/* <ReactLogo /> */}
+          {/* <ReactLogo /> */}
+          <div>asdf121231231231231233</div>
         </a>
       </div>
       <h1>Vite + React</h1>

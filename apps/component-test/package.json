@@ -1,5 +1,5 @@
 {
-  "name": "complete-ui",
+  "name": "component-test",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,13 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mantine/core": "^7.4.0",
-    "@mantine/hooks": "^7.4.0",
+    "complete-ui": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -25,10 +23,8 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "glob": "^10.3.10",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vite-plugin-dts": "^3.7.0",
     "vite-plugin-svgr": "^4.2.0"
   }
 }
