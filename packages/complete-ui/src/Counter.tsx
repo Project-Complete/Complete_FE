@@ -12,6 +12,7 @@ function Counter() {
   // console.log('Cat', Cat);
   return (
     <>
+      <div>????asdfasdf</div>
       <div>
         <a href='https://vitejs.dev' target='_blank'>
           {/* <ViteLogo /> */}
@@ -32,7 +33,8 @@ function Counter() {
           <ImageWrapper image={ReactLogo} />
           {/* <ReactLogo /> */}
           {/* <ReactLogo /> */}
-          <div>asdf121231231231231233</div>
+          asdfasdfasdfasdf
+          <div>asdfasdfasdfasd524541561651635as</div>
         </a>
       </div>
       <h1>Vite + React</h1>

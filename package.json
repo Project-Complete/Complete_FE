@@ -1,7 +1,6 @@
 {
   "name": "complete",
   "private": true,
-  
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -9,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "complete-ui":"*",
+    "@team-complete/complete-ui": "*",
     "prettier": "^3.1.0",
     "turbo": "latest"
   },

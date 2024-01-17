@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  transpilePackages: ['complete-ui'],
+  transpilePackages: ['@team-complete/complete-ui/dist'],
   // webpack(config) {
   //   config.module.rules.push({
   //     test: /\.svg$/i,

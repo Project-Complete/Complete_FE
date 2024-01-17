@@ -6,7 +6,7 @@
         "name": "next"
       }
     ],
-    "types": ["../../node_modules/complete-ui/dist"]
+    "types": ["../../node_modules/@team-complete/complete-ui/dist"]
   },
   "include": [
     "next-env.d.ts",

@@ -2,7 +2,7 @@
 // import reactLogo from './assets/react.svg';
 // import viteLogo from '/vite.svg';
 import './App.css';
-import { Counter } from 'complete-ui';
+import { Counter } from '@team-complete/complete-ui';
 
 function App() {
   return (
