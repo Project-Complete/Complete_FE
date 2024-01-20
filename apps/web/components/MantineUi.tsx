@@ -1,4 +1,5 @@
 'use client';
+
 import { Counter } from '@team-complete/complete-ui';
 import IOCComponent from './IOCComponent';
 import SubExportTest from './SubExportTest';
@@ -18,4 +19,5 @@ const MantineUi = () => {
     </>
   );
 };
+
 export default MantineUi;

@@ -2,6 +2,7 @@
   "name": "web",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev -p 3003",
     "build": "next build",
@@ -9,7 +10,11 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@mantine/core": "^7.4.2",
+    "@mantine/hooks": "^7.4.2",
+    "@next/bundle-analyzer": "^14.1.0",
     "@team-complete/complete-ui": "*",
+    "framer-motion": "^10.18.0",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -24,6 +29,9 @@
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "eslint": "^8.53.0",
+    "postcss": "^8.4.33",
+    "postcss-preset-mantine": "^1.12.3",
+    "postcss-simple-vars": "^7.0.1",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
