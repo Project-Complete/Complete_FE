@@ -14,13 +14,7 @@ module.exports = {
     { value: "update", name: "update: 라이브러리 or 서브모듈 버전 업데이트" },
     { value: "chore", name: "chore: 빌드 소스 수정" },
   ],
-  scopes: [
-    {
-      name: "setting",
-      value: "setting",
-    },
-  ],
-  allowCustomScopes: false,
+  scopes: [],
   skipQuestions: ["body"],
   subjectLimit: 100,
 };
