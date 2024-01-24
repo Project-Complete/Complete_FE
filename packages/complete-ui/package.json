@@ -39,6 +39,7 @@
     "vite-plugin-dts": "^3.7.0",
     "vite-plugin-svgr": "^4.2.0"
   },
+
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "author": "",
   "license": "ISC"
