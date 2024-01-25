@@ -1,22 +1,28 @@
 {
   "name": "complete",
   "private": true,
-  
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "commit": "cross-env ./node_modules/cz-customizable/standalone.js"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
-    "complete-ui":"*",
-    "prettier": "^3.1.0",
+    "@team-complete/complete-ui": "*",
+    "commitizen": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "cz-customizable": "^7.0.0",
+    "prettier": "^3.2.4",
     "turbo": "latest"
   },
   "engines": {
     "node": ">=18"
+  },
+  "config": {
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
   },
   "packageManager": "yarn@1.22.19",
   "workspaces": [

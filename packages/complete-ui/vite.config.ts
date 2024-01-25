@@ -1,22 +1,18 @@
 import { defineConfig } from 'vite';
-import { extname, relative, resolve } from 'path';
-import { fileURLToPath } from 'node:url';
-import { glob } from 'glob';
+import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
-import svgr from '@svgr/rollup';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts({ copyDtsFiles: true })],
+  // assetsInclude: ['./src/assets**/*.jpg'],
   build: {
-    // copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, 'index.ts'),
-      formats: ['es'],
+      entry: resolve(__dirname, './index.ts'),
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime'],
+      external: ['react'],
       output: {
         globals: {
           react: 'React',

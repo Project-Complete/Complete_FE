@@ -5,14 +5,26 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "types": ["../../node_modules/@team-complete/complete-ui/dist"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "paths": {
+    "@/*": ["./*"]
   },
   "include": [
     "next-env.d.ts",
-    "next.config.js",
+    "next.config.mjs",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "./../../node_modules/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
