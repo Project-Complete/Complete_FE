@@ -5,8 +5,13 @@ import { Inter } from 'next/font/google';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 import HeaderWrapper from '../components/Header';
+import localFont from 'next/font/local';
 
 const inter = Inter({ subsets: ['latin'] });
+export const pretendard = localFont({
+  src: './../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',
@@ -28,9 +33,17 @@ export default function RootLayout({
           content='minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no'
         />
       </head>
-      <body className={inter.className}>
+      <body>
         {/* {children} */}
-        <MantineProvider theme={theme}>
+        <MantineProvider
+          theme={{
+            fontFamily: pretendard.style.fontFamily,
+            headings: {
+              fontFamily: pretendard.style.fontFamily,
+            },
+            ...theme,
+          }}
+        >
           <HeaderWrapper />
           {children}
         </MantineProvider>
