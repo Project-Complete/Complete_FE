@@ -13,4 +13,5 @@ export default withBundleAnalyzer({
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   transpilePackages: ['@team-complete/complete-ui/dist'],
+  nextScriptWorkers: true,
 });

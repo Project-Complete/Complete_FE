@@ -1,0 +1,9 @@
+.banner-image-section {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.banner-image-inner-section {
+  background: black;
+  border-radius: 30px;
+}
