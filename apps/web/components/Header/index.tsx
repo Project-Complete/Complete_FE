@@ -5,14 +5,7 @@ import HeaderCenterWrapper from './SearchBar';
 
 const HeaderWrapper = () => {
   return (
-    <Flex
-      w={'100%'}
-      h={232}
-      direction={`column`}
-      align={`center`}
-      pos={`relative`}
-      className={classes.headerWrapper}
-    >
+    <>
       <Flex
         w={`100%`}
         h={52}
@@ -22,10 +15,19 @@ const HeaderWrapper = () => {
       <Flex w={`100%`} h={120} className={classes[`header-center`]}>
         <HeaderCenterWrapper />
       </Flex>
-      <Flex w={`100%`} mih={60} pos={`sticky`}>
-        <HeaderNavWrapper />
+      <Flex
+        w={`100%`}
+        h={60}
+        pos={`sticky`}
+        top={0}
+        bg={`#FFF`}
+        style={{ zIndex: 10 }}
+      >
+        <Flex w={`100%`} h={`100%`} pos={`relative`} top={0}>
+          <HeaderNavWrapper />
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 
