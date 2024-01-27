@@ -12,13 +12,14 @@
   },
   "scripts": {
     "ui:build": "vite build --watch",
+    "buildTest": "vite build",
     "dev": "vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mantine/core": "^7.4.0",
-    "@mantine/hooks": "^7.4.0",
+    "@mantine/core": "^7.5.0",
+    "@mantine/hooks": "^7.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite-tsconfig-paths": "^4.3.1"
