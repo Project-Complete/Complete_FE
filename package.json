@@ -4,7 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "ui:build": "turbo dev --parallel",
-    "dev": "turbo dev --parallel",
+    "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "cross-env ./node_modules/cz-customizable/standalone.js"

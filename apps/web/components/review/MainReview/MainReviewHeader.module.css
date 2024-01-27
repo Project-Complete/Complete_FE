@@ -1,0 +1,37 @@
+.review-main-title{
+    --Font-Text-active: #000000D9;
+    color: var(--Font-Text-active, rgba(0, 0, 0, 0.85));
+    /* Page/Page-Head-ext */
+    font-family: Pretendard;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 60px; /* 150% */
+    
+}
+
+
+.review-filter-button-layout{
+    display: flex;
+    padding: 0px 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-filter-button{
+    --Corner-radius-32: brown;
+    --Background-bg-button:#FFFFFF;
+    --Font-Text-muted: #00000073;
+    border-radius:32px;
+    border: 1px solid var(--Font-Text-muted, rgba(0, 0, 0, 0.45));
+    background: var(--Background-bg-button, #FFF);
+
+    color: var(--Font-Text-muted, rgba(0, 0, 0, 0.45));
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px; /* 314.286% */
+}
+

@@ -1,0 +1,5 @@
+.star-score-layout{
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+}

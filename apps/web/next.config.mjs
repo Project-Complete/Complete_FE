@@ -5,6 +5,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 export default withBundleAnalyzer({
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+    ],
+  },
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
