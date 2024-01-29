@@ -1,0 +1,23 @@
+.banner-beer-list-card-section {
+  width: 116px;
+  height: 116px;
+  background-color: #44ffd0;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-beer-list-background-section {
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  background-color: #bcc0c4;
+}
+
+.banner-beer-list-score-section {
+  position: absolute;
+  border-radius: 4px;
+  bottom: 10px;
+  right: 10px;
+  box-shadow: 4px 4px 5.9px 0px rgba(0, 0, 0, 0.07);
+  color: rgba(0, 0, 0, 0.65);
+}

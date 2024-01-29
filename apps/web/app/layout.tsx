@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
-import HeaderWrapper from '../components/Header';
+import HeaderWrapper from '../components/header';
 import localFont from 'next/font/local';
 
 const inter = Inter({ subsets: ['latin'] });
