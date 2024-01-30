@@ -6,7 +6,7 @@
         "name": "next",
       },
     ],
-    "types": ["../../node_modules/@team-complete/complete-ui/dist"],
+    
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
