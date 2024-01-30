@@ -7,6 +7,7 @@ import MainReview from '@/components/review/mainReview/MainReview';
 export default function Page(): JSX.Element {
   return (
     <Flex className={styles.main}>
+      <Button>ASDF</Button>
       <Flex
         className={styles['banner']}
         w={'100%'}

@@ -1,0 +1,12 @@
+{
+  "name": "@repo/mantine-theme",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./mantine.theme.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@mantine/core": "^7.5.0"
+  }
+}

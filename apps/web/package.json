@@ -24,6 +24,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@repo/mantine-theme": "*",
     "@next/eslint-plugin-next": "^14.0.2",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
