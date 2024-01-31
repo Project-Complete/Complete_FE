@@ -1,2 +1,3 @@
 import Counter from './src/Counter';
-export { Counter };
+import { StyledButton } from './src/components/button/Button';
+export { Counter, StyledButton };

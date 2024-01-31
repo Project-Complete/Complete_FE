@@ -7,8 +7,8 @@ export const theme: MantineThemeOverride = createTheme({
     xl: rem(20),
     lg: rem(18),
     base: rem(16),
-    sm: rem(15),
-    xs: rem(13),
+    sm: rem(14),
+    xs: rem(12),
   },
   lineHeights: {
     '2xl': '3.125',
@@ -18,5 +18,4 @@ export const theme: MantineThemeOverride = createTheme({
     sm: '1.875',
     xs: '1.5',
   },
-  
 });

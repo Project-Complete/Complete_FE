@@ -13,14 +13,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
     "paths": {
-      "@/assets/*": ["./src/assets/*"]
+      "@/*":["src/*"],
     }
   },
   "include": ["src/**/*", "index.ts", "src/types/index.d.ts"],

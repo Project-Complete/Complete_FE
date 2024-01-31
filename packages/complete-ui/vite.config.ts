@@ -6,6 +6,11 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   plugins: [react(), dts({ copyDtsFiles: true })],
   // assetsInclude: ['./src/assets**/*.jpg'],
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, './index.ts'),
