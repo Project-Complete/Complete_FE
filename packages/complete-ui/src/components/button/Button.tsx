@@ -1,22 +1,35 @@
 import { cn } from '@/utils/util';
-import { Button, MantineProvider } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ButtonHTMLAttributes } from 'react';
+import classes from './Button.module.css';
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}
 
-const buttonVariants = cva({});
-
+const buttonVariants = cva(classes.button, {
+  variants: {
+    size: {
+      md: classes[`button-md`],
+      lg: classes[`button-lg`],
+    },
+  },
+  defaultVariants: {
+    size: `md`,
+  },
+});
+//  cn({ size, className });
 const StyledButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, ...props }) => {
+  ({ className, size, children, ...props }) => {
     return (
-      <MantineProvider>
-        <Button className={cn(className)} {...props}>
-          {children}
-        </Button>
-      </MantineProvider>
+      <Button
+        classNames={{
+          root: classes.button,
+        }}
+      >
+        {children}
+      </Button>
     );
   },
 );

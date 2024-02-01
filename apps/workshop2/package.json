@@ -19,16 +19,17 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@mantine/core": "^7.5.1",
-    "@mantine/hooks": "^7.5.1",
+    "@mantine/core": "^7.5.0",
+    "@mantine/hooks": "^7.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+  "@repo/mantine-theme": "*",
+    "@team-complete/complete-ui": "*"
   },
   "devDependencies": {
-    "@repo/mantine-theme": "*",
-    "@team-complete/complete-ui": "*",
+    
     "@storybook/addon-essentials": "7.6.12",
     "@storybook/addon-interactions": "7.6.12",
     "@storybook/addon-links": "7.6.12",

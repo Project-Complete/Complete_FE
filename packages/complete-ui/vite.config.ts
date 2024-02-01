@@ -17,10 +17,12 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react'],
+      external: ['react', '@mantine/core', '@mantine/hooks'],
       output: {
         globals: {
           react: 'React',
+          ['@mantine/core']: '@mantine/core',
+          ['@mantine/hooks']: '@mantine/hooks',
         },
       },
     },
