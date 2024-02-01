@@ -8,7 +8,8 @@
       "import": "./dist/complete-ui.js",
       "require": "./dist/complete-ui.cjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
     "ui:build": "vite build --watch",

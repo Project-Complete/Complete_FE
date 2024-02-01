@@ -16,17 +16,17 @@ const buttonVariants = cva(classes.button, {
     },
   },
   defaultVariants: {
-    size: `md`,
+    size: `lg`,
   },
 });
 //  cn({ size, className });
 const StyledButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, size, children, ...props }) => {
+  ({ className, size, children, ...props }, ref) => {
     return (
       <Button
-        classNames={{
-          root: classes.button,
-        }}
+        className={cn(buttonVariants({ size, className }))}
+        {...props}
+        ref={ref}
       >
         {children}
       </Button>

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 // import { Button } from "./a";
 import { StyledButton as Button } from '@team-complete/complete-ui';
+import classes from './button.module.css';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -20,15 +21,18 @@ const meta = {
 } satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// type Story = StoryObj<typeof meta>;
+
+export const Size = () => <Button size={`md`}>test</Button>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
-  args: {
-    // primary: true,
-    children: 'Button',
-  },
-};
+// export const Primary: Story = {
+//   args: {
+//     // primary: true,
+//     children: 'Button',
+//     className:`classes.storybookButtonTest`
+//   },
+// };
 
 // export const Secondary: Story = {
 //   args: {

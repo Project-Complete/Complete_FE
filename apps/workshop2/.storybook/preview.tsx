@@ -9,7 +9,7 @@ import { MantineProvider, useMantineColorScheme } from '@mantine/core';
 // theme.ts file from previous step
 // import { theme } from "../theme";
 import { theme } from '../../../node_modules/@repo/mantine-theme/mantine.theme';
-import '../../../node_modules/@team-complete/complete-ui/dist/style.css';
+import '@team-complete/complete-ui/style.css';
 
 const channel = addons.getChannel();
 

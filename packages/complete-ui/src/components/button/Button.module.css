@@ -3,17 +3,16 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  background-color: red !important;
-  width: 1000px;
+  background: red;
 }
 
 .button-md {
   padding: 5rem;
-  width: 4.25rem;
-  height: 2.5rem;
+  width: 15rem;
+  height: 15rem;
   gap: 3.5rem;
   /* 기본 상태일 때의 스타일 */
-  background: #fff;
+  background: skyblue;
   /* 호버 상태일 때의 스타일 */
   &:hover {
     background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */
@@ -28,9 +27,7 @@
 
 .button-lg {
   display: inline-flex;
-  padding: var(--Padding-btn-lg-vertical, 0rem)
-    var(--btn-md-horizontal-padding, 0.75rem);
-  gap: var(--Spacing-8, 0.5rem);
+  width: 1000rem;
 
   &:hover {
     background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */
