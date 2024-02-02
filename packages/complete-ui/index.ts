@@ -1,4 +1,4 @@
 import Counter from './src/Counter';
-import { StyledButton } from './src/components/button/Button';
-import { Loader } from './src/components/Loader/index';
-export { Counter, StyledButton, Loader };
+import { Button } from './src/components/button/index';
+import { Dropdown } from './src/components/dropdown';
+export { Counter, Button, Dropdown };

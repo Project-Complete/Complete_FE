@@ -1,0 +1,23 @@
+.Dropdown {
+  display: flex;
+  min-width: 11.5rem;
+  padding: 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  background: #000;
+}
+
+.Dropdown .mantine-Input-input {
+  outline: none;
+  outline-offset: 199px;
+  background: #000;
+  border: none;
+}
+
+.Dropdown input {
+  outline: none;
+  outline-offset: 199px;
+  background: #fff;
+  border: none;
+  border-radius: 0.75rem;
+}

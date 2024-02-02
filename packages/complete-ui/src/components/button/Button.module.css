@@ -1,15 +1,13 @@
 .button {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
-  background: red;
+  justify-content: center;
+  align-items: center;
 }
 
 .button-md {
-  padding: 5rem;
-  width: 15rem;
-  height: 15rem;
+  min-width: 4.5rem;
+  height: 2.5rem;
   gap: 3.5rem;
   /* 기본 상태일 때의 스타일 */
   background: skyblue;
@@ -26,8 +24,8 @@
 }
 
 .button-lg {
-  display: inline-flex;
-  width: 1000rem;
+  min-width: 5rem;
+  height: 3rem;
 
   &:hover {
     background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */

@@ -16,7 +16,8 @@ module.exports = {
     // customize the Vite config here
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@": path.resolve(__dirname, "../src"),
+      "@": path.resolve(__dirname, "../../../packages/complete-ui/src"),
+      
     };
     // return the customized config
     return config;

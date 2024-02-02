@@ -16,7 +16,7 @@ const buttonVariants = cva(classes.button, {
     },
   },
   defaultVariants: {
-    size: `lg`,
+    size: `md`,
   },
 });
 //  cn({ size, className });

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "ui:build": "vite build --watch",
-    "buildTest": "vite build",
+    "build": "vite build",
     "dev": "vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
