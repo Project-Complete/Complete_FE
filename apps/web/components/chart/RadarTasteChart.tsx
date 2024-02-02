@@ -20,11 +20,10 @@ ChartJS.register(
 );
 
 export const data = {
-  labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6'],
+  labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
   datasets: [
     {
-      label: '# of Votes',
-      data: [2, 9, 3, 5, 2, 3],
+      data: [5, 9, 3, 5, 5],
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       borderColor: 'rgba(255, 99, 132, 1)',
       borderWidth: 1,
@@ -32,7 +31,24 @@ export const data = {
   ],
 };
 
-const RaderTasteChart = () => {
-  return <Radar data={data} />;
+const RadarTasteChart = () => {
+  return (
+    <Radar
+      data={data}
+      options={{
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          r: {
+            suggestedMin: 0,
+            suggestedMax: 10,
+          },
+        },
+      }}
+    />
+  );
 };
-export default RaderTasteChart;
+export default RadarTasteChart;

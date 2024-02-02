@@ -1,10 +1,10 @@
 import Detail from '@/components/drinkDetail/Detail';
-import { Flex } from '@mantine/core';
+import { Container, Flex } from '@mantine/core';
 
 export default function Page(): JSX.Element {
   return (
-    <Flex>
+    <Container>
       <Detail />
-    </Flex>
+    </Container>
   );
 }
