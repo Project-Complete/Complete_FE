@@ -7,6 +7,11 @@ const meta = {
   component: Dropdown,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: `자세한 내용은 해당 링크 참조 https://mantine.dev/core/select/`,
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

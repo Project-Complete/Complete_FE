@@ -3,6 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid var(--Border, #7E3FB8);;
+  background: linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%);
+  
 }
 
 .button-md {
@@ -10,7 +13,6 @@
   height: 2.5rem;
   gap: 3.5rem;
   /* 기본 상태일 때의 스타일 */
-  background: skyblue;
   /* 호버 상태일 때의 스타일 */
   &:hover {
     background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */

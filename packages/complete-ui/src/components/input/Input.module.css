@@ -1,0 +1,33 @@
+.Input-focus {
+}
+
+.Input-color-orange {
+  /* color: #ff7e12; */
+}
+
+.Input-color-red {
+}
+
+.Input-color-black {
+}
+
+.Input-focus input {
+  &:hover {
+    border: 1px solid #606770;
+  }
+
+  &:focus {
+    border: 1px solid #693bc9;
+  }
+}
+
+.Input-color-orange input {
+  color: #ff7e12;
+}
+.Input-color-black input {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.Input-color-red input {
+  color: #fd3d51;
+}
