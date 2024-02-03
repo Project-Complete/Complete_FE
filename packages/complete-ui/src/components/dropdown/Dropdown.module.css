@@ -4,20 +4,16 @@
   padding: 0.75rem;
   align-items: center;
   gap: 0.5rem;
-  background: #000;
-}
-
-.Dropdown .mantine-Input-input {
-  outline: none;
-  outline-offset: 199px;
-  background: #000;
-  border: none;
+  /* background: #000; */
 }
 
 .Dropdown input {
   outline: none;
-  outline-offset: 199px;
   background: #fff;
   border: none;
   border-radius: 0.75rem;
+}
+.Dropdown [data-expanded='true'] {
+  border-bottom: 1px solid #e5e6e8;
+  border-radius: 0.75rem 0.75rem 0 0;
 }
