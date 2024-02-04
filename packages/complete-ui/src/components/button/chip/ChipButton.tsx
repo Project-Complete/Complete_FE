@@ -13,15 +13,17 @@ const chipButtonVariants = cva(classes.ChipButtonWrapper, {
     variant: {
       full: classes[`ChipButton-full`],
       outline: classes[`ChipButton-outline`],
+      ghost: classes[`ChipButton-ghost`],
     },
     background: {
       white: classes[`ChipButton-full-background-white`],
       primary: classes[`ChipButton-full-background-primary`],
+      none: classes[`ChipButton-full-background-none`],
     },
   },
   defaultVariants: {
     variant: `full`,
-    background: `white`,
+    background: `none`,
   },
 });
 
