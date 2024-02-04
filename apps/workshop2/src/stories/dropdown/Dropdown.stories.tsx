@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react';
 import { Dropdown } from '@team-complete/complete-ui';
 
 const meta = {
-  title: 'Button/Dropdown',
+  title: 'Buttons/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',
