@@ -1,4 +1,6 @@
 import Counter from './src/Counter';
-import { StyledButton } from './src/components/button/Button';
-import { Loader } from './src/components/Loader/index';
-export { Counter, StyledButton, Loader };
+import { Button, ChipButton } from './src/components/button/index';
+import { Dropdown } from './src/components/dropdown';
+import { Input } from './src/components/input';
+
+export { Counter, Button, ChipButton, Dropdown, Input };

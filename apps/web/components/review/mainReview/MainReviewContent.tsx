@@ -3,6 +3,7 @@ import { Flex, Grid } from '@mantine/core';
 import Image from 'next/image';
 import bookmark from '@/assets/bookmark.svg';
 import heart from '@/assets/heart.svg';
+import emptyStar from '@/assets/emptyStar.svg';
 import StarScore from '@/components/animation/StarScore';
 import classes from './MainReviewContent.module.css';
 
