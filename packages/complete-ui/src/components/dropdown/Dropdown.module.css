@@ -1,0 +1,20 @@
+.Dropdown {
+  display: flex;
+  min-width: 11.5rem;
+  padding: 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  /* background: #000; */
+}
+
+.Dropdown input {
+  outline: none;
+  background: #fff;
+  border: none;
+  border-radius: 0.75rem;
+}
+.Dropdown [data-expanded='true'] {
+  border-bottom: 1px solid #e5e6e8;
+  border-radius: 0.75rem 0.75rem 0 0;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
