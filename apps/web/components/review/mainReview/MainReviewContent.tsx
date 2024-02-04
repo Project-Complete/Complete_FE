@@ -3,7 +3,6 @@ import { Flex, Grid } from '@mantine/core';
 import Image from 'next/image';
 import bookmark from '@/assets/bookmark.svg';
 import heart from '@/assets/heart.svg';
-import emptyStar from '@/assets/emptyStar.svg';
 import StarScore from '@/components/animation/StarScore';
 import classes from './MainReviewContent.module.css';
 
@@ -13,35 +12,36 @@ const MainReviewContent = () => {
       {new Array(10).fill(null).map((v, index) => {
         return (
           <Grid.Col
+            w={'100%'}
             key={index}
             span={{ base: 6, md: 4, lg: 3 }}
             style={{ display: 'flex', justifyContent: 'center' }}
           >
             <Flex
               direction={'column'}
-              w={288}
               justify={'center'}
               align={'center'}
-              style={{
-                overflow: 'hidden',
-                border: '1px solid black',
-                borderRadius: '12px',
-              }}
+              w={'100%'}
               gap={16}
+              pos={'relative'}
             >
               <Flex
-                w={{ base: 288, sm: 288 }}
-                h={{ base: 288, sm: 288 }}
+                w={'100%'}
+                pb={'100%'}
                 style={{
-                  border: '1px solid black',
-                  borderRadius: '12px',
                   overflow: 'hidden',
+                  borderRadius: '12px',
+                  boxShadow: '0px 4px 20px 0px #00000033',
                 }}
+                pos={'relative'}
               >
                 <Image
                   src={'https://picsum.photos/288/288.webp'}
-                  width={288}
-                  height={288}
+                  sizes='256px'
+                  fill
+                  style={{
+                    objectFit: 'contain',
+                  }}
                   alt={'image'}
                 />
               </Flex>
