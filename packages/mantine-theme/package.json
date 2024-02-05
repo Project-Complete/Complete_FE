@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".": "./mantine.theme.ts"
+    ".": "./mantine.theme.ts",
+    "./_mantine.scss": "./_mantine.scss"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

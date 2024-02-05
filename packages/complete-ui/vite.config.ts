@@ -27,4 +27,11 @@ export default defineConfig({
       },
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@repo/mantine-theme/_mantine.scss";`,
+      },
+    },
+  },
 });
