@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@repo/mantine-theme": "*",
-    "@team-complete/complete-ui": "*",
     "@storybook/addon-essentials": "7.6.12",
     "@storybook/addon-interactions": "7.6.12",
     "@storybook/addon-links": "7.6.12",
@@ -37,6 +36,7 @@
     "@storybook/react": "7.6.12",
     "@storybook/react-vite": "7.6.12",
     "@storybook/test": "7.6.12",
+    "@team-complete/complete-ui": "*",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -49,12 +49,13 @@
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",
     "postcss-simple-vars": "^7.0.1",
+    "sass": "^1.70.0",
     "storybook": "7.6.12",
     "storybook-dark-mode": "^3.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-    "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "author": "",
   "license": "ISC",
   "packageManager": "yarn@4.0.2"
