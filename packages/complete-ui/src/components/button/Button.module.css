@@ -28,12 +28,11 @@
   min-width: 5rem;
   height: 3rem;
   text-align: center;
-  /* Button/Button-Semi Bold */
   font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 3rem; /* 266.667% */
+  line-height: 3rem;
 }
 
 .button-primary {
@@ -43,16 +42,15 @@
     linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
   &:hover {
     color: rgba(255, 255, 255, 0.85);
-    background:
-      linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
-      linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-    background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */
+    border: 1px solid #0000005b;
+    background-image: linear-gradient(99.88deg, #7e3fb8 0%, #b24a8b 100%),
+      linear-gradient(111.27deg, #7e3fb8 0%, #b24a8b 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
   }
 
-  /* 액티브 상태일 때의 스타일 */
   &:active {
     color: rgba(255, 255, 255, 0.85);
-    background-color: #d9d9d9; /* 클릭 시 배경 색상 변경 */
     transform: translateY(2px);
   }
 }
@@ -83,7 +81,7 @@
 
   border-radius: 0px;
   &:hover {
-    background: white; /* 배경색 설정 */
+    background: white;
     background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
     background-clip: text;
     -webkit-background-clip: text;

@@ -1,0 +1,31 @@
+.Tab {
+  outline: none;
+
+  &[data-active='true'] {
+    border-bottom: 2px;
+    border-style: solid;
+    border-image: linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) 1;
+    background-color: var(--Background-bg-Button, #fff);
+    }
+   &[data-active='true'] span {
+    font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 3.25rem;
+        
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+   }
+   & span{
+    color:rgba(0, 0, 0, 0.65);
+    font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 3.25rem;
+        
+   }
+}
+
+

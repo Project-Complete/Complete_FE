@@ -7,30 +7,23 @@ interface ChipButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof chipButtonVariants> {}
 
-const chipButtonVariants = cva(classes.ChipButtonWrapper, {
+const chipButtonVariants = cva(classes[`Chip-button-wrapper`], {
   variants: {
     variant: {
-      full: classes[`ChipButton-full`],
-      outline: classes[`ChipButton-outline`],
-      ghost: classes[`ChipButton-ghost`],
-    },
-    background: {
-      white: classes[`ChipButton-full-background-white`],
-      primary: classes[`ChipButton-full-background-primary`],
-      none: classes[`ChipButton-full-background-none`],
+      primary: classes[`Chip-button-background-primary`],
+      gray: classes[`Chip-button-background-gray`],
     },
   },
   defaultVariants: {
-    variant: `full`,
-    background: `none`,
+    variant: `primary`,
   },
 });
 
 const ChipButton = React.forwardRef<HTMLButtonElement, ChipButtonProps>(
-  ({ className, background, variant, children, ...props }, ref) => {
+  ({ className, gray, variant, children, ...props }, ref) => {
     return (
       <button
-        className={cn(chipButtonVariants({ variant, background, className }))}
+        className={cn(chipButtonVariants({ variant, gray, className }))}
         {...props}
         ref={ref}
       >

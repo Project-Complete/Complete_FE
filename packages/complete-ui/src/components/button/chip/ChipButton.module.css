@@ -1,75 +1,36 @@
-.ChipButtonWrapper {
+.Chip-button-wrapper {
   border-radius: 9999px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background: white;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 3rem; /* 266.667% */
 }
 
-.ChipButton-full {
-  border: none;
-  background: none;
-}
-
-.ChipButton-outline {
-  color: #a589df;
-  border: 1px solid #a589df;
-  background: none;
+.Chip-button-background-primary {
+  border: 1px solid var(--primary-color-400);
+  color: var(--primary-color-400);
   &:hover {
     color: rgba(255, 255, 255, 0.85);
-    border: 1px solid;
-    background:
-      linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
-      linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-    background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */
+    border: 1px solid #0000005b;
+    background-image: linear-gradient(99.88deg, #7e3fb8 0%, #b24a8b 100%),
+      linear-gradient(111.27deg, #7e3fb8 0%, #b24a8b 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
   }
-
-  /* 액티브 상태일 때의 스타일 */
   &:active {
     color: rgba(255, 255, 255, 0.85);
-    background:
-      linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
-      linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
     transform: translateY(2px);
   }
-  &:disabled {
-    border: 1px solid var(--Stoke, rgba(0, 0, 0, 0.1));
-    color: rgba(0, 0, 0, 0.25);
-    background: none;
-  }
 }
 
-.ChipButton-full-background-white {
-  background: #fff;
-}
-.ChipButton-full-background-none {
-  background: none;
-}
-
-.ChipButton-full-background-primary {
-  background:
-    linear-gradient(111deg, #fff 0%, #fff 100%),
-    linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-  color: rgba(0, 0, 0, 0.65);
-  &:hover {
-    color: rgba(255, 255, 255, 0.85);
-    border: 1px solid;
-    background:
-      linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
-      linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-  }
-
-  /* 액티브 상태일 때의 스타일 */
+.Chip-button-background-gray {
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.45);
   &:active {
-    color: rgba(255, 255, 255, 0.85);
-    background:
-      linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
-      linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
+    color: rgba(0, 0, 0, 0.45);
+    transform: translateY(2px);
   }
-  &:disabled {
-    border: 1px solid var(--Stoke, rgba(0, 0, 0, 0.1));
-    color: rgba(0, 0, 0, 0.25);
-    background: none;
-  }
-}
-
-.ChipButton-ghost {
-  background: none;
-  border: none;
 }
