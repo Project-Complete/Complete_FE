@@ -2,7 +2,7 @@ import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 import { ColorSchemeScript } from '@mantine/core';
 import HeaderWrapper from '../components/header';
-import Provider from './Provider';
+import Provider from './provider';
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',
