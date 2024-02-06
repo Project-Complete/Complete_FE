@@ -10,7 +10,7 @@ const drinkOccasionList = [
 ];
 
 const Detail = () => (
-  <Flex w={'100%'} gap={106} justify={'center'}>
+  <Flex w={'100%'} gap={106} justify={'space-between'}>
     <Flex direction={'column'}>
       <Text size='xl'>칠러들의 칠링 노트</Text>
       <Text size='md'>누구랑 마시면 좋을까요?</Text>
