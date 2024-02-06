@@ -9,17 +9,15 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: `자세한 내용은 해당 링크 참조 https://mantine.dev/core/select/`,
+        component: `Tabs로 전체를 감싸줍니다. 그 다음 TabList는 각 탭의 제목들을 설정해주면 됩니다.
+            Tab은 해당 항목의 제목을 의미합니다. value를 넣어주면 해당 각 제목의 값들이 설정 되게 됩니다.
+            TabPanel은 설정된 value의 값과 동일한 경우 자신의 자식들을 화면에 출력하도록 합니다.
+            자세한 내용은 해당 링크 참조 https://mantine.dev/core/tabs/`,
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    data: {
-      description:
-        'data를 통해 select 항목을 넣을 수 있습니다. 해당 항목은 배열 형태나 key와 value가 있는 객체 형태 또한 가능합니다. ex) [`react`,`vue`] 혹은 [  { value: `react`, label: `React` },{ value: `ng`, label: `Angular` },]',
-    },
-  },
+  argTypes: {},
 } satisfies Meta<typeof Tabs>;
 
 export default meta;
