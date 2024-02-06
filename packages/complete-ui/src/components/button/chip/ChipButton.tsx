@@ -1,5 +1,4 @@
 import { cn } from '@/utils/util';
-import { Button } from '@mantine/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ButtonHTMLAttributes } from 'react';
 import classes from './ChipButton.module.css';
@@ -30,13 +29,13 @@ const chipButtonVariants = cva(classes.ChipButtonWrapper, {
 const ChipButton = React.forwardRef<HTMLButtonElement, ChipButtonProps>(
   ({ className, background, variant, children, ...props }, ref) => {
     return (
-      <Button
+      <button
         className={cn(chipButtonVariants({ variant, background, className }))}
         {...props}
         ref={ref}
       >
         {children}
-      </Button>
+      </button>
     );
   },
 );

@@ -26,8 +26,7 @@
     background:
       linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
       linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-
-    /* color: #262d31; */
+    transform: translateY(2px);
   }
   &:disabled {
     border: 1px solid var(--Stoke, rgba(0, 0, 0, 0.1));
@@ -44,12 +43,9 @@
 }
 
 .ChipButton-full-background-primary {
-  /* background: #bcc0c4 !important;
-  color: rgba(0, 0, 0, 0.85); */
   background:
     linear-gradient(111deg, #fff 0%, #fff 100%),
     linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05); */
   color: rgba(0, 0, 0, 0.65);
   &:hover {
     color: rgba(255, 255, 255, 0.85);
@@ -57,7 +53,6 @@
     background:
       linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
       linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-    background-color: #bcc0c4; /* 호버 시 배경 색상 변경 */
   }
 
   /* 액티브 상태일 때의 스타일 */
@@ -66,8 +61,6 @@
     background:
       linear-gradient(111deg, #7e3fb8 0%, #b24a8b 100%) padding-box,
       linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-
-    /* color: #262d31; */
   }
   &:disabled {
     border: 1px solid var(--Stoke, rgba(0, 0, 0, 0.1));

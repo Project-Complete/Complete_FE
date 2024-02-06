@@ -5,11 +5,42 @@
   align-items: center;
   border: 1px solid transparent;
   border-radius: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  cursor: pointer;
+  background: white;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-md {
+  min-width: 2.7rem;
+  height: 2.5rem;
+  gap: 3.5rem;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.button-lg {
+  min-width: 5rem;
+  height: 3rem;
+  text-align: center;
+  /* Button/Button-Semi Bold */
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 3rem; /* 266.667% */
+}
+
+.button-primary {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
   background:
     linear-gradient(111deg, #fff 0%, #fff 100%) padding-box,
     linear-gradient(to right, #3f2379 0%, #b24a8b 100%) border-box;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.65);
   &:hover {
     color: rgba(255, 255, 255, 0.85);
     background:
@@ -22,25 +53,48 @@
   &:active {
     color: rgba(255, 255, 255, 0.85);
     background-color: #d9d9d9; /* 클릭 시 배경 색상 변경 */
-    /* color: #262d31; */
-  }
-  &:disabled {
-    border: 1px solid var(--Stoke, rgba(0, 0, 0, 0.1));
-    color: rgba(0, 0, 0, 0.25);
-    background: none;
+    transform: translateY(2px);
   }
 }
 
-.button-md {
-  min-width: 4.5rem;
-  height: 2.5rem;
-  gap: 3.5rem;
+.button-outline {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-  /* 기본 상태일 때의 스타일 */
-  /* 호버 상태일 때의 스타일 */
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.65);
+  &:active {
+    color: rgba(0, 0, 0, 0.85);
+    transform: translateY(2px);
+  }
 }
 
-.button-lg {
-  min-width: 5rem;
-  height: 3rem;
+.button-white {
+  background: white;
+  color: rgba(0, 0, 0, 0.65);
+  &:active {
+    color: rgba(0, 0, 0, 0.85);
+    transform: translateY(2px);
+  }
+}
+
+.button-white-primary {
+  background: white;
+  color: rgba(0, 0, 0, 0.65);
+
+  border-radius: 0px;
+  &:hover {
+    background: white; /* 배경색 설정 */
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  &:active {
+    background: white;
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
+    background-clip: text;
+    transform: translateY(2px);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 }
