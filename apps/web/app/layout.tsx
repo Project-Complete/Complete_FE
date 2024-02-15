@@ -2,7 +2,8 @@ import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 import { ColorSchemeScript } from '@mantine/core';
 import HeaderWrapper from '../components/header';
-import Provider from './provider';
+import Provider from './Provider';
+import Footer from '@/components/footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Provider>
           <HeaderWrapper />
           {children}
+          <Footer />
         </Provider>
       </body>
     </html>

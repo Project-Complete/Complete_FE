@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const CustomerReview = () => {
   return (
-    <Flex direction={'column'}>
+    <Flex direction={'column'} w={'100%'}>
       <Text component='h2' lh={'40px'} fz={'28px'} fw={800}>
         칠러들의 솔직한 리뷰
       </Text>
@@ -63,7 +63,6 @@ const CustomerReview = () => {
           );
         })}
       </Grid>
-      <StarScore score={4.5} />
     </Flex>
   );
 };
