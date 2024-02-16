@@ -4,6 +4,7 @@ import { ColorSchemeScript } from '@mantine/core';
 import HeaderWrapper from '../components/header';
 import Provider from './Provider';
 import Footer from '@/components/footer/Footer';
+import './style.scss';
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',

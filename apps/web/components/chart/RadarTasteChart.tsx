@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import type { ChartData, ChartArea } from 'chart.js';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -19,23 +20,59 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
+const createGradient = (ctx: CanvasRenderingContext2D, area: ChartArea) => {
+  const gradient = ctx.createLinearGradient(0, 100.0, 300.0, 100.0);
+  gradient.addColorStop(0, 'rgba(249, 221, 224, 0.8)');
+  gradient.addColorStop(1, 'rgba(225, 216, 244, 0.8)');
 
-export const data = {
-  labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
-  datasets: [
-    {
-      data: [5, 9, 3, 5, 5],
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-    },
-  ],
+  return gradient;
 };
 
-const RadarTasteChart = () => {
+const RadarTasteChart = ({
+  data,
+}: {
+  data: {
+    labels: string[];
+    datasets: {
+      data: number[];
+      borderColor: string;
+      borderWidth: number;
+    }[];
+  };
+}) => {
+  const chartRef = useRef<any>(null);
+  const [chartData, setChartData] = useState<ChartData<'radar'>>({
+    datasets: [
+      {
+        data: [5, 9, 3, 5, 5],
+        borderColor: '#A589DF',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  useEffect(() => {
+    const chart = chartRef.current;
+
+    if (!chart) {
+      return;
+    }
+
+    const chartData = {
+      ...data,
+      datasets: data.datasets.map(dataset => ({
+        ...dataset,
+        backgroundColor: createGradient(chart.ctx, chart.chartArea),
+      })),
+    };
+
+    setChartData(chartData);
+  }, []);
+
   return (
     <Radar
-      data={data}
+      ref={chartRef}
+      data={chartData}
       options={{
         plugins: {
           legend: {

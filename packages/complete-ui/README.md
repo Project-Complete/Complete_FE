@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Team-complete의 디자인 시스템 라이브러리 입니다!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`npm i @team-complete/complete-ui` 를 통해 설치 하고 당신의 최상위 파일에 `import '@team-complete/complete-ui/style.css';`를 작성하면 사용할 수 있습니다.
+<br />
+라이브러리 제작환경은 React + Vite + TypeScript를 통해 빌드 하였으며 Headless UI로는 Mantine.dev를 사용하였습니다.
 
-Currently, two official plugins are available:
+Next.js를 지원하기 위해 SASS, SCSS를 사용하였습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+만약 디자인을 변경하고 싶다면 className으로 CSS를 넣을 수 있으며 선택자가 필요한 경우 아래 Mantine.dev 주소를 참고하면 변경할 수 있습니다.
 
-## Expanding the ESLint configuration
+[https://mantine.dev/](https://mantine.dev/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<br/>
 
-- Configure the top-level `parserOptions` property like this:
+# Team-complete Design System Library
+This is the design system library for Team-complete!
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+You can install it via `npm i @team-complete/complete-ui` and utilize it by adding import `@team-complete/complete-ui/style.css;` to your top-level file.
+<br />
+The library is built using React + Vite + TypeScript, and Headless UI is implemented using Mantine.dev.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+SASS and SCSS were used to support Next.js.
+
+If you wish to customize the design, you can insert CSS via classNames. For more specific selectors, refer to the Mantine.dev documentation:
+
+[https://mantine.dev/](https://mantine.dev/)

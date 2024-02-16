@@ -1,7 +1,9 @@
+'use client';
 import { MantineProvider } from '@mantine/core';
 import { theme } from '@repo/mantine-theme';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import localFont from 'next/font/local';
-import React from 'react';
+import React, { useState } from 'react';
 
 export const pretendard = localFont({
   src: './../public/fonts/PretendardVariable.woff2',
@@ -9,6 +11,7 @@ export const pretendard = localFont({
 });
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
+  const [queryClient] = useState(new QueryClient());
   return (
     <MantineProvider
       theme={{
@@ -19,7 +22,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
         },
       }}
     >
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </MantineProvider>
   );
 };

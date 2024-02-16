@@ -1,5 +1,4 @@
 import { cn } from '@/utils/util';
-import { Button } from '@mantine/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ButtonHTMLAttributes } from 'react';
 import classes from './Button.module.css';
@@ -14,22 +13,29 @@ const buttonVariants = cva(classes.button, {
       md: classes[`button-md`],
       lg: classes[`button-lg`],
     },
+    variant: {
+      primary: classes[`button-primary`],
+      outline: classes[`button-outline`],
+      white: classes[`button-white`],
+      'white-primary': classes[`button-white-primary`],
+    },
   },
   defaultVariants: {
     size: `md`,
+    variant: 'white-primary',
   },
 });
-//  cn({ size, className });
+
 const StyledButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, size, children, ...props }, ref) => {
+  ({ className, variant, size, children, ...props }, ref) => {
     return (
-      <Button
-        className={cn(buttonVariants({ size, className }))}
+      <button
+        className={cn(buttonVariants({ size, variant, className }))}
         {...props}
         ref={ref}
       >
         {children}
-      </Button>
+      </button>
     );
   },
 );

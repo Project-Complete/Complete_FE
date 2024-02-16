@@ -5,8 +5,9 @@ import classes from './DetailSummary.module.scss';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
 import StarScore from '../animation/StarScore';
+import { DetailSummarySimpleDrink } from '@/types/drinks';
 
-const DetailSummary = () => {
+const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
   return (
     <Flex bg='gray' w={'100%'} py={92} justify={'center'} mb={'100px'}>
       <Flex w={'100%'} maw={1224} gap={'128px'} align={'center'}>
@@ -23,7 +24,7 @@ const DetailSummary = () => {
         <Flex direction='column' w={'100%'}>
           <Flex justify={'space-between'}>
             <Title size={40} fw={800} lh={'50px'}>
-              트롤브루 레몬 라들러
+              {data.name}
             </Title>
             <Flex gap={24} align={'center'}>
               {/* TODO: design-system으로 교체 */}
@@ -42,14 +43,14 @@ const DetailSummary = () => {
             fw={500}
             py={12}
           >
-            유럽식 상큼한 레몬 향이 풍부하게 느껴지는 라들러
+            {data.summary}
           </Text>
           <Flex className={classes['drink-description']} py={12}>
             <Text w={80} mr={24} size='20px' fw={600} lh={'32px'}>
               제조사
             </Text>
             <Text size='18px' lh={'32px'} fw={500}>
-              트롤브루(Troll Brew)
+              {data.manufacturer.manufacturer_name}
             </Text>
           </Flex>
           <Flex py={12}>
@@ -57,38 +58,29 @@ const DetailSummary = () => {
               유저 평가
             </Text>
             <Flex align={'center'}>
-              <StarScore score={4.6} />
+              <StarScore score={data.review_rating} />
               <Text size='14px' fw={500} lh={'30px'} ml={3}>
-                (4.6)
+                {`(${data.review_rating})`}
               </Text>
             </Flex>
           </Flex>
-          <Flex gap={'8px'}>
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <Text
-                className={classes['drink-tag']}
-                span
-                lh={'30px'}
-                bg={'white'}
-                px={12}
-                size='14px'
-                fw={500}
-                key={idx}
-              >
-                태그
-              </Text>
-            ))}
-          </Flex>
+
           <Text size={'lg'} fw={600} lh={'32px'} mt={'24px'} mb={'12px'}>
             함께하면 좋은 안주
           </Text>
           <Flex gap={24}>
-            {/* TODO: 추후 음식 이미지로 변경 필요 */}
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <div
-                key={idx}
-                className={classes['drink-food-image-section']}
-              ></div>
+            {data.food_statistics.map((e, idx) => (
+              <div key={idx} className={classes['drink-food-image-section']}>
+                <div className={classes['drink-food-image']}>
+                  <Image
+                    src={e.image_url}
+                    alt='음식 아이콘'
+                    width={51}
+                    height={51}
+                  />
+                  <div>{e.category}</div>
+                </div>
+              </div>
             ))}
           </Flex>
         </Flex>
