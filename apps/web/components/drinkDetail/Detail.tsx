@@ -31,8 +31,6 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
   const sortedValues = sortedDataFlavorFilter.map(
     key => detailDrink.taste_statistic[key],
   );
-  console.log(sortedValues);
-  console.log(detailDrink);
   const data = {
     labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
     datasets: [

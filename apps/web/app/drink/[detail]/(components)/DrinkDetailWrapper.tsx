@@ -7,7 +7,11 @@ import { Flex } from '@mantine/core';
 import classes from './DetailPage.module.css';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
-import { DetailSimpleDrink, DetailSummarySimpleDrink } from '@/types/drinks';
+import {
+  DetailDescriptionDrink,
+  DetailSimpleDrink,
+  DetailSummarySimpleDrink,
+} from '@/types/drinks';
 
 const DrinkDetailWrapper = () => {
   const params = useParams();
@@ -38,6 +42,15 @@ const DrinkDetailWrapper = () => {
       situation_statistic: data.situation_statistic,
       flavor_statistics: data.flavor_statistics,
     };
+    console.log(data);
+
+    const detailDescription: DetailDescriptionDrink = {
+      title: data.title,
+      description: data.description,
+      packages: data.packages,
+      abv: data.abv,
+      manufacturer: data.manufacturer,
+    };
 
     return (
       <>
@@ -51,7 +64,7 @@ const DrinkDetailWrapper = () => {
           direction={'column'}
         >
           <Detail detailDrink={detailDrink} />
-          <DetailDescription />
+          <DetailDescription detailDescription={detailDescription} />
           <CustomerReview />
         </Flex>
       </>
