@@ -15,9 +15,25 @@
 }
 
 .drink-food-image-section {
+  display: flex;
+  justify-content: center;
   width: 80px;
   height: 80px;
-  background-color: #bcc0c4;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: #FFF;
+}
+
+.drink-food-image{
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
 }
 
 .share-button {

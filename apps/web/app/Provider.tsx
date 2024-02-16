@@ -10,9 +10,8 @@ export const pretendard = localFont({
   display: 'swap',
 });
 
-
 const Provider = ({ children }: { children: React.ReactNode }) => {
-  const [queryClient,] = useState(new QueryClient());
+  const [queryClient] = useState(new QueryClient());
   return (
     <MantineProvider
       theme={{

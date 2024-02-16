@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="_햄버거바" data-name="햄버거바">
+    <g>
+      <rect class="cls-2" width="800" height="800"/>
+      <path class="cls-1" d="M680,140H120c-11.05,0-20-8.95-20-20s8.95-20,20-20h560c11.05,0,20,8.95,20,20s-8.95,20-20,20Z"/>
+      <path class="cls-1" d="M680,420H120c-11.05,0-20-8.95-20-20s8.95-20,20-20h560c11.05,0,20,8.95,20,20s-8.95,20-20,20Z"/>
+      <path class="cls-1" d="M680,700H120c-11.05,0-20-8.95-20-20s8.95-20,20-20h560c11.05,0,20,8.95,20,20s-8.95,20-20,20Z"/>
+    </g>
+  </g>
+</svg>

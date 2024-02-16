@@ -1,13 +1,23 @@
 import { Drink } from '@/types/drinks';
 import { api } from '@/utils/api';
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { QueryClient, UseQueryResult, useQuery } from '@tanstack/react-query';
 
 const drinkDetailFetcher = async ({ detailId }: { detailId: number }) => {
-  const response = await api
-    .get(`drink/detail/${detailId}`)
-    .json();
-  console.log(response);
+  const response = await api.get(`drink/detail/${detailId}`).json();
   return response;
+};
+
+export const usePrefetchDrinkDetail = async (
+  detail: string,
+  queryClient: QueryClient,
+) => {
+  await queryClient.prefetchQuery({
+    queryKey: ['drinkDetail', parseInt(detail)],
+    queryFn: async () => {
+      const response = await drinkDetailFetcher({ detailId: parseInt(detail) });
+      return response;
+    },
+  });
 };
 
 export const useDrinkDetailQuery = ({
@@ -19,7 +29,6 @@ export const useDrinkDetailQuery = ({
     queryKey: ['drinkDetail', detailId],
     queryFn: async () => {
       const response = await drinkDetailFetcher({ detailId });
-      console.log(response);
       return response;
     },
   });

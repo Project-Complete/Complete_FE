@@ -17,19 +17,16 @@ export interface FoodStatistic {
 }
 
 export interface TasteStatistic {
-  sweet_rating: number;
-  sour_rating: number;
-  bitter_rating: number;
-  body_rating: number;
-  refresh_rating: number;
+  [key: string]: number;
+  // sweet_rating: number;
+  // sour_rating: number;
+  // bitter_rating: number;
+  // body_rating: number;
+  // refresh_rating: number;
 }
 
 export interface SituationStatistic {
-  adult_sum: number;
-  partner_sum: number;
-  friend_sum: number;
-  business_sum: number;
-  alone_sum: number;
+  [key: string]: number;
 }
 
 export interface FlavorStatistic {
@@ -64,4 +61,21 @@ export interface Drink {
     type: string;
     detail_type: string;
   };
+}
+
+export interface DetailSummarySimpleDrink {
+  name: string;
+  summary: string;
+  drink_id: number;
+  image_url: string;
+  manufacturer: Manufacturer;
+  review_rating: number;
+  food_statistics: FoodStatistic[];
+}
+
+export interface DetailSimpleDrink {
+  food_statistics: FoodStatistic[];
+  taste_statistic: TasteStatistic;
+  situation_statistic: SituationStatistic;
+  flavor_statistics: FlavorStatistic[];
 }
