@@ -42,14 +42,13 @@ const DrinkDetailWrapper = () => {
       situation_statistic: data.situation_statistic,
       flavor_statistics: data.flavor_statistics,
     };
-    console.log(data);
-
     const detailDescription: DetailDescriptionDrink = {
       title: data.title,
       description: data.description,
       packages: data.packages,
       abv: data.abv,
       manufacturer: data.manufacturer,
+      type: data.type,
     };
 
     return (
@@ -63,6 +62,7 @@ const DrinkDetailWrapper = () => {
           align={'center'}
           direction={'column'}
         >
+          {/* 탭이 여기 들어가서 */}
           <Detail detailDrink={detailDrink} />
           <DetailDescription detailDescription={detailDescription} />
           <CustomerReview />

@@ -86,4 +86,8 @@ export interface DetailDescriptionDrink {
   packages: Package[];
   abv: number;
   manufacturer: Manufacturer;
+  type: {
+    type: string;
+    detail_type: string;
+  };
 }
