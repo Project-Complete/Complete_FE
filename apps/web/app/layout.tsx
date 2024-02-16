@@ -1,4 +1,4 @@
-import '@mantine/core/styles.css';
+import '@mantine/core/styles.layer.css';
 import type { Metadata } from 'next';
 import { ColorSchemeScript } from '@mantine/core';
 import HeaderWrapper from '../components/header';
