@@ -79,3 +79,15 @@ export interface DetailSimpleDrink {
   situation_statistic: SituationStatistic;
   flavor_statistics: FlavorStatistic[];
 }
+
+export interface DetailDescriptionDrink {
+  title: string;
+  description: string;
+  packages: Package[];
+  abv: number;
+  manufacturer: Manufacturer;
+  type: {
+    type: string;
+    detail_type: string;
+  };
+}

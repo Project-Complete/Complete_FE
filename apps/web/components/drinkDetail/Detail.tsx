@@ -1,4 +1,4 @@
-import { Badge, Flex, Text } from '@mantine/core';
+import { Badge, Box, Flex, Text } from '@mantine/core';
 import RadarTasteChart from '../chart/RadarTasteChart';
 import { DetailSimpleDrink } from '@/types/drinks';
 import Image from 'next/image';
@@ -31,8 +31,6 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
   const sortedValues = sortedDataFlavorFilter.map(
     key => detailDrink.taste_statistic[key],
   );
-  console.log(sortedValues);
-  console.log(detailDrink);
   const data = {
     labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
     datasets: [
@@ -44,67 +42,75 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
     ],
   };
   return (
-    <Flex w={'100%'} gap={106} justify={'space-between'}>
-      <Flex direction={'column'}>
-        <Text size='xl'>칠러들의 칠링 노트</Text>
-        <Text size='md'>누구랑 마시면 좋을까요?</Text>
-        <Flex gap={24}>
-          {updatedDrinkOccasionList.map(
-            ({ id, title, selectedPeople }, index) => {
-              return (
-                <Flex
-                  key={index}
-                  direction={'column'}
-                  justify={'center'}
-                  align={'center'}
-                >
+    <Flex w={'100%'} direction={'column'}>
+      <Text size='2.5rem' fw={800} lh={'xl2'}>
+        칠러들의 칠링 노트
+      </Text>
+      <Flex w={'100%'} justify={'space-between'}>
+        <Flex direction={'column'}>
+          <Text size={'xl2'} fw={600} lh={2.5}>
+            누구랑 마시면 좋을까요?
+          </Text>
+          <Flex gap={24}>
+            {updatedDrinkOccasionList.map(
+              ({ id, title, selectedPeople }, index) => {
+                return (
                   <Flex
-                    w={100}
-                    h={120}
-                    justify={'center'}
-                    align={'center'}
-                    pos={'relative'}
-                  >
-                    <Image
-                      src={`/detail_who/${id}.svg`}
-                      alt='title'
-                      width={100}
-                      height={100}
-                    />
-                  </Flex>
-                  <Flex
+                    key={index}
                     direction={'column'}
                     justify={'center'}
                     align={'center'}
                   >
-                    <Text size='lg'>{title}</Text>
-                    <Text size='md'>{selectedPeople}명</Text>
+                    <Flex
+                      w={100}
+                      h={120}
+                      justify={'center'}
+                      align={'center'}
+                      pos={'relative'}
+                    >
+                      <Image
+                        src={`/detail_who/${id}.svg`}
+                        alt='title'
+                        width={100}
+                        height={100}
+                      />
+                    </Flex>
+                    <Flex
+                      direction={'column'}
+                      justify={'center'}
+                      align={'center'}
+                    >
+                      <Text size='lg'>{title}</Text>
+                      <Text size='md'>{selectedPeople}명</Text>
+                    </Flex>
                   </Flex>
-                </Flex>
-              );
-            },
-          )}
-        </Flex>
-        <Flex direction={'column'}>
-          <Text size={'lg'} fw={600} lh={'48px'}>
-            어떤 향이 느껴지나요?
-          </Text>
-          <Flex gap={8}>
-            {detailDrink.flavor_statistics.map((e, index) => {
-              return (
-                <Badge key={index} h={48} fz={18}>
-                  {e.flavor}
-                </Badge>
-              );
-            })}
+                );
+              },
+            )}
+          </Flex>
+          <Flex direction={'column'} mt={'3.5rem'}>
+            <Text size={'xl2'} fw={600} lh={'lg'}>
+              어떤 향이 느껴지나요?
+            </Text>
+            <Flex gap={8}>
+              {detailDrink.flavor_statistics.map((e, index) => {
+                return (
+                  <Badge key={index} h={48} fz={18}>
+                    {e.flavor}
+                  </Badge>
+                );
+              })}
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex direction={'column'}>
-        <Text fw={600} lh={'40px'}>
-          어떤 맛이 느껴지나요?
-        </Text>
-        <RadarTasteChart data={data} />
+        <Flex direction={'column'}>
+          <Text size='xl2' fw={600} lh={'40px'}>
+            어떤 맛이 느껴지나요?
+          </Text>
+          <Box py='1.5rem' px='3.31rem' w={'31rem'} h='25rem' fs='xl2'>
+            <RadarTasteChart data={data} />
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );

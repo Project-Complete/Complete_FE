@@ -5,6 +5,7 @@ import HeaderWrapper from '../components/header';
 import Provider from './Provider';
 import Footer from '@/components/footer/Footer';
 import './style.scss';
+import '@team-complete/complete-ui/style.css';
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',
