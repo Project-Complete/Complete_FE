@@ -12,6 +12,7 @@ import {
   DetailSimpleDrink,
   DetailSummarySimpleDrink,
 } from '@/types/drinks';
+import { Tabs, Tab, TabList } from '@team-complete/complete-ui';
 
 const DrinkDetailWrapper = () => {
   const params = useParams();
@@ -62,8 +63,14 @@ const DrinkDetailWrapper = () => {
           align={'center'}
           direction={'column'}
         >
-          {/* 탭이 여기 들어가서 */}
           <Detail detailDrink={detailDrink} />
+          <Tabs defaultValue='상세 정보' w={'100%'}>
+            <TabList>
+              <Tab value='상세 정보'>상세 정보</Tab>
+              <Tab value='비슷한 평가의 주류'>비슷한 평가의 주류</Tab>
+              <Tab value='칠러들의 리뷰'>칠러들의 리뷰</Tab>
+            </TabList>
+          </Tabs>
           <DetailDescription detailDescription={detailDescription} />
           <CustomerReview />
         </Flex>
