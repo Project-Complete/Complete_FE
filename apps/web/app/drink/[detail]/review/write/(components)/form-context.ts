@@ -10,11 +10,11 @@ interface FormValues {
     adult: boolean;
   };
   taste: {
-    sweet: number | null;
-    sour: number | null;
-    bitter: number | null;
-    body: number | null;
-    refresh: number | null;
+    sweet: number;
+    sour: number;
+    bitter: number;
+    body: number;
+    refresh: number;
   };
   flavors: boolean[];
   foods: boolean[];
