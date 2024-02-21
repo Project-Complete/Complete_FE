@@ -1,32 +1,32 @@
 import Image from 'next/image';
 import React from 'react';
 import {
-  Situation,
   SituationItemsLabelType,
   SituationItemsValueType,
 } from './ReviewWriteForm';
 import classes from './IconButton.module.scss';
+import { useReviewFormContext } from './form-context';
 
 interface SituationButtonProps {
   label: SituationItemsLabelType;
   value: SituationItemsValueType;
   isSelected: boolean;
-  situation: Situation;
-  setSituation: React.Dispatch<React.SetStateAction<Situation>>;
 }
 
 const SituationButton = ({
   label,
   value,
   isSelected,
-  situation,
-  setSituation,
 }: SituationButtonProps) => {
+  const form = useReviewFormContext();
+
   return (
-    <div
-      className={classes['icon-button-wrapper']}
-      onClick={() => setSituation({ ...situation, [value]: !situation[value] })}
-    >
+    <label className={classes['icon-button-wrapper']}>
+      <input
+        type='checkbox'
+        value={value}
+        {...form.getInputProps(`situation.${value}`)}
+      />
       <Image
         src={
           isSelected
@@ -38,7 +38,7 @@ const SituationButton = ({
         height={92}
       />
       <div>{label}</div>
-    </div>
+    </label>
   );
 };
 

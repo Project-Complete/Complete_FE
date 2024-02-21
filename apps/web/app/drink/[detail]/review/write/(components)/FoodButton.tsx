@@ -1,34 +1,32 @@
 import React from 'react';
 import Image from 'next/image';
 import classes from './IconButton.module.scss';
+import { useReviewFormContext } from './form-context';
 
 interface FoodButtonProps {
   label: string;
   value: number;
-  isSelected: boolean;
-  food: Set<number>;
-  setFood: React.Dispatch<React.SetStateAction<Set<number>>>;
+  isSelected?: boolean;
 }
 
-const FoodButton = ({
-  label,
-  value,
-  isSelected,
-  food,
-  setFood,
-}: FoodButtonProps) => {
+const FoodButton = ({ label, value, isSelected }: FoodButtonProps) => {
+  const form = useReviewFormContext();
+
   return (
-    <div
+    <label
       className={classes['icon-button-wrapper']}
-      onClick={() =>
-        setFood(prevFood => {
-          const newFood = new Set<number>(prevFood);
-          if (isSelected) newFood.delete(value);
-          else newFood.add(value);
-          return newFood;
-        })
-      }
+      // onClick={() => {
+      //   const newFoods = new Set<number>(form.values.foods);
+      //   if (isSelected) newFoods.delete(value);
+      //   else newFoods.add(value);
+      //   form.setValues(prev => ({ ...prev, foods: newFoods }));
+      // }}
     >
+      <input
+        type='checkbox'
+        value={value}
+        {...form.getInputProps(`foods.${value - 1}`)}
+      />
       <Image
         src={
           isSelected
@@ -40,7 +38,7 @@ const FoodButton = ({
         height={92}
       />
       <div>{label}</div>
-    </div>
+    </label>
   );
 };
 
