@@ -26,7 +26,12 @@ const DetailDescription = ({
   );
 
   return (
-    <Flex w={'100%'} direction={'column'} py={'72px'}>
+    <Flex
+      w={'100%'}
+      direction={'column'}
+      py={'72px'}
+      className={classes['detail-description-border-bottom']}
+    >
       <Title
         component={'h1'}
         size={40}

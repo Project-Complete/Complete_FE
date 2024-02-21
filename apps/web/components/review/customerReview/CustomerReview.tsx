@@ -9,7 +9,7 @@ const CustomerReview = ({
   customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
 }) => {
   return (
-    <Flex direction={'column'} w={'100%'}>
+    <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
       <Text
         component='h1'
         lh={'40px'}

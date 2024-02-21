@@ -91,3 +91,22 @@ export interface DetailDescriptionDrink {
     detail_type: string;
   };
 }
+
+export interface DetailRecommendDrink {
+  drink_id: number;
+  image_url: string;
+  manufacturer_name: string;
+  drink_like: boolean;
+  drink_name: string;
+  review_rating: number;
+}
+
+export interface DetailRecommendDrinkList {
+  drinks: DetailRecommendDrink[];
+  page_info: {
+    page: number;
+    size: number;
+    total_element: number;
+    sort: string;
+  };
+}
