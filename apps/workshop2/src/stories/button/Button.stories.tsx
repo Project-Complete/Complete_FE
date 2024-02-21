@@ -18,16 +18,38 @@ const meta = {
       control: { type: 'select' },
       defaultValue: 'md',
     },
+    variant: {
+      description: '배경과 border를 변경할 수 있습니다.',
+      options: ['primary', 'outline', 'white-primary', 'white'],
+      control: { type: 'select' },
+      defaultValue: 'primary',
+    },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
 
-export const Middle = ({ size = 'md' }: { size?: 'md' | 'lg' }) => (
-  <Button size={size}>test</Button>
+export const Middle = ({
+  size = 'md',
+  variant = 'primary',
+}: {
+  size?: 'md' | 'lg';
+  variant?: `primary` | `outline` | 'white-primary' | 'white';
+}) => (
+  <Button size={size} variant={variant}>
+    test
+  </Button>
 );
 
-export const Large = ({ size = 'lg' }: { size?: 'md' | 'lg' }) => (
-  <Button size={size}>테스트 버튼</Button>
+export const Large = ({
+  size = 'lg',
+  variant = 'primary',
+}: {
+  size?: 'md' | 'lg';
+  variant?: 'primary' | `outline` | 'white-primary' | 'white';
+}) => (
+  <Button size={size} variant={variant}>
+    테스트 버튼
+  </Button>
 );

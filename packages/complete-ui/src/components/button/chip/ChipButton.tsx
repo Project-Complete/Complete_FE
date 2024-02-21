@@ -1,5 +1,4 @@
 import { cn } from '@/utils/util';
-import { Button } from '@mantine/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ButtonHTMLAttributes } from 'react';
 import classes from './ChipButton.module.css';
@@ -8,35 +7,28 @@ interface ChipButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof chipButtonVariants> {}
 
-const chipButtonVariants = cva(classes.ChipButtonWrapper, {
+const chipButtonVariants = cva(classes[`Chip-button-wrapper`], {
   variants: {
     variant: {
-      full: classes[`ChipButton-full`],
-      outline: classes[`ChipButton-outline`],
-      ghost: classes[`ChipButton-ghost`],
-    },
-    background: {
-      white: classes[`ChipButton-full-background-white`],
-      primary: classes[`ChipButton-full-background-primary`],
-      none: classes[`ChipButton-full-background-none`],
+      primary: classes[`Chip-button-background-primary`],
+      gray: classes[`Chip-button-background-gray`],
     },
   },
   defaultVariants: {
-    variant: `full`,
-    background: `none`,
+    variant: `primary`,
   },
 });
 
 const ChipButton = React.forwardRef<HTMLButtonElement, ChipButtonProps>(
-  ({ className, background, variant, children, ...props }, ref) => {
+  ({ className, gray, variant, children, ...props }, ref) => {
     return (
-      <Button
-        className={cn(chipButtonVariants({ variant, background, className }))}
+      <button
+        className={cn(chipButtonVariants({ variant, gray, className }))}
         {...props}
         ref={ref}
       >
         {children}
-      </Button>
+      </button>
     );
   },
 );
