@@ -16,7 +16,8 @@ export function middleware(request: NextRequest) {
     const nextUrl = request.nextUrl;
     const access_token = nextUrl.searchParams.get('access_token');
     const refresh_token = nextUrl.searchParams.get('refresh_token');
-    const newUrlString = new URL('/', request.url);
+    const redirect_uri = nextUrl.searchParams.get('redirect_uri');
+    const newUrlString = new URL(redirect_uri ?? '/');
     const response = NextResponse.redirect(newUrlString);
     if (access_token) {
       response.cookies.set({
@@ -35,7 +36,7 @@ export function middleware(request: NextRequest) {
     return response;
   } else if (request.nextUrl.pathname.startsWith('/oauth2/authorization/')) {
     const nextUrl = request.nextUrl;
-    const redirect_uri = nextUrl.searchParams.get('redirect_uri');
+    const redirect_uri = request.cookies.get('redirect_uri')?.value;
     const newUrlString = new URL(
       (process.env.NEXT_PUBLIC_BACKEND_URL ?? '/') + nextUrl.pathname,
     );
