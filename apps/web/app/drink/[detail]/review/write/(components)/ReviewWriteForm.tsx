@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import SectionHeader from './SectionHeader';
 import classes from './ReviewWriteForm.module.scss';
 import Image from 'next/image';
@@ -72,6 +72,7 @@ const ReviewWriteForm = () => {
   const form = useReviewForm({
     initialValues: {
       content: '',
+      rating: 0,
       situation: {
         alone: false,
         friend: false,
@@ -91,7 +92,6 @@ const ReviewWriteForm = () => {
     },
     validate: {},
   });
-  const [rate, setRate] = useState(0);
 
   return (
     <ReviewFormProvider form={form}>
@@ -118,14 +118,13 @@ const ReviewWriteForm = () => {
           <SectionHeader title='칠러님의 별점 및 리뷰' dot={false} />
           <Rating
             size={40}
-            value={rate}
-            onChange={setRate}
             fullSymbol={
               <Image src={'/icons/별_1.svg'} alt='1' width={40} height={40} />
             }
             emptySymbol={
               <Image src={'/icons/별_0.svg'} alt='0' width={40} height={40} />
             }
+            {...form.getInputProps('rating')}
           />
           <HelpMessageButton />
           <textarea

@@ -2,6 +2,7 @@ import { createFormContext } from '@mantine/form';
 
 interface FormValues {
   content: string;
+  rating: number;
   situation: {
     alone: boolean;
     friend: boolean;
