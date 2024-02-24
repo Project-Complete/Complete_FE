@@ -7,10 +7,11 @@ import classes from './DetailDescription.module.scss';
 
 const DetailDescription = ({
   detailDescription,
+  descriptionRef,
 }: {
   detailDescription: DetailDescriptionDrink;
+  descriptionRef: React.RefObject<HTMLHeadingElement> | null;
 }) => {
-  // console.log(detailDescription);
   function chunkArray(arr: Package[], size: number): Package[][] {
     return arr.reduce((acc: Package[][], _, index: number) => {
       if (index % size === 0) {
@@ -25,8 +26,20 @@ const DetailDescription = ({
   );
 
   return (
-    <Flex w={'100%'} direction={'column'} py={'72px'}>
-      <Title size={40} fw={800} lh={'50px'} mb={'25px'}>
+    <Flex
+      w={'100%'}
+      direction={'column'}
+      py={'72px'}
+      className={classes['detail-description-border-bottom']}
+    >
+      <Title
+        component={'h1'}
+        size={40}
+        fw={800}
+        lh={'50px'}
+        mb={'25px'}
+        ref={descriptionRef}
+      >
         {detailDescription.title}
       </Title>
       <Text mb={'48px'}>

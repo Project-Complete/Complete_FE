@@ -3,10 +3,20 @@ import StarScore from '@/components/animation/StarScore';
 import { Divider, Flex, Grid, Text } from '@mantine/core';
 import Image from 'next/image';
 
-const CustomerReview = () => {
+const CustomerReview = ({
+  customerReviewRef,
+}: {
+  customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
+}) => {
   return (
-    <Flex direction={'column'} w={'100%'}>
-      <Text component='h2' lh={'40px'} fz={'28px'} fw={800}>
+    <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
+      <Text
+        component='h1'
+        lh={'40px'}
+        fz={'28px'}
+        fw={800}
+        ref={customerReviewRef}
+      >
         칠러들의 솔직한 리뷰
       </Text>
       <Grid w={'100%'} gutter={24} mt={24} mb={24}>
