@@ -7,8 +7,6 @@ import bookmark from '@/assets/bookmark.svg';
 import StarScore from '../animation/StarScore';
 import { DetailSummarySimpleDrink } from '@/types/drinks';
 
-import './DetailSummary.scss';
-
 const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
   return (
     <Flex bg='gray' w={'100%'} py={92} justify={'center'} mb={'100px'}>
