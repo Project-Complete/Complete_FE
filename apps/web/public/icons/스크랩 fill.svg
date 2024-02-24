@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #f6ce9e;
+      }
+    </style>
+  </defs>
+  <g id="_스크랩_fill" data-name="스크랩 fill">
+    <g>
+      <path class="cls-2" d="M575,100H215c-22.06,0-40,17.94-40,40v520c0,22.06,17.94,40,40,40h15.35c10.09,0,19.73-3.19,27.88-9.24l141.64-105.02,141.64,105.02c8.15,6.04,17.79,9.24,27.88,9.24h5.61c22.06,0,40-17.94,40-40V140c0-22.06-17.94-40-40-40Z"/>
+      <rect class="cls-1" width="800" height="800"/>
+    </g>
+  </g>
+</svg>
