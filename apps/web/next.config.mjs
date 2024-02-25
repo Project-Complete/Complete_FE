@@ -15,6 +15,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'github.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'search.pstatic.net',
+      },
     ],
   },
   reactStrictMode: false,

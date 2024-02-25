@@ -3,7 +3,7 @@ import Detail from '@/components/drinkDetail/Detail';
 import DetailDescription from '@/components/drinkDetail/DetailDescription';
 import DetailSummary from '@/components/drinkDetail/DetailSummary';
 import CustomerReview from '@/components/review/customerReview/CustomerReview';
-import { Box, Flex } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
@@ -67,7 +67,7 @@ const DrinkDetailWrapper = () => {
       const options = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5,
+        threshold: 0.9,
       };
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -164,7 +164,10 @@ const DrinkDetailWrapper = () => {
             anotherDrinkRef={anotherDrinkRef}
             detailId={parseInt(detailId)}
           />
-          <CustomerReview customerReviewRef={customerReviewRef} />
+          <CustomerReview
+            customerReviewRef={customerReviewRef}
+            detailId={parseInt(detailId)}
+          />
         </Flex>
       </>
     );

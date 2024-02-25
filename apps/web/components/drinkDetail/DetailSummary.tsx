@@ -1,6 +1,6 @@
 import { Box, Flex, Rating, Text, Title } from '@mantine/core';
 import Image from 'next/image';
-import React from 'react';
+import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
@@ -71,17 +71,23 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
           </Text>
           <Flex gap={24}>
             {data.food_statistics.map((e, idx) => (
-              <div key={idx} className={classes['drink-food-image-section']}>
-                <div className={classes['drink-food-image']}>
-                  <Image
-                    src={e.image_url}
-                    alt='음식 아이콘'
-                    width={51}
-                    height={51}
-                  />
-                  <div>{e.category}</div>
-                </div>
-              </div>
+              <Fragment key={idx}>
+                {e.food_id !== null &&
+                  e.category !== null &&
+                  e.image_url !== null && (
+                    <div className={classes['drink-food-image-section']}>
+                      <div className={classes['drink-food-image']}>
+                        <Image
+                          src={e.image_url}
+                          alt='음식 아이콘'
+                          width={51}
+                          height={51}
+                        />
+                        <div>{e.category}</div>
+                      </div>
+                    </div>
+                  )}
+              </Fragment>
             ))}
           </Flex>
         </Flex>
