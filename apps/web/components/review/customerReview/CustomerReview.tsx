@@ -1,9 +1,10 @@
 'use client';
 import StarScore from '@/components/animation/StarScore';
 import { useReviewListQuery } from '@/hooks/queries/useReviewListQuery';
-import { Divider, Flex, Grid, Text } from '@mantine/core';
+import { Divider, Flex, Grid, Paper, Text } from '@mantine/core';
+import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 const CustomerReview = ({
   customerReviewRef,
@@ -12,7 +13,20 @@ const CustomerReview = ({
   customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
   detailId: number;
 }) => {
-  const { data } = useReviewListQuery({ detailId, sort: 'latest' });
+  const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
+    detailId,
+    sort: 'latest',
+  });
+  console.log(data);
+  const { ref, entry } = useIntersection({
+    root: null,
+    threshold: 0.3,
+  });
+  useEffect(() => {
+    if (entry && entry.isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [entry]);
 
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
@@ -45,7 +59,7 @@ const CustomerReview = ({
                       >
                         <Image
                           src={
-                            e.image_url !== 'string'
+                            e.image_url !== '없어유'
                               ? e.image_url
                               : 'https://picsum.photos/392/288.webp'
                           }
@@ -92,6 +106,7 @@ const CustomerReview = ({
             </Fragment>
           ))}
       </Grid>
+      <div ref={ref}></div>
     </Flex>
   );
 };

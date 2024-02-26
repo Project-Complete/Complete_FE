@@ -3,9 +3,7 @@ import { api } from '@/utils/api';
 import {
   InfiniteData,
   UseInfiniteQueryResult,
-  UseQueryResult,
   useInfiniteQuery,
-  useQuery,
 } from '@tanstack/react-query';
 
 const reviewListFetcher = async ({
@@ -52,7 +50,8 @@ export const useReviewListQuery = ({
         page.page_info.total_elements / page.page_info.size,
       );
       const nextPage =
-        page.page_info.page + 1 > totalPage ? null : page.page_info.page + 1;
+        page.page_info.page + 1 >= totalPage ? null : page.page_info.page + 1;
+
       return nextPage;
     },
   });

@@ -110,3 +110,24 @@ export interface DetailRecommendDrinkList {
     sort: string;
   };
 }
+
+interface DrinkListElement {
+  drink_id: number;
+  drink_like: boolean;
+  image_url: string;
+  manufacturer_name: string;
+  drink_name: string;
+  review_rating: number;
+}
+
+interface PageInfo {
+  page: number;
+  size: number;
+  total_elements: number;
+  sort: string;
+}
+
+interface DrinksResponse {
+  drinks: DrinkListElement[];
+  page_info: PageInfo;
+}

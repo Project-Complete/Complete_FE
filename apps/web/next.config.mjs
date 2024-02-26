@@ -19,6 +19,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'search.pstatic.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.shinsegae-lnb.com',
+      },
     ],
   },
   reactStrictMode: false,

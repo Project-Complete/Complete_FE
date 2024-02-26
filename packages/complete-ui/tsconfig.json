@@ -24,5 +24,4 @@
     }
   },
   "include": ["src/**/*", "index.ts", "src/types/index.d.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
