@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Title } from '@mantine/core';
+import { Box, Flex, Rating, Text, Title } from '@mantine/core';
 import Image from 'next/image';
 import React from 'react';
 import classes from './DetailSummary.module.scss';
@@ -59,6 +59,7 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
             </Text>
             <Flex align={'center'}>
               <StarScore score={data.review_rating} />
+
               <Text size='14px' fw={500} lh={'30px'} ml={3}>
                 {`(${data.review_rating})`}
               </Text>

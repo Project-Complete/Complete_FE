@@ -1,9 +1,20 @@
 import { cn } from '@/utils/util';
-import { Modal as ModalPrimitive } from '@mantine/core';
+import { MantineComponent, ModalBaseStylesNames, ModalOverlayProps, Modal as ModalPrimitive, ModalRootProps } from '@mantine/core';
 import React from 'react';
 
-export const ModalRoot = ModalPrimitive.Root;
-export const ModalOverlay = ModalPrimitive.Overlay;
+export const ModalRoot: MantineComponent<{
+  props: ModalRootProps;
+  ref: HTMLDivElement;
+  stylesNames: ModalBaseStylesNames;
+  vars: unknown;
+  compound: true;
+}> = ModalPrimitive.Root;
+export const ModalOverlay: MantineComponent<{
+  props: ModalOverlayProps;
+  ref: HTMLDivElement;
+  stylesNames: 'overlay';
+  compound: true;
+}> = ModalPrimitive.Overlay;
 export const ModalCloseButton = ModalPrimitive.CloseButton;
 export const ModalTitle = ModalPrimitive.Title;
 export const ModalHeader = ModalPrimitive.Header;

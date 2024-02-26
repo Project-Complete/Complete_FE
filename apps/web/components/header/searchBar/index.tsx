@@ -47,6 +47,8 @@ const HeaderCenterWrapper = () => {
 
         <Box>
           <Button
+            component='a'
+            href='/login'
             w={`7rem`}
             h={`2.75rem`}
             radius={`1.5rem`}

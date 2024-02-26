@@ -4,7 +4,7 @@ import DetailDescription from '@/components/drinkDetail/DetailDescription';
 import DetailSummary from '@/components/drinkDetail/DetailSummary';
 import CustomerReview from '@/components/review/customerReview/CustomerReview';
 import { Box, Flex } from '@mantine/core';
-import classes from './DetailPage.module.css';
+import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
 import {
@@ -13,7 +13,7 @@ import {
   DetailSummarySimpleDrink,
 } from '@/types/drinks';
 import { Tabs, Tab, TabList } from '@team-complete/complete-ui';
-import AnotherDrink from './AnotherDrink';
+import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';
 import useScroll from '@/hooks/useScroll';
 
@@ -25,7 +25,7 @@ const DrinkDetailWrapper = () => {
   const anotherDrinkRef = useRef<HTMLHeadingElement | null>(null);
   const customerReviewRef = useRef<HTMLHeadingElement | null>(null);
 
-  let detailId = params && params.detail ? params.detail : '1';
+  let detailId = '1';
   if (
     params &&
     params.detail &&
@@ -33,8 +33,10 @@ const DrinkDetailWrapper = () => {
     params.detail[0]
   ) {
     detailId = params.detail[0];
+  } else if (params && params.detail && !Array.isArray(params.detail)) {
+    detailId = params.detail;
   }
-  const { data } = useDrinkDetailQuery({ detailId: 1 });
+  const { data } = useDrinkDetailQuery({ detailId: parseInt(detailId) });
   if (data) {
     const summaryDrink: DetailSummarySimpleDrink = {
       drink_id: data.drink_id,
@@ -112,8 +114,20 @@ const DrinkDetailWrapper = () => {
           direction={'column'}
         >
           <Detail detailDrink={detailDrink} />
-          <Box w={'100%'} bg={'#FFF'} pos={'sticky'} top={60}>
-            <Tabs value={activeTab} onChange={setActiveTab} w={'100%'}>
+          <Flex
+            justify={'center'}
+            w={'100vw'}
+            bg={'#FFF'}
+            pos={'sticky'}
+            top={60}
+            className={classes['detail-page-tab-z-index']}
+          >
+            <Tabs
+              value={activeTab}
+              onChange={setActiveTab}
+              w={'100%'}
+              className={classes['detail-age-tab-max-width']}
+            >
               <TabList>
                 <Tab
                   value='상세 정보'
@@ -141,12 +155,15 @@ const DrinkDetailWrapper = () => {
                 </Tab>
               </TabList>
             </Tabs>
-          </Box>
+          </Flex>
           <DetailDescription
             detailDescription={detailDescription}
             descriptionRef={descriptionRef}
           />
-          <AnotherDrink anotherDrinkRef={anotherDrinkRef} />
+          <AnotherDrink
+            anotherDrinkRef={anotherDrinkRef}
+            detailId={parseInt(detailId)}
+          />
           <CustomerReview customerReviewRef={customerReviewRef} />
         </Flex>
       </>
