@@ -1,9 +1,17 @@
 'use client';
 import Link from 'next/link';
-import { Box, Burger, Button, Collapse, Flex, Anchor } from '@mantine/core';
+import {
+  Box,
+  Burger,
+  Button,
+  Collapse,
+  Flex,
+  Anchor,
+  UnstyledButton,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import classes from './HeaderNav.module.css';
+import classes from './HeaderNav.module.scss';
 
 const HeaderNavWrapper = () => {
   const [opened, { toggle, open, close }] = useDisclosure(false);
@@ -18,56 +26,44 @@ const HeaderNavWrapper = () => {
             <Burger onClick={toggle} />
             <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
               <Anchor
-                href={'/'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                c={`#000000A6`}
+                href={'/'}
                 p={0}
-                bg={`none`}
+                className={classes['header-collapse-link']}
               >
                 홈
               </Anchor>
             </Flex>
             <div className={classes[`Header-nav-right-line`]}></div>
             <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <Button
-                size={`sm`}
-                fw={600}
+              <UnstyledButton
                 onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
+                // bg={`none`}
+                className={classes['header-collapse-link']}
               >
-                술
-              </Button>
+                주류 리뷰
+              </UnstyledButton>
             </Flex>
             <div className={classes[`Header-nav-right-line`]}></div>
             <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <Button
+              <UnstyledButton
                 size={`sm`}
-                fw={600}
                 onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                w={`100%`}
                 p={0}
+                className={classes['header-collapse-link']}
+              >
+                본격적 칠링
+              </UnstyledButton>
+            </Flex>
+            <div className={classes[`Header-nav-right-line`]}></div>
+            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
+              <UnstyledButton
+                onClick={toggle}
+                p={0}
+                className={classes['header-collapse-link']}
               >
                 커뮤니티
-              </Button>
-            </Flex>
-            <div className={classes[`Header-nav-right-line`]}></div>
-            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <Button
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                w={`100%`}
-                p={0}
-              >
-                공지사항 및 이벤트
-              </Button>
+              </UnstyledButton>
             </Flex>
           </Flex>
         </Flex>
@@ -98,12 +94,7 @@ const HeaderNavWrapper = () => {
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
+                className={classes['header-collapse-link']}
                 pb={12}
               >
                 전체
@@ -111,26 +102,16 @@ const HeaderNavWrapper = () => {
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
-                p={12}
+                className={classes['header-collapse-link']}
+                pb={12}
               >
                 전통주
               </Anchor>
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
-                p={12}
+                className={classes['header-collapse-link']}
+                pb={12}
               >
                 맥주
               </Anchor>
@@ -141,26 +122,16 @@ const HeaderNavWrapper = () => {
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
+                className={classes['header-collapse-link']}
                 pb={12}
               >
-                술끼리 안주끼리 조합
+                술끼리 안주끼리
               </Anchor>
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
-                p={12}
+                className={classes['header-collapse-link']}
+                pb={12}
               >
                 한잔 말아먹기
               </Anchor>
@@ -170,12 +141,7 @@ const HeaderNavWrapper = () => {
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
+                className={classes['header-collapse-link']}
                 pb={12}
               >
                 공지사항
@@ -183,13 +149,8 @@ const HeaderNavWrapper = () => {
               <Anchor
                 href={'/drink'}
                 component={Link}
-                size={`sm`}
-                fw={600}
-                onClick={toggle}
-                c={`#000000A6`}
-                bg={`none`}
-                underline='never'
-                p={12}
+                className={classes['header-collapse-link']}
+                pb={12}
               >
                 이벤트
               </Anchor>

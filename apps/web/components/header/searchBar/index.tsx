@@ -1,8 +1,20 @@
-import { Box, Button, Center, Flex, Text, TextInput } from '@mantine/core';
-import classes from './SearchBar.module.css';
+'use client';
+import { Anchor, Autocomplete, Box, Center, Flex } from '@mantine/core';
+import classes from './SearchBar.module.scss';
 import HeaderWriteButton from './WriteButton';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const HeaderCenterWrapper = () => {
+  const SearchIcon = (
+    <Image
+      src='/icons/돋보기.svg'
+      alt='검색 아이콘'
+      width={24}
+      height={24}
+      sizes='24px'
+    />
+  );
   return (
     <Center w={`100%`} h={`100%`}>
       <Flex
@@ -21,51 +33,46 @@ const HeaderCenterWrapper = () => {
           w={`35rem`}
           px={`1rem`}
           py={`0.625rem`}
-          bg={`#F2F3F3`}
+          bg={`#ffffff`}
           className={classes[`SearchBar-Wrapper`]}
         >
           <Flex w={`100%`} h={`100%`} align={`center`}>
             <Flex mr={`0.5rem`} w={`100%`} h={`100%`} align={`center`}>
               {/* 추후 맨틴의 autocomplete로 교체 -> 자동완성 기능 */}
-              <TextInput
+              <Autocomplete
+                leftSection={SearchIcon}
                 w={`100%`}
                 placeholder='원하시는 술 정보를 검색해보세요.'
                 variant='unstyled'
               />
             </Flex>
-            <Flex
-              justify={`center`}
-              align={`center`}
-              w={`1.5rem`}
-              h={`1.5rem`}
-              ml={`auto`}
-            >
-              Q
-            </Flex>
           </Flex>
         </Box>
 
-        <Box>
-          <Button
-            component='a'
-            href='/login'
-            w={`7rem`}
-            h={`2.75rem`}
-            radius={`1.5rem`}
-            px={`1.5rem`}
-            variant={`outline`}
-            color={`#BCC0C4`}
-            mr={`1.5rem`}
+        <Flex h={'100%'} align={'center'}>
+          <Anchor
+            href={'/login'}
+            component={Link}
+            className={classes['header-nav-sns-login-button']}
           >
-            <Text c={`#000`} size='0.875rem' w={`100%`} fw={600} ta='center'>
+            <Box className={classes['header-nav-sns-login-button-inside-div']}>
               소셜 로그인
-            </Text>
-          </Button>
+            </Box>
+          </Anchor>
           <HeaderWriteButton />
-        </Box>
+        </Flex>
       </Flex>
     </Center>
   );
 };
 
 export default HeaderCenterWrapper;
+
+// component='a'
+//             href='/login'
+//             w={`7rem`}
+//             h={`2.75rem`}
+//             radius={`1.5rem`}
+//             px={`1.5rem`}
+//             color={`#BCC0C4`}
+//             mr={`1.5rem`}

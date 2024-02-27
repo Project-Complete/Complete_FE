@@ -1,5 +1,4 @@
 .review-main-title {
-  
   --Font-Text-active: #000000d9;
   color: var(--Font-Text-active, rgba(0, 0, 0, 0.85));
   /* Page/Page-Head-ext */
@@ -40,4 +39,16 @@
 
 .another-drink-list-wrapper {
   border-bottom: 1px solid var(--Background-bg-divider, #e5e6e8);
+}
+
+.another-drink-list {
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.5rem; /* 250% */
+  color: #000000a6;
+  &:hover {
+    color: var(--Font-text-active, rgba(0, 0, 0, 0.85));
+  }
 }

@@ -1,5 +1,6 @@
 'use client';
-import { Flex, UnstyledButton } from '@mantine/core';
+import { Anchor, Flex } from '@mantine/core';
+import Link from 'next/link';
 import { ChipButton } from '@team-complete/complete-ui';
 import AngleRight from '@/assets/angleRight.svg';
 import Image from 'next/image';
@@ -70,7 +71,19 @@ const MainDrinkHeader = ({
           </ChipButton>
         </Flex>
         <Flex w={'100%'} justify={'flex-end'} align={'center'}>
-          <UnstyledButton component='a'>
+          <Anchor
+            href={`/drink?select=${activeState}`}
+            component={Link}
+            size={`base`}
+            fw={600}
+            p={0}
+            bg={`none`}
+            lh={'2.5rem'}
+            style={{
+              textDecoration: 'none',
+            }}
+            className={classes['another-drink-list']}
+          >
             <Flex justify={'center'} align={'center'} gap={8}>
               더보기
               <Image
@@ -80,7 +93,7 @@ const MainDrinkHeader = ({
                 alt={'angle-right'}
               />
             </Flex>
-          </UnstyledButton>
+          </Anchor>
         </Flex>
       </Flex>
     </Flex>
