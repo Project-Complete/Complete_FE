@@ -1,0 +1,54 @@
+.review-main-title {
+  --Font-Text-active: #000000d9;
+  color: var(--Font-Text-active, rgba(0, 0, 0, 0.85));
+  /* Page/Page-Head-ext */
+  font-family: Pretendard;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 3rem;
+}
+
+.review-filter-button-layout {
+  /* padding: 0px 24px; */
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.ChipButtonArea {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.5rem;
+  padding: 0rem var(--Spacing-16, 1rem);
+}
+
+.ChipButtonArea-active {
+  padding: 0rem var(--Spacing-16, 1rem);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid #0000005b;
+  background-image: linear-gradient(99.88deg, #7e3fb8 0%, #b24a8b 100%),
+    linear-gradient(111.27deg, #7e3fb8 0%, #b24a8b 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.another-drink-list-wrapper {
+  border-bottom: 1px solid var(--Background-bg-divider, #e5e6e8);
+}
+
+.another-drink-list {
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.5rem; /* 250% */
+  color: #000000a6;
+  &:hover {
+    color: var(--Font-text-active, rgba(0, 0, 0, 0.85));
+  }
+}

@@ -20,10 +20,10 @@ const chipButtonVariants = cva(classes[`Chip-button-wrapper`], {
 });
 
 const ChipButton = React.forwardRef<HTMLButtonElement, ChipButtonProps>(
-  ({ className, gray, variant, children, ...props }, ref) => {
+  ({ className,  variant, children, ...props }, ref) => {
     return (
       <button
-        className={cn(chipButtonVariants({ variant, gray, className }))}
+        className={cn(chipButtonVariants({ variant, className }))}
         {...props}
         ref={ref}
       >

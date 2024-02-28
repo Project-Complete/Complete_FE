@@ -30,9 +30,9 @@ const AnotherDrinkListCard = ({
           </div>
           <div className={classes['card-content-like']}>
             {drink_like ? (
-              <Image src='/icons/좋아요_fill.svg' alt='좋아요' fill></Image>
+              <Image src='/icons/like_fill.svg' alt='좋아요' fill></Image>
             ) : (
-              <Image src='/icons/좋아요.svg' alt='좋아요' fill></Image>
+              <Image src='/icons/like.svg' alt='좋아요' fill></Image>
             )}
           </div>
         </div>

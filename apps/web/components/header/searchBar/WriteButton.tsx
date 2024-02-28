@@ -1,25 +1,20 @@
 'use client';
-import {
-  Popover,
-  Button,
-  Text,
-  Box,
-  UnstyledButton,
-  Flex,
-} from '@mantine/core';
+import { Popover, Text, Flex, Button } from '@mantine/core';
+import classes from '../nav/HeaderNav.module.scss';
 
 const HeaderWriteButton = () => {
   return (
     <Popover>
       <Popover.Target>
         <Button
-          w={`5.5rem`}
-          h={`2.75rem`}
+          variant={'primary'}
+          w={`5.9rem`}
+          h={`2.5rem`}
           radius={`1.5rem`}
           px={`1.5rem`}
-          bg={`#BCC0C4`}
+          className={classes['header-nav-write-button']}
         >
-          <Text c={`#000`} size='0.875rem' w={`100%`} fw={600} ta='center'>
+          <Text size='1rem' w={`100%`} fw={600} ta='center'>
             글 쓰기
           </Text>
         </Button>
