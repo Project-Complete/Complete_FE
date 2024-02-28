@@ -4,7 +4,8 @@ import { useReviewListQuery } from '@/hooks/queries/useReviewListQuery';
 import { Divider, Flex, Grid, Paper, Text } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import CustomerReviewCard from './ReviewCard';
 
 const CustomerReview = ({
   customerReviewRef,
@@ -13,11 +14,15 @@ const CustomerReview = ({
   customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
   detailId: number;
 }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalHandler = () => {
+    setModalOpen(prev => !prev);
+  };
   const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
     detailId,
     sort: 'latest',
   });
-  console.log(data);
+
   const { ref, entry } = useIntersection({
     root: null,
     threshold: 0.3,
@@ -30,6 +35,7 @@ const CustomerReview = ({
 
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
+      <CustomerReviewCard modalOpen={modalOpen} modalHandler={modalHandler} />
       <Text
         component='h1'
         lh={'40px'}
@@ -46,7 +52,12 @@ const CustomerReview = ({
             <Fragment key={index}>
               {v.reviews.map(e => {
                 return (
-                  <Grid.Col key={e.id} w={'100%'} span={{ base: 6, sm: 4 }}>
+                  <Grid.Col
+                    key={e.id}
+                    w={'100%'}
+                    span={{ base: 6, sm: 4 }}
+                    onClick={modalHandler}
+                  >
                     <Flex gap={16} direction={'column'}>
                       <Flex
                         w={'100%'}

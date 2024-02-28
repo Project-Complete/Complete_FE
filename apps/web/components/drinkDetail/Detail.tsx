@@ -2,6 +2,7 @@ import { Badge, Box, Flex, Text } from '@mantine/core';
 import RadarTasteChart from '../chart/RadarTasteChart';
 import { DetailSimpleDrink } from '@/types/drinks';
 import Image from 'next/image';
+import { ChipButton } from '@team-complete/complete-ui';
 
 const drinkOccasionList = [
   { id: 'alone_sum', title: '나 혼자', selectedPeople: 0 },
@@ -95,9 +96,9 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
             <Flex gap={8}>
               {detailDrink.flavor_statistics.map((e, index) => {
                 return (
-                  <Badge key={index} h={48} fz={18}>
+                  <ChipButton variant={'gray'} key={index}>
                     {e.flavor}
-                  </Badge>
+                  </ChipButton>
                 );
               })}
             </Flex>
