@@ -1,5 +1,11 @@
 import { cn } from '@/utils/util';
-import { MantineComponent, ModalBaseStylesNames, ModalOverlayProps, Modal as ModalPrimitive, ModalRootProps } from '@mantine/core';
+import {
+  MantineComponent,
+  ModalBaseStylesNames,
+  ModalOverlayProps,
+  Modal as ModalPrimitive,
+  ModalRootProps,
+} from '@mantine/core';
 import React from 'react';
 
 export const ModalRoot: MantineComponent<{
@@ -66,7 +72,13 @@ const ModalContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ children, className, ...props }, ref) => {
   return (
-    <ModalPrimitive.Content className={cn(``, className)} {...props} ref={ref}>
+    <ModalPrimitive.Content
+      py={'40px'}
+      px={'24px'}
+      className={cn(className)}
+      {...props}
+      ref={ref}
+    >
       {children}
     </ModalPrimitive.Content>
   );

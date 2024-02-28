@@ -1,0 +1,11 @@
+.review-detail-card{
+    > section {
+        border-radius: 40px;
+        border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+        background: #FAFAFA;
+    }
+}
+
+.review-detail-header{
+    background: #FAFAFA;
+}
