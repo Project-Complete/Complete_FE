@@ -1,9 +1,11 @@
-import { ReviewList } from '@/types/review';
+import { DrinkDetailReview, ReviewList } from '@/types/review';
 import { api } from '@/utils/api';
 import {
   InfiniteData,
   UseInfiniteQueryResult,
+  UseQueryResult,
   useInfiniteQuery,
+  useQuery,
 } from '@tanstack/react-query';
 
 const reviewListFetcher = async ({
@@ -54,5 +56,23 @@ export const useReviewListQuery = ({
 
       return nextPage;
     },
+  });
+};
+
+const reviewDetailFetcher = async (reviewId: number) => {
+  const url = `reviews/${reviewId}`;
+
+  const response = await api.get(url).json();
+  return response;
+};
+
+export const useReviewDetailQuery = ({
+  reviewId,
+}: {
+  reviewId: number;
+}): UseQueryResult<DrinkDetailReview, Error> => {
+  return useQuery({
+    queryKey: ['review', reviewId],
+    queryFn: () => reviewDetailFetcher(reviewId),
   });
 };

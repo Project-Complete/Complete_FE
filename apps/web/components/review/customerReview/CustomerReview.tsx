@@ -1,6 +1,6 @@
 'use client';
 import StarScore from '@/components/animation/StarScore';
-import { useReviewListQuery } from '@/hooks/queries/useReviewListQuery';
+import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
 import { Divider, Flex, Grid, Paper, Text } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
@@ -15,8 +15,11 @@ const CustomerReview = ({
   detailId: number;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const modalHandler = () => {
+  const [reviewId, setReviewId] = useState<number>(0);
+
+  const modalHandler = (id: number) => {
     setModalOpen(prev => !prev);
+    setReviewId(id);
   };
   const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
     detailId,
@@ -35,7 +38,13 @@ const CustomerReview = ({
 
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
-      <CustomerReviewCard modalOpen={modalOpen} modalHandler={modalHandler} />
+      {reviewId > 0 && (
+        <CustomerReviewCard
+          modalOpen={modalOpen}
+          modalHandler={() => modalHandler(0)}
+          reviewId={reviewId}
+        />
+      )}
       <Text
         component='h1'
         lh={'40px'}
@@ -56,7 +65,9 @@ const CustomerReview = ({
                     key={e.id}
                     w={'100%'}
                     span={{ base: 6, sm: 4 }}
-                    onClick={modalHandler}
+                    onClick={() => {
+                      modalHandler(e.id);
+                    }}
                   >
                     <Flex gap={16} direction={'column'}>
                       <Flex
