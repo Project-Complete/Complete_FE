@@ -8,6 +8,7 @@ import {
   ModalOverlay,
   ModalHeader,
   ModalBody,
+  Modal,
 } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
@@ -40,43 +41,56 @@ const CustomerReviewCard = ({
     const formattedDate = year + '.' + month + '.' + day;
 
     return (
-      <ModalRoot opened={modalOpen} onClose={modalHandler}>
+      // <Modal
+      //   className={classes['review-detail-card']}
+      //   opened={modalOpen}
+      //   onClose={modalHandler}
+      //   size={'40.5rem'}
+      // ></Modal>
+      <ModalRoot opened={modalOpen} onClose={modalHandler} size={'40.5rem'}>
         <ModalOverlay />
         <ModalContent className={classes['review-detail-card']}>
-          <ModalHeader className={classes['review-detail-header']}>
-            <Flex gap={'24px'}>
-              <Box>
-                <Image
-                  src={data.image_url}
-                  alt='리뷰 사진'
-                  width={80}
-                  height={80}
-                  sizes={'width:80px; height:80px'}
-                />
-              </Box>
-              <Flex direction='column'>
-                <Flex>
-                  <Box>{data.writer_dto.nickname}</Box>
-                  <Flex
-                    align={'center'}
-                    h={'100%'}
-                    mx={'6px'}
-                    color={'#E5E6E8'}
-                  >
-                    |
-                  </Flex>
-                  <Box>{formattedDate}</Box>
-                </Flex>
+          <Box className={classes['review-detail-wrapper']}>
+            <ModalHeader className={classes['review-detail-header']}>
+              <Flex gap={'24px'}>
                 <Box>
-                  <StarScore score={data.rating} />
+                  <Image
+                    src={data.image_url}
+                    alt='리뷰 사진'
+                    width={80}
+                    height={80}
+                    sizes={'width:80px; height:80px'}
+                  />
+                </Box>
+                <Flex direction='column'>
+                  <Flex>
+                    <Box>{data.writer_dto.nickname}</Box>
+                    <Flex
+                      align={'center'}
+                      h={'100%'}
+                      mx={'6px'}
+                      color={'#E5E6E8'}
+                    >
+                      |
+                    </Flex>
+                    <Box>{formattedDate}</Box>
+                  </Flex>
+                  <Box>
+                    <StarScore score={data.rating} />
+                  </Box>
+                </Flex>
+              </Flex>
+            </ModalHeader>
+            <ModalBody>
+              <Box>평가</Box>
+              <Flex className={classes['review-detail-content-card']}>
+                <Box>이 술은,</Box>
+                <Box>
+                  
                 </Box>
               </Flex>
-            </Flex>
-          </ModalHeader>
-          <ModalBody>
-            <Box>평가</Box>
-            <Flex></Flex>
-          </ModalBody>
+            </ModalBody>
+          </Box>
         </ModalContent>
       </ModalRoot>
     );
