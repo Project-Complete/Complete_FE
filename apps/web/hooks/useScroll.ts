@@ -6,7 +6,7 @@ const useScroll = () => {
   ) => {
     if (userRef && userRef.current) {
       const element = userRef.current;
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 

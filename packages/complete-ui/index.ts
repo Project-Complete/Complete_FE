@@ -14,7 +14,7 @@ import {
   ModalTitle,
   ModalHeader,
   ModalBody,
-} from './src/components/Modal';
+} from './src/components/modal';
 
 export {
   Counter,

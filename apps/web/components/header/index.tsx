@@ -3,7 +3,9 @@ import { Flex } from '@mantine/core';
 import HeaderNavWrapper from './nav';
 import HeaderCenterWrapper from './searchBar';
 
+
 const HeaderWrapper = () => {
+
   return (
     <>
       <Flex

@@ -1,15 +1,50 @@
 'use client';
 import StarScore from '@/components/animation/StarScore';
-import { Divider, Flex, Grid, Text } from '@mantine/core';
+import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
+import { Divider, Flex, Grid, Paper, Text } from '@mantine/core';
+import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
+import { Fragment, useEffect, useState } from 'react';
+import CustomerReviewCard from './ReviewCard';
 
 const CustomerReview = ({
   customerReviewRef,
+  detailId,
 }: {
   customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
+  detailId: number;
 }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [reviewId, setReviewId] = useState<number>(0);
+
+  const modalHandler = (id: number) => {
+    setModalOpen(prev => !prev);
+    setReviewId(id);
+  };
+  const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
+    detailId,
+    sort: 'latest',
+  });
+
+  const { ref, entry } = useIntersection({
+    root: null,
+    threshold: 0.3,
+  });
+  useEffect(() => {
+    if (entry && entry.isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [entry]);
+
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
+      {reviewId > 0 && (
+        <CustomerReviewCard
+          modalOpen={modalOpen}
+          modalHandler={() => modalHandler(0)}
+          reviewId={reviewId}
+        />
+      )}
       <Text
         component='h1'
         lh={'40px'}
@@ -20,59 +55,80 @@ const CustomerReview = ({
         칠러들의 솔직한 리뷰
       </Text>
       <Grid w={'100%'} gutter={24} mt={24} mb={24}>
-        {new Array(6).fill(null).map((v, index) => {
-          return (
-            <Grid.Col key={index} w={'100%'} span={{ base: 6, sm: 4 }}>
-              <Flex gap={16} direction={'column'}>
-                <Flex
-                  w={'100%'}
-                  pb={'73.4%'}
-                  pos={'relative'}
-                  style={{ boxShadow: '0px 4px 20px 0px #00000033' }}
-                >
-                  <Image
-                    src={'https://picsum.photos/392/288.webp'}
-                    sizes='512px'
-                    fill
-                    style={{
-                      objectFit: 'contain',
-                      borderRadius: '12px',
-                    }}
-                    alt={'image'}
-                  />
-                  <Flex
-                    pos={'absolute'}
-                    right={10}
-                    bottom={0}
-                    w={72}
-                    h={72}
-                    p={10}
-                    bg={'white'}
-                    style={{
-                      boxshadow: '0px 4px 20px 0px #00000033',
-                      transform: 'translate(0, 50%)',
-                      borderRadius: '100%',
+        {data &&
+          data.pages &&
+          data.pages.map((v, index) => (
+            <Fragment key={index}>
+              {v.reviews.map(e => {
+                return (
+                  <Grid.Col
+                    key={e.id}
+                    w={'100%'}
+                    span={{ base: 6, sm: 4 }}
+                    onClick={() => {
+                      modalHandler(e.id);
                     }}
                   >
-                    <Flex
-                      w={'100%'}
-                      h={'100%'}
-                      bg={'gray'}
-                      style={{ borderRadius: '100%' }}
-                    ></Flex>
-                  </Flex>
-                </Flex>
-                <Flex gap={10}>
-                  <Text>김성호</Text>
-                  <Divider orientation='vertical' />
-                  <Text>2023.01.19</Text>
-                </Flex>
-                <StarScore score={4.5} />
-              </Flex>
-            </Grid.Col>
-          );
-        })}
+                    <Flex gap={16} direction={'column'}>
+                      <Flex
+                        w={'100%'}
+                        pb={'73.4%'}
+                        pos={'relative'}
+                        style={{
+                          boxShadow: '0px 4px 20px 0px #00000033',
+                          borderRadius: '12px',
+                        }}
+                      >
+                        <Image
+                          src={
+                            e.image_url !== '없어유'
+                              ? e.image_url
+                              : 'https://picsum.photos/392/288.webp'
+                          }
+                          sizes='512px'
+                          fill
+                          style={{
+                            objectFit: 'contain',
+                            borderRadius: '12px',
+                          }}
+                          alt={'image'}
+                        />
+                        <Flex
+                          pos={'absolute'}
+                          right={10}
+                          bottom={0}
+                          w={72}
+                          h={72}
+                          p={10}
+                          bg={'white'}
+                          style={{
+                            boxshadow: '0px 4px 20px 0px #00000033',
+                            transform: 'translate(0, 50%)',
+                            borderRadius: '100%',
+                          }}
+                        >
+                          <Flex
+                            w={'100%'}
+                            h={'100%'}
+                            bg={'gray'}
+                            style={{ borderRadius: '100%' }}
+                          ></Flex>
+                        </Flex>
+                      </Flex>
+                      <Flex gap={10}>
+                        <Text>{e.writer.nickname}</Text>
+                        <Divider orientation='vertical' />
+                        <Text>{e.created_date}</Text>
+                      </Flex>
+                      <StarScore score={e.review_rating} />
+                    </Flex>
+                  </Grid.Col>
+                );
+              })}
+            </Fragment>
+          ))}
       </Grid>
+      <div ref={ref}></div>
     </Flex>
   );
 };

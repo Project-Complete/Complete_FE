@@ -1,7 +1,7 @@
 import styles from './page.module.css';
 import { Flex } from '@mantine/core';
 import SelectedBanner from '../components/banner/SelectedBanner';
-import MainReview from '@/components/review/mainReview/MainReview';
+import MainReview from '@/components/review/mainDrink/MainDrink';
 
 export default function Page(): JSX.Element {
   return (
