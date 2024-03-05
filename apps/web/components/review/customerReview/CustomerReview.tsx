@@ -35,6 +35,7 @@ const CustomerReview = ({
       fetchNextPage();
     }
   }, [entry]);
+  console.log(data);
 
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
@@ -81,7 +82,7 @@ const CustomerReview = ({
                       >
                         <Image
                           src={
-                            e.image_url !== '없어유'
+                            e.image_url !== 'string'
                               ? e.image_url
                               : 'https://picsum.photos/392/288.webp'
                           }

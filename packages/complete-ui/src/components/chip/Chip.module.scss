@@ -1,0 +1,46 @@
+.Chip-wrapper {
+  border-radius: 2rem;
+  border: 1px solid var(--Font-Input-text-default, rgba(0, 0, 0, 0.45));
+  background: var(--Background-Button-Defualt, #FFF);
+  display: inline-flex;
+  padding: 0rem var(--Spacing-16, 1rem);
+  justify-content: center;
+  align-items: center;
+}
+
+// .Chip-button-background-primary {
+//   border: 1px solid var(--primary-color-400);
+//   color: var(--primary-color-400);
+//   &:hover {
+//     color: rgba(255, 255, 255, 0.85);
+//     border: 1px solid #0000005b;
+//     background-image: linear-gradient(99.88deg, #7e3fb8 0%, #b24a8b 100%),
+//       linear-gradient(111.27deg, #7e3fb8 0%, #b24a8b 100%);
+//     background-origin: border-box;
+//     background-clip: content-box, border-box;
+//   }
+//   &:active {
+//     color: rgba(255, 255, 255, 0.85);
+//     transform: translateY(2px);
+//   }
+// }
+
+// .Chip-button-background-gray {
+//   border: 1px solid rgba(0, 0, 0, 0.45);
+//   color: rgba(0, 0, 0, 0.45);
+//   &:active {
+//     color: rgba(0, 0, 0, 0.45);
+//     transform: translateY(2px);
+//   }
+// }
+
+.Chip-background-outline{
+  border-radius: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  color: #000000;
+  display: inline-flex;
+  padding: 0rem var(--Spacing-16, 1rem);
+  justify-content: center;
+  align-items: center;
+
+}

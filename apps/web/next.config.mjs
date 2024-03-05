@@ -23,6 +23,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'www.shinsegae-lnb.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'dev-challang.s3.ap-northeast-2.amazonaws.com',
+      },
     ],
   },
   reactStrictMode: false,
