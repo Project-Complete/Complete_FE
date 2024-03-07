@@ -9,7 +9,6 @@ export const findMinMaxTaste = (data: Taste): [string[], string[]] => {
 
   keys.forEach(key => {
     const value = data[key];
-    console.log(key);
     if (value > maxValue) {
       maxValue = value;
       maxTasteValues = [key];

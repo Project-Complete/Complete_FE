@@ -15,6 +15,7 @@
 
 .review-detail-content-card{
     display: flex;
+    position: relative;
     width: 100%;
     padding: var(--Spacing-16, 1rem) var(--Spacing-24, 1.5rem);
     flex-direction: column;
@@ -31,4 +32,47 @@
     height:2.5rem;
     font-weight: 600;
     line-height:2.5rem;
+}
+
+.review-grid-col{
+    :hover{
+        cursor:pointer;
+    }
+}
+
+.review-detail-image-modal {
+    background: none;
+    & section {
+        position: relative;
+        width: 100%;
+        height:100%;
+        display: flex;
+    }
+   
+}
+
+.review-image-body{
+    width: 100%;
+    height: 90%;
+    position: relative;
+    margin-top: auto;
+}
+
+.review-image-header{
+    background: none;
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:100%;
+    height:10%;
+    & button{
+        width:2.5rem;
+        height: 2.5rem;
+        // position:absolute;
+        color:#FFF;
+    }
+    padding:1.25rem;
+    & :hover{
+        background-color: black;
+    }
 }
