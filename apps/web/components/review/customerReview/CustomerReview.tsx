@@ -1,7 +1,6 @@
 'use client';
-import StarScore from '@/components/animation/StarScore';
 import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
-import { Divider, Flex, Grid, Paper, Text } from '@mantine/core';
+import { Divider, Flex, Grid, Paper, Rating, Text } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
 import { Fragment, useEffect, useState } from 'react';
@@ -81,7 +80,7 @@ const CustomerReview = ({
                       >
                         <Image
                           src={
-                            e.image_url !== '없어유'
+                            e.image_url !== ''
                               ? e.image_url
                               : 'https://picsum.photos/392/288.webp'
                           }
@@ -120,7 +119,7 @@ const CustomerReview = ({
                         <Divider orientation='vertical' />
                         <Text>{e.created_date}</Text>
                       </Flex>
-                      <StarScore score={e.review_rating} />
+                      <Rating value={e.review_rating} fractions={2} readOnly />
                     </Flex>
                   </Grid.Col>
                 );

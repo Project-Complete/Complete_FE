@@ -4,6 +4,7 @@ import classes from './SearchBar.module.scss';
 import HeaderWriteButton from './WriteButton';
 import Image from 'next/image';
 import Link from 'next/link';
+import MainLogo from '../MainLogo';
 
 const HeaderCenterWrapper = () => {
   const SearchIcon = (
@@ -24,9 +25,9 @@ const HeaderCenterWrapper = () => {
         w={`100%`}
         h={`100%`}
       >
-        <Box w={`11.5rem`} h={`5rem`}>
-          Logo Image
-        </Box>
+        <Flex w={`11.5rem`} h={`5rem`} justify={'center'} align={'center'}>
+          <MainLogo />
+        </Flex>
 
         <Box
           h={`3.25rem`}

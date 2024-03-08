@@ -1,10 +1,9 @@
 'use client';
-import { Flex, Grid } from '@mantine/core';
+import { Flex, Grid, Rating } from '@mantine/core';
 import Image from 'next/image';
 import bookmark from '@/assets/bookmark.svg';
 import heart from '@/assets/heart.svg';
 import emptyStar from '@/assets/emptyStar.svg';
-import StarScore from '@/components/animation/StarScore';
 import classes from './MainDrinkContent.module.css';
 import { useMainDrinkListQuery } from '@/hooks/queries/useDrinkListQuery';
 import Link from 'next/link';
@@ -88,7 +87,7 @@ const MainDrinkContent = ({
                     <Flex className={classes['review-content-product-title']}>
                       {v.drink_name}
                     </Flex>
-                    <StarScore score={v.review_rating} />
+                    <Rating value={v.review_rating} fractions={2} readOnly />
                   </Flex>
                 </Flex>
               </Link>

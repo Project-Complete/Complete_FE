@@ -1,4 +1,3 @@
-import { DrinksResponse } from '@/types/drinks';
 import { api } from '@/utils/api';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
@@ -10,7 +9,7 @@ const drinkListFetcher = async ({
   sorted?: 'popularity_order';
 }) => {
   const response = await api
-    .get(`drink/search?drink_type=${drinkType}&sorted=${sorted}&page=1`)
+    .get(`drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=1`)
     .json();
   return response;
 };
