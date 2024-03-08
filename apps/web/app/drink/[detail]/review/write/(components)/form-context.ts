@@ -1,24 +1,24 @@
 import { createFormContext } from '@mantine/form';
 
-interface FormValues {
+export interface FormValues {
   content: string;
   rating: number;
-  situation: {
+  situation_dto: {
     alone: boolean;
     friend: boolean;
     partner: boolean;
     business: boolean;
     adult: boolean;
   };
-  taste: {
+  taste_dto: {
     sweet: number;
     sour: number;
     bitter: number;
     body: number;
     refresh: number;
   };
-  flavors: boolean[];
-  foods: boolean[];
+  flavors: boolean[] | number[];
+  foods: boolean[] | number[];
 }
 export const [ReviewFormProvider, useReviewFormContext, useReviewForm] =
   createFormContext<FormValues>();
