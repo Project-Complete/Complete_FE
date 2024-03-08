@@ -37,7 +37,7 @@ const TasteInput = ({ taste }: TasteInputProps) => {
       )}
 
       <Rating
-        {...form.getInputProps(`taste.${taste}`)}
+        {...form.getInputProps(`taste_dto.${taste}`)}
         highlightSelectedOnly
         emptySymbol={
           <Image src={'/radio_empty.svg'} alt='' width={32} height={32} />

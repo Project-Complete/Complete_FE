@@ -25,7 +25,7 @@ const SituationButton = ({
       <input
         type='checkbox'
         value={value}
-        {...form.getInputProps(`situation.${value}`)}
+        {...form.getInputProps(`situation_dto.${value}`)}
       />
       <Image
         src={
