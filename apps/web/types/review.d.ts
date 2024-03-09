@@ -21,7 +21,6 @@ export interface ReviewList {
   page_info: PageInfo;
 }
 
-
 export interface WriterDTO {
   id: number;
   nickname: string;
@@ -33,6 +32,7 @@ export interface Situation {
   business: boolean;
   friend: boolean;
   partner: boolean;
+  // [key: 'adult' | 'alone' | 'business' | 'friend' | 'partner']: boolean;
 }
 
 export interface Taste {
