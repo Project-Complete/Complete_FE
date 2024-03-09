@@ -6,22 +6,14 @@ import { useReviewFormContext } from './form-context';
 interface FoodButtonProps {
   label: string;
   value: number;
-  isSelected?: boolean;
+  isSelected?: boolean | number;
 }
 
 const FoodButton = ({ label, value, isSelected }: FoodButtonProps) => {
   const form = useReviewFormContext();
 
   return (
-    <label
-      className={classes['icon-button-wrapper']}
-      // onClick={() => {
-      //   const newFoods = new Set<number>(form.values.foods);
-      //   if (isSelected) newFoods.delete(value);
-      //   else newFoods.add(value);
-      //   form.setValues(prev => ({ ...prev, foods: newFoods }));
-      // }}
-    >
+    <label className={classes['icon-button-wrapper']}>
       <input
         type='checkbox'
         value={value}
