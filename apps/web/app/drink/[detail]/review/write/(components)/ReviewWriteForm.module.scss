@@ -1,10 +1,44 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 72px;
+  gap: 40px;
 }
 
 // image-attach-section
+.image-section {
+  > input {
+    display: none;
+  }
+}
+
+.image-wrapper {
+  margin-top: 40px;
+  margin-bottom: 24px;
+
+  > div {
+    position: relative;
+    width: 288px;
+    height: 288px;
+
+    > img:first-child {
+      object-fit: cover;
+    }
+
+    > button {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: 20px;
+      bottom: 20px;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
 .image-attach {
   display: flex;
   justify-content: center;
@@ -132,5 +166,22 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
+  }
+}
+
+// button-wrapper
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+
+  > button {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  > button:first-child {
+    box-shadow: none;
   }
 }
