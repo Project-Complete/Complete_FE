@@ -5,6 +5,7 @@ import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
 import { Fragment, useEffect, useState } from 'react';
 import CustomerReviewCard from './ReviewCard';
+import classes from './ReviewCard.module.scss';
 
 const CustomerReview = ({
   customerReviewRef,
@@ -34,6 +35,7 @@ const CustomerReview = ({
       fetchNextPage();
     }
   }, [entry]);
+  console.log(data);
 
   return (
     <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
@@ -67,6 +69,7 @@ const CustomerReview = ({
                     onClick={() => {
                       modalHandler(e.id);
                     }}
+                    className={classes['review-grid-col']}
                   >
                     <Flex gap={16} direction={'column'}>
                       <Flex
@@ -80,7 +83,7 @@ const CustomerReview = ({
                       >
                         <Image
                           src={
-                            e.image_url !== ''
+                            e.image_url !== 'string' && e.image_url !== ''
                               ? e.image_url
                               : 'https://picsum.photos/392/288.webp'
                           }

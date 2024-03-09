@@ -7,8 +7,15 @@ import bookmark from '@/assets/bookmark.svg';
 
 const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
   return (
-    <Flex bg='gray' w={'100%'} py={92} justify={'center'} mb={'100px'}>
-      <Flex w={'100%'} maw={1224} gap={'128px'} align={'center'}>
+    <Flex pos={'relative'} w={'100%'} py={92} justify={'center'} mb={'100px'}>
+      <Flex
+        w={'100%'}
+        maw={1224}
+        gap={'128px'}
+        align={'center'}
+        pos={'relative'}
+        className={classes['drink-banner-content-wrapper']}
+      >
         <Flex
           bg='white'
           w={392}
@@ -89,6 +96,12 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
           </Flex>
         </Flex>
       </Flex>
+      <Image
+        src='/banner/홈-header-맥주.svg'
+        fill
+        alt='배너'
+        objectFit='cover'
+      />
     </Flex>
   );
 };

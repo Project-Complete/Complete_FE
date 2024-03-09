@@ -15,6 +15,7 @@ import {
   ModalHeader,
   ModalBody,
 } from './src/components/modal';
+import { Chip } from './src/components/chip';
 
 export {
   Counter,
@@ -34,4 +35,5 @@ export {
   ModalTitle,
   ModalHeader,
   ModalBody,
+  Chip,
 };

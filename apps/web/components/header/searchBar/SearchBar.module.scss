@@ -3,6 +3,11 @@
   border: 1px solid var(--Background-bg-input-border-default, #cbcdd1);
 }
 
+.SearchBar-focus-Wrapper {
+  border-radius: 0.5rem;
+  border: 1px solid var(--Font-Input-text-primary, #693BC9);
+}
+
 .header-nav-sns-login-button {
   border-radius: 9999px;
   background: white;
