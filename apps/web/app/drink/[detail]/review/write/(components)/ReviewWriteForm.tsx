@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeader from './SectionHeader';
 import classes from './ReviewWriteForm.module.scss';
 import Image from 'next/image';
@@ -7,8 +7,9 @@ import HelpMessageButton from './HelpMessageButton';
 import { Rating } from '@mantine/core';
 import SituationButton from './SituationButton';
 import FoodButton from './FoodButton';
-import { ReviewFormProvider, useReviewForm } from './form-context';
+import { FormValues, ReviewFormProvider, useReviewForm } from './form-context';
 import TasteInput from './TasteInput';
+import { Button } from '@team-complete/complete-ui';
 
 export interface Situation {
   alone: boolean;
@@ -67,20 +68,20 @@ const foodItems = [
   { value: 11, label: '튀김' },
   { value: 12, label: '해산물' },
 ];
-
-const ReviewWriteForm = () => {
+// 탄산이고 레몬맛이라서 상큼합니다! 도수가 낮아서 음료처럼 가볍게 마시기 좋아요~!!
+const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   const form = useReviewForm({
     initialValues: {
       content: '',
       rating: 0,
-      situation: {
+      situation_dto: {
         alone: false,
         friend: false,
         partner: false,
         business: false,
         adult: false,
       },
-      taste: {
+      taste_dto: {
         sweet: 0,
         sour: 0,
         bitter: 0,
@@ -90,19 +91,141 @@ const ReviewWriteForm = () => {
       flavors: Array.from({ length: foodItems.length }, () => false),
       foods: Array.from({ length: foodItems.length }, () => false),
     },
-    validate: {},
+    transformValues: values => ({
+      ...values,
+      flavors: values.flavors.reduce((acc, cur, idx) => {
+        if (cur) {
+          acc.push(idx + 1);
+        }
+        return acc;
+      }, [] as number[]),
+      foods: values.foods.reduce((acc, cur, idx) => {
+        if (cur) {
+          acc.push(idx + 1);
+        }
+        return acc;
+      }, [] as number[]),
+    }),
   });
+
+  const [image, setImage] = useState<{ file: File | null; src: string }>({
+    file: null,
+    src: '',
+  });
+
+  const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    const file = event.target.files?.[0];
+    if (file) {
+      if (!image.file) {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          setImage({ file: file, src: reader.result as string });
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
+  const postFileName = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/pre-signed-url`,
+        {
+          method: 'POST',
+
+          body: JSON.stringify({ file_name: image.file?.name }),
+        },
+      ).then(res => res.json());
+
+      return response.pre_signed_url.split('?')[0];
+    } catch (error) {
+      throw new Error('pre signed url 전송 실패');
+    }
+  };
+
+  const postImage = async (storageUrl: string) => {
+    try {
+      const response = await fetch(storageUrl, {
+        method: 'PUT',
+        body: image.file,
+      });
+
+      return response;
+    } catch (error) {
+      console.error('image post error', error);
+      throw new Error('리뷰 이미지 등록실패');
+    }
+  };
+
+  const handleSubmit = async (values: FormValues) => {
+    event?.preventDefault();
+    try {
+      const presignedUrlResponse = await postFileName();
+
+      await postImage(presignedUrlResponse);
+
+      console.log({
+        drink_id: parseInt(drinkId),
+        image_url: presignedUrlResponse,
+        ...values,
+      });
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/reviews`,
+        {
+          method: 'POST',
+
+          body: JSON.stringify({
+            drink_id: parseInt(drinkId),
+            image_url: presignedUrlResponse,
+            ...values,
+          }),
+        },
+      ).then(res => res.json());
+
+      console.log(response);
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw new Error('리뷰 작성 실패');
+    }
+  };
 
   return (
     <ReviewFormProvider form={form}>
       <form
         className={classes['form']}
-        onSubmit={form.onSubmit(values => console.log(values))}
+        onSubmit={form.onSubmit(values => handleSubmit(values))}
       >
-        <button type={'submit'}>버튼</button>
-        <section>
+        <section className={classes['image-section']}>
+          {image.src && (
+            <div className={classes['image-wrapper']}>
+              <div>
+                <Image src={image.src} alt='thumbnail' fill />
+                <button
+                  onClick={() =>
+                    setImage({
+                      file: null,
+                      src: '',
+                    })
+                  }
+                >
+                  <Image
+                    src={'/icons/닫기.svg'}
+                    alt='x'
+                    height={20}
+                    width={20}
+                  />
+                </button>
+              </div>
+            </div>
+          )}
           <SectionHeader title='인증샷' dot={false} />
-          <button className={classes['image-attach']}>
+          <label className={classes['image-attach']} htmlFor='review-image'>
             사진 첨부하기
             <Image
               src={'/icons/카메라.svg'}
@@ -110,7 +233,13 @@ const ReviewWriteForm = () => {
               height={24}
               width={24}
             />
-          </button>
+          </label>
+          <input
+            id='review-image'
+            type='file'
+            accept='image/*'
+            onChange={handleImage}
+          />
           <HelpMessageButton />
         </section>
 
@@ -142,7 +271,7 @@ const ReviewWriteForm = () => {
                 key={item.value}
                 label={item.label}
                 value={item.value}
-                isSelected={form.values.situation[item.value]}
+                isSelected={form.values.situation_dto[item.value]}
               />
             ))}
           </div>
@@ -195,6 +324,12 @@ const ReviewWriteForm = () => {
               />
             ))}
           </div>
+        </div>
+        <div className={classes['button-wrapper']}>
+          <Button variant='outline'>작성 취소</Button>
+          <Button variant='primary' type={'submit'}>
+            작성 완료
+          </Button>
         </div>
       </form>
     </ReviewFormProvider>
