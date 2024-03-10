@@ -10,7 +10,7 @@ const drinkDetailFetcher = async ({
   rateName: string;
 }) => {
   const response = await api
-    .get(`drink/${detailId}/search?rate=${rateName}`)
+    .get(`drinks/${detailId}/search?rate=${rateName}`)
     .json();
   return response;
 };

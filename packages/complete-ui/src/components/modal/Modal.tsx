@@ -1,5 +1,13 @@
 import { cn } from '@/utils/util';
-import { MantineComponent, ModalBaseStylesNames, ModalOverlayProps, Modal as ModalPrimitive, ModalRootProps } from '@mantine/core';
+import {
+  MantineComponent,
+  ModalBaseStylesNames,
+  ModalContentProps,
+  ModalOverlayProps,
+  Modal as ModalPrimitive,
+  ModalProps,
+  ModalRootProps,
+} from '@mantine/core';
 import React from 'react';
 
 export const ModalRoot: MantineComponent<{
@@ -22,12 +30,10 @@ export const ModalBody = ModalPrimitive.Body;
 
 const Modal = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    overlay?: boolean;
-    opened: boolean;
-    centered?: boolean;
-    onClose: () => void;
-  }
+  React.HTMLAttributes<HTMLDivElement> &
+    ModalProps & {
+      overlay?: boolean;
+    }
 >(
   (
     {
@@ -37,6 +43,8 @@ const Modal = React.forwardRef<
       opened,
       onClose,
       className,
+      w = '100rem',
+      withCloseButton = false,
       ...props
     },
     ref,
@@ -46,6 +54,7 @@ const Modal = React.forwardRef<
         centered={centered}
         opened={opened}
         onClose={onClose}
+        w={w}
         overlayProps={
           overlay
             ? { backgroundOpacity: 0.7, blur: 3 }
@@ -54,6 +63,7 @@ const Modal = React.forwardRef<
         className={cn(``, className)}
         {...props}
         ref={ref}
+        withCloseButton={withCloseButton}
       >
         {children}
       </ModalPrimitive>
@@ -63,10 +73,14 @@ const Modal = React.forwardRef<
 
 const ModalContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement> & ModalContentProps
 >(({ children, className, ...props }, ref) => {
   return (
-    <ModalPrimitive.Content className={cn(``, className)} {...props} ref={ref}>
+    <ModalPrimitive.Content
+      className={cn(className)}
+      {...props}
+      ref={ref}
+    >
       {children}
     </ModalPrimitive.Content>
   );
