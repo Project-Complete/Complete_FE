@@ -1,14 +1,79 @@
 import ky from 'ky';
-export const api = ky.create({
+const kyInstance = ky.create({
   prefixUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
 
+export const api = kyInstance.extend({
+  hooks: {
+    beforeRequest: [
+      async request => {
+        // 쿠키에서 access_token을 가져옴
+        try {
+          const accessToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('access_token='))
+            ?.split('=')[1];
+          if (!accessToken) throw 'accessToken undefined';
+
+          // 요청에 access_token을 포함하여 전송
+          request.headers.set('Authorization', `Bearer ${accessToken}`);
+          return request;
+        } catch (error) {
+          throw error;
+        }
+      },
+    ],
+    afterResponse: [
+      async (request, options, response) => {
+        // 만료된 토큰 또는 인증 오류로 인한 요청 실패 시 토큰을 갱신하고 다시 요청을 시도합니다.
+        if (response.status === 401) {
+          console.log(
+            '토큰 만료 또는 인증 오류. 토큰을 갱신하고 다시 요청합니다.',
+          );
+          try {
+            const cookieRefreshToken = document.cookie
+              .split('; ')
+              .find(row => row.startsWith('refresh_token='))
+              ?.split('=')[1];
+            if (!cookieRefreshToken) throw 'refreshToken undefined';
+            const newAccessToken = await refreshToken({
+              request,
+              cookieRefreshToken,
+            });
+            const cloneRequest = request.clone(); // 요청을 복제하여 수정
+
+            // 갱신된 토큰으로 다시 요청을 보냅니다.
+            cloneRequest.headers.set(
+              'Authorization',
+              `Bearer ${newAccessToken}`,
+            );
+            return ky(cloneRequest);
+          } catch (error) {
+            console.error('토큰 갱신 및 다시 요청 실패:', error);
+            throw error; // 토큰 갱신 및 다시 요청에 실패하면 예외를 throw합니다.
+          }
+        }
+        return response;
+      },
+    ],
+  },
+});
+
 // 토큰 갱신 함수
-const refreshToken = async ({ request, cookieRefreshToken }: { request: Request, cookieRefreshToken: string }) => {
+const refreshToken = async ({
+  request,
+  cookieRefreshToken,
+}: {
+  request: Request;
+  cookieRefreshToken: string;
+}) => {
   try {
     // 토큰 갱신 요청을 보냅니다. (토큰 갱신 API의 주소와 요청 방식에 따라 수정해야 합니다.)
-    request.headers.set('Authorization-refresh', `Bearer ${cookieRefreshToken}`);
-    const response = await ky(request)
+    request.headers.set(
+      'Authorization-refresh',
+      `Bearer ${cookieRefreshToken}`,
+    );
+    const response = await ky(request);
     const newAccessToken = response.headers.get('Authorization');
     const newRefreshToken = response.headers.get('Authorization-refresh');
 
@@ -22,52 +87,6 @@ const refreshToken = async ({ request, cookieRefreshToken }: { request: Request,
     throw error; // 토큰 갱신에 실패하면 예외를 throw합니다.
   }
 };
-
-// Ky Interceptor 설정
-ky.extend({
-  hooks: {
-    beforeRequest: [
-      async (request) => {
-        // 쿠키에서 access_token을 가져옴
-        try {
-
-          const accessToken = document.cookie.split('; ').find(row => row.startsWith('access_token='))?.split('=')[1];
-          if (!accessToken) throw 'accessToken undefined';
-
-          // 요청에 access_token을 포함하여 전송
-          request.headers.set('Authorization', `Bearer ${accessToken}`);
-          return request;
-        }
-        catch (error) {
-          throw error;
-        }
-      }
-    ],
-    afterResponse: [
-      async (request, options, response) => {
-        // 만료된 토큰 또는 인증 오류로 인한 요청 실패 시 토큰을 갱신하고 다시 요청을 시도합니다.
-        if (response.status === 401) {
-          console.log('토큰 만료 또는 인증 오류. 토큰을 갱신하고 다시 요청합니다.');
-          try {
-            const cookieRefreshToken = document.cookie.split('; ').find(row => row.startsWith('refresh_token='))?.split('=')[1];
-            if (!cookieRefreshToken) throw 'refreshToken undefined';
-            const newAccessToken = await refreshToken({ request, cookieRefreshToken });
-            const cloneRequest = request.clone(); // 요청을 복제하여 수정
-
-            // 갱신된 토큰으로 다시 요청을 보냅니다.
-            cloneRequest.headers.set('Authorization', `Bearer ${newAccessToken}`);
-            return ky(cloneRequest);
-          } catch (error) {
-            console.error('토큰 갱신 및 다시 요청 실패:', error);
-            throw error; // 토큰 갱신 및 다시 요청에 실패하면 예외를 throw합니다.
-          }
-        }
-        return response;
-      }
-    ]
-  }
-});
-
 
 // // 로그아웃 함수
 // const logout = () => {
