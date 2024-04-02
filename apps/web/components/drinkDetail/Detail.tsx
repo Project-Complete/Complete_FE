@@ -1,6 +1,5 @@
 import { Badge, Box, Flex, Text } from '@mantine/core';
 import RadarTasteChart from '../chart/RadarTasteChart';
-import { DetailSimpleDrink } from '@/types/drinks';
 import Image from 'next/image';
 import { ChipButton } from '@team-complete/complete-ui';
 

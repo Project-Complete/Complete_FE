@@ -1,5 +1,4 @@
 'use client';
-import { DetailDescriptionDrink, Package } from '@/types/drinks';
 import { Flex, Table, Text, Title } from '@mantine/core';
 import Image from 'next/image';
 import React from 'react';
