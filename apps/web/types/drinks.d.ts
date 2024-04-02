@@ -71,12 +71,12 @@ export interface DetailSummarySimpleDrink {
   manufacturer: Manufacturer;
   review_rating: number;
   food_statistics: FoodStatistic[];
+  situation_statistic: SituationStatistic;
 }
 
 export interface DetailSimpleDrink {
   food_statistics: FoodStatistic[];
   taste_statistic: TasteStatistic;
-  situation_statistic: SituationStatistic;
   flavor_statistics: FlavorStatistic[];
 }
 

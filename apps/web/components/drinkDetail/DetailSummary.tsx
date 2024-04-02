@@ -6,8 +6,31 @@ import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
 import StarScore from '../animation/StarScore';
 import { DetailSummarySimpleDrink } from '@/types/drinks';
+import { Chip, ChipButton } from '@team-complete/complete-ui';
+
+const drinkOccasionList = [
+  { id: 'alone_sum', title: '나 혼자', selectedPeople: 0 },
+  { id: 'friend_sum', title: '친구', selectedPeople: 0 },
+  { id: 'partner_sum', title: '연인', selectedPeople: 0 },
+  { id: 'business_sum', title: '비즈니스', selectedPeople: 0 },
+  { id: 'adult_sum', title: '웃어른', selectedPeople: 0 },
+];
 
 const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
+  const updatedDrinkOccasionList = drinkOccasionList.map(item => {
+    const situationStatisticValue = data.situation_statistic[item.id];
+    return {
+      ...item,
+      selectedPeople:
+        situationStatisticValue !== undefined ? situationStatisticValue : 0,
+    };
+  });
+  const sortedUpdatedDrinkOccasionList = updatedDrinkOccasionList
+    .sort((a, b) => {
+      return -(a.selectedPeople - b.selectedPeople);
+    })
+    .splice(0, 3);
+
   return (
     <Flex pos={'relative'} w={'100%'} py={92} justify={'center'} mb={'100px'}>
       <Flex
@@ -18,15 +41,34 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
         pos={'relative'}
         className={classes['drink-banner-content-wrapper']}
       >
-        <Flex
-          bg='white'
-          w={392}
-          h={392}
-          className={classes['drink-image']}
-          justify={'center'}
-          pt={30}
-        >
-          <Image src={'/beer.svg'} alt='맥주' width={438.72} height={625.58} />
+        <Flex direction={'column'}>
+          <Flex
+            bg='white'
+            w={392}
+            h={392}
+            className={classes['drink-image']}
+            justify={'center'}
+            pt={30}
+            mb={4}
+          >
+            <Image
+              src={'/beer.svg'}
+              alt='맥주'
+              width={438.72}
+              height={625.58}
+            />
+          </Flex>
+          <Flex ml={'auto'}>
+            <Text size='1.125rem' fw={400} lh={'2rem'}>
+              이미지 제공
+            </Text>
+            <Text size='1.125rem' fw={400} lh={'2rem'} c='#E5E6E8' mx={8}>
+              |
+            </Text>
+            <Text size='1.125rem' fw={400} lh={'2rem'}>
+              {data.manufacturer.manufacturer_name}
+            </Text>
+          </Flex>
         </Flex>
         <Flex direction='column' w={'100%'}>
           <Flex justify={'space-between'}>
@@ -35,12 +77,11 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
             </Title>
             <Flex gap={24} align={'center'}>
               {/* TODO: design-system으로 교체 */}
+              <Image src={heart} alt='like' width={40} height={40} />
               <button className={classes['share-button']}>
                 <Box>공유하기</Box>
                 <Image src={'/share.svg'} alt='share' width={24} height={24} />
               </button>
-              <Image src={heart} alt='like' width={40} height={40} />
-              <Image src={bookmark} alt='bookmark' width={40} height={40} />
             </Flex>
           </Flex>
           <Text
@@ -52,28 +93,19 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
           >
             {data.summary}
           </Text>
-          <Flex className={classes['drink-description']} py={12}>
-            <Text w={80} mr={24} size='20px' fw={600} lh={'32px'}>
-              제조사
-            </Text>
-            <Text size='18px' lh={'32px'} fw={500}>
-              {data.manufacturer.manufacturer_name}
-            </Text>
-          </Flex>
-          <Flex py={12}>
+          <Flex py={16} className={classes['drink-description']}>
             <Text w={80} mr={24} size='20px' fw={600} lh={'32px'}>
               유저 평가
             </Text>
             <Flex align={'center'}>
               <StarScore score={data.review_rating} />
-
-              <Text size='14px' fw={500} lh={'30px'} ml={3}>
+              <Text size='1.25rem' fw={700} lh={'1.5rem'} ml={4}>
                 {`(${data.review_rating})`}
               </Text>
             </Flex>
           </Flex>
 
-          <Text size={'lg'} fw={600} lh={'32px'} mt={'24px'} mb={'12px'}>
+          <Text size={'lg'} fw={600} lh={'32px'} mt={'1rem'} mb={'1rem'}>
             함께하면 좋은 안주
           </Text>
           <Flex gap={24}>
@@ -82,20 +114,42 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
                 {e.food_id !== null &&
                   e.category !== null &&
                   e.image_url !== null && (
-                    <div className={classes['drink-food-image-section']}>
+                    <Chip variant={'ghost'}>
                       <div className={classes['drink-food-image']}>
                         <Image
                           src={e.image_url}
                           alt='음식 아이콘'
-                          width={51}
-                          height={51}
+                          width={32}
+                          height={32}
                         />
                         <div>{e.category}</div>
                       </div>
-                    </div>
+                    </Chip>
                   )}
               </Fragment>
             ))}
+          </Flex>
+          <Text size={'lg'} fw={600} lh={'32px'} mt={'1rem'} mb={'8px'}>
+            함께 마시면 좋은 사람
+          </Text>
+          <Flex gap={24}>
+            {sortedUpdatedDrinkOccasionList.map(({ id, title }, index) => {
+              return (
+                <Fragment key={index}>
+                  <Chip variant='ghost'>
+                    <div className={classes['drink-food-image']}>
+                      <Image
+                        src={`/detail_who/${id}.svg`}
+                        alt='title'
+                        width={32}
+                        height={32}
+                      />
+                      <Text size='lg'>{title}</Text>
+                    </div>
+                  </Chip>
+                </Fragment>
+              );
+            })}
           </Flex>
         </Flex>
       </Flex>

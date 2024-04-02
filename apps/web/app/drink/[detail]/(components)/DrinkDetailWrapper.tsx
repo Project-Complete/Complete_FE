@@ -46,12 +46,12 @@ const DrinkDetailWrapper = () => {
       name: data.name,
       review_rating: data.review_rating,
       summary: data.summary,
+      situation_statistic: data.situation_statistic,
     };
 
     const detailDrink: DetailSimpleDrink = {
       food_statistics: data.food_statistics,
       taste_statistic: data.taste_statistic,
-      situation_statistic: data.situation_statistic,
       flavor_statistics: data.flavor_statistics,
     };
     const detailDescription: DetailDescriptionDrink = {
