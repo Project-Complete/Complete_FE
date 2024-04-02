@@ -111,7 +111,7 @@ interface DetailRecommendDrinkList {
   };
 }
 
-export interface DrinkListElement {
+interface DrinkListElement {
   drink_id: number;
   drink_like: boolean;
   image_url: string;
@@ -120,14 +120,14 @@ export interface DrinkListElement {
   review_rating: number;
 }
 
-export interface PageInfo {
+interface PageInfo {
   page: number;
   size: number;
   total_elements: number;
   sort: string;
 }
 
-export interface DrinksResponse {
+interface DrinksResponse {
   drinks: DrinkListElement[];
   page_info: PageInfo;
 }
