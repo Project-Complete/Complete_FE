@@ -59,7 +59,7 @@ const bookMarkColor: MantineColorsTuple = [
 
 export const theme: MantineThemeOverride = createTheme({
   fontSizes: {
-    xl4: rem(40),
+    xl4: rem(36),
     xl3: rem(28),
     xl2: rem(24),
     xl: rem(20),
@@ -69,12 +69,11 @@ export const theme: MantineThemeOverride = createTheme({
     xs: rem(12),
   },
   lineHeights: {
-    xl2: '3.125',
-    xl: '3',
-    lg: '2.5',
-    md: '2',
-    sm: '1.875',
-    xs: '1.5',
+    xl: '2.5',
+    lg: '2',
+    md: '1.875',
+    sm: '1.5',
+    xs: '1.25',
   },
   colors: {
     primaryColor,
