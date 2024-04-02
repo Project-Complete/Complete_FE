@@ -3,4 +3,8 @@
 }
 .header-center {
   border-bottom: 1px solid var(--Background-bg-divider, #e5e6e8);
+
+  &[data-login='true'] {
+    border-bottom: none;
+  }
 }

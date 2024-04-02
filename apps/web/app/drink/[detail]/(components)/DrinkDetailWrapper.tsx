@@ -7,11 +7,6 @@ import { Flex } from '@mantine/core';
 import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
-import {
-  DetailDescriptionDrink,
-  DetailSimpleDrink,
-  DetailSummarySimpleDrink,
-} from '@/types/drinks';
 import { Tabs, Tab, TabList } from '@team-complete/complete-ui';
 import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';

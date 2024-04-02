@@ -1,4 +1,3 @@
-import { Drink } from '@/types/drinks';
 import { api } from '@/utils/api';
 import { QueryClient, UseQueryResult, useQuery } from '@tanstack/react-query';
 

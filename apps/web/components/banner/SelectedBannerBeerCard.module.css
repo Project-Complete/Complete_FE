@@ -1,7 +1,6 @@
 .banner-beer-list-card-section {
   width: 116px;
   height: 116px;
-  background-color: #44ffd0;
   overflow: hidden;
   position: relative;
 }
@@ -10,7 +9,7 @@
   width: 96px;
   height: 96px;
   border-radius: 8px;
-  background-color: #bcc0c4;
+  background-color: var(--banner-content-color);
 }
 
 .banner-beer-list-score-section {

@@ -1,11 +1,11 @@
-import { Flex, Text } from '@mantine/core';
+import { Flex, Rating, Text } from '@mantine/core';
 import Image from 'next/image';
 import React from 'react';
 import classes from './SelectedBannerBeerCard.module.css';
-import { BannerDrinkItem, PourAnimation } from './SelectedBanner';
+import PourAnimation from './PourAnimation';
 
 interface SelectedBannerBeerCardProps {
-  drink: BannerDrinkItem;
+  drink: DrinkOfBanner;
   onClick: (idx: number) => void;
   isSelectComplete: boolean;
   idx: number;
@@ -44,7 +44,7 @@ const SelectedBannerBeerCard = ({
           align={'center'}
         >
           <Text span lh={'30px'} size={'15px'} fw={500}>
-            {drink.rate}
+            {drink.review_rating}
           </Text>
           <Image src={'/full_star.svg'} alt={'beer'} width={16} height={16} />
         </Flex>
