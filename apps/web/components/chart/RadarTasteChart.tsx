@@ -83,6 +83,16 @@ const RadarTasteChart = ({
           r: {
             suggestedMin: 0,
             suggestedMax: 10,
+            ticks: {
+              display: false,
+              stepSize: 2, // y축 간격
+            },
+            pointLabels: {
+              font: {
+                size: 16,
+                weight: 600,
+              },
+            },
           },
         },
       }}

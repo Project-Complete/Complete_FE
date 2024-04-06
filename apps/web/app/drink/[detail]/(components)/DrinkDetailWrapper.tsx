@@ -16,8 +16,15 @@ import { Tabs, Tab, TabList } from '@team-complete/complete-ui';
 import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';
 import useScroll from '@/hooks/useScroll';
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-const DrinkDetailWrapper = () => {
+const DrinkDetailWrapper = ({
+  accessToken,
+  refreshToken,
+}: {
+  accessToken: RequestCookie | undefined;
+  refreshToken: RequestCookie | undefined;
+}) => {
   const params = useParams();
   const [activeTab, setActiveTab] = useState<string | null>('상세 정보');
   const { moveToSection } = useScroll();
@@ -104,7 +111,11 @@ const DrinkDetailWrapper = () => {
 
     return (
       <>
-        <DetailSummary data={summaryDrink} />
+        <DetailSummary
+          data={summaryDrink}
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+        />
         <Flex
           className={classes.DetailPageMainWrapper}
           w={'100%'}

@@ -1,12 +1,13 @@
-import { Box, Flex, Rating, Text, Title } from '@mantine/core';
+import { Flex, Text, Title } from '@mantine/core';
 import Image from 'next/image';
 import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
-import heart from '@/assets/heart.svg';
-import bookmark from '@/assets/bookmark.svg';
 import StarScore from '../animation/StarScore';
 import { DetailSummarySimpleDrink } from '@/types/drinks';
-import { Chip, ChipButton } from '@team-complete/complete-ui';
+import { Chip, Button } from '@team-complete/complete-ui';
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import ShareButton from '../button/ShareButton';
+import LikeButton from '../button/LikeButton';
 
 const drinkOccasionList = [
   { id: 'alone_sum', title: '나 혼자', selectedPeople: 0 },
@@ -16,7 +17,15 @@ const drinkOccasionList = [
   { id: 'adult_sum', title: '웃어른', selectedPeople: 0 },
 ];
 
-const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
+const DetailSummary = ({
+  data,
+  accessToken,
+  refreshToken,
+}: {
+  data: DetailSummarySimpleDrink;
+  accessToken: RequestCookie | undefined;
+  refreshToken: RequestCookie | undefined;
+}) => {
   const updatedDrinkOccasionList = drinkOccasionList.map(item => {
     const situationStatisticValue = data.situation_statistic[item.id];
     return {
@@ -77,11 +86,8 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
             </Title>
             <Flex gap={24} align={'center'}>
               {/* TODO: design-system으로 교체 */}
-              <Image src={heart} alt='like' width={40} height={40} />
-              <button className={classes['share-button']}>
-                <Box>공유하기</Box>
-                <Image src={'/share.svg'} alt='share' width={24} height={24} />
-              </button>
+              {accessToken !== undefined && <LikeButton />}
+              <ShareButton />
             </Flex>
           </Flex>
           <Text

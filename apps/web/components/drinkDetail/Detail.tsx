@@ -29,7 +29,7 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
       },
     ],
   };
-  console.log(detailDrink);
+  
   return (
     <Flex w={'100%'} direction={'column'}>
       <Text size='2.5rem' fw={800} lh={'xl2'}>

@@ -39,20 +39,22 @@
 
 .share-button {
   display: flex;
-  gap: 8px;
+  flex-direction: row;
+  padding: 0rem var(--Spacing-12, 0.75rem) 0rem var(--Spacing-16, 1rem);
   justify-content: center;
   align-items: center;
-  line-height: 48px;
-  background-color: white;
-  color: #000000a6;
-  font-size: 18px;
+  gap: var(--Spacing-8, 0.5rem);
+  border-radius: 1.5rem;
+  text-align: center;
+  /* Button/Button-Semibold */
+  font-size: 1rem;
+  font-style: normal;
   font-weight: 600;
-  padding: 0 20px;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
+  line-height: 2.5rem;
+    /* 250% */
 }
 
 .drink-banner-content-wrapper{
   z-index: 1;
 }
+
