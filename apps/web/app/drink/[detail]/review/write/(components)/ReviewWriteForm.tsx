@@ -11,6 +11,7 @@ import { FormValues, ReviewFormProvider, useReviewForm } from './form-context';
 import TasteInput from './TasteInput';
 import { Button } from '@team-complete/complete-ui';
 import { api } from '@/utils/api';
+import ky from 'ky';
 
 export interface Situation {
   alone: boolean;
@@ -73,6 +74,7 @@ const foodItems = [
   { value: 11, label: '튀김' },
   { value: 12, label: '해산물' },
 ];
+
 // 탄산이고 레몬맛이라서 상큼합니다! 도수가 낮아서 음료처럼 가볍게 마시기 좋아요~!!
 const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   const form = useReviewForm({
@@ -142,7 +144,7 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
         })
         .json();
 
-      return response.pre_signed_url.split('?')[0];
+      return response.pre_signed_url;
     } catch (error) {
       throw new Error('pre signed url 전송 실패');
     }
@@ -150,8 +152,7 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
 
   const postImage = async (storageUrl: string) => {
     try {
-      const response = await api.put(storageUrl, {
-        prefixUrl: '',
+      const response = await ky.put(storageUrl, {
         body: image.file,
       });
 
@@ -175,7 +176,7 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
         .post(`reviews`, {
           json: {
             drink_id: parseInt(drinkId),
-            image_url: presignedUrlResponse,
+            image_url: presignedUrlResponse.split('?')[0],
             ...values,
           },
         })
