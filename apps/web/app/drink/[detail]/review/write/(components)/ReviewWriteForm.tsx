@@ -10,6 +10,7 @@ import FoodButton from './FoodButton';
 import { FormValues, ReviewFormProvider, useReviewForm } from './form-context';
 import TasteInput from './TasteInput';
 import { Button } from '@team-complete/complete-ui';
+import { api } from '@/utils/api';
 
 export interface Situation {
   alone: boolean;
@@ -31,6 +32,10 @@ export type SituationItemsLabelType =
 interface SituationItems {
   value: SituationItemsValueType;
   label: SituationItemsLabelType;
+}
+
+interface PreSignedUrlResponse {
+  pre_signed_url: string;
 }
 
 const situationItems: SituationItems[] = [
@@ -129,16 +134,13 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
     }
   };
 
-  const postFileName = async () => {
+  const postImageName = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/pre-signed-url`,
-        {
-          method: 'POST',
-
-          body: JSON.stringify({ file_name: image.file?.name }),
-        },
-      ).then(res => res.json());
+      const response: PreSignedUrlResponse = await api
+        .post(`pre-signed-url`, {
+          json: { file_name: image.file?.name },
+        })
+        .json();
 
       return response.pre_signed_url.split('?')[0];
     } catch (error) {
@@ -148,10 +150,12 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
 
   const postImage = async (storageUrl: string) => {
     try {
-      const response = await fetch(storageUrl, {
-        method: 'PUT',
+      const response = await api.put(storageUrl, {
+        prefixUrl: '',
         body: image.file,
       });
+
+      console.log('pose image response', response);
 
       return response;
     } catch (error) {
@@ -163,30 +167,19 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   const handleSubmit = async (values: FormValues) => {
     event?.preventDefault();
     try {
-      const presignedUrlResponse = await postFileName();
+      const presignedUrlResponse = await postImageName();
 
-      await postImage(presignedUrlResponse);
+      await postImage(presignedUrlResponse || '');
 
-      console.log({
-        drink_id: parseInt(drinkId),
-        image_url: presignedUrlResponse,
-        ...values,
-      });
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/reviews`,
-        {
-          method: 'POST',
-
-          body: JSON.stringify({
+      const response = await api
+        .post(`reviews`, {
+          json: {
             drink_id: parseInt(drinkId),
             image_url: presignedUrlResponse,
             ...values,
-          }),
-        },
-      ).then(res => res.json());
-
-      console.log(response);
+          },
+        })
+        .json();
 
       return response;
     } catch (error) {
