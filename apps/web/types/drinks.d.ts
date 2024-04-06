@@ -1,22 +1,22 @@
-export interface Manufacturer {
+interface Manufacturer {
   drink_manufacturer_id: number;
   manufacturer_name: string;
   location: string;
 }
 
-export interface Tag {
+interface Tag {
   tag_id: number;
   tag: string;
 }
 
-export interface FoodStatistic {
+interface FoodStatistic {
   food_id: number;
   category: string;
   image_url: string;
   count: number;
 }
 
-export interface TasteStatistic {
+interface TasteStatistic {
   [key: string]: number;
   // sweet_rating: number;
   // sour_rating: number;
@@ -25,22 +25,22 @@ export interface TasteStatistic {
   // refresh_rating: number;
 }
 
-export interface SituationStatistic {
+interface SituationStatistic {
   [key: string]: number;
 }
 
-export interface FlavorStatistic {
+interface FlavorStatistic {
   flavor_id: number;
   flavor: string;
   count: number;
 }
 
-export interface Package {
+interface Package {
   type: string;
   volume: string;
 }
 
-export interface Drink {
+interface Drink {
   drink_id: number;
   name: string;
   image_url: string;
@@ -63,7 +63,7 @@ export interface Drink {
   };
 }
 
-export interface DetailSummarySimpleDrink {
+interface DetailSummarySimpleDrink {
   name: string;
   summary: string;
   drink_id: number;
@@ -73,14 +73,14 @@ export interface DetailSummarySimpleDrink {
   food_statistics: FoodStatistic[];
 }
 
-export interface DetailSimpleDrink {
+interface DetailSimpleDrink {
   food_statistics: FoodStatistic[];
   taste_statistic: TasteStatistic;
   situation_statistic: SituationStatistic;
   flavor_statistics: FlavorStatistic[];
 }
 
-export interface DetailDescriptionDrink {
+interface DetailDescriptionDrink {
   title: string;
   description: string;
   packages: Package[];
@@ -92,7 +92,7 @@ export interface DetailDescriptionDrink {
   };
 }
 
-export interface DetailRecommendDrink {
+interface DetailRecommendDrink {
   drink_id: number;
   image_url: string;
   manufacturer_name: string;
@@ -101,7 +101,7 @@ export interface DetailRecommendDrink {
   review_rating: number;
 }
 
-export interface DetailRecommendDrinkList {
+interface DetailRecommendDrinkList {
   drinks: DetailRecommendDrink[];
   page_info: {
     page: number;
@@ -111,7 +111,7 @@ export interface DetailRecommendDrinkList {
   };
 }
 
-export interface DrinkListElement {
+interface DrinkListElement {
   drink_id: number;
   drink_like: boolean;
   image_url: string;
@@ -120,14 +120,30 @@ export interface DrinkListElement {
   review_rating: number;
 }
 
-export interface PageInfo {
+interface PageInfo {
   page: number;
   size: number;
   total_elements: number;
   sort: string;
 }
 
-export interface DrinksResponse {
+interface DrinksResponse {
   drinks: DrinkListElement[];
+  page_info: PageInfo;
+}
+
+interface DrinkOfBanner {
+  drink_id: number;
+  name: string;
+  image_url: string;
+  review_rating: number;
+  manufacturer: Manufacturer;
+  description: string;
+  food_statistics: FoodStatistic[];
+  abv: number;
+}
+
+interface DrinkBannerResponseDto {
+  drinks: DrinkOfBanner[];
   page_info: PageInfo;
 }

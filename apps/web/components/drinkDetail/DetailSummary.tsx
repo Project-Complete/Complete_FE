@@ -4,8 +4,6 @@ import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
-import StarScore from '../animation/StarScore';
-import { DetailSummarySimpleDrink } from '@/types/drinks';
 
 const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
   return (
@@ -64,9 +62,8 @@ const DetailSummary = ({ data }: { data: DetailSummarySimpleDrink }) => {
             <Text w={80} mr={24} size='20px' fw={600} lh={'32px'}>
               유저 평가
             </Text>
-            <Flex align={'center'}>
-              <StarScore score={data.review_rating} />
-
+            <Flex align={'center'} justify={'center'}>
+              <Rating value={data.review_rating} fractions={2} readOnly />
               <Text size='14px' fw={500} lh={'30px'} ml={3}>
                 {`(${data.review_rating})`}
               </Text>

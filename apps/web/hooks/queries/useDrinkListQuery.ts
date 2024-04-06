@@ -1,4 +1,3 @@
-import { DrinksResponse } from '@/types/drinks';
 import { api } from '@/utils/api';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
