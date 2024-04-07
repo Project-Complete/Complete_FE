@@ -86,7 +86,7 @@ const DetailSummary = ({
             </Title>
             <Flex gap={24} align={'center'}>
               {/* TODO: design-system으로 교체 */}
-              {accessToken !== undefined && <LikeButton />}
+              {accessToken !== undefined && <LikeButton drink_id={data.drink_id}/>}
               <ShareButton />
             </Flex>
           </Flex>

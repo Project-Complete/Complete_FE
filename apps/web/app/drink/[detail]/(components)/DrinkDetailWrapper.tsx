@@ -47,6 +47,7 @@ const DrinkDetailWrapper = ({
   if (data) {
     const summaryDrink: DetailSummarySimpleDrink = {
       drink_id: data.drink_id,
+      drink_like: data.drink_like,
       food_statistics: data.food_statistics,
       image_url: data.image_url,
       manufacturer: data.manufacturer,

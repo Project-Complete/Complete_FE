@@ -10,30 +10,16 @@ export default async function Page({ params }: { params: { detail: string } }) {
   await usePrefetchDrinkDetail(params.detail, queryClient);
 
   const cookieStore = cookies();
-
-  if (cookieStore.has('access_token')) {
-    const accessToken = cookieStore.get('access_token');
-    const refreshToken = cookieStore.get('refresh_token');
-    return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Flex w={'100%'} h={'100%'} align={'center'} direction={'column'}>
-          <DrinkDetailWrapper
-            accessToken={accessToken}
-            refreshToken={refreshToken}
-          />
-        </Flex>
-      </HydrationBoundary>
-    );
-  } else {
-    return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Flex w={'100%'} h={'100%'} align={'center'} direction={'column'}>
-          <DrinkDetailWrapper
-            accessToken={undefined}
-            refreshToken={undefined}
-          />
-        </Flex>
-      </HydrationBoundary>
-    );
-  }
+  const accessToken = cookieStore.get('access_token');
+  const refreshToken = cookieStore.get('refresh_token');
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Flex w={'100%'} h={'100%'} align={'center'} direction={'column'}>
+        <DrinkDetailWrapper
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+        />
+      </Flex>
+    </HydrationBoundary>
+  );
 }

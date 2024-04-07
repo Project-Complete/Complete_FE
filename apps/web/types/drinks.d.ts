@@ -42,6 +42,7 @@ export interface Package {
 
 export interface Drink {
   drink_id: number;
+  drink_like: boolean;
   name: string;
   image_url: string;
   summary: string;
@@ -65,6 +66,7 @@ export interface Drink {
 
 export interface DetailSummarySimpleDrink {
   name: string;
+  drink_like: boolean;
   summary: string;
   drink_id: number;
   image_url: string;
