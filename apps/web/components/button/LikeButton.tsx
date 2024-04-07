@@ -1,9 +1,11 @@
+'use client';
+
 import { Button } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import classes from './LikeButton.module.scss';
 import { useState } from 'react';
 import heart from '@/assets/heart.svg';
-import { useLikeMutate } from '@/hooks/mutates/useLikeMutate';
+import { useLikeMutate, useUnLikeMutate } from '@/hooks/mutates/useLikeMutate';
 
 const LikeButton = ({
   drink_id,
@@ -14,6 +16,7 @@ const LikeButton = ({
 }) => {
   const [hoverState, setHoverState] = useState(false);
   const { mutate } = useLikeMutate(drink_id);
+  const { mutate: dislike } = useUnLikeMutate(drink_id);
 
   if (!drink_like) {
     return (
@@ -50,6 +53,9 @@ const LikeButton = ({
         }}
         onMouseOut={() => {
           setHoverState(false);
+        }}
+        onClick={() => {
+          dislike();
         }}
       >
         {hoverState ? (

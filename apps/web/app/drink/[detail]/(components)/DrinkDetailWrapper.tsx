@@ -7,16 +7,16 @@ import { Flex } from '@mantine/core';
 import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
-import {
-  DetailDescriptionDrink,
-  DetailSimpleDrink,
-  DetailSummarySimpleDrink,
-} from '@/types/drinks';
 import { Tabs, Tab, TabList } from '@team-complete/complete-ui';
 import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';
 import useScroll from '@/hooks/useScroll';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import {
+  DetailSummarySimpleDrink,
+  DetailSimpleDrink,
+  DetailDescriptionDrink,
+} from '@/types/drinks';
 
 const DrinkDetailWrapper = ({
   accessToken,
@@ -44,6 +44,47 @@ const DrinkDetailWrapper = ({
     detailId = params.detail;
   }
   const { data } = useDrinkDetailQuery({ detailId: parseInt(detailId) });
+
+  // tabs 하위 컴포넌트로 변경
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.9,
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target === descriptionRef.current) {
+            setActiveTab('상세 정보');
+            // 여기서 description 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
+          } else if (entry.target === anotherDrinkRef.current) {
+            setActiveTab('비슷한 평가의 주류');
+            // 여기서 another drink 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
+          } else if (entry.target === customerReviewRef.current) {
+            setActiveTab('칠러들의 리뷰');
+            // 여기서 customer review 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
+          }
+        }
+      });
+    }, options);
+
+    if (descriptionRef.current) {
+      observer.observe(descriptionRef.current);
+    }
+
+    if (anotherDrinkRef.current) {
+      observer.observe(anotherDrinkRef.current);
+    }
+    if (customerReviewRef.current) {
+      observer.observe(customerReviewRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [data]);
+
   if (data) {
     const summaryDrink: DetailSummarySimpleDrink = {
       drink_id: data.drink_id,
@@ -70,45 +111,6 @@ const DrinkDetailWrapper = ({
       manufacturer: data.manufacturer,
       type: data.type,
     };
-
-    useEffect(() => {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.9,
-      };
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (entry.target === descriptionRef.current) {
-              setActiveTab('상세 정보');
-              // 여기서 description 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
-            } else if (entry.target === anotherDrinkRef.current) {
-              setActiveTab('비슷한 평가의 주류');
-              // 여기서 another drink 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
-            } else if (entry.target === customerReviewRef.current) {
-              setActiveTab('칠러들의 리뷰');
-              // 여기서 customer review 요소가 화면의 중앙에 있을 때 실행할 작업을 수행
-            }
-          }
-        });
-      }, options);
-
-      if (descriptionRef.current) {
-        observer.observe(descriptionRef.current);
-      }
-
-      if (anotherDrinkRef.current) {
-        observer.observe(anotherDrinkRef.current);
-      }
-      if (customerReviewRef.current) {
-        observer.observe(customerReviewRef.current);
-      }
-
-      return () => {
-        observer.disconnect();
-      };
-    }, []);
 
     return (
       <>
