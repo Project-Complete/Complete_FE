@@ -8,19 +8,16 @@ export const api = kyInstance.extend({
     beforeRequest: [
       async request => {
         // 쿠키에서 access_token을 가져옴
-        try {
-          const accessToken = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('access_token='))
-            ?.split('=')[1];
-          if (!accessToken) throw 'accessToken undefined';
+        const accessToken = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('access_token='))
+          ?.split('=')[1];
 
-          // 요청에 access_token을 포함하여 전송
+        // 요청에 access_token을 포함하여 전송
+        if (accessToken)
           request.headers.set('Authorization', `Bearer ${accessToken}`);
-          return request;
-        } catch (error) {
-          throw error;
-        }
+
+        return request;
       },
     ],
     afterResponse: [
