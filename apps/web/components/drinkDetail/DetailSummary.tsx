@@ -41,7 +41,7 @@ const DetailSummary = ({
     .splice(0, 3);
 
   return (
-    <Flex pos={'relative'} w={'100%'} py={92} justify={'center'} mb={'100px'}>
+    <Flex pos={'relative'} id={"111111"} w={'100%'} py={92} bg={"#FAFAFA"} justify={'center'} >
       <Flex
         w={'100%'}
         maw={1224}

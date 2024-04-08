@@ -3,7 +3,7 @@ import Detail from '@/components/drinkDetail/Detail';
 import DetailDescription from '@/components/drinkDetail/DetailDescription';
 import DetailSummary from '@/components/drinkDetail/DetailSummary';
 import CustomerReview from '@/components/review/customerReview/CustomerReview';
-import { Flex } from '@mantine/core';
+import { Box, Flex } from '@mantine/core';
 import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
@@ -123,65 +123,82 @@ const DrinkDetailWrapper = ({
           className={classes.DetailPageMainWrapper}
           w={'100%'}
           h={'100%'}
-          maw={1224}
           align={'center'}
           direction={'column'}
         >
-          <Detail detailDrink={detailDrink} />
           <Flex
             justify={'center'}
-            w={'100vw'}
-            bg={'#FFF'}
-            pos={'sticky'}
-            top={60}
-            className={classes['detail-page-tab-z-index']}
+            w={'100%'}
+            h={'100%'}
+            py={'4.5rem'}
+            bg={'#FAFAFA'}
           >
-            <Tabs
-              value={activeTab}
-              onChange={setActiveTab}
-              w={'100%'}
-              className={classes['detail-age-tab-max-width']}
-            >
-              <TabList>
-                <Tab
-                  value='상세 정보'
-                  onClick={() => {
-                    moveToSection(descriptionRef);
-                  }}
-                >
-                  상세 정보
-                </Tab>
-                <Tab
-                  value='비슷한 평가의 주류'
-                  onClick={() => {
-                    moveToSection(anotherDrinkRef);
-                  }}
-                >
-                  비슷한 평가의 주류
-                </Tab>
-                <Tab
-                  value='칠러들의 리뷰'
-                  onClick={() => {
-                    moveToSection(customerReviewRef);
-                  }}
-                >
-                  칠러들의 리뷰
-                </Tab>
-              </TabList>
-            </Tabs>
+            <Box w={`100%`} maw={1224}>
+              <Detail detailDrink={detailDrink} />
+            </Box>
           </Flex>
-          <DetailDescription
-            detailDescription={detailDescription}
-            descriptionRef={descriptionRef}
-          />
-          <AnotherDrink
-            anotherDrinkRef={anotherDrinkRef}
-            detailId={parseInt(detailId)}
-          />
-          <CustomerReview
-            customerReviewRef={customerReviewRef}
-            detailId={parseInt(detailId)}
-          />
+          <Flex
+            maw={1224}
+            w={'100%'}
+            h={'100%'}
+            align={'center'}
+            direction={'column'}
+          >
+            <Flex
+              justify={'center'}
+              w={'100vw'}
+              bg={'#FFF'}
+              pos={'sticky'}
+              top={60}
+              className={classes['detail-page-tab-z-index']}
+            >
+              <Tabs
+                value={activeTab}
+                onChange={setActiveTab}
+                w={'100%'}
+                className={classes['detail-age-tab-max-width']}
+              >
+                <TabList>
+                  <Tab
+                    value='상세 정보'
+                    onClick={() => {
+                      moveToSection(descriptionRef);
+                    }}
+                  >
+                    상세 정보
+                  </Tab>
+                  <Tab
+                    value='비슷한 평가의 주류'
+                    onClick={() => {
+                      moveToSection(anotherDrinkRef);
+                    }}
+                  >
+                    비슷한 평가의 주류
+                  </Tab>
+                  <Tab
+                    value='칠러들의 리뷰'
+                    onClick={() => {
+                      moveToSection(customerReviewRef);
+                    }}
+                  >
+                    칠러들의 리뷰
+                  </Tab>
+                </TabList>
+              </Tabs>
+            </Flex>
+            <DetailDescription
+              detailDescription={detailDescription}
+              descriptionRef={descriptionRef}
+            />
+            <AnotherDrink
+              anotherDrinkRef={anotherDrinkRef}
+              detailId={parseInt(detailId)}
+            />
+            <CustomerReview
+              customerReviewRef={customerReviewRef}
+              detailId={parseInt(detailId)}
+            />
+          </Flex>
         </Flex>
       </>
     );
