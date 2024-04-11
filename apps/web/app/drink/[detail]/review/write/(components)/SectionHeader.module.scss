@@ -1,0 +1,13 @@
+.header-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.95);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+}

@@ -1,0 +1,187 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+// image-attach-section
+.image-section {
+  > input {
+    display: none;
+  }
+}
+
+.image-wrapper {
+  margin-top: 40px;
+  margin-bottom: 24px;
+
+  > div {
+    position: relative;
+    width: 288px;
+    height: 288px;
+
+    > img:first-child {
+      object-fit: cover;
+    }
+
+    > button {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: 20px;
+      bottom: 20px;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.image-attach {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-size: 18px;
+  line-height: 48px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+  padding: 4px 24px;
+  cursor: pointer;
+}
+
+// rating-comment-section
+.textarea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  border: 1px solid rgba(203, 205, 209, 1);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+// situation-section
+.situation-section-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  div:first-child {
+    margin-bottom: 24px;
+  }
+
+  > div:last-child {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+}
+
+// taste-section
+.taste-section-wrapper {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: end;
+}
+
+.taste-guide {
+  margin-left: 160px;
+  width: 448px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.taste-inputs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+}
+
+// flavor-section
+.flavor-section-wrapper {
+  div:first-child {
+    margin-bottom: 24px;
+  }
+  div:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+
+.flavor-chip {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 48px;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 999px;
+  padding: 0 24px;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+}
+
+.selected {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #693bc9;
+  color: white;
+}
+
+// food-section
+.food-section-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > div:first-child {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  > div:last-child {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+}
+
+// button-wrapper
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+
+  > button {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  > button:first-child {
+    box-shadow: none;
+  }
+}
