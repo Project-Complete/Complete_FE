@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3000 --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@mantine/core": "^7.5.0",
+    "@mantine/form": "^7.5.3",
     "@mantine/hooks": "^7.5.0",
     "@next/bundle-analyzer": "^14.1.0",
     "@tabler/icons-react": "^2.46.0",
@@ -20,6 +21,7 @@
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
     "framer-motion": "^10.18.0",
+    "immer": "^10.0.3",
     "ky": "^1.2.0",
     "next": "^14.0.3",
     "react": "^18.2.0",

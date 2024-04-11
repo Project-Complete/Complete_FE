@@ -1,4 +1,3 @@
-import { DetailRecommendDrink } from '@/types/drinks';
 import { Rating } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';

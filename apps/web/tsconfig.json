@@ -6,7 +6,8 @@
         "name": "next",
       },
     ],
-    
+    "declarationMap": false,
+    "declaration": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -25,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./../../node_modules/**/*.d.ts"
+    "./../../node_modules/**/*.d.ts",
   ],
   "exclude": ["node_modules"],
 }

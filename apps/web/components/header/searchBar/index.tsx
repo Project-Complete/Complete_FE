@@ -8,33 +8,37 @@ import Logo from '@/components/Logo';
 import classes from './SearchBar.module.scss';
 import HeaderCenterSearchInput from './SearchInput';
 
-const HeaderCenterWrapper = () => {
+const HeaderCenterWrapper = ({ isLogin }: { isLogin: boolean }) => {
   return (
     <Center w={`100%`} h={`100%`}>
       <Flex
         maw={`1224px`}
-        // justify={`space-between`}
         align={`center`}
         w={`100%`}
         h={`100%`}
+        justify={'center'}
         gap={'13rem'}
       >
         <Flex h={`5rem`} align={'center'} gap={'2.5rem'}>
           <Logo />
-          <HeaderCenterSearchInput />
+          {!isLogin && <HeaderCenterSearchInput />}
         </Flex>
-        <Flex h={'100%'} align={'center'}>
-          <Anchor
-            href={'/login'}
-            component={Link}
-            className={classes['header-nav-sns-login-button']}
-          >
-            <Box className={classes['header-nav-sns-login-button-inside-div']}>
-              소셜 로그인
-            </Box>
-          </Anchor>
-          <HeaderWriteButton />
-        </Flex>
+        {!isLogin && (
+          <Flex h={'100%'} align={'center'}>
+            <Anchor
+              href={'/login'}
+              component={Link}
+              className={classes['header-nav-sns-login-button']}
+            >
+              <Box
+                className={classes['header-nav-sns-login-button-inside-div']}
+              >
+                소셜 로그인
+              </Box>
+            </Anchor>
+            <HeaderWriteButton />
+          </Flex>
+        )}
       </Flex>
     </Center>
   );
