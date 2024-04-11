@@ -29,6 +29,7 @@ export const useDrinkDetailQuery = ({
     queryKey: ['drinkDetail', detailId],
     queryFn: async () => {
       const response = await drinkDetailFetcher({ detailId });
+      console.log(response);
       return response;
     },
   });

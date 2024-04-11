@@ -17,11 +17,6 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
   const sortedValues = sortedDataFlavorFilter.map(
     key => detailDrink.taste_statistic[key],
   );
-  const sortedDetailDrink = detailDrink.flavor_statistics
-    .sort((a, b) => {
-      return -(a.count - b.count);
-    })
-    .splice(0, 3);
 
   const data = {
     labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
@@ -49,15 +44,27 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
               어떤 향이 느껴지나요?
             </Text>
             <Flex w={'100%'} direction={'column'} gap={16}>
-              {sortedDetailDrink && sortedDetailDrink[0] && (
-                <DetailFlavorChip index={1} flavor={sortedDetailDrink[0]} />
-              )}
-              {sortedDetailDrink && sortedDetailDrink[1] && (
-                <DetailFlavorChip index={2} flavor={sortedDetailDrink[1]} />
-              )}
-              {sortedDetailDrink && sortedDetailDrink[2] && (
-                <DetailFlavorChip index={3} flavor={sortedDetailDrink[2]} />
-              )}
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[0] && (
+                  <DetailFlavorChip
+                    index={1}
+                    flavor={detailDrink.sortedDetailDrink[0]}
+                  />
+                )}
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[1] && (
+                  <DetailFlavorChip
+                    index={2}
+                    flavor={detailDrink.sortedDetailDrink[1]}
+                  />
+                )}
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[2] && (
+                  <DetailFlavorChip
+                    index={3}
+                    flavor={detailDrink.sortedDetailDrink[2]}
+                  />
+                )}
             </Flex>
           </Flex>
         </Flex>

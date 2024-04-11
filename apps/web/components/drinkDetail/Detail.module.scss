@@ -18,15 +18,10 @@
 
 .chip-box{
     width: 100%;
-    gap: var(--Spacing-24, 1.5rem);
-    align-self: stretch;
-    border-radius: var(--Corner-radius-circle, 62.4375rem);
-    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
-    background: var(--Background-surface-2, #FAFAFA);
-    margin-bottom: 1rem;
 }
 
 .chip {
+    height:5.5rem;
     margin-top: 1.5rem;
     display: flex;
     padding: var(--Spacing-24, 1.5rem) var(--Spacing-40, 2.5rem);
@@ -34,22 +29,33 @@
     align-items: center;
     gap: var(--Spacing-24, 1.5rem);
     align-self: stretch;
+    border-radius: var(--Corner-radius-circle, 62.4375rem);
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+    background: var(--Background-surface-2, #FAFAFA);
 }
 
 .chip2{
+    height:5rem;
     display: flex;
     padding: var(--Spacing-24, 1.5rem) var(--Spacing-40, 2.5rem) var(--Spacing-24, 1.5rem) 2.75rem;
     justify-content: flex-start;
     align-items: center;
     gap: var(--Spacing-24, 1.5rem);
     align-self: stretch;
+    border-radius: var(--Corner-radius-circle, 62.4375rem);
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+    background: var(--Background-surface-2, #FAFAFA);
 }
 
 .chip3{
+    height:4.5rem;
     display: flex;
     justify-content: flex-start;
     padding: var(--Spacing-24, 1.5rem) var(--Spacing-40, 2.5rem) var(--Spacing-24, 1.5rem) 3rem;
     align-items: center;
     gap: var(--Spacing-24, 1.5rem);
     align-self: stretch;
+    border-radius: var(--Corner-radius-circle, 62.4375rem);
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+    background: var(--Background-surface-2, #FAFAFA);
 }

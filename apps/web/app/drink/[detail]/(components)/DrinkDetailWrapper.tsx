@@ -44,7 +44,6 @@ const DrinkDetailWrapper = ({
     detailId = params.detail;
   }
   const { data } = useDrinkDetailQuery({ detailId: parseInt(detailId) });
-
   // tabs 하위 컴포넌트로 변경
   useEffect(() => {
     const options = {
@@ -86,6 +85,12 @@ const DrinkDetailWrapper = ({
   }, [data]);
 
   if (data) {
+    const sortedDetailDrink = [...data.flavor_statistics]
+      .sort((a, b) => {
+        return -(a.count - b.count);
+      })
+      .splice(0, 3);
+
     const summaryDrink: DetailSummarySimpleDrink = {
       drink_id: data.drink_id,
       drink_like: data.drink_like,
@@ -99,6 +104,7 @@ const DrinkDetailWrapper = ({
     };
 
     const detailDrink: DetailSimpleDrink = {
+      sortedDetailDrink: sortedDetailDrink,
       food_statistics: data.food_statistics,
       taste_statistic: data.taste_statistic,
       flavor_statistics: data.flavor_statistics,

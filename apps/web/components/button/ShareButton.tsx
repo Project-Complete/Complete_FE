@@ -8,6 +8,9 @@ import { useState } from 'react';
 
 const ShareButton = () => {
   const [hoverState, setHoverState] = useState(false);
+  const onClick = () => {
+    window.navigator.clipboard.writeText(window.location.href);
+  };
   return (
     <Button
       className={classes[`share-button`]}
@@ -17,6 +20,7 @@ const ShareButton = () => {
       onMouseOut={() => {
         setHoverState(false);
       }}
+      onClick={onClick}
     >
       <Box
         className={hoverState ? classes[`share-button-text`] : classes[`text`]}

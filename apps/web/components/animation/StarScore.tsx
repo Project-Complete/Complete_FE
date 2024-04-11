@@ -6,7 +6,7 @@ type StarScorePropsType = {
 
 const StarScore = ({ score }: StarScorePropsType) => {
   return (
-    <Flex w={'100%'} h='100%' justify={'center'} align={'center'}>
+    <Flex w={'100%'} h='100%' justify={'start'} align={'center'}>
       <Rating readOnly fractions={3} value={score} />
     </Flex>
   );

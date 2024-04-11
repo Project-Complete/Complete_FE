@@ -77,6 +77,7 @@ export interface DetailSummarySimpleDrink {
 }
 
 export interface DetailSimpleDrink {
+  sortedDetailDrink: FlavorStatistic[];
   food_statistics: FoodStatistic[];
   taste_statistic: TasteStatistic;
   flavor_statistics: FlavorStatistic[];
