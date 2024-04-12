@@ -41,3 +41,18 @@ export const foods: { [key: string]: string } = {
   튀김: '/안주/튀김.svg',
   '마른 안주': '/안주/마른_안주.svg',
 };
+
+export const DRINKS_TYPE = {
+  beer: {
+    sort: 1,
+    label: 'Beer',
+    exposeLabel: '맥주',
+    image: '/주종/맥주.svg',
+  },
+  traditional: {
+    sort: 2,
+    label: 'Traditional Liquor',
+    exposeLabel: '전통주',
+    image: '/주종/전통주.svg',
+  },
+};
