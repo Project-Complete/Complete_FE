@@ -1,8 +1,10 @@
 'use client';
+import AnotherDrinkListCard from '@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/Card';
 import { useMainSearchDrinkInfinityQuery } from '@/hooks/queries/useMainSearchDrinkInfinityQuery';
 import { Flex } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import { useEffect } from 'react';
+import cardListCss from '@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/List.module.scss';
 
 type SearchDrinkReviewPropsType = {
   keyword: string;
@@ -22,7 +24,7 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
     }
   }, [entry]);
 
-  const totalElements = data?.pages[0]?.page_info?.total_elements;
+  const totalElements = data?.pages[0]?.search_drinks.page_info?.total_elements;
 
   return (
     <div>
@@ -36,12 +38,22 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
         >{`"${keyword}"에 대 검색 결과 ${totalElements}개`}</Flex>
       )}
       <h1>SearchDrinkReview</h1>
-      {data?.pages.map((page, index) => {
+      {data?.pages?.map((page, index) => {
         return (
           <>
-            <div key={index}>
-              {page.drinks.map(drink => {
-                return <>{drink.drink_id}</>;
+            <div key={index} className={cardListCss['card-list-wrapper']}>
+              {page.search_drinks.drinks.map(drink => {
+                return (
+                  <AnotherDrinkListCard
+                    key={drink.drink_id}
+                    drink_id={drink.drink_id}
+                    drink_like={drink.drink_like}
+                    drink_name={drink.drink_name}
+                    image_url={drink.image_url}
+                    manufacturer_name={drink.manufacturer_name}
+                    review_rating={drink.review_rating}
+                  />
+                );
               })}
             </div>
           </>

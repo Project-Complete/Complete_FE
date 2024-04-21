@@ -129,8 +129,10 @@ interface PageInfo {
 }
 
 interface DrinksResponse {
-  drinks: DrinkListElement[];
-  page_info: PageInfo;
+  search_drinks: {
+    drinks: DrinkListElement[];
+    page_info: PageInfo;
+  };
 }
 
 interface DrinkOfBanner {
