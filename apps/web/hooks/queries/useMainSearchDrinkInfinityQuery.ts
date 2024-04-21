@@ -15,9 +15,8 @@ const useMainSearchDrinkFetcher = async ({
   pageParam,
 }: useMainSearchDrinkFetcherPropsType) => {
   const url = `/main/search?keyword=${keyword}&page=${pageParam}`;
-  console.log('url', url);
   const response = await api.get(url).json();
-  return response as any;
+  return response as DrinksResponse;
 };
 
 const useMainSearchDrinkInfinityQuery = ({

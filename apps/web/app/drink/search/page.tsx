@@ -21,9 +21,10 @@ type SearchTabType = 'drinkReview' | 'chilling' | 'community';
 
 export default function Page(): JSX.Element {
   const searchParams = useSearchParams();
-  const keyword = searchParams?.get('keyword') || '';
+  const keywordParam = searchParams?.get('keyword') || '';
+  const tabTypeParam = searchParams?.get('tabType') || 'drinkReview';
   const form = useForm({
-    initialValues: { keyword },
+    initialValues: { keyword: keywordParam, tabType: tabTypeParam },
     enhanceGetInputProps: (payload: any) => {
       if (payload.options.fieldType === 'searchAutocomplete') {
         return {
@@ -39,20 +40,16 @@ export default function Page(): JSX.Element {
     },
   });
   const [debouncedKeyword] = useDebouncedValue(form.values.keyword, 500);
-  const { data } = useMainSearchDrinkInfinityQuery({
-    keyword: debouncedKeyword,
-  });
-
-  console.log('data', data);
-
-  const [tabType, setTabType] = useState<SearchTabType>('drinkReview');
+  const [tabType, setTabType] = useState<SearchTabType>(
+    tabTypeParam as SearchTabType,
+  );
 
   return (
     <>
       <Flex classNames={containerCss}>
         <Flex w={'100%'}>
           <Autocomplete
-            defaultValue={keyword}
+            defaultValue={keywordParam}
             leftSection={
               <Image
                 src={'/icons/돋보기.svg'}
@@ -80,9 +77,9 @@ export default function Page(): JSX.Element {
           </>
         ) : (
           <>
-            <Flex>{`"${debouncedKeyword}"에 대 검색 결과 ${'asdf'}개`}</Flex>
             <Tabs
               w={1240}
+              defaultValue={tabType}
               onChange={v => {
                 if (v === null) return;
                 setTabType(v as SearchTabType);
@@ -95,13 +92,13 @@ export default function Page(): JSX.Element {
                 <Tab value='community'>커뮤니티</Tab>
               </TabList>
               <Tabs.Panel value='drinkReview'>
-                <SearchDrinkReview />
+                <SearchDrinkReview keyword={debouncedKeyword} />
               </Tabs.Panel>
               <Tabs.Panel value='chilling'>
-                <SearchChilling />
+                <SearchChilling keyword={debouncedKeyword} />
               </Tabs.Panel>
               <Tabs.Panel value='community'>
-                <SearchCommunity />
+                <SearchCommunity keyword={debouncedKeyword} />
               </Tabs.Panel>
             </Tabs>
           </>

@@ -1,4 +1,9 @@
-const SearchCommunity = () => {
+import { Flex } from '@mantine/core';
+
+type SearchCommunityPropsType = {
+  keyword: string;
+};
+const SearchCommunity = ({}: SearchCommunityPropsType) => {
   //   const { t } = useTranslation();
   //   const { search, setSearch } = useSearch();
   //   const { data, loading } = useSearchCommunity(search);
