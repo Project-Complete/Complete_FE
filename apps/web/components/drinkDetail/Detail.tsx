@@ -1,15 +1,9 @@
 import { Badge, Box, Flex, Text } from '@mantine/core';
 import RadarTasteChart from '../chart/RadarTasteChart';
-import Image from 'next/image';
-import { ChipButton } from '@team-complete/complete-ui';
-
-const drinkOccasionList = [
-  { id: 'alone_sum', title: '나 혼자', selectedPeople: 0 },
-  { id: 'friend_sum', title: '친구', selectedPeople: 0 },
-  { id: 'partner_sum', title: '연인', selectedPeople: 0 },
-  { id: 'business_sum', title: '비즈니스', selectedPeople: 0 },
-  { id: 'adult_sum', title: '웃어른', selectedPeople: 0 },
-];
+import { DetailSimpleDrink } from '@/types/drinks';
+import Point from '@/assets/Point';
+import classes from './Detail.module.scss';
+import DetailFlavorChip from './DetailFlavorChip';
 
 const sortedDataFlavorFilter = [
   'body_rating',
@@ -20,17 +14,10 @@ const sortedDataFlavorFilter = [
 ];
 
 const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
-  const updatedDrinkOccasionList = drinkOccasionList.map(item => {
-    const situationStatisticValue = detailDrink.situation_statistic[item.id];
-    return {
-      ...item,
-      selectedPeople:
-        situationStatisticValue !== undefined ? situationStatisticValue : 0,
-    };
-  });
   const sortedValues = sortedDataFlavorFilter.map(
     key => detailDrink.taste_statistic[key],
   );
+
   const data = {
     labels: ['바디감(목넘김)', '쓴맛', '청량감', '산미', '단맛'],
     datasets: [
@@ -41,75 +28,60 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
       },
     ],
   };
+
   return (
-    <Flex w={'100%'} direction={'column'}>
-      <Text size='2.5rem' fw={800} lh={'xl2'}>
-        칠러들의 칠링 노트
-      </Text>
-      <Flex w={'100%'} justify={'space-between'}>
-        <Flex direction={'column'}>
-          <Text size={'xl2'} fw={600} lh={2.5}>
-            누구랑 마시면 좋을까요?
-          </Text>
-          <Flex gap={24}>
-            {updatedDrinkOccasionList.map(
-              ({ id, title, selectedPeople }, index) => {
-                return (
-                  <Flex
-                    key={index}
-                    direction={'column'}
-                    justify={'center'}
-                    align={'center'}
-                  >
-                    <Flex
-                      w={100}
-                      h={120}
-                      justify={'center'}
-                      align={'center'}
-                      pos={'relative'}
-                    >
-                      <Image
-                        src={`/detail_who/${id}.svg`}
-                        alt='title'
-                        width={100}
-                        height={100}
-                      />
-                    </Flex>
-                    <Flex
-                      direction={'column'}
-                      justify={'center'}
-                      align={'center'}
-                    >
-                      <Text size='lg'>{title}</Text>
-                      <Text size='md'>{selectedPeople}명</Text>
-                    </Flex>
-                  </Flex>
-                );
-              },
-            )}
-          </Flex>
-          <Flex direction={'column'} mt={'3.5rem'}>
-            <Text size={'xl2'} fw={600} lh={'lg'}>
+    <Flex w={'100%'} direction={'column'} bg={'#FAFAFA'}>
+      <Flex align={`center`} gap={'1.5rem'}>
+        <Point />
+        <Text size='2rem' fw={800} lh={'xl2'}>
+          칠러들의 칠링 노트
+        </Text>
+      </Flex>
+      <Flex w={'100%'} justify={'space-between'} mt={'3.5rem'}>
+        <Flex className={classes['smell-taste-box']}>
+          <Flex w={'100%'} direction={'column'}>
+            <Text size={'xl'} fw={600} lh={'lg'}>
               어떤 향이 느껴지나요?
             </Text>
-            <Flex gap={8}>
-              {detailDrink.flavor_statistics.map((e, index) => {
-                return (
-                  <ChipButton variant={'gray'} key={index}>
-                    {e.flavor}
-                  </ChipButton>
-                );
-              })}
+            <Flex w={'100%'} direction={'column'} gap={16}>
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[0] && (
+                  <DetailFlavorChip
+                    index={1}
+                    flavor={detailDrink.sortedDetailDrink[0]}
+                  />
+                )}
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[1] && (
+                  <DetailFlavorChip
+                    index={2}
+                    flavor={detailDrink.sortedDetailDrink[1]}
+                  />
+                )}
+              {detailDrink.sortedDetailDrink &&
+                detailDrink.sortedDetailDrink[2] && (
+                  <DetailFlavorChip
+                    index={3}
+                    flavor={detailDrink.sortedDetailDrink[2]}
+                  />
+                )}
             </Flex>
           </Flex>
         </Flex>
-        <Flex direction={'column'}>
-          <Text size='xl2' fw={600} lh={'40px'}>
+        <Flex className={classes['smell-taste-box']}>
+          <Text size='xl' fw={600} lh={'40px'}>
             어떤 맛이 느껴지나요?
           </Text>
-          <Box py='1.5rem' px='3.31rem' w={'31rem'} h='25rem' fs='xl2'>
+          <Flex
+            justify={'center'}
+            py='1.5rem'
+            px='3.31rem'
+            w={'100%'}
+            h='25rem'
+            fs='xl2'
+          >
             <RadarTasteChart data={data} />
-          </Box>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

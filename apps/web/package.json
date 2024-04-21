@@ -16,6 +16,8 @@
     "@next/bundle-analyzer": "^14.1.0",
     "@tabler/icons-react": "^2.46.0",
     "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-query-devtools": "^5.29.0",
+    "add": "^2.0.6",
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
     "framer-motion": "^10.18.0",
@@ -25,6 +27,7 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "yarn": "^1.22.22",
     "zod": "^3.22.4"
   },
   "devDependencies": {

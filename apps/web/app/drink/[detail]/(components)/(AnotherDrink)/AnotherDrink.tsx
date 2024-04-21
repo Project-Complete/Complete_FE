@@ -26,7 +26,7 @@ const AnotherDrink = ({
         <Text
           component='h1'
           lh={'40px'}
-          fz={'28px'}
+          fz={'1.125rem'}
           fw={800}
           ref={anotherDrinkRef}
         >
@@ -74,7 +74,7 @@ const AnotherDrink = ({
           </ChipButton>
         </Box>
       </Flex>
-      <Box className={classes['another-drink-list-wrapper']}>
+      <Box>
         <AnotherDrinkList detailId={detailId} rateName={activeState} />
       </Box>
     </Box>

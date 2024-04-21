@@ -36,9 +36,8 @@ const CustomerReview = ({
     }
   }, [entry]);
   console.log(data);
-
   return (
-    <Flex direction={'column'} w={'100%'} mt={'5.25rem'}>
+    <Flex direction={'column'} w={'100%'}>
       {reviewId > 0 && (
         <CustomerReviewCard
           modalOpen={modalOpen}
@@ -46,15 +45,29 @@ const CustomerReview = ({
           reviewId={reviewId}
         />
       )}
-      <Text
-        component='h1'
-        lh={'40px'}
-        fz={'28px'}
-        fw={800}
-        ref={customerReviewRef}
-      >
-        칠러들의 솔직한 리뷰
-      </Text>
+      <Flex justify={'space-between'} align={'center'}>
+        <Text
+          component='h1'
+          lh={'40px'}
+          // fz={'28px'}
+          fz={'1.125rem'}
+          fw={800}
+          ref={customerReviewRef}
+        >
+          칠러들의 솔직한 리뷰
+        </Text>
+        {data && data.pages[0] && data.pages[0].page_info && (
+          <Text
+            fz={'0.875rem'}
+            lh={'1.25rem'}
+            fw={400}
+            c={'rgba(0, 0, 0, 0.45)'}
+          >
+            {data.pages[0].page_info.total_elements}개의 리뷰
+          </Text>
+        )}
+      </Flex>
+
       <Grid w={'100%'} gutter={24} mt={24} mb={24}>
         {data &&
           data.pages &&
