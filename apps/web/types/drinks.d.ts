@@ -42,6 +42,7 @@ interface Package {
 
 interface Drink {
   drink_id: number;
+  drink_like: boolean;
   name: string;
   image_url: string;
   summary: string;
@@ -65,18 +66,20 @@ interface Drink {
 
 interface DetailSummarySimpleDrink {
   name: string;
+  drink_like: boolean;
   summary: string;
   drink_id: number;
   image_url: string;
   manufacturer: Manufacturer;
   review_rating: number;
   food_statistics: FoodStatistic[];
+  situation_statistic: SituationStatistic;
 }
 
 interface DetailSimpleDrink {
+  sortedDetailDrink: FlavorStatistic[];
   food_statistics: FoodStatistic[];
   taste_statistic: TasteStatistic;
-  situation_statistic: SituationStatistic;
   flavor_statistics: FlavorStatistic[];
 }
 

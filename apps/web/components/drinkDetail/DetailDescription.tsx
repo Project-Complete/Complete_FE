@@ -29,7 +29,6 @@ const DetailDescription = ({
       w={'100%'}
       direction={'column'}
       py={'72px'}
-      className={classes['detail-description-border-bottom']}
     >
       <Title
         component={'h1'}
@@ -87,6 +86,12 @@ const DetailDescription = ({
           })}
           <Table.Tr>
             <Table.Td className={classes['detail-description-title']}>
+              제조사
+            </Table.Td>
+            <Table.Td colSpan={2}>{detailDescription.manufacturer.manufacturer_name}</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td className={classes['detail-description-title']}>
               도수
             </Table.Td>
             <Table.Td colSpan={2}>{detailDescription.abv}</Table.Td>
@@ -103,6 +108,10 @@ const DetailDescription = ({
             </Table.Td>
             <Table.Td colSpan={2}>
               {detailDescription.manufacturer.location}
+            </Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td className={classes['detail-description-title']}>
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>

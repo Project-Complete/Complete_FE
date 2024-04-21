@@ -10,9 +10,8 @@ interface ChipProps
 const chipVariants = cva(classes[`Chip-button-wrapper`], {
   variants: {
     variant: {
-      //   primary: classes[`Chip-button-background-primary`],
-      //   gray: classes[`Chip-button-background-gray`],
       outline: classes[`Chip-background-outline`],
+      ghost:classes[`Chip-wrapper`],
     },
   },
   defaultVariants: {
