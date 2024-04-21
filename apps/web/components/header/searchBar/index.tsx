@@ -8,7 +8,7 @@ import Logo from '@/components/Logo';
 import classes from './SearchBar.module.scss';
 import HeaderCenterSearchInput from './SearchInput';
 
-const HeaderCenterWrapper = ({ isLogin }: { isLogin: boolean }) => {
+const HeaderCenterWrapper = ({ isCenter }: { isCenter: boolean }) => {
   return (
     <Center w={`100%`} h={`100%`}>
       <Flex
@@ -21,9 +21,9 @@ const HeaderCenterWrapper = ({ isLogin }: { isLogin: boolean }) => {
       >
         <Flex h={`5rem`} align={'center'} gap={'2.5rem'}>
           <Logo />
-          {!isLogin && <HeaderCenterSearchInput />}
+          {!isCenter && <HeaderCenterSearchInput />}
         </Flex>
-        {!isLogin && (
+        {!isCenter && (
           <Flex h={'100%'} align={'center'}>
             <Anchor
               href={'/login'}

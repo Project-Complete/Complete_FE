@@ -1,0 +1,16 @@
+.root {
+  .input {
+    &[data-variant='chilling-search'] {
+      border-radius: 0.5rem;
+      border: 1px solid var(--Background-bg-input-border-default, #cbcdd1);
+      &:focus {
+        border: 1px solid var(--Font-Input-text-primary, #693bc9);
+      }
+    }
+  }
+  .section {
+    &[data-variant='chilling-search'] {
+      // 여기에 상위 .input에 값이 있으면 display none 처리하고싶어
+    }
+  }
+}

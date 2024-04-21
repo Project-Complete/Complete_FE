@@ -53,7 +53,6 @@ export const useReviewListQuery = ({
       );
       const nextPage =
         page.page_info.page + 1 >= totalPage ? null : page.page_info.page + 1;
-
       return nextPage;
     },
   });

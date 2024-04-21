@@ -76,7 +76,7 @@ interface DetailSummarySimpleDrink {
   situation_statistic: SituationStatistic;
 }
 
-export interface DetailSimpleDrink {
+interface DetailSimpleDrink {
   sortedDetailDrink: FlavorStatistic[];
   food_statistics: FoodStatistic[];
   taste_statistic: TasteStatistic;
@@ -127,12 +127,15 @@ interface PageInfo {
   page: number;
   size: number;
   total_elements: number;
+  total_pages: number;
   sort: string;
 }
 
 interface DrinksResponse {
-  drinks: DrinkListElement[];
-  page_info: PageInfo;
+  search_drinks: {
+    drinks: DrinkListElement[];
+    page_info: PageInfo;
+  };
 }
 
 interface DrinkOfBanner {
