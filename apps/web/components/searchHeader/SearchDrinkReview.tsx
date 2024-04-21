@@ -1,4 +1,5 @@
-import useMainSearchDrinkInfinityQuery from '@/hooks/queries/useMainSearchDrinkInfinityQuery';
+'use client';
+import { useMainSearchDrinkInfinityQuery } from '@/hooks/queries/useMainSearchDrinkInfinityQuery';
 import { Flex } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import { useEffect } from 'react';
@@ -11,22 +12,29 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
     keyword,
   });
 
-  console.log('data',data)
-
   const { ref, entry } = useIntersection({
     root: null,
     threshold: 0.3,
   });
   useEffect(() => {
-    if (entry && entry.isIntersecting && hasNextPage) {
+    if (entry && entry?.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
   }, [entry]);
-  console.log('data', data);
+
+  const totalElements = data?.pages[0]?.page_info?.total_elements;
 
   return (
     <div>
-      <Flex c={'h2'}>{`"${keyword}"에 대 검색 결과 ${'asdf'}개`}</Flex>
+      {totalElements !== undefined && (
+        <Flex
+          c={'h2'}
+          lh={'40px'}
+          fz={'28px'}
+          fw={800}
+          ref={ref}
+        >{`"${keyword}"에 대 검색 결과 ${totalElements}개`}</Flex>
+      )}
       <h1>SearchDrinkReview</h1>
       {data?.pages.map((page, index) => {
         return (

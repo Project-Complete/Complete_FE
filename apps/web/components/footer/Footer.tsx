@@ -10,12 +10,14 @@ const menuItems = [
   '제휴문의',
 ];
 
-const Footer = () => {
-  const pathname = usePathname();
-  const isLogin = pathname === '/login';
+type FooterPropsType = {
+  useFooter?: boolean;
+};
+
+const Footer = ({ useFooter = false }: FooterPropsType) => {
   return (
     <>
-      {!isLogin && (
+      {!useFooter && (
         <footer className={classes['footer-wrapper']}>
           <div>
             <div className={classes['footer-menu']}>

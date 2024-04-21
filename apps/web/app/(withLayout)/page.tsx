@@ -1,6 +1,6 @@
 import styles from './page.module.css';
 import { Flex } from '@mantine/core';
-import SelectedBanner from '../components/banner/SelectedBanner';
+import SelectedBanner from '../../components/banner/SelectedBanner';
 import MainReview from '@/components/review/mainDrink/MainDrink';
 import Banner from '@/components/banner/Banner';
 import Image from 'next/image';
