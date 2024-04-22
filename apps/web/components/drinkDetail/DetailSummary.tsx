@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
 import StarScore from '../animation/StarScore';
-import { DetailSummarySimpleDrink } from '@/types/drinks';
 import { Chip, Button } from '@team-complete/complete-ui';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import ShareButton from '../button/ShareButton';
@@ -41,7 +40,14 @@ const DetailSummary = ({
     .splice(0, 3);
 
   return (
-    <Flex pos={'relative'} id={"111111"} w={'100%'} py={92} bg={"#FAFAFA"} justify={'center'} >
+    <Flex
+      pos={'relative'}
+      id={'111111'}
+      w={'100%'}
+      py={92}
+      bg={'#FAFAFA'}
+      justify={'center'}
+    >
       <Flex
         w={'100%'}
         maw={1224}
@@ -133,7 +139,7 @@ const DetailSummary = ({
                           width={32}
                           height={32}
                         />
-                        <div>{e.category}</div>
+                        <Text size='lg'>{e.category}</Text>
                       </div>
                     </Chip>
                   )}
