@@ -4,21 +4,22 @@ import classes from './HeaderWrapper.module.css';
 import { Flex } from '@mantine/core';
 import HeaderNavWrapper from './nav';
 import HeaderCenterWrapper from './searchBar';
-import { usePathname } from 'next/navigation';
 
 type HeaderWrapperPropsType = {
   useNav?: boolean;
   isCenter?: boolean;
+  isLogin?: boolean;
 };
 
 const HeaderWrapper = ({
   useNav = false,
   isCenter = false,
+  isLogin = false,
 }: HeaderWrapperPropsType) => {
   return (
     <>
       <Flex w={`100%`} h={120} className={classes[`header-center`]}>
-        <HeaderCenterWrapper isCenter={isCenter} />
+        <HeaderCenterWrapper isCenter={isCenter} isLogin={isLogin} />
       </Flex>
       {!useNav && (
         <>
