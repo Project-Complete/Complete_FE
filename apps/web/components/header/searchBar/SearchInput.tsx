@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Flex, Autocomplete } from '@mantine/core';
+import { Box, Flex, Autocomplete, UnstyledButton } from '@mantine/core';
 import classes from './SearchBar.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -28,6 +28,8 @@ const HeaderCenterSearchInput = () => {
 
   return (
     <Box
+      component='a'
+      href='/search'
       h={`3.25rem`}
       w={`35rem`}
       px={`1rem`}
@@ -43,6 +45,7 @@ const HeaderCenterSearchInput = () => {
         <Flex mr={`0.5rem`} w={`100%`} h={`100%`} align={`center`}>
           {/* 추후 맨틴의 autocomplete로 교체 -> 자동완성 기능 */}
           <Autocomplete
+            className={classes[`searchBar-input`]}
             leftSection={SearchIcon}
             w={`100%`}
             placeholder='원하시는 술 정보를 검색해보세요.'

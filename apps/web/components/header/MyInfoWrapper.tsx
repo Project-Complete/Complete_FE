@@ -1,8 +1,9 @@
 'use client';
 import { useMyInfoQuery } from '@/hooks/queries/useMyInfoQuery';
-import { Avatar, Box, Flex } from '@mantine/core';
+import { Avatar, Flex } from '@mantine/core';
 import HeaderWriteButton from './searchBar/WriteButton';
 import { Chip } from '@team-complete/complete-ui';
+import Link from 'next/link';
 
 import classes from './MyInfoWrapper.module.scss';
 
@@ -17,9 +18,11 @@ const HeaderMyInfoWrapper = () => {
         justify={'flex-end'}
         w={'100%'}
       >
-        <Chip variant={'ghost'} className={classes['MyNicknameWrapper']}>
-          {myInfoData.nickname}
-        </Chip>
+        <Link href='/myPage' className={classes.MyNicknameWrapperFlex}>
+          <Chip variant={'ghost'} className={classes['MyNicknameWrapper']}>
+            {myInfoData.nickname}
+          </Chip>
+        </Link>
         <Avatar src={myInfoData.profile_image_url} alt="It's me!" />
         <HeaderWriteButton />
       </Flex>
