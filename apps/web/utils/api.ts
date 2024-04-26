@@ -33,18 +33,11 @@ export const api = kyInstance.extend({
               .find(row => row.startsWith('refresh_token='))
               ?.split('=')[1];
             if (!cookieRefreshToken) throw 'refreshToken undefined';
-            const newAccessToken = await refreshToken({
+            const { newAccessToken, response } = await resendWithRefreshToken({
               request,
               cookieRefreshToken,
             });
-            const cloneRequest = request.clone(); // 요청을 복제하여 수정
-
-            // 갱신된 토큰으로 다시 요청을 보냅니다.
-            cloneRequest.headers.set(
-              'Authorization',
-              `Bearer ${newAccessToken}`,
-            );
-            return ky(cloneRequest);
+            return response;
           } catch (error) {
             console.error('토큰 갱신 및 다시 요청 실패:', error);
             throw error; // 토큰 갱신 및 다시 요청에 실패하면 예외를 throw합니다.
@@ -57,7 +50,7 @@ export const api = kyInstance.extend({
 });
 
 // 토큰 갱신 함수
-const refreshToken = async ({
+const resendWithRefreshToken = async ({
   request,
   cookieRefreshToken,
 }: {
@@ -78,7 +71,7 @@ const refreshToken = async ({
     document.cookie = `access_token=${newAccessToken}; Secure; HttpOnly; SameSite=Strict`;
     document.cookie = `refresh_token=${newRefreshToken}; Secure; HttpOnly; SameSite=Strict`;
 
-    return newAccessToken;
+    return { newAccessToken, response };
   } catch (error) {
     console.error('토큰 갱신 실패:', error);
     throw error; // 토큰 갱신에 실패하면 예외를 throw합니다.

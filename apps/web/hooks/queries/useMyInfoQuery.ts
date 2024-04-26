@@ -3,7 +3,7 @@ import { api } from '@/utils/api';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
 const myInfoFetcher = async () => {
-  const response = await api.get(`users/3`).json();
+  const response = await api.get(`users`).json();
   return response;
 };
 
