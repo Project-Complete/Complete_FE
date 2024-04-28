@@ -1,7 +1,10 @@
+import MyPageLeftSideBarMyProfile from "./Profile";
+
 const MyPageLeftSideBarWrapper = () => {
+    
     return (
         <div>
-            테스트
+            <MyPageLeftSideBarMyProfile />
         </div>
     )
 }

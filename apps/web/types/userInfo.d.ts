@@ -3,14 +3,14 @@ export interface MyUserInfo {
   profile_image_url: string;
   nickname: string;
   email: string | null | undefined;
-  followers: number;
-  followings: number;
+  follower_count: number;
+  following_count: number;
 }
 
 export interface UserInfo {
   user_id: number;
   profile_image_url: string;
   nickname: string;
-  followers: number;
-  followings: number;
+  follower_count: number;
+  following_count: number;
 }

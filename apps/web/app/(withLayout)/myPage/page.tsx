@@ -1,4 +1,4 @@
-import MyPageLeftSideBarWrapper from './(components)/LeftSideBarWrapper';
+import MyPageLeftSideBarWrapper from './(components)/(sideBar)/Wrapper';
 import classes from './MyPageLayout.module.scss';
 
 const MyPageWrapper = () => {

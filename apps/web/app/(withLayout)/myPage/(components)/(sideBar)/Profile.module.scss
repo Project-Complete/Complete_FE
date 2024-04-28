@@ -1,0 +1,60 @@
+.profileWrapper{
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+    justify-content: center;
+    align-items: center;
+    width:18rem;
+    height: 23.75rem;
+    border-radius: 1.5rem;
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+    position:relative;
+}
+
+.profileNickname{
+    text-align: center;
+    color: var(--Font-Input-text-on-primary, #FFF);
+    text-align: center;
+    /* Card/Title-Semibold */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    /* 133.333% */
+}
+
+.profileEmail{
+    color: var(--Palette-base-white-alpha-65, rgba(255, 255, 255, 0.65));
+    text-align: center;
+    /* Card/Lable-Medium */
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    /* 142.857% */
+}
+
+.profileFollowWrapper{
+    position:absolute;
+    height:5rem;
+    display: flex;
+    bottom:0px;
+    justify-content: space-around;
+    width:100%;
+}
+
+.profileFollowFollowingBox{
+    flex:1;
+    height:100%;
+    width:100%;
+    display: flex;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

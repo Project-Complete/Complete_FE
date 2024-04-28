@@ -14,7 +14,6 @@ const HeaderCenterWrapper = ({
   isCenter: boolean;
   isLogin: boolean;
 }) => {
-  console.log('testafast', isLogin);
   return (
     <Center w={`100%`} h={`100%`}>
       <Flex
