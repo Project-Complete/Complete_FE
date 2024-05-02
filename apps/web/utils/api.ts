@@ -1,4 +1,5 @@
 import ky from 'ky';
+import Cookie from 'js-cookie';
 const kyInstance = ky.create({
   prefixUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
@@ -68,10 +69,10 @@ const resendWithRefreshToken = async ({
     const newRefreshToken = response.headers.get('Authorization-refresh');
 
     // 새로운 토큰을 쿠키에 저장합니다.
-    document.cookie = `access_token=${newAccessToken}; Secure; HttpOnly; SameSite=Strict`;
-    document.cookie = `refresh_token=${newRefreshToken}; Secure; HttpOnly; SameSite=Strict`;
+    newAccessToken && Cookie.set('access_token', newAccessToken);
+    newRefreshToken && Cookie.set('refresh_token', newRefreshToken);
 
-    return { newAccessToken, response };
+    return { newAccessToken, newRefreshToken, response };
   } catch (error) {
     console.error('토큰 갱신 실패:', error);
     throw error; // 토큰 갱신에 실패하면 예외를 throw합니다.
