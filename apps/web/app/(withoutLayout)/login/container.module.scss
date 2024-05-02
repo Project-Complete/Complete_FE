@@ -1,18 +1,19 @@
-.root{
-    margin:0px;
-    padding:0px;
+.root {
+    margin: 0px;
+    padding: 5px;
     max-width: 1224px;
-    width:100%;
-    margin:0 auto;
+    min-width: var(--min-width);
+    width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:72px;
+    gap: 72px;
 
     text-align: center;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 40px; 
+    line-height: 40px;
 }

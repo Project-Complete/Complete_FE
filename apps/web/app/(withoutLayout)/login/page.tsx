@@ -7,17 +7,16 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Flex classNames={containerCss}>
-        <Box w={600} h={200} mt={72}>
-          <Image
-            src={'/banner/login_banner.png'}
-            alt={'logo'}
-            width={600}
-            height={218}
-          />
-        </Box>
+        <Image
+          src={'/banner/login_banner.png'}
+          alt={'logo'}
+          width={600}
+          height={218}
+          style={{ maxWidth: '600px', width: '100%', height: 'auto' }}
+        />
         <LoginButton />
         <Flex>궁금하신 사항 있으신가요?</Flex>
-      </Flex>
+      </Flex >
     </>
   );
 }
