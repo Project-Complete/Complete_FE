@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
-    "@mantine/core": "^7.5.0"
+    "@mantine/core": "^7.8.1"
   }
 }

@@ -1,0 +1,8 @@
+.MyNicknameWrapper{
+    display: flex;
+    padding: var(--Spacing-4, 0.25rem) var(--Spacing-24, 1.5rem);
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5rem;
+    background: var(--Background-sheet, #FFF);
+}

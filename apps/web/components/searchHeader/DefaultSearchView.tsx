@@ -1,16 +1,18 @@
 'use client';
-import { Flex, Pill, Text } from '@mantine/core';
-import React, { useMemo, useState } from 'react';
-import Image from 'next/image';
+import React, { useMemo } from 'react';
 import { DRINKS_TYPE } from '@/constants/drinks';
-const DefaultSearchView: React.FC = () => {
-  const [recentSearches, setRecentSearches] = useState<string[]>([
-    '검색어',
-    '검색어',
-    '검색어',
-    '검색어',
-  ]);
+import { Flex, Pill, Text } from '@mantine/core';
+import Image from 'next/image';
 
+type DefaultSearchViewPropsType = {
+  recentSearches: string[];
+  deleteRecentSearch: (index: number) => void;
+};
+
+const DefaultSearchView = ({
+  recentSearches,
+  deleteRecentSearch,
+}: DefaultSearchViewPropsType) => {
   const popularSearches = ['Coffee', 'Tea', 'Juice'];
 
   const drinksType = useMemo(() => {
@@ -23,9 +25,13 @@ const DefaultSearchView: React.FC = () => {
         <Flex direction={'column'} w={'100%'}>
           <Text c={'h2'}>최근 검색어</Text>
           <Pill.Group>
-            {recentSearches.map((search, index) => {
+            {recentSearches.map((search: string, index: number) => {
               return (
-                <Pill key={index} withRemoveButton>
+                <Pill
+                  key={index}
+                  withRemoveButton
+                  onRemove={() => deleteRecentSearch(index)}
+                >
                   {search}
                 </Pill>
               );
@@ -35,7 +41,7 @@ const DefaultSearchView: React.FC = () => {
         <Flex direction={'column'} w={'100%'}>
           <Text c={'h2'}>인기 검색어</Text>
           <Pill.Group>
-            {popularSearches.map((search, index) => (
+            {popularSearches.map((search: string, index: number) => (
               <Pill key={index}>{search}</Pill>
             ))}
           </Pill.Group>
@@ -44,21 +50,23 @@ const DefaultSearchView: React.FC = () => {
       <Flex direction={'column'}>
         <Text c={'h2'}>주종별로 찾아볼까요?</Text>
         <Flex>
-          {drinksType.map(({ label, exposeLabel, image }, index) => {
-            return (
-              <Flex key={index} direction={'column'} align={'center'}>
-                <Image
-                  src={image}
-                  width={60}
-                  height={60}
-                  alt={label}
-                  placeholder='blur'
-                  blurDataURL={image}
-                ></Image>
-                <Text>{exposeLabel}</Text>
-              </Flex>
-            );
-          })}
+          {drinksType.map(
+            ({ label, exposeLabel, image }: any, index: number) => {
+              return (
+                <Flex key={index} direction={'column'} align={'center'}>
+                  <Image
+                    src={image}
+                    width={60}
+                    height={60}
+                    alt={label}
+                    placeholder='blur'
+                    blurDataURL={image}
+                  ></Image>
+                  <Text>{exposeLabel}</Text>
+                </Flex>
+              );
+            },
+          )}
         </Flex>
       </Flex>
     </Flex>
