@@ -12,8 +12,8 @@ const useRecentSearches = () => {
     return JSON.parse(localStorage.getItem('recentSearches') ?? '[]');
   };
 
-  //   const defaultRecentSearches: string[] = getRecentSearchesFromLocalStorage();
-  const defaultRecentSearches: string[] = [];
+  const defaultRecentSearches: string[] = getRecentSearchesFromLocalStorage();
+  // const defaultRecentSearches: string[] = [];
 
   const [recentSearches, setRecentSearches] = useState<string[]>(
     defaultRecentSearches,
@@ -23,12 +23,26 @@ const useRecentSearches = () => {
     setRecentSearches(
       produce(prev => {
         prev.splice(index, 1);
-        // saveRecentSearchToLocalStorage(prev);
+        saveRecentSearchToLocalStorage(prev);
       }),
     );
   }, []);
+
+  const addRecentSearch = useCallback((search: string) => {
+    setRecentSearches(
+      produce(prev => {
+        if (search !== '' && prev.indexOf(search) === -1) {
+          prev.unshift(search);
+          prev.splice(5)
+        }
+        saveRecentSearchToLocalStorage(prev);
+      }),
+    );
+  }, [setRecentSearches]);
+
   return {
     recentSearches,
+    addRecentSearch,
     setRecentSearches,
     deleteRecentSearch,
     saveRecentSearchToLocalStorage,

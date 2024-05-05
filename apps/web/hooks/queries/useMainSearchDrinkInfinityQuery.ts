@@ -17,15 +17,15 @@ const drinkListSearchFetcher = async ({
   page: number;
 }) => {
   let url = `main/search?keyword=${keyword}&page=${page}`;
-  const response = await api.get(url).json();
-  return response as DrinksResponse;
+  const response = await api.get(url).json<{ search_drinks: DrinksResponse }>();
+  return response;
 };
 
 export const useMainSearchDrinkInfinityQuery = ({
   keyword,
 }: {
   keyword: string;
-}): UseInfiniteQueryResult<InfiniteData<DrinksResponse, Error>, Error> => {
+}) => {
   return useInfiniteQuery({
     queryKey: ['drinkListSearch', keyword],
     queryFn: ({ pageParam }: { pageParam: number }) =>
@@ -39,7 +39,7 @@ export const useMainSearchDrinkInfinityQuery = ({
       const page = lastPage;
       const totalPage = Math.ceil(
         page.search_drinks.page_info.total_elements /
-          page.search_drinks.page_info.size,
+        page.search_drinks.page_info.size,
       );
       const nextPage =
         page.search_drinks.page_info.page + 1 >= totalPage
