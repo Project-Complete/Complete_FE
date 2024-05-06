@@ -1,8 +1,10 @@
 'use client';
 
 import { Flex, Text, Title, Box, Rating } from '@mantine/core';
+import { Chip } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import classes from './SelectedBanner.module.css';
+import selectedBannerCss from '@/components/drinkDetail/DetailSummary.module.scss';
 import React, { useEffect, useState } from 'react';
 import SelectedBannerBeerCard from './SelectedBannerBeerCard';
 import { produce } from 'immer';
@@ -31,9 +33,21 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
       setIsSelectComplete(true);
     }, 1000);
   };
+
   useEffect(() => {
     setDrinks(propsDrinks);
   }, [propsDrinks]);
+
+  console.log(
+    drinks[0] &&
+      Object.keys(drinks[0]?.situation_statistics)
+        .sort(
+          (a, b) =>
+            drinks[0]?.situation_statistics[b] -
+            drinks[0]?.situation_statistics[a],
+        )
+        .slice(0, 3),
+  );
 
   return (
     <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'}>
@@ -41,41 +55,78 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
         {drinks[0] && (
           <PourAnimation isSelectComplete={isSelectComplete}>
             <Flex direction={'column'}>
-              <Text size={'lg'} fw={500} lh={'50px'}>
+              <Text size={'sm'} fw={400} lh={'20px'}>
                 칠러들이 선별한 베스트 술 추천
               </Text>
-              <Title size={40} fw={800} lh={'60px'}>
-                {drinks[0].name}
-              </Title>
-              <Rating
-                className={classes['rating-section']}
-                value={drinks[0].review_rating}
-                fractions={2}
-                readOnly
-              />
-              <Text lh={'32px'} my={'12px'} fw={500}>
-                {drinks[0].description}
-              </Text>
-              <Text size={'lg'} fw={600} lh={'40px'}>
-                함께하면 좋은 안주
-              </Text>
-              <Flex gap={24}>
-                {(drinks[0].food_statistics ?? []).map((foodStatistic, idx) => (
-                  <div
-                    key={idx}
-                    className={classes['banner-food-image-section']}
-                  >
-                    <Image
-                      src={foodStatistic.image_url}
-                      height={72}
-                      width={72}
-                      alt={foodStatistic.category}
-                    />
-                    <div className={classes['category-text']}>
-                      {foodStatistic.category}
-                    </div>
-                  </div>
-                ))}
+              <Flex my={'12px'} gap={'8px'} direction={'column'}>
+                <Title size={32} fw={800} lh={'40px'}>
+                  {drinks[0].name}
+                </Title>
+                <Rating
+                  className={classes['rating-section']}
+                  value={drinks[0].review_rating}
+                  fractions={2}
+                  readOnly
+                />
+                <Text size={'md'} lh={'24px'} fw={400}>
+                  {drinks[0].description}
+                </Text>
+              </Flex>
+              <Flex direction={'column'} gap={'8px'} mb={'12px'}>
+                <Text size={'18px'} fw={600} lh={'24px'}>
+                  함께하면 좋은 안주
+                </Text>
+                <Flex gap={8}>
+                  {(drinks[0].food_statistics ?? []).map(
+                    (foodStatistic, idx) => (
+                      <Chip
+                        variant={'ghost'}
+                        className={selectedBannerCss['chip-wrapper']}
+                        key={idx}
+                      >
+                        <div className={selectedBannerCss['drink-food-image']}>
+                          <Image
+                            src={foodStatistic.image_url}
+                            alt='음식 아이콘'
+                            width={24}
+                            height={24}
+                          />
+                          <Text size='md' lh={'32px'} fw={600}>
+                            {foodStatistic.category}
+                          </Text>
+                        </div>
+                      </Chip>
+                    ),
+                  )}
+                </Flex>
+              </Flex>
+              <Flex direction={'column'} gap={'8px'}>
+                <Text size={'18px'} fw={600} lh={'24px'}>
+                  함께 마시면 좋은 사람
+                </Text>
+                <Flex gap={8}>
+                  {(drinks[0].food_statistics ?? []).map(
+                    (foodStatistic, idx) => (
+                      <Chip
+                        variant={'ghost'}
+                        className={selectedBannerCss['chip-wrapper']}
+                        key={idx}
+                      >
+                        <div className={selectedBannerCss['drink-food-image']}>
+                          <Image
+                            src={foodStatistic.image_url}
+                            alt='음식 아이콘'
+                            width={24}
+                            height={24}
+                          />
+                          <Text size='md' lh={'32px'} fw={600}>
+                            {foodStatistic.category}
+                          </Text>
+                        </div>
+                      </Chip>
+                    ),
+                  )}
+                </Flex>
               </Flex>
             </Flex>
           </PourAnimation>
