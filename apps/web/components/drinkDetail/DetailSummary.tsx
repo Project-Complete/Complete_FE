@@ -139,7 +139,7 @@ const DetailSummary = ({
                           width={32}
                           height={32}
                         />
-                        <div>{e.category}</div>
+                        <Text size='lg'>{e.category}</Text>
                       </div>
                     </Chip>
                   )}

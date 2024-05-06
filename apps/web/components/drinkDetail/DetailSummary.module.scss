@@ -21,15 +21,19 @@
   width: 80px;
   height: 80px;
   border-radius: 0.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
-.drink-food-image{
-  width:100%;
+.chip-wrapper {
+  padding: 0 1rem 0 0.5rem;
+}
+
+.drink-food-image {
+  width: 100%;
   height: 100%;
   display: flex;
-  gap:0.5rem;
+  gap: 0.5rem;
   align-items: center;
   font-size: 1rem;
   font-style: normal;
@@ -51,10 +55,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: 2.5rem;
-    /* 250% */
+  /* 250% */
 }
 
-.drink-banner-content-wrapper{
+.drink-banner-content-wrapper {
   z-index: 1;
 }
-
