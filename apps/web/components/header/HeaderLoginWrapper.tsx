@@ -11,7 +11,7 @@ const HeaderWrapper = () => {
         className={classes[`header-center`]}
         data-login={true}
       >
-        <HeaderCenterWrapper isCenter={true} />
+        <HeaderCenterWrapper isCenter={true} isLogin={false} />
       </Flex>
     </>
   );

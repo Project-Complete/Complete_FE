@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { Fragment } from 'react';
 import classes from './Footer.module.scss';
 import { usePathname } from 'next/navigation';
 
@@ -22,10 +22,10 @@ const Footer = ({ useFooter = false }: FooterPropsType) => {
           <div>
             <div className={classes['footer-menu']}>
               {menuItems.map((item, idx) => (
-                <>
-                  <span key={item}>{item}</span>
+                <Fragment key={item}>
+                  <span>{item}</span>
                   <div />
-                </>
+                </Fragment>
               ))}
             </div>
           </div>

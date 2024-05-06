@@ -1,14 +1,19 @@
 'use client';
 import { Anchor, Box, Center, Flex } from '@mantine/core';
 import HeaderWriteButton from './WriteButton';
-import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
-
 import classes from './SearchBar.module.scss';
 import HeaderCenterSearchInput from './SearchInput';
+import HeaderMyInfoWrapper from '../MyInfoWrapper';
 
-const HeaderCenterWrapper = ({ isCenter }: { isCenter: boolean }) => {
+const HeaderCenterWrapper = ({
+  isCenter,
+  isLogin,
+}: {
+  isCenter: boolean;
+  isLogin: boolean;
+}) => {
   return (
     <Center w={`100%`} h={`100%`}>
       <Flex
@@ -20,10 +25,12 @@ const HeaderCenterWrapper = ({ isCenter }: { isCenter: boolean }) => {
         gap={'13rem'}
       >
         <Flex h={`5rem`} align={'center'} gap={'2.5rem'}>
-          <Logo />
+          <Link href='/'>
+            <Logo />
+          </Link>
           {!isCenter && <HeaderCenterSearchInput />}
         </Flex>
-        {!isCenter && (
+        {!isCenter && (!isLogin ? (
           <Flex h={'100%'} align={'center'}>
             <Anchor
               href={'/login'}
@@ -38,19 +45,12 @@ const HeaderCenterWrapper = ({ isCenter }: { isCenter: boolean }) => {
             </Anchor>
             <HeaderWriteButton />
           </Flex>
-        )}
+        ) : (
+          <HeaderMyInfoWrapper></HeaderMyInfoWrapper>
+        ))}
       </Flex>
     </Center>
   );
 };
 
 export default HeaderCenterWrapper;
-
-// component='a'
-//             href='/login'
-//             w={`7rem`}
-//             h={`2.75rem`}
-//             radius={`1.5rem`}
-//             px={`1.5rem`}
-//             color={`#BCC0C4`}
-//             mr={`1.5rem`}

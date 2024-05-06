@@ -37,7 +37,6 @@ export const useMainSearchDrinkInfinityQuery = ({
     initialPageParam: 1,
     getNextPageParam: lastPage => {
       const page = lastPage;
-      console.log('lastPage', lastPage);
       const totalPage = Math.ceil(
         page.search_drinks.page_info.total_elements /
           page.search_drinks.page_info.size,
