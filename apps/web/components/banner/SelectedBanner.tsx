@@ -14,6 +14,14 @@ type SelectedBannerPropsType = {
   drinks: DrinkOfBanner[];
 };
 
+const situationKeyword: { [key: string]: string } = {
+  adult_sum: '웃어른',
+  partner_sum: '연인',
+  friend_sum: '친구',
+  business_sum: '비즈니스',
+  alone_sum: '나 혼자',
+};
+
 const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
   const [drinks, setDrinks] = useState<DrinkOfBanner[]>([]);
   const [isSelectComplete, setIsSelectComplete] = useState(true);
@@ -82,7 +90,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                       <Chip
                         variant={'ghost'}
                         className={selectedBannerCss['chip-wrapper']}
-                        key={idx}
+                        key={foodStatistic.food_id}
                       >
                         <div className={selectedBannerCss['drink-food-image']}>
                           <Image
@@ -105,8 +113,14 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                   함께 마시면 좋은 사람
                 </Text>
                 <Flex gap={8}>
-                  {(drinks[0].food_statistics ?? []).map(
-                    (foodStatistic, idx) => (
+                  {Object.keys(drinks[0]?.situation_statistics ?? {})
+                    .sort(
+                      (a, b) =>
+                        drinks[0]?.situation_statistics[b] -
+                        drinks[0]?.situation_statistics[a],
+                    )
+                    .slice(0, 3)
+                    .map((situationStastics, idx) => (
                       <Chip
                         variant={'ghost'}
                         className={selectedBannerCss['chip-wrapper']}
@@ -114,18 +128,17 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                       >
                         <div className={selectedBannerCss['drink-food-image']}>
                           <Image
-                            src={foodStatistic.image_url}
+                            src={`/detail_who/${situationStastics}.svg`}
                             alt='음식 아이콘'
                             width={24}
                             height={24}
                           />
                           <Text size='md' lh={'32px'} fw={600}>
-                            {foodStatistic.category}
+                            {situationKeyword[situationStastics]}
                           </Text>
                         </div>
                       </Chip>
-                    ),
-                  )}
+                    ))}
                 </Flex>
               </Flex>
             </Flex>
