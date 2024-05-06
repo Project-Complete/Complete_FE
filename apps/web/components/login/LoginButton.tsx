@@ -1,39 +1,17 @@
 'use client';
 
-import { Flex, Container, Button, Box } from '@mantine/core';
+import { Flex, Button } from '@mantine/core';
 import Image from 'next/image';
 import loginButtonCss from './loginButton.module.scss';
-import { useRouter } from 'next/navigation';
+import { LOGIN_TYPE_LIST } from '@/constants/login';
+
 
 type LoginButtonPropsType = {};
-const LoginButton = ({}: LoginButtonPropsType) => {
-  const loginTypeList = [
-    {
-      path: `/oauth2/authorization/naver`,
-      content: '네이버 로그인',
-      src: '/icons/naver-icon.svg',
-      bg: '#03CF5D',
-      c: '#FFFFFF',
-    },
-    {
-      path: `/oauth2/authorization/kakao`,
-      content: '카카오 로그인',
-      src: '/icons/kakao-icon.svg',
-      bg: '#FEE500',
-      c: '#000000',
-    },
-    {
-      path: `/oauth2/authorization/google`,
-      content: '구글 로그인',
-      src: '/icons/google-icon.svg',
-      bg: '#FFF',
-      c: '#000000',
-    },
-  ];
+const LoginButton = ({ }: LoginButtonPropsType) => {
 
   return (
-    <Flex direction={'column'} gap={16} justify={'center'} align={'center'}>
-      {loginTypeList.map(({ content, src, bg, c, path }, index) => {
+    <Flex direction={'column'} w={'100%'} maw={600} gap={16} justify={'center'} align={'center'}>
+      {LOGIN_TYPE_LIST.map(({ content, src, bg, c, path }, index) => {
         return (
           <Button
             component='a'

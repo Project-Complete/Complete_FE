@@ -54,12 +54,3 @@ const HeaderCenterWrapper = ({
 };
 
 export default HeaderCenterWrapper;
-
-// component='a'
-//             href='/login'
-//             w={`7rem`}
-//             h={`2.75rem`}
-//             radius={`1.5rem`}
-//             px={`1.5rem`}
-//             color={`#BCC0C4`}
-//             mr={`1.5rem`}
