@@ -10,7 +10,7 @@ const drinkListFetcher = async ({
 }) => {
   const response = await api
     .get(`drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=1`)
-    .json();
+    .json<DrinksResponse>();
   return response;
 };
 
@@ -20,7 +20,7 @@ export const useMainDrinkListQuery = ({
 }: {
   drinkType: 'all' | 'beer' | 'tradition';
   sorted?: 'popularity_order';
-}): UseQueryResult<DrinksResponse, Error> => {
+}) => {
   return useQuery({
     queryKey: ['drinkList', drinkType, sorted],
     queryFn: () => drinkListFetcher({ drinkType, sorted }),
