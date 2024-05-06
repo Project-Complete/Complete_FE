@@ -12,11 +12,7 @@ import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';
 import useScroll from '@/hooks/useScroll';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
-import {
-  DetailSummarySimpleDrink,
-  DetailSimpleDrink,
-  DetailDescriptionDrink,
-} from '@/types/drinks';
+
 
 const DrinkDetailWrapper = ({
   accessToken,

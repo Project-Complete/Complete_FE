@@ -5,7 +5,7 @@ import { Chip } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import classes from './SelectedBanner.module.css';
 import selectedBannerCss from '@/components/drinkDetail/DetailSummary.module.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import SelectedBannerBeerCard from './SelectedBannerBeerCard';
 import { produce } from 'immer';
 import PourAnimation from './PourAnimation';
@@ -46,16 +46,21 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
     setDrinks(propsDrinks);
   }, [propsDrinks]);
 
-  console.log(
-    drinks[0] &&
-      Object.keys(drinks[0]?.situation_statistics)
-        .sort(
-          (a, b) =>
-            drinks[0]?.situation_statistics[b] -
-            drinks[0]?.situation_statistics[a],
-        )
-        .slice(0, 3),
-  );
+
+
+  const sortedSituationStatistics = useMemo(() => {
+    if (drinks[0] === undefined) return [];
+    const situationStatistics = drinks[0].situation_statistics;
+    const situationStatisticsList = Object.keys(situationStatistics) as (keyof SituationStatistics)[]
+    const sortedSituationStatistics = situationStatisticsList.sort((a, b) => {
+      return situationStatistics[b] - situationStatistics[a]
+    }).slice(0, 3)
+    return sortedSituationStatistics;
+  }, [drinks[0]])
+
+
+
+
 
   return (
     <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'}>
@@ -113,32 +118,25 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                   함께 마시면 좋은 사람
                 </Text>
                 <Flex gap={8}>
-                  {Object.keys(drinks[0]?.situation_statistics ?? {})
-                    .sort(
-                      (a, b) =>
-                        drinks[0]?.situation_statistics[b] -
-                        drinks[0]?.situation_statistics[a],
-                    )
-                    .slice(0, 3)
-                    .map((situationStastics, idx) => (
-                      <Chip
-                        variant={'ghost'}
-                        className={selectedBannerCss['chip-wrapper']}
-                        key={idx}
-                      >
-                        <div className={selectedBannerCss['drink-food-image']}>
-                          <Image
-                            src={`/detail_who/${situationStastics}.svg`}
-                            alt='음식 아이콘'
-                            width={24}
-                            height={24}
-                          />
-                          <Text size='md' lh={'32px'} fw={600}>
-                            {situationKeyword[situationStastics]}
-                          </Text>
-                        </div>
-                      </Chip>
-                    ))}
+                  {sortedSituationStatistics.map((situationStastics, idx) => (
+                    <Chip
+                      variant={'ghost'}
+                      className={selectedBannerCss['chip-wrapper']}
+                      key={idx}
+                    >
+                      <div className={selectedBannerCss['drink-food-image']}>
+                        <Image
+                          src={`/detail_who/${situationStastics}.svg`}
+                          alt='음식 아이콘'
+                          width={24}
+                          height={24}
+                        />
+                        <Text size='md' lh={'32px'} fw={600}>
+                          {situationKeyword[situationStastics]}
+                        </Text>
+                      </div>
+                    </Chip>
+                  ))}
                 </Flex>
               </Flex>
             </Flex>
