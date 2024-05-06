@@ -9,30 +9,33 @@ import {
 } from '@tanstack/react-query';
 
 const reviewListFetcher = async ({
-  detailId,
+  detailId = null,
   writerId = null,
   page,
   sort = 'latest',
 }: {
-  detailId: number;
+  detailId?: number | null;
   writerId?: number | null;
   page: number;
   sort?: 'latest';
 }) => {
-  let url = `reviews?drink-id=${detailId}&page=${page}&sort=${sort}`;
+  let url = `reviews?page=${page}&sort=${sort}`;
+  if (detailId) {
+    url += `&drink-id=${detailId}`;
+  }
   if (writerId) {
-    url = `reviews?drink-id=${detailId}&write=${writerId}&page=${page}&sort=${sort}`;
+    url += `&write=${writerId}`;
   }
   const response = await api.get(url).json();
   return response;
 };
 
 export const useReviewListQuery = ({
-  detailId,
+  detailId = null,
   writerId = null,
   sort = 'latest',
 }: {
-  detailId: number;
+  detailId?: number | null;
   writerId?: number | null;
   sort?: 'latest';
 }): UseInfiniteQueryResult<InfiniteData<ReviewList, Error>, Error> => {

@@ -7,7 +7,6 @@ import Image from 'next/image';
 
 const MyPageLeftSideBarMyProfile = () => {
   const { data: myInfoData } = useMyInfoQuery();
-  console.log(myInfoData);
   if (myInfoData) {
     return (
       <>
