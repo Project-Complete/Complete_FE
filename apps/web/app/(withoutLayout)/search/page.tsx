@@ -1,9 +1,11 @@
 'use client';
 import {
+  AutocompleteProps,
   Button,
   CloseButton,
   Divider,
   Flex,
+  Group,
   Select,
   Tabs,
 } from '@mantine/core';
@@ -26,6 +28,8 @@ import { produce } from 'immer';
 import { useRouter } from 'next/navigation';
 
 type SearchTabType = 'drinkReview' | 'chilling' | 'community';
+
+
 
 export default function Page(): JSX.Element {
   const router = useRouter();
@@ -53,7 +57,32 @@ export default function Page(): JSX.Element {
       if (payload.options.fieldType === 'searchAutocomplete') {
         return {
           placeholder: '찾는 주류가 있으신가요?',
-          onChange: (payload: string) => form.setFieldValue('keyword', payload),
+          onSubmitOption: (value: string) => {
+            router.push(
+              pathname + '?' + createQueryString('keyword', value),
+            );
+            form.setFieldValue('keyword', value);
+            setSubmittedValues(
+              produce(prev => {
+                prev.keyword = value;
+              }),
+            );
+          },
+          onChange: ((keyword: string) => {
+            form.setValues({ keyword });
+          }),
+          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              const keyword = e.currentTarget.value;
+              handleOnclickSearch(keyword);
+              setSubmittedValues(
+                produce(prev => {
+                  prev.keyword = keyword;
+                }),
+              );
+            }
+          },
+
         };
       }
       return {};
@@ -73,14 +102,39 @@ export default function Page(): JSX.Element {
   );
   const isEmptyKeyword = submittedValues?.keyword.length === 0;
 
-  const { recentSearches, deleteRecentSearch, setRecentSearches } =
+  const { recentSearches, deleteRecentSearch, addRecentSearch, setRecentSearches } =
     useRecentSearches();
+
+  const handleOnclickSearch = (keyword: string) => {
+    router.push(
+      pathname +
+      '?' +
+      createQueryString('keyword', keyword),
+    );
+  }
+
+
+  const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
+
+    return <Flex justify={'space-between'} w={'100%'}>
+      <Flex>
+        {option.value}
+      </Flex>
+      <CloseButton onClick={((e) => {
+        e.stopPropagation();
+        deleteRecentSearch(recentSearches.indexOf(option.value))
+      })} />
+    </Flex>
+  }
 
   return (
     <>
       <form
         onSubmit={form.onSubmit((data, event) => {
+          console.log("aS???", data)
           setSubmittedValues(data);
+          addRecentSearch(data.keyword);
+
         })}
       >
         <Flex classNames={containerCss}>
@@ -96,21 +150,11 @@ export default function Page(): JSX.Element {
               variant='chilling-search'
               w={'100%'}
               value={form.getValues().keyword}
+              renderOption={renderAutocompleteOption}
               data={recentSearches}
               {...form.getInputProps('keyword', {
                 fieldType: 'searchAutocomplete',
               })}
-              onOptionSubmit={(value: string) => {
-                router.push(
-                  pathname + '?' + createQueryString('keyword', value),
-                );
-                form.setFieldValue('keyword', value);
-                setSubmittedValues(
-                  produce(prev => {
-                    prev.keyword = value;
-                  }),
-                );
-              }}
               rightSection={
                 <CloseButton
                   display={isEmptyKeyword ? 'none' : 'block'}
@@ -133,7 +177,6 @@ export default function Page(): JSX.Element {
                       }),
                     );
                   }}
-                  type='submit'
                 />
               }
             />
@@ -141,13 +184,7 @@ export default function Page(): JSX.Element {
               <Button
                 bg={'none'}
                 c={'gray'}
-                onClick={() => {
-                  router.push(
-                    pathname +
-                      '?' +
-                      createQueryString('keyword', form.getValues().keyword),
-                  );
-                }}
+                onClick={() => handleOnclickSearch(form.getValues().keyword)}
                 type='submit'
               >
                 검색

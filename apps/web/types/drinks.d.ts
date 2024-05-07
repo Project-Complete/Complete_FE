@@ -35,6 +35,14 @@ interface FlavorStatistic {
   count: number;
 }
 
+interface SituationStatistics {
+  adult_sum: number;
+  partner_sum: number;
+  friend_sum: number;
+  business_sum: number;
+  alone_sum: number;
+}
+
 interface Package {
   type: string;
   volume: string;
@@ -132,10 +140,8 @@ interface PageInfo {
 }
 
 interface DrinksResponse {
-  search_drinks: {
     drinks: DrinkListElement[];
     page_info: PageInfo;
-  };
 }
 
 interface DrinkOfBanner {
@@ -146,6 +152,7 @@ interface DrinkOfBanner {
   manufacturer: Manufacturer;
   description: string;
   food_statistics: FoodStatistic[];
+  situation_statistics: SituationStatistics;
   abv: number;
 }
 

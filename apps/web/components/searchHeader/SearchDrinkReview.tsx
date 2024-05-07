@@ -40,23 +40,21 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
       <h1>SearchDrinkReview</h1>
       {data?.pages?.map((page, index) => {
         return (
-          <>
-            <div key={index} className={cardListCss['card-list-wrapper']}>
-              {page.search_drinks.drinks.map(drink => {
-                return (
-                  <AnotherDrinkListCard
-                    key={drink.drink_id}
-                    drink_id={drink.drink_id}
-                    drink_like={drink.drink_like}
-                    drink_name={drink.drink_name}
-                    image_url={drink.image_url}
-                    manufacturer_name={drink.manufacturer_name}
-                    review_rating={drink.review_rating}
-                  />
-                );
-              })}
-            </div>
-          </>
+          <div key={index} className={cardListCss['card-list-wrapper']}>
+            {page.search_drinks.drinks.map(drink => {
+              return (
+                <AnotherDrinkListCard
+                  key={drink.drink_id}
+                  drink_id={drink.drink_id}
+                  drink_like={drink.drink_like}
+                  drink_name={drink.drink_name}
+                  image_url={drink.image_url}
+                  manufacturer_name={drink.manufacturer_name}
+                  review_rating={drink.review_rating}
+                />
+              );
+            })}
+          </div>
         );
       })}
     </div>
