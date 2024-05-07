@@ -29,12 +29,7 @@ export const useMyPageTabMenuContext = () => {
 export default function MyPageTabStore({ children }: { children: ReactNode }) {
   const [state, setState] = useState<MenuList>({
     title: '마이페이지',
-    items: [
-      '내가 작성한 게시글',
-      '나의 좋아요',
-      '나의 북마크',
-      '주류 리뷰 작성하기',
-    ],
+    items: ['내가 작성한 게시글', '내가 좋아하는 주류'],
     selectedIndex: 0,
   });
 

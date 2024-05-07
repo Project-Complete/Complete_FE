@@ -3,8 +3,8 @@
 import { Box, Flex, UnstyledButton } from '@mantine/core';
 import Image from 'next/image';
 import classes from './Profile.module.scss';
-import { MenuList } from './Menu';
 import { Fragment } from 'react';
+import { MenuList } from '../../(store)/store';
 
 const MyProfileMenuList = ({
   data,

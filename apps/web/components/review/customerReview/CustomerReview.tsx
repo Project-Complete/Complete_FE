@@ -35,7 +35,6 @@ const CustomerReview = ({
       fetchNextPage();
     }
   }, [entry]);
-  console.log(data);
   return (
     <Flex direction={'column'} w={'100%'}>
       {reviewId > 0 && (

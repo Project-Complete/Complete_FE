@@ -1,27 +1,18 @@
 'use client';
 
-import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
+import { useDrinksLikeListQuery } from '@/hooks/queries/useDrinksLikeListQuery';
 import { MyUserInfo } from '@/types/userInfo';
 import { Divider, Flex, Grid, Rating, Text } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import classes from './center.module.scss';
-import CustomerReviewCard from '@/components/review/customerReview/ReviewCard';
 
-const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [reviewId, setReviewId] = useState<number>(0);
-
-  const modalHandler = (id: number) => {
-    setIsModalOpen(prev => !prev);
-    setReviewId(id);
-  };
-
-  const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
-    writerId: myInfoData.user_id,
-    sort: 'latest',
+const MyPageDrinkList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
+  const { data, fetchNextPage, hasNextPage } = useDrinksLikeListQuery({
+    size: 9,
   });
+
   const { ref, entry } = useIntersection({
     root: null,
     threshold: 0.3,
@@ -34,27 +25,17 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
 
   return (
     <>
-      {isModalOpen && (
-        <CustomerReviewCard
-          modalOpen={isModalOpen}
-          modalHandler={() => modalHandler(0)}
-          reviewId={reviewId}
-        />
-      )}
       <Grid w={'100%'} gutter={24} mt={24} mb={24}>
         {data &&
           data.pages &&
           data.pages.map((v, index) => (
             <Fragment key={index}>
-              {v.reviews.map(e => {
+              {v.drinks.map(e => {
                 return (
                   <Grid.Col
-                    key={e.id}
+                    key={e.drink_id}
                     w={'100%'}
                     span={{ base: 6, sm: 4 }}
-                    onClick={() => {
-                      modalHandler(e.id);
-                    }}
                     className={classes['review-grid-col']}
                   >
                     <Flex gap={16} direction={'column'}>
@@ -69,7 +50,9 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                       >
                         <Image
                           src={
-                            e.image_url !== 'string' && e.image_url !== ''
+                            e.image_url !== 'string' &&
+                            e.image_url !== '' &&
+                            e.image_url !== 'imageUrl'
                               ? e.image_url
                               : 'https://picsum.photos/392/288.webp'
                           }
@@ -83,9 +66,9 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                         />
                       </Flex>
                       <Flex gap={10}>
-                        <Text>{e.writer.nickname}</Text>
+                        <Text>{e.drink_name}</Text>
                         <Divider orientation='vertical' />
-                        <Text>{e.created_date}</Text>
+                        <Text>{e.manufacturer_name}</Text>
                       </Flex>
                       <Rating value={e.review_rating} fractions={2} readOnly />
                     </Flex>
@@ -100,4 +83,4 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
   );
 };
 
-export default MyPageCenterReviewList;
+export default MyPageDrinkList;

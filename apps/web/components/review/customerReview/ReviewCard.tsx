@@ -8,6 +8,7 @@ import {
   ModalOverlay,
   ModalHeader,
   ModalBody,
+  Button,
 } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import classes from './ReviewCard.module.scss';
@@ -101,6 +102,15 @@ const CustomerReviewCard = ({
                     </Box>
                   </Flex>
                 </Flex>
+                <Box h={'100%'} mb={'auto'}>
+                  
+                  <Button
+                    variant={'primary'}
+                    className={classes[`review-follow-button`]}
+                  >
+                    팔로우
+                  </Button>
+                </Box>
               </ModalHeader>
               <ModalBody>
                 <Box>평가</Box>
