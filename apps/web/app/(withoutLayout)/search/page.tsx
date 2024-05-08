@@ -29,8 +29,6 @@ import { useRouter } from 'next/navigation';
 
 type SearchTabType = 'drinkReview' | 'chilling' | 'community';
 
-
-
 export default function Page(): JSX.Element {
   const router = useRouter();
   const pathname = usePathname();
@@ -58,9 +56,7 @@ export default function Page(): JSX.Element {
         return {
           placeholder: '찾는 주류가 있으신가요?',
           onSubmitOption: (value: string) => {
-            router.push(
-              pathname + '?' + createQueryString('keyword', value),
-            );
+            router.push(pathname + '?' + createQueryString('keyword', value));
             form.setFieldValue('keyword', value);
             setSubmittedValues(
               produce(prev => {
@@ -68,9 +64,9 @@ export default function Page(): JSX.Element {
               }),
             );
           },
-          onChange: ((keyword: string) => {
+          onChange: (keyword: string) => {
             form.setValues({ keyword });
-          }),
+          },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === 'Enter') {
               const keyword = e.currentTarget.value;
@@ -82,7 +78,6 @@ export default function Page(): JSX.Element {
               );
             }
           },
-
         };
       }
       return {};
@@ -102,39 +97,40 @@ export default function Page(): JSX.Element {
   );
   const isEmptyKeyword = submittedValues?.keyword.length === 0;
 
-  const { recentSearches, deleteRecentSearch, addRecentSearch, setRecentSearches } =
-    useRecentSearches();
+  const {
+    recentSearches,
+    deleteRecentSearch,
+    addRecentSearch,
+    setRecentSearches,
+  } = useRecentSearches();
 
   const handleOnclickSearch = (keyword: string) => {
-    router.push(
-      pathname +
-      '?' +
-      createQueryString('keyword', keyword),
-    );
-  }
+    router.push(pathname + '?' + createQueryString('keyword', keyword));
+  };
 
-
-  const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
-
-    return <Flex justify={'space-between'} w={'100%'}>
-      <Flex>
-        {option.value}
+  const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
+    option,
+  }) => {
+    return (
+      <Flex justify={'space-between'} w={'100%'}>
+        <Flex>{option.value}</Flex>
+        <CloseButton
+          onClick={e => {
+            e.stopPropagation();
+            deleteRecentSearch(recentSearches.indexOf(option.value));
+          }}
+        />
       </Flex>
-      <CloseButton onClick={((e) => {
-        e.stopPropagation();
-        deleteRecentSearch(recentSearches.indexOf(option.value))
-      })} />
-    </Flex>
-  }
+    );
+  };
 
   return (
     <>
       <form
         onSubmit={form.onSubmit((data, event) => {
-          console.log("aS???", data)
+          console.log('aS???', data);
           setSubmittedValues(data);
           addRecentSearch(data.keyword);
-
         })}
       >
         <Flex classNames={containerCss}>
@@ -219,9 +215,9 @@ export default function Page(): JSX.Element {
                   style={{ justifySelf: 'center' }}
                   defaultValue={tabTypeParam}
                 >
-                  <Tab value='drinkReview'>주류 리뷰</Tab>
-                  <Tab value='chilling'>본격적 칠링</Tab>
-                  <Tab value='community'>커뮤니티</Tab>
+                  <Tab value='drinkReview'>주류</Tab>
+                  {/* <Tab value='chilling'>본격적 칠링</Tab>
+                  <Tab value='community'>커뮤니티</Tab> */}
                 </TabList>
                 <Tabs.Panel value='drinkReview'>
                   <SearchDrinkReview keyword={submittedValues?.keyword ?? ''} />

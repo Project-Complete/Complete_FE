@@ -96,6 +96,7 @@ const DetailSummary = ({
                 <LikeButton
                   drink_like={data.drink_like}
                   drink_id={data.drink_id}
+                  isMyPage={false}
                 />
               )}
               <ShareButton />

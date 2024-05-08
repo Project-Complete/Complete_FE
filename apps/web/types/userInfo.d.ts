@@ -14,3 +14,9 @@ export interface UserInfo {
   follower_count: number;
   following_count: number;
 }
+
+interface UserInfoPatch {
+  email: string;
+  profile_image_url: string;
+  nickname: string;
+}

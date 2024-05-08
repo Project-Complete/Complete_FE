@@ -17,5 +17,16 @@
   padding: 0rem var(--Spacing-16, 1rem);
   justify-content: center;
   align-items: center;
+  
+}
 
+.Chip-primary{
+  border-radius: 2rem;
+  // border: 1px solid rgba(0, 0, 0, 0.45);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid #0000005b;
+  background-image: linear-gradient(99.88deg, #7e3fb8 0%, #b24a8b 100%),
+    linear-gradient(111.27deg, #7e3fb8 0%, #b24a8b 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 }

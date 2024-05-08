@@ -7,11 +7,12 @@ interface ChipProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chipVariants> {}
 
-const chipVariants = cva(classes[`Chip-button-wrapper`], {
+const chipVariants = cva(classes[`Chip-wrapper`], {
   variants: {
     variant: {
       outline: classes[`Chip-background-outline`],
-      ghost:classes[`Chip-wrapper`],
+      ghost: classes[`Chip-wrapper`],
+      primary: classes[`Chip-primary`],
     },
   },
   defaultVariants: {

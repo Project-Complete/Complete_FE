@@ -26,7 +26,7 @@ export const useDrinksLikeListQuery = ({
     queryKey: ['drinks', 'like'],
     queryFn: async ({ pageParam }: { pageParam: number }) =>
       drinkLikeListFetcher({ page: pageParam, size }),
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: lastPage => {
       const page = lastPage as DrinksResponse;
       const totalPage = Math.ceil(

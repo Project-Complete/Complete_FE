@@ -35,7 +35,7 @@ interface SituationItems {
   label: SituationItemsLabelType;
 }
 
-interface PreSignedUrlResponse {
+export interface PreSignedUrlResponse {
   pre_signed_url: string;
 }
 

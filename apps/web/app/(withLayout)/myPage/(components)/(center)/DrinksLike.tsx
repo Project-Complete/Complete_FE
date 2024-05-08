@@ -2,16 +2,27 @@
 
 import { useDrinksLikeListQuery } from '@/hooks/queries/useDrinksLikeListQuery';
 import { MyUserInfo } from '@/types/userInfo';
-import { Divider, Flex, Grid, Rating, Text } from '@mantine/core';
+import {
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  Rating,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
 import Image from 'next/image';
 import { Fragment, useEffect } from 'react';
 import classes from './center.module.scss';
+import Link from 'next/link';
+import LikeButton from '@/components/button/LikeButton';
 
 const MyPageDrinkList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
   const { data, fetchNextPage, hasNextPage } = useDrinksLikeListQuery({
     size: 9,
   });
+  console.log(data);
 
   const { ref, entry } = useIntersection({
     root: null,
@@ -48,27 +59,55 @@ const MyPageDrinkList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                           borderRadius: '12px',
                         }}
                       >
-                        <Image
-                          src={
-                            e.image_url !== 'string' &&
-                            e.image_url !== '' &&
-                            e.image_url !== 'imageUrl'
-                              ? e.image_url
-                              : 'https://picsum.photos/392/288.webp'
-                          }
-                          sizes='512px'
-                          fill
-                          style={{
-                            objectFit: 'contain',
-                            borderRadius: '12px',
-                          }}
-                          alt={'image'}
-                        />
+                        <Link href={`/drink/${e.drink_id}`}>
+                          <Image
+                            src={
+                              e.image_url !== 'string' &&
+                              e.image_url !== '' &&
+                              e.image_url !== 'imageUrl'
+                                ? e.image_url
+                                : 'https://picsum.photos/392/288.webp'
+                            }
+                            sizes='512px'
+                            fill
+                            style={{
+                              objectFit: 'contain',
+                              borderRadius: '12px',
+                            }}
+                            alt={'image'}
+                          />
+                        </Link>
                       </Flex>
-                      <Flex gap={10}>
-                        <Text>{e.drink_name}</Text>
-                        <Divider orientation='vertical' />
-                        <Text>{e.manufacturer_name}</Text>
+                      <Flex w={'100%'} direction={'column'}>
+                        <Flex>
+                          <Flex direction='column'>
+                            <Flex
+                              className={classes['drink-content-maker-title']}
+                            >
+                              <UnstyledButton
+                                component='a'
+                                href={`/drink/${e.drink_id}`}
+                              >
+                                <Text>{e.manufacturer_name}</Text>
+                              </UnstyledButton>
+                            </Flex>
+                            <Flex>
+                              <UnstyledButton
+                                component='a'
+                                href={`/drink/${e.drink_id}`}
+                              >
+                                <Text>{e.drink_name}</Text>
+                              </UnstyledButton>
+                            </Flex>
+                          </Flex>
+                          <Flex ml={'auto'} align={'center'}>
+                            <LikeButton
+                              drink_like={e.drink_like}
+                              drink_id={e.drink_id}
+                              isMyPage={true}
+                            />
+                          </Flex>
+                        </Flex>
                       </Flex>
                       <Rating value={e.review_rating} fractions={2} readOnly />
                     </Flex>

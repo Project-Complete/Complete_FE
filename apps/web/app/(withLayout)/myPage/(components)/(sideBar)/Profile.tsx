@@ -4,6 +4,7 @@ import { useMyInfoQuery } from '@/hooks/queries/useMyInfoQuery';
 import { Avatar } from '@mantine/core';
 import classes from './Profile.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const MyPageLeftSideBarMyProfile = () => {
   const { data: myInfoData } = useMyInfoQuery();
@@ -25,21 +26,23 @@ const MyPageLeftSideBarMyProfile = () => {
                 w={'8.25rem'}
                 h={'8.25rem'}
               ></Avatar>
-              <button className={classes.profileImageModifyButton}>
-                <Image
-                  src='/icons/pencilButton.svg'
-                  alt='프로필 이미지 변경 버튼'
-                  width={40}
-                  height={40}
-                />
-              </button>
+              <Link href='/myPage/profileEdit'>
+                <button className={classes.profileImageModifyButton}>
+                  <Image
+                    src='/icons/pencilButton.svg'
+                    alt='프로필 이미지 변경 버튼'
+                    width={40}
+                    height={40}
+                  />
+                </button>
+              </Link>
             </div>
             <div className={classes.profileNickname}>{myInfoData.nickname}</div>
             {myInfoData.email !== null && (
               <div className={classes.profileEmail}>{myInfoData.email}</div>
             )}
           </div>
-          <div className={classes.profileFollowWrapper}>
+          {/* <div className={classes.profileFollowWrapper}>
             <div className={classes.profileFollowFollowingBox}>
               <div className={classes.profileFollowFollowingBoxName}>
                 팔로워
@@ -53,7 +56,7 @@ const MyPageLeftSideBarMyProfile = () => {
               </div>
               <div>{myInfoData.following_count}명</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </>
     );

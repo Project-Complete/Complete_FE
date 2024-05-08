@@ -10,9 +10,11 @@ import { useLikeMutate, useUnLikeMutate } from '@/hooks/mutates/useLikeMutate';
 const LikeButton = ({
   drink_id,
   drink_like,
+  isMyPage,
 }: {
   drink_id: number;
   drink_like: boolean;
+  isMyPage: boolean;
 }) => {
   const [hoverState, setHoverState] = useState(false);
   const { mutate } = useLikeMutate(drink_id);
@@ -36,11 +38,16 @@ const LikeButton = ({
           <Image
             src='/icons/like_fill.svg'
             alt='like'
-            width={40}
-            height={40}
+            width={isMyPage ? 32 : 40}
+            height={isMyPage ? 32 : 40}
           ></Image>
         ) : (
-          <Image src={heart} alt='like' width={40} height={40} />
+          <Image
+            src={heart}
+            alt='like'
+            width={isMyPage ? 32 : 40}
+            height={isMyPage ? 32 : 40}
+          />
         )}
       </Button>
     );
@@ -59,13 +66,18 @@ const LikeButton = ({
         }}
       >
         {hoverState ? (
-          <Image src={heart} alt='like' width={40} height={40} />
+          <Image
+            src={heart}
+            alt='like'
+            width={isMyPage ? 32 : 40}
+            height={isMyPage ? 32 : 40}
+          />
         ) : (
           <Image
             src='/icons/like_fill.svg'
             alt='like'
-            width={40}
-            height={40}
+            width={isMyPage ? 32 : 40}
+            height={isMyPage ? 32 : 40}
           ></Image>
         )}
       </Button>

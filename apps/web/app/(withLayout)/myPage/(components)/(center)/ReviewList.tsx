@@ -12,7 +12,6 @@ import CustomerReviewCard from '@/components/review/customerReview/ReviewCard';
 const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [reviewId, setReviewId] = useState<number>(0);
-
   const modalHandler = (id: number) => {
     setIsModalOpen(prev => !prev);
     setReviewId(id);
@@ -22,6 +21,7 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
     writerId: myInfoData.user_id,
     sort: 'latest',
   });
+
   const { ref, entry } = useIntersection({
     root: null,
     threshold: 0.3,
@@ -83,9 +83,9 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                         />
                       </Flex>
                       <Flex gap={10}>
-                        <Text>{e.writer.nickname}</Text>
-                        <Divider orientation='vertical' />
-                        <Text>{e.created_date}</Text>
+                        <Text>{e.drink.name}</Text>
+                        {/* <Divider orientation='vertical' />
+                        <Text>{e.created_date}</Text> */}
                       </Flex>
                       <Rating value={e.review_rating} fractions={2} readOnly />
                     </Flex>
