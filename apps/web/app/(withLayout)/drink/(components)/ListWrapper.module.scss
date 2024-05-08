@@ -1,0 +1,12 @@
+.text{
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+}
+
+.drink-grow-col{
+    :hover {
+        cursor: pointer;
+    }
+}

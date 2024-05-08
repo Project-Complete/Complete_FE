@@ -1,5 +1,5 @@
 'use client';
-import { Anchor, Flex } from '@mantine/core';
+import { Anchor, Box, Flex } from '@mantine/core';
 import Link from 'next/link';
 import { ChipButton } from '@team-complete/complete-ui';
 import AngleRight from '@/assets/angleRight.svg';

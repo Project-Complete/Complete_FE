@@ -92,7 +92,7 @@ const HeaderNavWrapper = () => {
             {/* 술 */}
             <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=all'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
@@ -100,7 +100,7 @@ const HeaderNavWrapper = () => {
                 전체
               </Anchor>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=tradition'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
@@ -108,7 +108,7 @@ const HeaderNavWrapper = () => {
                 전통주
               </Anchor>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=beer'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
