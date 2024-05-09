@@ -10,7 +10,7 @@ interface SectionHeaderProps {
 const SectionHeader = ({ title, dot = true }: SectionHeaderProps) => {
   return (
     <div className={classes['header-wrapper']}>
-      {dot && <Image src={'/dot.svg'} alt='dot' width={16} height={16} />}
+      {dot && <Image src={'/dot.svg'} alt='dot' width={4} height={4} />}
       <h3>{title}</h3>
     </div>
   );

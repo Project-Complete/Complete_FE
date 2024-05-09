@@ -23,11 +23,14 @@
 }
 
 .taste-label {
+  display:flex;
+  align-items: center;
+  justify-content: end;
   width: 120px;
   height: 32px;
   text-align: right;
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.85);
 }

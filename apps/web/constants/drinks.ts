@@ -32,14 +32,16 @@ export const tastes: { [key: string]: string } = {
 export const foods: { [key: string]: string } = {
   가공육: '/안주/가공육.svg',
   과일: '/안주/견과류.svg',
-  '매운 음식': '/안주/매운_음식.svg',
-  스낵류: '/안주/스낵류.svg',
+  매운음식: '/안주/매운_음식.svg',
+  스낵류: '/안주/스낵.svg',
   양식: '/안주/양식.svg',
   육류: '/안주/육류.svg',
   치즈: '/안주/치즈.svg',
   탕: '/안주/탕.svg',
   튀김: '/안주/튀김.svg',
-  '마른 안주': '/안주/마른_안주.svg',
+  마른안주: '/안주/마른_안주.svg',
+  해산물: '/안주/해산물.svg',
+  견과류: '/안주/견과류.svg',
 };
 
 export const DRINKS_TYPE = {

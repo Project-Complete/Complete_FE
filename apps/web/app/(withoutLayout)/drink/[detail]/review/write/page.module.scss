@@ -1,0 +1,26 @@
+.review-wrapper {
+  max-width: 50.5rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.page-title {
+  color: var(--Font-Input-text-active, rgba(0, 0, 0, 0.85));
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 2.5rem;
+  /* 166.667% */
+}
+
+.drink-description {
+  color: var(--Font-Input-text-active, rgba(0, 0, 0, 0.85));
+  /* Page/Title-SemiBold */
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  /* 133.333% */
+}

@@ -1,0 +1,15 @@
+.header-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  h3 {
+    color: var(--Font-Input-Title-Bold, rgba(0, 0, 0, 0.85));
+    /* Input/Title-Bold */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+  }
+}

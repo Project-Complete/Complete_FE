@@ -1,4 +1,3 @@
-import { PreSignedUrlResponse } from '@/app/drink/[detail]/review/write/(components)/ReviewWriteForm';
 import { MyUserInfo } from '@/types/userInfo';
 import { api } from '@/utils/api';
 import { Avatar, Flex, TextInput } from '@mantine/core';
@@ -9,9 +8,12 @@ import { useState } from 'react';
 import { useProfilePatchMutate } from '@/hooks/mutates/useProfilePatchMutate';
 
 import classes from './Profile.module.scss';
+import { PreSignedUrlResponse } from '@/app/(withoutLayout)/drink/[detail]/review/write/(components)/ReviewWriteForm';
+import { useRouter } from 'next/navigation';
 
 const MyPageProfileEdit = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
   const { mutate } = useProfilePatchMutate();
+  const router = useRouter();
 
   const form = useForm({
     initialValues: {
@@ -77,8 +79,6 @@ const MyPageProfileEdit = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
         body: image.file,
       });
 
-      console.log('pose image response', response);
-
       return response;
     } catch (error) {
       console.error('image post error', error);
@@ -88,23 +88,36 @@ const MyPageProfileEdit = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
 
   const handleSubmit = async (values: any) => {
     event?.preventDefault();
-    console.log(image);
     try {
       if (image.isChange) {
         const presignedUrlResponse = await postImageName();
 
         await postImage(presignedUrlResponse || '');
-        mutate({
-          profile: {
-            profile_image_url: presignedUrlResponse.split('?')[0]!,
-            nickname: values.nickname,
-            email: values.email,
+        mutate(
+          {
+            profile: {
+              profile_image_url: presignedUrlResponse.split('?')[0]!,
+              nickname: values.nickname,
+              email: values.email,
+            },
           },
-        });
+          {
+            onSuccess: () => {
+              router.push('/myPage');
+            },
+          },
+        );
       } else {
-        mutate({
-          profile: values,
-        });
+        mutate(
+          {
+            profile: values,
+          },
+          {
+            onSuccess: () => {
+              router.push('/myPage');
+            },
+          },
+        );
       }
     } catch (error) {
       console.error(error);

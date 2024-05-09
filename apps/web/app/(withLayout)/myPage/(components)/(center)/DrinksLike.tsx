@@ -3,8 +3,6 @@
 import { useDrinksLikeListQuery } from '@/hooks/queries/useDrinksLikeListQuery';
 import { MyUserInfo } from '@/types/userInfo';
 import {
-  Box,
-  Divider,
   Flex,
   Grid,
   Rating,

@@ -12,8 +12,8 @@ const tasteLabel: TasteLabel = {
   sweet: '단맛',
   sour: '산미',
   bitter: '쓴맛',
-  body: '청량감',
-  refresh: ['목넘김', '바디감'],
+  refresh: '청량감',
+  body: ['목넘김', '바디감'],
 };
 
 interface TasteInputProps {
@@ -27,10 +27,10 @@ const TasteInput = ({ taste }: TasteInputProps) => {
     <div className={classes['taste-input-wrapper']}>
       {Array.isArray(tasteLabel[taste]) ? (
         <div className={classes['taste-label']}>
+          <span>{tasteLabel[taste]?.[1]}</span>
           <span className={classes['tast-sub-label']}>
             {`(${tasteLabel[taste]?.[0]})`}
           </span>
-          <span>{tasteLabel[taste]?.[1]}</span>
         </div>
       ) : (
         <div className={classes['taste-label']}>{tasteLabel[taste]}</div>

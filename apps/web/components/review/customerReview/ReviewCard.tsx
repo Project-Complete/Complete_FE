@@ -8,7 +8,6 @@ import {
   ModalOverlay,
   ModalHeader,
   ModalBody,
-  Button,
 } from '@team-complete/complete-ui';
 import Image from 'next/image';
 import classes from './ReviewCard.module.scss';

@@ -25,6 +25,7 @@ const CustomerReview = ({
     detailId,
     sort: 'latest',
   });
+  console.log(data);
 
   const { ref, entry } = useIntersection({
     root: null,
@@ -126,6 +127,7 @@ const CustomerReview = ({
                             h={'100%'}
                             bg={'gray'}
                             style={{ borderRadius: '100%' }}
+                            pos={'relative'}
                           ></Flex>
                         </Flex>
                       </Flex>

@@ -80,7 +80,7 @@ const HeaderMyInfoWrapper = () => {
           </Popover.Dropdown>
         </Popover>
         <Avatar src={myInfoData.profile_image_url} alt="It's me!" />
-        <HeaderWriteButton />
+        {/* <HeaderWriteButton /> */}
       </Flex>
     );
   } else {

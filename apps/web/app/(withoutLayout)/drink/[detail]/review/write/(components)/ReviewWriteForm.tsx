@@ -4,14 +4,19 @@ import SectionHeader from './SectionHeader';
 import classes from './ReviewWriteForm.module.scss';
 import Image from 'next/image';
 import HelpMessageButton from './HelpMessageButton';
-import { Rating } from '@mantine/core';
+import { Divider, Flex, Rating, Textarea } from '@mantine/core';
 import SituationButton from './SituationButton';
 import FoodButton from './FoodButton';
 import { FormValues, ReviewFormProvider, useReviewForm } from './form-context';
 import TasteInput from './TasteInput';
 import { Button } from '@team-complete/complete-ui';
 import { api } from '@/utils/api';
-import ky from 'ky';
+import Link from 'next/link';
+import {
+  useReviewPictureUpload,
+  useReviewWriteMutate,
+} from '@/hooks/mutates/useReviewWriteMutate';
+import { useRouter } from 'next/navigation';
 
 export interface Situation {
   alone: boolean;
@@ -77,8 +82,16 @@ const foodItems = [
 
 // 탄산이고 레몬맛이라서 상큼합니다! 도수가 낮아서 음료처럼 가볍게 마시기 좋아요~!!
 const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
+  const router = useRouter();
+
+  const { mutate: reviewWriteMutate } = useReviewWriteMutate({
+    detailId: parseInt(drinkId),
+  });
+  const { mutate: pictureUploadMutate } = useReviewPictureUpload();
+
   const form = useReviewForm({
     initialValues: {
+      drinkId: drinkId,
       content: '',
       rating: 0,
       situation_dto: {
@@ -95,8 +108,37 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
         body: 0,
         refresh: 0,
       },
+      image_url: '',
       flavors: Array.from({ length: foodItems.length }, () => false),
       foods: Array.from({ length: foodItems.length }, () => false),
+    },
+    validate: {
+      content: value =>
+        value.trim().length < 20 || value.length > 250
+          ? '리뷰는 20자 이상 250자 이하여야 합니다.'
+          : null,
+      situation_dto: value => {
+        let trues = 0;
+        if (value.adult) {
+          trues++;
+        }
+        if (value.alone) {
+          trues++;
+        }
+        if (value.business) {
+          trues++;
+        }
+        if (value.friend) {
+          trues++;
+        }
+        if (value.partner) {
+          trues++;
+        }
+
+        return trues > 3 || trues < 1
+          ? '1개 이상, 3개 이하로 선택해주세요.'
+          : null;
+      },
     },
     transformValues: values => ({
       ...values,
@@ -151,49 +193,43 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   };
 
   const postImage = async (storageUrl: string) => {
-    try {
-      const response = await ky.put(storageUrl, {
-        body: image.file,
-      });
-
-      console.log('pose image response', response);
-
-      return response;
-    } catch (error) {
-      console.error('image post error', error);
-      throw new Error('리뷰 이미지 등록실패');
-    }
+    pictureUploadMutate({ storageUrl, image });
   };
 
   const handleSubmit = async (values: FormValues) => {
+    console.log('test');
     event?.preventDefault();
     try {
       const presignedUrlResponse = await postImageName();
 
       await postImage(presignedUrlResponse || '');
 
-      const response = await api
-        .post(`reviews`, {
-          json: {
-            drink_id: parseInt(drinkId),
-            image_url: presignedUrlResponse.split('?')[0],
+      reviewWriteMutate(
+        {
+          review: {
             ...values,
+            image_url: presignedUrlResponse.split('?')[0] as string,
           },
-        })
-        .json();
-
-      return response;
+        },
+        {
+          onSuccess: () => {
+            router.push(`/drink/${drinkId}`);
+          },
+        },
+      );
     } catch (error) {
       console.error(error);
+      alert('리뷰 작성 실패');
       throw new Error('리뷰 작성 실패');
     }
   };
-
   return (
     <ReviewFormProvider form={form}>
       <form
         className={classes['form']}
-        onSubmit={form.onSubmit(values => handleSubmit(values))}
+        onSubmit={form.onSubmit(values => {
+          handleSubmit(values);
+        })}
       >
         <section className={classes['image-section']}>
           {image.src && (
@@ -220,7 +256,7 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
           )}
           <SectionHeader title='인증샷' dot={false} />
           <label className={classes['image-attach']} htmlFor='review-image'>
-            사진 첨부하기
+            {image.src !== '' ? '사진 변경하기' : '사진 첨부하기'}
             <Image
               src={'/icons/카메라.svg'}
               alt='camera'
@@ -234,7 +270,9 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             accept='image/*'
             onChange={handleImage}
           />
-          <HelpMessageButton />
+          <HelpMessageButton
+            message={'해당 주류 리뷰에 대한 인증샷은 필수입니다.'}
+          />
         </section>
 
         <section>
@@ -249,12 +287,17 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             }
             {...form.getInputProps('rating')}
           />
-          <HelpMessageButton />
-          <textarea
+          <HelpMessageButton message={'해당 주류에 대한 별점을 매겨주세요.'} />
+          <Textarea
             className={classes['textarea']}
             {...form.getInputProps('content')}
           />
-          <HelpMessageButton />
+          <Flex
+            w={'100%'}
+            justify={'flex-end'}
+          >{`${form.getValues().content.length} / 250`}</Flex>
+          <HelpMessageButton message='해당 주류에 대한 평가를 해주세요. (최소 20자 최대 250자)' />
+          <Divider my={'2.5rem'} />
         </section>
 
         <div className={classes['situation-section-wrapper']}>
@@ -270,6 +313,8 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             ))}
           </div>
         </div>
+        <HelpMessageButton message='누구랑 마시면 좋을지 1개 이상, 3개 이하 선택해주세요.' />
+        <Divider my={'2.5rem'} />
 
         <SectionHeader title='어떤 맛이 느껴지나요?' />
         <div className={classes['taste-section-wrapper']}>
@@ -281,10 +326,12 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             <TasteInput taste='sweet' />
             <TasteInput taste='sour' />
             <TasteInput taste='bitter' />
-            <TasteInput taste='body' />
             <TasteInput taste='refresh' />
+            <TasteInput taste='body' />
           </div>
         </div>
+        <HelpMessageButton message='느껴지는 맛을 평가해주세요.' />
+        <Divider my={'2.5rem'} />
 
         <div className={classes['flavor-section-wrapper']}>
           <SectionHeader title='어떤 향이 느껴지나요?' />
@@ -303,7 +350,8 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
               </label>
             ))}
           </div>
-          <HelpMessageButton />
+          <HelpMessageButton message='느껴지는 향을 1개 이상 골라주세요.' />
+          <Divider my={'2.5rem'} />
         </div>
 
         <div className={classes['food-section-wrapper']}>
@@ -319,9 +367,10 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             ))}
           </div>
         </div>
+        <HelpMessageButton message='추천하는 안주를 1개 이상 골라주세요.' />
         <div className={classes['button-wrapper']}>
-          <Button variant='outline'>작성 취소</Button>
-          <Button variant='primary' type={'submit'}>
+          <Link href='/'>작성 취소</Link>
+          <Button variant='primary' type='submit'>
             작성 완료
           </Button>
         </div>

@@ -1,6 +1,7 @@
 import { createFormContext } from '@mantine/form';
 
 export interface FormValues {
+  drinkId: string;
   content: string;
   rating: number;
   situation_dto: {
@@ -17,6 +18,7 @@ export interface FormValues {
     body: number;
     refresh: number;
   };
+  image_url: string;
   flavors: boolean[] | number[];
   foods: boolean[] | number[];
 }

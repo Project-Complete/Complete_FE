@@ -6,6 +6,7 @@ import {
 } from './ReviewWriteForm';
 import classes from './IconButton.module.scss';
 import { useReviewFormContext } from './form-context';
+import { Checkbox } from '@mantine/core';
 
 interface SituationButtonProps {
   label: SituationItemsLabelType;
@@ -22,11 +23,6 @@ const SituationButton = ({
 
   return (
     <label className={classes['icon-button-wrapper']}>
-      <input
-        type='checkbox'
-        value={value}
-        {...form.getInputProps(`situation_dto.${value}`)}
-      />
       <Image
         src={
           isSelected
@@ -38,6 +34,12 @@ const SituationButton = ({
         height={92}
       />
       <div>{label}</div>
+      <Checkbox
+        className={classes[`icon-button-input`]}
+        type='checkbox'
+        value={value}
+        {...form.getInputProps(`situation_dto.${value}`)}
+      />
     </label>
   );
 };
