@@ -27,6 +27,10 @@
 
 .chip-wrapper {
   padding: 0 1rem 0 0.5rem;
+  @media (max-width:$mantine-breakpoint-sm) {
+    padding: 0 0.75rem 0 0.5rem;
+    
+  }
 }
 
 .drink-food-image {
@@ -39,6 +43,14 @@
   font-style: normal;
   font-weight: 600;
   line-height: 2rem;
+  min-width: fit-content;
+}
+
+.drink-food-mobile-gap{
+  gap:1.5rem;
+  @media (max-width:$mantine-breakpoint-sm) {
+      gap: 0.5rem;
+    }
 }
 
 .share-button {
@@ -60,4 +72,11 @@
 
 .drink-banner-content-wrapper {
   z-index: 1;
+  @media (max-width:$mantine-breakpoint-sm) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1.5rem;
+    padding-right:1.5rem;
+  }
 }

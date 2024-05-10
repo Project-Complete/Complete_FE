@@ -1,9 +1,9 @@
-import { Badge, Box, Flex, Text } from '@mantine/core';
+import { Badge, Box, Flex, Text, em } from '@mantine/core';
 import RadarTasteChart from '../chart/RadarTasteChart';
-import { DetailSimpleDrink } from '@/types/drinks';
 import Point from '@/assets/Point';
 import classes from './Detail.module.scss';
 import DetailFlavorChip from './DetailFlavorChip';
+import { useMediaQuery } from '@mantine/hooks';
 
 const sortedDataFlavorFilter = [
   'body_rating',
@@ -14,6 +14,7 @@ const sortedDataFlavorFilter = [
 ];
 
 const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
+  const isMobile = useMediaQuery(`(max-width:${em(768)})`);
   const sortedValues = sortedDataFlavorFilter.map(
     key => detailDrink.taste_statistic[key],
   );
@@ -30,14 +31,24 @@ const Detail = ({ detailDrink }: { detailDrink: DetailSimpleDrink }) => {
   };
 
   return (
-    <Flex w={'100%'} direction={'column'} bg={'#FAFAFA'}>
+    <Flex
+      w={'100%'}
+      direction={'column'}
+      bg={'#FAFAFA'}
+      px={isMobile ? '1.5rem' : ''}
+    >
       <Flex align={`center`} gap={'1.5rem'}>
         <Point />
         <Text size='2rem' fw={800} lh={'xl2'}>
           칠러들의 칠링 노트
         </Text>
       </Flex>
-      <Flex w={'100%'} justify={'space-between'} mt={'3.5rem'}>
+      <Flex
+        w={'100%'}
+        justify={'space-between'}
+        mt={'3.5rem'}
+        className={classes[`mobile-chiling-note-wrapper`]}
+      >
         <Flex className={classes['smell-taste-box']}>
           <Flex w={'100%'} direction={'column'}>
             <Text size={'xl'} fw={600} lh={'lg'}>

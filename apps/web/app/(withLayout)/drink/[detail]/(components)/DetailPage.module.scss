@@ -17,8 +17,24 @@
 
 .detail-page-tab-z-index{
   z-index: 10;
+  flex-wrap: wrap;
+  @media (max-width:$mantine-breakpoint-sm) {
+    padding-left:1.5rem;
+    padding-right:1.5rem; 
+  }
 }
 
 .detail-age-tab-max-width{
   max-width: 1240px;
+  width:100%;
+  height:3rem;
+  div{
+    
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    width: 100vw;
+    height:3rem;
+  }
+
 }
