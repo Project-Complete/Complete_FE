@@ -11,5 +11,7 @@ export const useMyInfoQuery = (): UseQueryResult<MyUserInfo, Error> => {
   return useQuery({
     queryKey: ['myInfo'],
     queryFn: myInfoFetcher,
+    staleTime: 60 * 1000 * 24,
+    gcTime: Infinity,
   });
 };

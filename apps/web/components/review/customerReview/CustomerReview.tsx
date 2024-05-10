@@ -25,6 +25,7 @@ const CustomerReview = ({
     detailId,
     sort: 'latest',
   });
+  console.log(data);
 
   const { ref, entry } = useIntersection({
     root: null,
@@ -35,7 +36,6 @@ const CustomerReview = ({
       fetchNextPage();
     }
   }, [entry]);
-  console.log(data);
   return (
     <Flex direction={'column'} w={'100%'}>
       {reviewId > 0 && (
@@ -127,6 +127,7 @@ const CustomerReview = ({
                             h={'100%'}
                             bg={'gray'}
                             style={{ borderRadius: '100%' }}
+                            pos={'relative'}
                           ></Flex>
                         </Flex>
                       </Flex>

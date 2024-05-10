@@ -11,6 +11,7 @@ type SituationKeys = 'adult' | 'alone' | 'business' | 'friend' | 'partner';
 
 const ReviewEvaluation = ({ data }: { data: DrinkDetailReview }) => {
   const [minTasteValues, maxTasteValues] = findMinMaxTaste(data.taste);
+  console.log(data);
   return (
     <Flex direction={'column'} rowGap={'0.75rem'}>
       <Flex className={classes['review-detail-content-card']}>

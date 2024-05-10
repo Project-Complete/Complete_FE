@@ -28,7 +28,7 @@ const CustomerReviewCard = ({
   const [imageModalState, setImageModalState] = useState(false);
   const isMobile = useMediaQuery('(max-width: 48em)');
   const { data } = useReviewDetailQuery({ reviewId });
-  console.log(data);
+
   if (data) {
     const dateObject = new Date(data.created_date);
 
@@ -101,6 +101,15 @@ const CustomerReviewCard = ({
                     </Box>
                   </Flex>
                 </Flex>
+                {/* <Box h={'100%'} mb={'auto'}>
+                  
+                  <Button
+                    variant={'primary'}
+                    className={classes[`review-follow-button`]}
+                  >
+                    팔로우
+                  </Button>
+                </Box> */}
               </ModalHeader>
               <ModalBody>
                 <Box>평가</Box>

@@ -41,10 +41,10 @@ const HeaderNavWrapper = () => {
                 // bg={`none`}
                 className={classes['header-collapse-link']}
               >
-                주류 리뷰
+                주류
               </UnstyledButton>
             </Flex>
-            <div className={classes[`Header-nav-right-line`]}></div>
+            {/* <div className={classes[`Header-nav-right-line`]}></div>
             <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
               <UnstyledButton
                 size={`sm`}
@@ -64,7 +64,7 @@ const HeaderNavWrapper = () => {
               >
                 커뮤니티
               </UnstyledButton>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
       </Box>
@@ -92,7 +92,7 @@ const HeaderNavWrapper = () => {
             {/* 술 */}
             <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=all'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
@@ -100,7 +100,7 @@ const HeaderNavWrapper = () => {
                 전체
               </Anchor>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=tradition'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
@@ -108,7 +108,7 @@ const HeaderNavWrapper = () => {
                 전통주
               </Anchor>
               <Anchor
-                href={'/drink'}
+                href={'/drink?select=beer'}
                 component={Link}
                 className={classes['header-collapse-link']}
                 pb={12}
@@ -118,7 +118,7 @@ const HeaderNavWrapper = () => {
             </Flex>
             <Box w={16}></Box>
             {/* 커뮤니티 */}
-            <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
+            {/* <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
               <Anchor
                 href={'/drink'}
                 component={Link}
@@ -154,7 +154,7 @@ const HeaderNavWrapper = () => {
               >
                 이벤트
               </Anchor>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
       </Collapse>

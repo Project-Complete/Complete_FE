@@ -12,7 +12,7 @@ import AnotherDrink from './(AnotherDrink)/AnotherDrink';
 import { useEffect, useRef, useState } from 'react';
 import useScroll from '@/hooks/useScroll';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
-
+import DetailWriteButton from './WriteButton';
 
 const DrinkDetailWrapper = ({
   accessToken,
@@ -116,6 +116,7 @@ const DrinkDetailWrapper = ({
 
     return (
       <>
+        <DetailWriteButton drinkName={summaryDrink.name} />
         <DetailSummary
           data={summaryDrink}
           accessToken={accessToken}

@@ -1,0 +1,142 @@
+.profileWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:18rem;
+    // height: 23.75rem;
+    height: 100%;
+    border-radius: 1.5rem;
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+    position:relative;
+    overflow: hidden;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 18.75rem;
+    gap: 0.5rem;
+}
+.profileImageWrapper{
+    position:relative;
+    z-index:1;
+    width:8.25rem;
+    height:8.25rem;
+}
+
+.profileImageModifyButton{
+    position:absolute;
+    background: none;
+    border:none;
+    width: 2.5rem;
+    height: 2.5rem;
+    right:0px;
+    bottom:0px;
+    :hover{
+        cursor: pointer;
+    }
+}
+
+
+.profileBackground{
+    z-index:0;
+}
+
+.profileNickname{
+    position:relative;
+    z-index:1;
+    text-align: center;
+    color: var(--Font-Input-text-on-primary, #FFF);
+    text-align: center;
+    /* Card/Title-Semibold */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    /* 133.333% */
+}
+
+.profileEmail{
+    color: var(--Palette-base-white-alpha-65, rgba(255, 255, 255, 0.65));
+    text-align: center;
+    /* Card/Lable-Medium */
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    /* 142.857% */
+}
+
+.profileFollowWrapper{
+    position:absolute;
+    height:5rem;
+    display: flex;
+    bottom:0px;
+    justify-content: space-around;
+    width:100%;
+    background-color: #FFF;
+    align-items: center;
+}
+
+.profileFollowFollowingBox{
+    flex:1;
+    height:100%;
+    width:100%;
+    display: flex;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    text-align: center;
+    /* Card/Title-Semibold */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    /* 133.333% */
+}
+
+.profileFollowFollowingBoxName{
+    color: var(--font-card-list-lable, rgba(0, 0, 0, 0.45));
+    text-align: center;
+    /* List/Lable-Medium */
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    /* 142.857% */
+}
+
+
+
+.profileMenuListWrapper{
+    border-radius: var(--Corner-radius-12, 0.75rem);
+    color: var(--font-card-list-title, rgba(0, 0, 0, 0.95));
+    
+    /* List/Title-bold */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+    /* 133.333% */
+}
+
+.profileMenuListSelectedItem {
+    line-height: 2.5rem;
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}

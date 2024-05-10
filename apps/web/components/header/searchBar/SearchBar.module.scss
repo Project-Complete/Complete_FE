@@ -1,11 +1,27 @@
 .SearchBar-Wrapper {
   border-radius: 0.5rem;
   border: 1px solid var(--Background-bg-input-border-default, #cbcdd1);
+  text-decoration: none;
+  & hover{
+    cursor: pointer;
+  }
 }
 
 .SearchBar-focus-Wrapper {
   border-radius: 0.5rem;
   border: 1px solid var(--Font-Input-text-primary, #693bc9);
+  text-decoration: none;
+    & hover {
+        cursor: pointer;
+      }
+}
+
+.searchBar-input{
+  & input{
+
+    cursor: pointer;
+  }
+    
 }
 
 .header-nav-sns-login-button {

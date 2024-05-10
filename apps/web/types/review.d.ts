@@ -2,6 +2,10 @@ export interface Review {
   id: number;
   image_url: string;
   review_rating: number;
+  drink: {
+    id: number;
+    name: string;
+  };
   writer: {
     id: number;
     nickname: string;

@@ -1,0 +1,33 @@
+.button-wrapper {
+    margin-top: 1.5rem;
+    margin-bottom:2.5rem;
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+
+    >button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    >button:first-child {
+        box-shadow: none;
+    }
+}
+
+.image-input{
+    width:0px;
+    height:0px;
+
+}
+
+.image-attach{
+    font-size:1.125rem;
+    font-weight:600;
+    line-height:1.5rem;
+}
+
+.form-wrapper{
+    width: 100%;
+}
