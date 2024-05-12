@@ -167,14 +167,12 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
 
     const file = event.target.files?.[0];
     if (file) {
-      if (!image.file) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = () => {
-          setImage({ file: file, src: reader.result as string });
-        };
-        reader.readAsDataURL(file);
-      }
+      reader.onload = () => {
+        setImage({ file: file, src: reader.result as string });
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -185,7 +183,6 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
           json: { file_name: image.file?.name },
         })
         .json();
-
       return response.pre_signed_url;
     } catch (error) {
       throw new Error('pre signed url 전송 실패');
@@ -197,7 +194,6 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   };
 
   const handleSubmit = async (values: FormValues) => {
-    console.log('test');
     event?.preventDefault();
     try {
       const presignedUrlResponse = await postImageName();
@@ -269,6 +265,9 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             type='file'
             accept='image/*'
             onChange={handleImage}
+            onClick={event => {
+              event.currentTarget.value = '';
+            }}
           />
           <HelpMessageButton
             message={'해당 주류 리뷰에 대한 인증샷은 필수입니다.'}
