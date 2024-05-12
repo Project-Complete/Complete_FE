@@ -232,43 +232,39 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             <div className={classes['image-wrapper']}>
               <div>
                 <Image src={image.src} alt='thumbnail' fill />
-                <button
-                  onClick={() =>
-                    setImage({
-                      file: null,
-                      src: '',
-                    })
-                  }
-                >
-                  <Image
-                    src={'/icons/닫기.svg'}
-                    alt='x'
-                    height={20}
-                    width={20}
-                  />
-                </button>
+                <label htmlFor='review-image'>사진 변경</label>
+                <input
+                  id='review-image'
+                  type='file'
+                  accept='image/*'
+                  onChange={handleImage}
+                  onClick={event => {
+                    event.currentTarget.value = '';
+                  }}
+                />
               </div>
             </div>
           )}
           <SectionHeader title='인증샷' dot={false} />
-          <label className={classes['image-attach']} htmlFor='review-image'>
-            {image.src !== '' ? '사진 변경하기' : '사진 첨부하기'}
-            <Image
-              src={'/icons/카메라.svg'}
-              alt='camera'
-              height={24}
-              width={24}
-            />
-          </label>
-          <input
-            id='review-image'
-            type='file'
-            accept='image/*'
-            onChange={handleImage}
-            onClick={event => {
-              event.currentTarget.value = '';
-            }}
-          />
+          {!image.src && (
+            <>
+              <label className={classes['image-attach']} htmlFor='review-image'>
+                사진 첨부하기
+                <Image
+                  src={'/icons/카메라.svg'}
+                  alt='camera'
+                  height={24}
+                  width={24}
+                />
+              </label>
+              <input
+                id='review-image'
+                type='file'
+                accept='image/*'
+                onChange={handleImage}
+              />
+            </>
+          )}
           <HelpMessageButton
             message={'해당 주류 리뷰에 대한 인증샷은 필수입니다.'}
           />
