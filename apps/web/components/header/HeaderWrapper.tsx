@@ -1,10 +1,14 @@
 'use client';
 
 import classes from './HeaderWrapper.module.css';
-import { Flex } from '@mantine/core';
+import { Anchor, Burger, Button, Divider, Drawer, Flex, UnstyledButton } from '@mantine/core';
 import HeaderNavWrapper from './nav';
 import HeaderCenterWrapper from './searchBar';
-import { useMediaQuery } from '@mantine/hooks';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
+import Image from 'next/image';
+import { NAVIGATION_LIST } from '@/constants/navigation';
+import Link from 'next/link';
+import React from 'react';
 
 type HeaderWrapperPropsType = {
   useNav?: boolean;
@@ -19,10 +23,37 @@ const HeaderWrapper = ({
 }: HeaderWrapperPropsType) => {
 
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const [opened, { open, close, toggle }] = useDisclosure(false);
 
   return (
     <>
       {isMobile ? <>
+        <Drawer opened={opened} onClose={close} size={260} overlayProps={{
+          backgroundOpacity: 0.65,
+        }}>
+
+          {NAVIGATION_LIST.map((nav, index) => {
+            return <>
+              <Flex key={index} w={152} p={12} m={12} justify={`center`} direction={'column'}>
+                <Flex h={24} fz={18} fw={500} lh={'24px'} mb={4}>{nav.name}</Flex>
+                {nav.menuList.map(v => {
+                  return <Flex h={16} my={12} fz={16} fw={500} lh={'16px'}>{v.name}</Flex>
+                })}
+              </Flex>
+            </>
+          }).reduce<React.ReactNode[] | null>((a, b) => {
+            return a === null ? [b] : [...a, <Divider />, b];
+          }, null)}
+        </Drawer>
+        <Flex h={56} align={'center'} px={26} className={classes[`header-center`]}>
+          <Flex w={'100%'} h={'100%'} align={'center'} gap={12}>
+            <Burger opened={opened} onClick={toggle} size={24} />
+            <Image src={'/logo/심볼.svg'} alt={'symbol'} width={24} height={24} />
+          </Flex>
+          <Image src={"/icons/돋보기.svg"} alt={'search'} width={24} height={24} />
+        </Flex>
+
+        {/* <Button onClick={open}>Open Drawer</Button> */}
       </> :
         <>
           <Flex w={`100%`} h={120} className={classes[`header-center`]}>

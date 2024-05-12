@@ -12,6 +12,11 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 
 import classes from './HeaderNav.module.scss';
+import React from 'react';
+import { NAVIGATION_LIST } from '@/constants/navigation';
+
+
+
 
 const HeaderNavWrapper = () => {
   const [opened, { toggle, open, close }] = useDisclosure(false);
@@ -23,48 +28,32 @@ const HeaderNavWrapper = () => {
       <Box w={`100%`} h={`100%`}>
         <Flex w={`100%`} justify={`center`} h={`100%`}>
           <Flex maw={`1224px`} w={`100%`} align={`center`}>
-            <Burger onClick={toggle} />
-            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <Anchor
-                component={Link}
-                href={'/'}
-                p={0}
-                className={classes['header-collapse-link']}
-              >
-                홈
-              </Anchor>
-            </Flex>
-            <div className={classes[`Header-nav-right-line`]}></div>
-            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <UnstyledButton
-                onClick={toggle}
-                // bg={`none`}
-                className={classes['header-collapse-link']}
-              >
-                주류
-              </UnstyledButton>
-            </Flex>
-            {/* <div className={classes[`Header-nav-right-line`]}></div>
-            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <UnstyledButton
-                size={`sm`}
-                onClick={toggle}
-                p={0}
-                className={classes['header-collapse-link']}
-              >
-                본격적 칠링
-              </UnstyledButton>
-            </Flex>
-            <div className={classes[`Header-nav-right-line`]}></div>
-            <Flex w={152} p={12} m={12} justify={`center`} align={`center`}>
-              <UnstyledButton
-                onClick={toggle}
-                p={0}
-                className={classes['header-collapse-link']}
-              >
-                커뮤니티
-              </UnstyledButton>
-            </Flex> */}
+            <Burger opened={opened} onClick={toggle} />
+            {NAVIGATION_LIST.map((nav, index) => {
+              return (
+                <Flex key={index} w={152} p={12} m={12} justify={`center`} align={`center`}>
+                  {nav.href ?
+                    <Anchor
+                      component={Link}
+                      href={'/'}
+                      p={0}
+                      className={classes['header-collapse-link']}
+                    >
+                      홈
+                    </Anchor>
+                    :
+                    <UnstyledButton
+                      size={`sm`}
+                      onClick={toggle}
+                      p={0}
+                      className={classes['header-collapse-link']}
+                    >
+                      {nav.name}
+                    </UnstyledButton>
+                  }
+                </Flex>
+              );
+            })}
           </Flex>
         </Flex>
       </Box>
@@ -87,74 +76,25 @@ const HeaderNavWrapper = () => {
         <Flex w={`100%`} justify={`center`}>
           <Flex maw={`1224px`} w={`100%`}>
             <Box w={34} h={34} />
-            <Flex w={152} p={12} mx={12} justify={`center`}></Flex>
-            <Box w={16}></Box>
-            {/* 술 */}
-            <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
-              <Anchor
-                href={'/drink?select=all'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                전체
-              </Anchor>
-              <Anchor
-                href={'/drink?select=tradition'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                전통주
-              </Anchor>
-              <Anchor
-                href={'/drink?select=beer'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                맥주
-              </Anchor>
-            </Flex>
-            <Box w={16}></Box>
-            {/* 커뮤니티 */}
-            {/* <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
-              <Anchor
-                href={'/drink'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                술끼리 안주끼리
-              </Anchor>
-              <Anchor
-                href={'/drink'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                한잔 말아먹기
-              </Anchor>
-            </Flex>
-            <Box w={16}></Box>
-            <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
-              <Anchor
-                href={'/drink'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                공지사항
-              </Anchor>
-              <Anchor
-                href={'/drink'}
-                component={Link}
-                className={classes['header-collapse-link']}
-                pb={12}
-              >
-                이벤트
-              </Anchor>
-            </Flex> */}
+            {NAVIGATION_LIST.map((nav, index) => {
+              return <>
+                <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
+                  {nav.menuList.map((menu, index) => {
+                    return (
+                      <Anchor
+                        href={menu.href}
+                        component={Link}
+                        className={classes['header-collapse-link']}
+                        pb={12}
+                      >
+                        {menu.name}
+                      </Anchor>
+                    );
+                  })}
+                </Flex>
+              </>
+            })
+            }
           </Flex>
         </Flex>
       </Collapse>
