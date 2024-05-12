@@ -31,7 +31,7 @@ const HeaderCenterSearchInput = () => {
       component='a'
       href='/search'
       h={`3.25rem`}
-      w={`35rem`}
+      w={'100%'}
       px={`1rem`}
       py={`0.625rem`}
       bg={`#ffffff`}

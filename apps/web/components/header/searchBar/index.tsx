@@ -22,16 +22,16 @@ const HeaderCenterWrapper = ({
         w={`100%`}
         h={`100%`}
         justify={'center'}
-        gap={'13rem'}
+        gap={'2.5rem'}
       >
-        <Flex h={`5rem`} align={'center'} gap={'2.5rem'}>
+        <Flex h={`5rem`} align={'center'} gap={'2.5rem'} w={'100%'}>
           <Link href='/'>
             <Logo />
           </Link>
           {!isCenter && <HeaderCenterSearchInput />}
         </Flex>
         {!isCenter && (!isLogin ? (
-          <Flex h={'100%'} align={'center'}>
+          <Flex h={'100%'} align={'center'} gap={'1.5rem'}>
             <Anchor
               href={'/login'}
               component={Link}
