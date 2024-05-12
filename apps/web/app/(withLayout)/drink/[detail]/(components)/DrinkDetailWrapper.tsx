@@ -3,7 +3,7 @@ import Detail from '@/components/drinkDetail/Detail';
 import DetailDescription from '@/components/drinkDetail/DetailDescription';
 import DetailSummary from '@/components/drinkDetail/DetailSummary';
 import CustomerReview from '@/components/review/customerReview/CustomerReview';
-import { Box, Flex } from '@mantine/core';
+import { Box, Flex, em } from '@mantine/core';
 import classes from './DetailPage.module.scss';
 import { useParams } from 'next/navigation';
 import { useDrinkDetailQuery } from '@/hooks/queries/useDrinkDetailQuery';
@@ -22,6 +22,7 @@ const DrinkDetailWrapper = ({
   refreshToken: RequestCookie | undefined;
 }) => {
   const params = useParams();
+  
   const [activeTab, setActiveTab] = useState<string | null>('상세 정보');
   const { moveToSection } = useScroll();
   const descriptionRef = useRef<HTMLHeadingElement | null>(null);
@@ -149,7 +150,9 @@ const DrinkDetailWrapper = ({
           >
             <Flex
               justify={'center'}
-              w={'100vw'}
+              miw={'100vw'}
+              w={'100%'}
+              h={'3rem'}
               bg={'#FFF'}
               pos={'sticky'}
               top={60}
@@ -158,11 +161,11 @@ const DrinkDetailWrapper = ({
               <Tabs
                 value={activeTab}
                 onChange={setActiveTab}
-                w={'100%'}
                 className={classes['detail-age-tab-max-width']}
               >
                 <TabList>
                   <Tab
+                    // ml={'1.5rem'}
                     value='상세 정보'
                     onClick={() => {
                       moveToSection(descriptionRef);

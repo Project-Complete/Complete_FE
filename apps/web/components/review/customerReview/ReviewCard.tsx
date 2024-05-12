@@ -1,7 +1,7 @@
 'use client';
 import StarScore from '@/components/animation/StarScore';
 import { useReviewDetailQuery } from '@/hooks/queries/useReviewQuery';
-import { Box, Flex, Text } from '@mantine/core';
+import { Box, Flex, ModalCloseButton, em } from '@mantine/core';
 import {
   ModalContent,
   ModalRoot,
@@ -26,7 +26,7 @@ const CustomerReviewCard = ({
   reviewId: number;
 }) => {
   const [imageModalState, setImageModalState] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 48em)');
+  const isMobile = useMediaQuery(`(max-width:${em(768)}`);
   const { data } = useReviewDetailQuery({ reviewId });
 
   if (data) {
@@ -101,6 +101,7 @@ const CustomerReviewCard = ({
                     </Box>
                   </Flex>
                 </Flex>
+                <ModalCloseButton />
                 {/* <Box h={'100%'} mb={'auto'}>
                   
                   <Button

@@ -4,8 +4,11 @@ import React from 'react';
 import Image from 'next/image';
 import classes from './MainDrinkContent.module.scss';
 import LikeButton from '@/components/button/LikeButton';
+import Cookies from 'js-cookie';
 
 const MainDrinkCard = ({ drinkInfo }: { drinkInfo: DrinkListElement }) => {
+  const isLogin = Cookies.get('access_token');
+
   return (
     <Flex
       direction={'column'}
@@ -66,13 +69,15 @@ const MainDrinkCard = ({ drinkInfo }: { drinkInfo: DrinkListElement }) => {
               </UnstyledButton>
             </Flex>
           </Flex>
-          <Flex ml={'auto'}>
-            <LikeButton
-              drink_id={drinkInfo.drink_id}
-              drink_like={drinkInfo.drink_like}
-              isMyPage={true}
-            />
-          </Flex>
+          {isLogin && (
+            <Flex ml={'auto'}>
+              <LikeButton
+                drink_id={drinkInfo.drink_id}
+                drink_like={drinkInfo.drink_like}
+                isMyPage={true}
+              />
+            </Flex>
+          )}
         </Flex>
         <Rating value={drinkInfo.review_rating} fractions={2} readOnly />
       </Flex>

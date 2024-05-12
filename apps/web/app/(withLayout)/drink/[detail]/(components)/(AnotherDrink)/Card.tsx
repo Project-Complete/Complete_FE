@@ -11,12 +11,17 @@ const AnotherDrinkListCard = ({
   manufacturer_name,
   review_rating,
 }: DetailRecommendDrink) => {
+  console.log(image_url);
   return (
     <Link href={`/drink/${drink_id}`} className={classes['card-wrapper']}>
       {/* 이미지 부분 */}
       <div className={classes['card-image']}>
         <Image
-          src={'https://picsum.photos/392/288.webp'}
+          src={
+            image_url === 'imageUrl'
+              ? 'https://picsum.photos/392/288.webp'
+              : image_url
+          }
           alt='주류 이미지'
           fill
         />
