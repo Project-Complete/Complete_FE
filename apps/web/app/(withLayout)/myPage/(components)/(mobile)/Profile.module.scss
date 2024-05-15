@@ -1,0 +1,9 @@
+.mobile-profile-wrapper{
+    display: flex;
+    width: var(--min-container, 18.75rem);
+    padding: var(--Spacing-24, 1.5rem) var(--Spacing-16, 1rem);
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: var(--Corner-radius-8, 0.5rem);
+    border: 1px solid var(--Background-Stroke, rgba(0, 0, 0, 0.10));
+}
