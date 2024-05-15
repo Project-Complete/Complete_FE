@@ -11,7 +11,6 @@ export default function Page(): JSX.Element {
       <Flex
         className={styles.banner}
         w={'100%'}
-        h={480}
         bg={'lime'}
         py={40}
         justify={'center'}

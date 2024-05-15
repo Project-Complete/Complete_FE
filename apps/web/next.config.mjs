@@ -27,6 +27,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'dev-challang.s3.ap-northeast-2.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'file.hitejinro.com',
+      },
     ],
   },
   reactStrictMode: false,

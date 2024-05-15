@@ -27,6 +27,11 @@
 
 .chip-wrapper {
   padding: 0 1rem 0 0.5rem;
+  @media screen and (max-width: 768px){
+    padding: 0.5rem;
+    background: none;
+    border:none;
+  }
 }
 
 .drink-food-image {
