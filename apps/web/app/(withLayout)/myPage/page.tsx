@@ -13,7 +13,7 @@ const MyPageWrapper = () => {
   return (
     <MyPageTabStore>
       {isMobile ? (
-        <div>
+        <div className={classes.MobileMyPageLayout}>
           <MobileProfile />
         </div>
       ) : (
