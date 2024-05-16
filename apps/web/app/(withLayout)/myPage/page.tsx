@@ -7,9 +7,18 @@ import MyPageTabStore from './(store)/store';
 import classes from './MyPageLayout.module.scss';
 import { em } from '@mantine/core';
 import MobileProfile from './(components)/(mobile)/Profile';
+import { useLayoutEffect } from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const MyPageWrapper = () => {
   const isMobile = useMediaQuery(`(max-width:${em(768)}`);
+  const router = useRouter();
+  useLayoutEffect(() => {
+    if (!Cookies.get('access_token')) {
+      router.push('/');
+    }
+  }, []);
   return (
     <MyPageTabStore>
       {isMobile ? (
