@@ -1,7 +1,7 @@
 'use client';
 import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
-import { Divider, Flex, Grid, Paper, Rating, Text } from '@mantine/core';
-import { useIntersection } from '@mantine/hooks';
+import { Divider, Flex, Grid, Rating, Text, em } from '@mantine/core';
+import { useIntersection, useMediaQuery } from '@mantine/hooks';
 import Image from 'next/image';
 import { Fragment, useEffect, useState } from 'react';
 import CustomerReviewCard from './ReviewCard';
@@ -14,6 +14,7 @@ const CustomerReview = ({
   customerReviewRef: React.RefObject<HTMLHeadingElement> | null;
   detailId: number;
 }) => {
+
   const [modalOpen, setModalOpen] = useState(false);
   const [reviewId, setReviewId] = useState<number>(0);
 
@@ -37,7 +38,7 @@ const CustomerReview = ({
     }
   }, [entry]);
   return (
-    <Flex direction={'column'} w={'100%'}>
+    <Flex direction={'column'} w={'100%'} className={classes.wrapper}>
       {reviewId > 0 && (
         <CustomerReviewCard
           modalOpen={modalOpen}
@@ -68,82 +69,87 @@ const CustomerReview = ({
         )}
       </Flex>
 
-      <Grid w={'100%'} gutter={24} mt={24} mb={24}>
-        {data &&
-          data.pages &&
-          data.pages.map((v, index) => (
-            <Fragment key={index}>
-              {v.reviews.map(e => {
-                return (
-                  <Grid.Col
-                    key={e.id}
-                    w={'100%'}
-                    span={{ base: 6, sm: 4 }}
-                    onClick={() => {
-                      modalHandler(e.id);
-                    }}
-                    className={classes['review-grid-col']}
-                  >
-                    <Flex gap={16} direction={'column'}>
-                      <Flex
-                        w={'100%'}
-                        pb={'73.4%'}
-                        pos={'relative'}
-                        style={{
-                          boxShadow: '0px 4px 20px 0px #00000033',
-                          borderRadius: '12px',
-                        }}
-                      >
-                        <Image
-                          src={
-                            e.image_url !== 'string' && e.image_url !== ''
-                              ? e.image_url
-                              : 'https://picsum.photos/392/288.webp'
-                          }
-                          sizes='512px'
-                          fill
+        <Grid w={'100%'} gutter={24} mt={24} mb={24}>
+          {data &&
+            data.pages &&
+            data.pages.map((v, index) => (
+              <Fragment key={index}>
+                {v.reviews.map(e => {
+                  return (
+                    <Grid.Col
+                      key={e.id}
+                      w={'100%'}
+                      span={{ base: 12, sm: 4 }}
+                      onClick={() => {
+                        modalHandler(e.id);
+                      }}
+                      className={classes['review-grid-col']}
+                    >
+                      <Flex gap={16} direction={'column'}>
+                        <Flex
+                          w={'100%'}
+                          pb={'73.4%'}
+                          pos={'relative'}
                           style={{
-                            objectFit: 'contain',
+                            boxShadow: '0px 4px 20px 0px #00000033',
                             borderRadius: '12px',
                           }}
-                          alt={'image'}
-                        />
-                        <Flex
-                          pos={'absolute'}
-                          right={10}
-                          bottom={0}
-                          w={72}
-                          h={72}
-                          p={10}
-                          bg={'white'}
-                          style={{
-                            boxshadow: '0px 4px 20px 0px #00000033',
-                            transform: 'translate(0, 50%)',
-                            borderRadius: '100%',
-                          }}
                         >
+                          <Image
+                            src={
+                              e.image_url !== 'string' && e.image_url !== ''
+                                ? e.image_url
+                                : 'https://picsum.photos/392/288.webp'
+                            }
+                            sizes='512px'
+                            fill
+                            style={{
+                              objectFit: 'contain',
+                              borderRadius: '12px',
+                            }}
+                            alt={'image'}
+                          />
                           <Flex
-                            w={'100%'}
-                            h={'100%'}
-                            bg={'gray'}
-                            style={{ borderRadius: '100%' }}
-                            pos={'relative'}
-                          ></Flex>
+                            pos={'absolute'}
+                            right={10}
+                            bottom={0}
+                            w={72}
+                            h={72}
+                            p={10}
+                            bg={'white'}
+                            style={{
+                              boxshadow: '0px 4px 20px 0px #00000033',
+                              transform: 'translate(0, 50%)',
+                              borderRadius: '100%',
+                            }}
+                          >
+                            <Flex
+                              w={'100%'}
+                              h={'100%'}
+                              bg={'gray'}
+                              style={{ borderRadius: '100%' }}
+                              pos={'relative'}
+                            ></Flex>
+                          </Flex>
                         </Flex>
+                        <Flex gap={10}>
+                          <Text>{e.writer.nickname}</Text>
+                          <Divider orientation='vertical' />
+                          <Text>{e.created_date}</Text>
+                        </Flex>
+                        <Rating
+                          value={e.review_rating}
+                          fractions={2}
+                          readOnly
+                        />
                       </Flex>
-                      <Flex gap={10}>
-                        <Text>{e.writer.nickname}</Text>
-                        <Divider orientation='vertical' />
-                        <Text>{e.created_date}</Text>
-                      </Flex>
-                      <Rating value={e.review_rating} fractions={2} readOnly />
-                    </Flex>
-                  </Grid.Col>
-                );
-              })}
-            </Fragment>
-          ))}
-      </Grid>
+                    </Grid.Col>
+                  );
+                })}
+              </Fragment>
+            ))}
+        </Grid>
+
       <div ref={ref}></div>
     </Flex>
   );

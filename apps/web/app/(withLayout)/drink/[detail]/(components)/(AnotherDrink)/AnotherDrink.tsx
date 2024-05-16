@@ -21,18 +21,24 @@ const AnotherDrink = ({
     setActiveState(value);
   };
   return (
-    <Box w={'100%'}>
-      <Flex justify={'space-between'} w={'100%'} h={'3rem'} align={'center'}>
+    <Box w={'100%'} className={classes.AnotherDrinkWrapper}>
+      <Flex
+        justify={'space-between'}
+        w={'100%'}
+        // h={'3rem'}
+        align={'center'}
+        className={classes.TitleWrapper}
+      >
         <Text
           component='h1'
           lh={'40px'}
-          fz={'1.125rem'}
+          
           fw={800}
           ref={anotherDrinkRef}
         >
           비슷한 평가를 받은 주류를 알려드릴게요!
         </Text>
-        <Box>
+        <Box className={classes.ButtonWrapper}>
           <ChipButton
             variant={'primary'}
             onClick={() => {

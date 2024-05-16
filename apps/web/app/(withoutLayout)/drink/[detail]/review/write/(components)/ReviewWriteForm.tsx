@@ -167,14 +167,12 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
 
     const file = event.target.files?.[0];
     if (file) {
-      if (!image.file) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = () => {
-          setImage({ file: file, src: reader.result as string });
-        };
-        reader.readAsDataURL(file);
-      }
+      reader.onload = () => {
+        setImage({ file: file, src: reader.result as string });
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -185,7 +183,6 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
           json: { file_name: image.file?.name },
         })
         .json();
-
       return response.pre_signed_url;
     } catch (error) {
       throw new Error('pre signed url 전송 실패');
@@ -197,7 +194,6 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   };
 
   const handleSubmit = async (values: FormValues) => {
-    console.log('test');
     event?.preventDefault();
     try {
       const presignedUrlResponse = await postImageName();
@@ -236,40 +232,39 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             <div className={classes['image-wrapper']}>
               <div>
                 <Image src={image.src} alt='thumbnail' fill />
-                <button
-                  onClick={() =>
-                    setImage({
-                      file: null,
-                      src: '',
-                    })
-                  }
-                >
-                  <Image
-                    src={'/icons/닫기.svg'}
-                    alt='x'
-                    height={20}
-                    width={20}
-                  />
-                </button>
+                <label htmlFor='review-image'>사진 변경</label>
+                <input
+                  id='review-image'
+                  type='file'
+                  accept='image/*'
+                  onChange={handleImage}
+                  onClick={event => {
+                    event.currentTarget.value = '';
+                  }}
+                />
               </div>
             </div>
           )}
           <SectionHeader title='인증샷' dot={false} />
-          <label className={classes['image-attach']} htmlFor='review-image'>
-            {image.src !== '' ? '사진 변경하기' : '사진 첨부하기'}
-            <Image
-              src={'/icons/카메라.svg'}
-              alt='camera'
-              height={24}
-              width={24}
-            />
-          </label>
-          <input
-            id='review-image'
-            type='file'
-            accept='image/*'
-            onChange={handleImage}
-          />
+          {!image.src && (
+            <>
+              <label className={classes['image-attach']} htmlFor='review-image'>
+                사진 첨부하기
+                <Image
+                  src={'/icons/카메라.svg'}
+                  alt='camera'
+                  height={24}
+                  width={24}
+                />
+              </label>
+              <input
+                id='review-image'
+                type='file'
+                accept='image/*'
+                onChange={handleImage}
+              />
+            </>
+          )}
           <HelpMessageButton
             message={'해당 주류 리뷰에 대한 인증샷은 필수입니다.'}
           />

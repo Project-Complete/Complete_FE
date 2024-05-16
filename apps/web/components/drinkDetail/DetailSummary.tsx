@@ -1,4 +1,4 @@
-import { Flex, Text, Title } from '@mantine/core';
+import { Flex, Text, Title, em } from '@mantine/core';
 import Image from 'next/image';
 import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
@@ -7,6 +7,7 @@ import { Chip, Button } from '@team-complete/complete-ui';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import ShareButton from '../button/ShareButton';
 import LikeButton from '../button/LikeButton';
+import { useMediaQuery } from '@mantine/hooks';
 
 const drinkOccasionList = [
   { id: 'alone_sum', title: '나 혼자', selectedPeople: 0 },
@@ -19,12 +20,13 @@ const drinkOccasionList = [
 const DetailSummary = ({
   data,
   accessToken,
-  refreshToken,
 }: {
   data: DetailSummarySimpleDrink;
   accessToken: RequestCookie | undefined;
   refreshToken: RequestCookie | undefined;
 }) => {
+  const isMobile = useMediaQuery(`(max-width:${em(768)})`);
+
   const updatedDrinkOccasionList = drinkOccasionList.map(item => {
     const situationStatisticValue = data.situation_statistic[item.id];
     return {
@@ -44,11 +46,13 @@ const DetailSummary = ({
       pos={'relative'}
       id={'111111'}
       w={'100%'}
-      py={92}
+      pb={92}
+      pt={isMobile ? 0 : 92}
       bg={'#FAFAFA'}
       justify={'center'}
     >
       <Flex
+        id={'DetailSummaryWrapper'}
         w={'100%'}
         maw={1224}
         gap={'128px'}
@@ -73,14 +77,28 @@ const DetailSummary = ({
               height={625.58}
             />
           </Flex>
-          <Flex ml={'auto'}>
-            <Text size='1.125rem' fw={400} lh={'2rem'}>
+          <Flex ml={'auto'} pr={isMobile ? '0.8rem' : ''}>
+            <Text
+              size={isMobile ? '0.875rem' : '1.125rem'}
+              fw={400}
+              lh={'2rem'}
+            >
               이미지 제공
             </Text>
-            <Text size='1.125rem' fw={400} lh={'2rem'} c='#E5E6E8' mx={8}>
+            <Text
+              size={isMobile ? '0.875rem' : '1.125rem'}
+              fw={400}
+              lh={'2rem'}
+              c='#E5E6E8'
+              mx={8}
+            >
               |
             </Text>
-            <Text size='1.125rem' fw={400} lh={'2rem'}>
+            <Text
+              size={isMobile ? '0.875rem' : '1.125rem'}
+              fw={400}
+              lh={'2rem'}
+            >
               {data.manufacturer.manufacturer_name}
             </Text>
           </Flex>
@@ -90,17 +108,19 @@ const DetailSummary = ({
             <Title size={40} fw={800} lh={'50px'}>
               {data.name}
             </Title>
-            <Flex gap={24} align={'center'}>
-              {/* TODO: design-system으로 교체 */}
-              {accessToken !== undefined && (
-                <LikeButton
-                  drink_like={data.drink_like}
-                  drink_id={data.drink_id}
-                  isMyPage={false}
-                />
-              )}
-              <ShareButton />
-            </Flex>
+            {!isMobile && (
+              <Flex gap={24} align={'center'}>
+                {/* TODO: design-system으로 교체 */}
+                {accessToken !== undefined && (
+                  <LikeButton
+                    drink_like={data.drink_like}
+                    drink_id={data.drink_id}
+                    isMyPage={false}
+                  />
+                )}
+                <ShareButton />
+              </Flex>
+            )}
           </Flex>
           <Text
             className={classes['drink-description']}
@@ -126,31 +146,61 @@ const DetailSummary = ({
           <Text size={'lg'} fw={600} lh={'32px'} mt={'1rem'} mb={'1rem'}>
             함께하면 좋은 안주
           </Text>
-          <Flex gap={24}>
-            {data.food_statistics.map((e, idx) => (
-              <Fragment key={idx}>
-                {e.food_id !== null &&
-                  e.category !== null &&
-                  e.image_url !== null && (
-                    <Chip variant={'ghost'}>
-                      <div className={classes['drink-food-image']}>
-                        <Image
-                          src={e.image_url}
-                          alt='음식 아이콘'
-                          width={32}
-                          height={32}
-                        />
-                        <Text size='lg'>{e.category}</Text>
-                      </div>
-                    </Chip>
-                  )}
-              </Fragment>
-            ))}
+          <Flex className={classes[`drink-food-mobile-gap`]}>
+            {isMobile ? (
+              <>
+                {data.food_statistics.slice(0, 3).map((e, idx) => (
+                  <Fragment key={idx}>
+                    {e.food_id !== null &&
+                      e.category !== null &&
+                      e.image_url !== null && (
+                        <Chip variant={'ghost'}>
+                          <div className={classes['drink-food-image']}>
+                            <Image
+                              src={e.image_url}
+                              alt='음식 아이콘'
+                              width={isMobile ? 16 : 32}
+                              height={isMobile ? 16 : 32}
+                            />
+                            <Text size='lg' miw={'fit-content'}>
+                              {e.category}
+                            </Text>
+                          </div>
+                        </Chip>
+                      )}
+                  </Fragment>
+                ))}
+              </>
+            ) : (
+              <>
+                {data.food_statistics.map((e, idx) => (
+                  <Fragment key={idx}>
+                    {e.food_id !== null &&
+                      e.category !== null &&
+                      e.image_url !== null && (
+                        <Chip variant={'ghost'}>
+                          <div className={classes['drink-food-image']}>
+                            <Image
+                              src={e.image_url}
+                              alt='음식 아이콘'
+                              width={isMobile ? 16 : 32}
+                              height={isMobile ? 16 : 32}
+                            />
+                            <Text size='lg' miw={'fit-content'}>
+                              {e.category}
+                            </Text>
+                          </div>
+                        </Chip>
+                      )}
+                  </Fragment>
+                ))}
+              </>
+            )}
           </Flex>
           <Text size={'lg'} fw={600} lh={'32px'} mt={'1rem'} mb={'8px'}>
             함께 마시면 좋은 사람
           </Text>
-          <Flex gap={24}>
+          <Flex className={classes[`drink-food-mobile-gap`]}>
             {sortedUpdatedDrinkOccasionList.map(({ id, title }, index) => {
               return (
                 <Fragment key={index}>
@@ -159,8 +209,8 @@ const DetailSummary = ({
                       <Image
                         src={`/detail_who/${id}.svg`}
                         alt='title'
-                        width={32}
-                        height={32}
+                        width={isMobile ? 16 : 32}
+                        height={isMobile ? 16 : 32}
                       />
                       <Text size='lg'>{title}</Text>
                     </div>
@@ -171,12 +221,14 @@ const DetailSummary = ({
           </Flex>
         </Flex>
       </Flex>
-      <Image
-        src='/banner/홈-header-맥주.svg'
-        fill
-        alt='배너'
-        objectFit='cover'
-      />
+      {!isMobile && (
+        <Image
+          src='/banner/홈-header-맥주.svg'
+          fill
+          alt='배너'
+          objectFit='cover'
+        />
+      )}
     </Flex>
   );
 };
