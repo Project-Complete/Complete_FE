@@ -3,7 +3,7 @@ import Blender from './(component)/Blender';
 
 
 export default function Page(): JSX.Element {
-  return <Flex justify={'center'} py={32}>
+  return <Flex justify={'center'} py={32} px={24}>
     <Blender />
   </Flex>
 }
