@@ -1,0 +1,45 @@
+
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px 0;
+
+    @media (min-width: 769px) {
+      display: none;
+    }
+    
+    .slider {
+      position: relative;
+      height: 320px;
+      width: 274px;
+
+
+      @media only screen and (max-width: 375px) {
+        height: 400px;
+        width: 300px;
+      }
+
+      .image {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        will-change: transform, opacity;
+
+        border-radius: 20px;
+
+      &:hover {
+        cursor: grab;
+      }
+  
+      &:active {
+        cursor: grabbing;
+      }
+      /* mix-blend-mode: multiply; */
+    }
+  }
+}
