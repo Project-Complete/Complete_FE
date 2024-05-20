@@ -8,6 +8,10 @@
 
 .banner {
   overflow: hidden;
+  height: 480px;
+  @media (max-width: 768px) {
+    height: 300px;
+  }
 }
 
 .vercelLogo {

@@ -3,12 +3,14 @@
 import { Flex, Text, Title, Box, Rating } from '@mantine/core';
 import { Chip } from '@team-complete/complete-ui';
 import Image from 'next/image';
-import classes from './SelectedBanner.module.css';
+import classes from './SelectedBanner.module.scss';
 import selectedBannerCss from '@/components/drinkDetail/DetailSummary.module.scss';
 import React, { useEffect, useMemo, useState } from 'react';
 import SelectedBannerBeerCard from './SelectedBannerBeerCard';
 import { produce } from 'immer';
 import PourAnimation from './PourAnimation';
+import { useMediaQuery } from '@mantine/hooks';
+import SlideAnimation from './SlideAnimation';
 
 type SelectedBannerPropsType = {
   drinks: DrinkOfBanner[];
@@ -63,7 +65,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
 
 
   return (
-    <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'}>
+    <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'} p={20} h={300}>
       <Flex w={'100%'}>
         {drinks[0] && (
           <PourAnimation isSelectComplete={isSelectComplete}>
@@ -81,7 +83,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                   fractions={2}
                   readOnly
                 />
-                <Text size={'md'} lh={'24px'} fw={400}>
+                <Text className={classes['responsive-mobile-hide']} size={'md'} lh={'24px'} fw={400}>
                   {drinks[0].description}
                 </Text>
               </Flex>
@@ -104,7 +106,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                             width={24}
                             height={24}
                           />
-                          <Text size='md' lh={'32px'} fw={600}>
+                          <Text className={classes['responsive-mobile-hide']} size='md' lh={'32px'} fw={600}>
                             {foodStatistic.category}
                           </Text>
                         </div>
@@ -113,7 +115,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
                   )}
                 </Flex>
               </Flex>
-              <Flex direction={'column'} gap={'8px'}>
+              <Flex className={classes['responsive-mobile-hide']} direction={'column'} gap={'8px'}>
                 <Text size={'18px'} fw={600} lh={'24px'}>
                   함께 마시면 좋은 사람
                 </Text>
@@ -143,7 +145,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
           </PourAnimation>
         )}
       </Flex>
-      <Flex w={500} align={'center'}>
+      <Flex w={500} align={'center'} className={classes['responsive-mobile-hide']}>
         {drinks.map((drink, drinkIndex) => {
           return (
             <React.Fragment key={drinkIndex}>
@@ -175,6 +177,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
           );
         })}
       </Flex>
+      <SlideAnimation drinks={drinks} />
     </Flex>
   );
 };

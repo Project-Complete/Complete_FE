@@ -28,8 +28,10 @@
 .chip-wrapper {
   padding: 0 1rem 0 0.5rem;
   @media (max-width:$mantine-breakpoint-sm) {
-    padding: 0 0.75rem 0 0.5rem;
-    
+    // padding: 0 0.75rem 0 0.5rem;
+    padding: 0.5rem;
+    background: none;
+    border:none;
   }
 }
 
