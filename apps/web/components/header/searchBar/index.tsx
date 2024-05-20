@@ -24,7 +24,7 @@ const HeaderCenterWrapper = ({
         justify={'center'}
         gap={'2.5rem'}
       >
-        <Flex h={`5rem`} align={'center'} gap={'2.5rem'} w={'100%'}>
+        <Flex h={`5rem`} align={'center'} gap={'2.5rem'} w={'100%'} justify={'center'}>
           <Link href='/'>
             <Logo />
           </Link>
