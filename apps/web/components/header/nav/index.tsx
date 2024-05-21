@@ -15,9 +15,6 @@ import classes from './HeaderNav.module.scss';
 import React from 'react';
 import { NAVIGATION_LIST } from '@/constants/navigation';
 
-
-
-
 const HeaderNavWrapper = () => {
   const [opened, { toggle, open, close }] = useDisclosure(false);
 
@@ -31,8 +28,15 @@ const HeaderNavWrapper = () => {
             <Burger opened={opened} onClick={toggle} />
             {NAVIGATION_LIST.map((nav, index) => {
               return (
-                <Flex key={index} w={152} p={12} m={12} justify={`center`} align={`center`}>
-                  {nav.href ?
+                <Flex
+                  key={index}
+                  w={152}
+                  p={12}
+                  m={12}
+                  justify={`center`}
+                  align={`center`}
+                >
+                  {nav.href ? (
                     <Anchor
                       component={Link}
                       href={'/'}
@@ -41,7 +45,7 @@ const HeaderNavWrapper = () => {
                     >
                       홈
                     </Anchor>
-                    :
+                  ) : (
                     <UnstyledButton
                       size={`sm`}
                       onClick={toggle}
@@ -50,7 +54,7 @@ const HeaderNavWrapper = () => {
                     >
                       {nav.name}
                     </UnstyledButton>
-                  }
+                  )}
                 </Flex>
               );
             })}
@@ -77,24 +81,31 @@ const HeaderNavWrapper = () => {
           <Flex maw={`1224px`} w={`100%`}>
             <Box w={34} h={34} />
             {NAVIGATION_LIST.map((nav, index) => {
-              return <>
-                <Flex w={152} p={12} mx={12} align={`center`} direction={`column`}>
-                  {nav.menuList.map((menu, index) => {
-                    return (
-                      <Anchor
-                        href={menu.href}
-                        component={Link}
-                        className={classes['header-collapse-link']}
-                        pb={12}
-                      >
-                        {menu.name}
-                      </Anchor>
-                    );
-                  })}
-                </Flex>
-              </>
-            })
-            }
+              return (
+                <>
+                  <Flex
+                    w={152}
+                    p={12}
+                    mx={12}
+                    align={`center`}
+                    direction={`column`}
+                  >
+                    {nav.menuList.map((menu, index) => {
+                      return (
+                        <Anchor
+                          href={menu.href}
+                          component={Link}
+                          className={classes['header-collapse-link']}
+                          pb={12}
+                        >
+                          {menu.name}
+                        </Anchor>
+                      );
+                    })}
+                  </Flex>
+                </>
+              );
+            })}
           </Flex>
         </Flex>
       </Collapse>
