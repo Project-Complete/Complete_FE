@@ -1,6 +1,9 @@
 import '@mantine/core/styles.css';
 import '@team-complete/complete-ui/style.css';
 import './style.scss';
+import '@mantine/carousel/styles.css';
+import '@mantine/dropzone/styles.css';
+
 import type { Metadata } from 'next';
 import { ColorSchemeScript } from '@mantine/core';
 import Provider from './(provider)/Provider';

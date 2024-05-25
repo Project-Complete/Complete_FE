@@ -11,7 +11,6 @@ import { useMemo } from 'react';
 import React from 'react';
 import { Carousel } from '@mantine/carousel';
 import MainDrinkCard from './MainDrinkContentCard';
-import '@mantine/carousel/styles.css';
 
 
 const MainDrinkContent = ({
