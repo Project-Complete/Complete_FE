@@ -65,7 +65,7 @@ const SelectedBanner = ({ drinks: propsDrinks }: SelectedBannerPropsType) => {
 
 
   return (
-    <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'} p={20} h={300}>
+    <Flex w={'100%'} h={'100%'} maw={1224} align={'center'} pos={'relative'} p={20}>
       <Flex w={'100%'}>
         {drinks[0] && (
           <PourAnimation isSelectComplete={isSelectComplete}>
