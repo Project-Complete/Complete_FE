@@ -1,7 +1,7 @@
 import { Rating } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
-import classes from './Card.module.scss';
+import classes from './DrinkListCard.module.scss';
 
 const BlenderDrinkListCard = ({
   drink_id,

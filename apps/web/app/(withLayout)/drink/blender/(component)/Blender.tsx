@@ -4,7 +4,7 @@ import Image from 'next/image';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
 import blenderClasses from './Blender.module.scss';
-import { useBlenderDetailQuery } from '@/hooks/queries/useBlenderDetailQuery';
+import { useBlenderDetailQuery } from '@/hooks/queries/blenders/useBlenderDetailQuery';
 import { useParams } from 'next/navigation';
 import { formattedDate } from '@/utils/formattedDate';
 import { date } from 'zod';

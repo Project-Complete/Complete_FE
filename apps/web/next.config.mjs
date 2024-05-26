@@ -31,6 +31,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'file.hitejinro.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'img1.daumcdn.net',
+      },
     ],
   },
   reactStrictMode: false,

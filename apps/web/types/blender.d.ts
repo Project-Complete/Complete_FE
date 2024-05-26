@@ -22,3 +22,26 @@ interface Blender {
     ycoordinate: number;
   }[];
 }
+
+
+interface BlenderListElement {
+  combination_board_id: number;
+  image_url: string;
+  title: string;
+  nickname: string;
+  combination_like: boolean;
+  combination_bookmark: boolean;
+}
+
+interface PageInfo {
+  page: number;
+  size: number;
+  total_elements: number;
+  total_pages: number;
+  sort: string;
+}
+
+interface BlenderList {
+  combinations: BlenderListElement[];
+  page_info: PageInfo;
+}
