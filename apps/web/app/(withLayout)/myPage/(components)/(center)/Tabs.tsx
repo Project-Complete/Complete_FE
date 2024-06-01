@@ -11,7 +11,7 @@ const MyPageCenterTabs = ({ index }: { index: number }) => {
       {myInfoData && index === 0 && (
         <MyPageCenterReviewList myInfoData={myInfoData} />
       )}
-      {myInfoData && index === 1 && <MyPageDrinkList myInfoData={myInfoData} />}
+      {myInfoData && index === 1 && <MyPageDrinkList />}
     </>
   );
 };

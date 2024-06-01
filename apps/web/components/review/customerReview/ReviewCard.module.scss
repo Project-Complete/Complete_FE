@@ -6,6 +6,12 @@
     }
 }
 
+.review-detail-card-close-button{
+    position: absolute;
+    right:1.5rem;
+    top:1rem;
+}
+
 .review-detail-card{
     & section {
         width: 100%;

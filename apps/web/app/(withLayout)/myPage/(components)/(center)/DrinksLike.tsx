@@ -16,7 +16,7 @@ import classes from './center.module.scss';
 import Link from 'next/link';
 import LikeButton from '@/components/button/LikeButton';
 
-const MyPageDrinkList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
+const MyPageDrinkList = () => {
   const { data, fetchNextPage, hasNextPage } = useDrinksLikeListQuery({
     size: 9,
   });

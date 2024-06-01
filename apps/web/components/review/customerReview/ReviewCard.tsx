@@ -68,7 +68,10 @@ const CustomerReviewCard = ({
           <ModalOverlay />
           <ModalContent className={classes['review-detail-card']}>
             <Box className={classes['review-detail-wrapper']}>
-              <ModalHeader className={classes['review-detail-header']}>
+              <ModalCloseButton
+                className={classes[`review-detail-card-close-button`]}
+              />
+              <Flex px={'1.5rem'} className={classes[`review-detail-header`]}>
                 <Flex gap={'24px'}>
                   <Box onClick={imageModalHandler}>
                     <Image
@@ -101,17 +104,16 @@ const CustomerReviewCard = ({
                     </Box>
                   </Flex>
                 </Flex>
-                <ModalCloseButton />
                 {/* <Box h={'100%'} mb={'auto'}>
                   
                   <Button
-                    variant={'primary'}
-                    className={classes[`review-follow-button`]}
+                  variant={'primary'}
+                  className={classes[`review-follow-button`]}
                   >
-                    팔로우
+                  팔로우
                   </Button>
                 </Box> */}
-              </ModalHeader>
+              </Flex>
               <ModalBody>
                 <Box>평가</Box>
                 <ReviewEvaluation data={data} />
