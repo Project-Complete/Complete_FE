@@ -12,6 +12,7 @@
   "dependencies": {
     "@mantine/carousel": "7.9.0",
     "@mantine/core": "7.9.0",
+    "@mantine/dropzone": "^7.10.0",
     "@mantine/form": "7.9.0",
     "@mantine/hooks": "7.9.0",
     "@next/bundle-analyzer": "^14.1.0",
@@ -26,12 +27,13 @@
     "immer": "^10.0.3",
     "js-cookie": "^3.0.5",
     "ky": "^1.2.0",
+    "mantine-form-zod-resolver": "^1.1.0",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "yarn": "^1.22.22",
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.2",

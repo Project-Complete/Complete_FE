@@ -4,6 +4,8 @@ import Image from 'next/image';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
 import blenderClasses from './Blender.module.scss';
+import { useState } from 'react';
+import { useForm } from '@mantine/form';
 
 const Blender = () => {
     return <Flex w={600} direction={'column'} gap={12}>
