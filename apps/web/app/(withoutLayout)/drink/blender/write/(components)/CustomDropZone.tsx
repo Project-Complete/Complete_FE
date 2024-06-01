@@ -6,10 +6,7 @@ import Image from 'next/image';
 const CustomDropZone = (props: Partial<DropzoneProps>) => {
     return (
         <Dropzone
-            onDrop={(files) => console.log('accepted files', files)}
-            onReject={(files) => console.log('rejected files', files)}
-            maxSize={5 * 1024 ** 2}
-            accept={IMAGE_MIME_TYPE}
+            onDrop={() => { }}
             {...props}
         >
             <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
