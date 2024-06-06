@@ -1,10 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import SectionHeader from './SectionHeader';
 import classes from './ReviewWriteForm.module.scss';
 import Image from 'next/image';
 import HelpMessageButton from './HelpMessageButton';
-import { Divider, Flex, Rating, Textarea } from '@mantine/core';
+import { Divider, Flex, Rating, Text, Textarea } from '@mantine/core';
 import SituationButton from './SituationButton';
 import FoodButton from './FoodButton';
 import { FormValues, ReviewFormProvider, useReviewForm } from './form-context';
@@ -17,6 +17,7 @@ import {
   useReviewWriteMutate,
 } from '@/hooks/mutates/useReviewWriteMutate';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export interface Situation {
   alone: boolean;
@@ -113,31 +114,54 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
       foods: Array.from({ length: foodItems.length }, () => false),
     },
     validate: {
-      content: value =>
-        value.trim().length < 20 || value.length > 250
+      content: value => {
+        return value.trim().length < 20 || value.length > 250
           ? '리뷰는 20자 이상 250자 이하여야 합니다.'
-          : null,
+          : null;
+      },
+      rating: value => {
+        console.log('rating', value);
+        return value < 1 && value > 5
+          ? null
+          : '해당 주류에 대한 별점을 매겨주세요.';
+      },
       situation_dto: value => {
-        let trues = 0;
+        let cnt = 0;
         if (value.adult) {
-          trues++;
+          cnt++;
         }
         if (value.alone) {
-          trues++;
+          cnt++;
         }
         if (value.business) {
-          trues++;
+          cnt++;
         }
         if (value.friend) {
-          trues++;
+          cnt++;
         }
         if (value.partner) {
-          trues++;
+          cnt++;
         }
-
-        return trues > 3 || trues < 1
-          ? '1개 이상, 3개 이하로 선택해주세요.'
-          : null;
+        return cnt > 3 || cnt < 1 ? '1개 이상, 3개 이하로 선택해주세요.' : null;
+      },
+      taste_dto: value => {
+        let isAllTasteChecked = false;
+        if (
+          value.sweet >= 1 &&
+          value.sweet <= 5 &&
+          value.bitter >= 1 &&
+          value.bitter <= 5 &&
+          value.body >= 1 &&
+          value.body <= 5 &&
+          value.sour >= 1 &&
+          value.sour <= 5 &&
+          value.refresh >= 1 &&
+          value.refresh <= 5
+        ) {
+          isAllTasteChecked = true;
+        }
+        console.log('taste', value);
+        return isAllTasteChecked ? null : '느껴지는 맛을 평가해주세요.';
       },
     },
     transformValues: values => ({
@@ -219,6 +243,13 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
       throw new Error('리뷰 작성 실패');
     }
   };
+
+  useLayoutEffect(() => {
+    if (!Cookies.get('access_token')) {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <ReviewFormProvider form={form}>
       <form
@@ -282,6 +313,9 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             }
             {...form.getInputProps('rating')}
           />
+          {form.errors['rating'] && (
+            <Text variant='error'>{form.errors['rating']}</Text>
+          )}
           <HelpMessageButton message={'해당 주류에 대한 별점을 매겨주세요.'} />
           <Textarea
             className={classes['textarea']}
@@ -308,6 +342,9 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             ))}
           </div>
         </div>
+        {form.errors['situation_dto'] && (
+          <Text variant='error'>{form.errors['situation_dto']}</Text>
+        )}
         <HelpMessageButton message='누구랑 마시면 좋을지 1개 이상, 3개 이하 선택해주세요.' />
         <Divider my={'2.5rem'} />
 
@@ -325,6 +362,9 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
             <TasteInput taste='body' />
           </div>
         </div>
+        {form.errors['taste_dto'] && (
+          <Text variant='error'>{form.errors['taste_dto']}</Text>
+        )}
         <HelpMessageButton message='느껴지는 맛을 평가해주세요.' />
         <Divider my={'2.5rem'} />
 
