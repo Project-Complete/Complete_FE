@@ -27,14 +27,15 @@
 .detail-age-tab-max-width{
   max-width: 1240px;
   width:100%;
-  height:3rem;
+  height:3.5rem;
   div{
-    
-    overflow-y: hidden;
+    // overflow-y: hidden;
     overflow-x: auto;
     flex-wrap: nowrap;
-    width: 100vw;
-    height:3rem;
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    height:3.5rem;
   }
 
 }

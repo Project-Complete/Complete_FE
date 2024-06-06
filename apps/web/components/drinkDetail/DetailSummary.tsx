@@ -1,4 +1,4 @@
-import { Flex, Text, Title, em } from '@mantine/core';
+import { Box, Flex, Text, Title, em } from '@mantine/core';
 import Image from 'next/image';
 import React, { Fragment } from 'react';
 import classes from './DetailSummary.module.scss';
@@ -63,19 +63,20 @@ const DetailSummary = ({
         <Flex direction={'column'}>
           <Flex
             bg='white'
-            w={392}
-            h={392}
+            w={'100%'}
+            h={'21.75rem'}
             className={classes['drink-image']}
             justify={'center'}
-            pt={30}
+            mt={30}
             mb={4}
           >
-            <Image
-              src={'/beer.svg'}
-              alt='맥주'
-              width={438.72}
-              height={625.58}
-            />
+            <Box
+              pos={'relative'}
+              w={'21.75rem'}
+              h={'21.75rem'}
+            >
+              <Image src={'/beer.svg'} alt='맥주' fill />
+            </Box>
           </Flex>
           <Flex ml={'auto'} pr={isMobile ? '0.8rem' : ''}>
             <Text
