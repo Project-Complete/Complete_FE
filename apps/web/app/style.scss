@@ -38,4 +38,16 @@
   --font-height-md: '2rem';
   --font-height-sm: '1.875rem';
   --font-height-xs: '1.5rem';
+
+  p {
+    &[data-variant='error'] {
+      color: var(--mantine-color-error);
+      font-size: var(
+        --input-error-size,
+        calc(
+          var(--mantine-font-size-sm) - calc(0.125rem * var(--mantine-scale))
+        )
+      );
+    }
+  }
 }
