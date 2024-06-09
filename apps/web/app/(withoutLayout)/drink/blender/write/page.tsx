@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Box, Divider, Input, Image as MantineImage } from '@mantine/core';
+import { Flex, Box, Divider, Input, Image as MantineImage, Popover } from '@mantine/core';
 import { Button } from '@team-complete/complete-ui';
 import containerCss from './container.module.scss';
 import LoginButton from '@/components/login/LoginButton';
@@ -13,6 +13,7 @@ import { IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useRef, useState } from 'react';
 import { IconCirclePlus } from '@tabler/icons-react';
 import { randomId } from '@mantine/hooks';
+import SearchDrinkPopover from './(components)/SearchDrinkPopover';
 
 function checkFileType(file: File) {
     if (file?.name) {
@@ -39,7 +40,13 @@ const schema = z.object({
 })
 
 export default function Page(): JSX.Element {
-    const blenderWriteForm = useForm({
+    const blenderWriteForm = useForm<{
+        file: File | null,
+        title: string,
+        description: string,
+        content: string,
+        combinations: { id: string, xcoodinate: number, ycoodinate: number }[]
+    }>({
         mode: 'uncontrolled',
         initialValues: {
             file: null,
@@ -51,8 +58,8 @@ export default function Page(): JSX.Element {
         validateInputOnBlur: true,
         validate: zodResolver(schema),
     });
-    const [combinations, setCombinations] = useState<{ id: string, xcoodinate: number, ycoodinate: number }[]>([]);
     const [selectedCombinationId, setSelectedCombinationId] = useState<string | null>(null);
+    const [selectedCombinationPopover, setSelectedCombinationPopover] = useState<string | null>(null);
 
 
 
@@ -62,112 +69,163 @@ export default function Page(): JSX.Element {
     const handleAddCombination = (
         e: React.MouseEvent<HTMLDivElement, MouseEvent>
     ) => {
+        e.stopPropagation();
+        e.preventDefault();
+        // 이미지를 클릭하는 경우 combination 을 추가한다.
         if (selectedCombinationId !== null) return;
+        if (selectedCombinationPopover !== null) {
+            console.log("")
+            setSelectedCombinationPopover(null);
+            return;
+        }
         const { clientX, clientY } = e;
         const { top, left, width, height } = e.currentTarget.getBoundingClientRect();
-        const xcoodinate = (clientX - left) / width;
-        const ycoodinate = (clientY - top) / height;
+        const xcoodinate = (clientX - left) / width * 100;
+        const ycoodinate = (clientY - top) / height * 100;
         const id = randomId()
-        setCombinations([...combinations, { id, xcoodinate, ycoodinate }]);
+        blenderWriteForm.setFieldValue('combinations', [...blenderWriteForm.getValues().combinations, { id, xcoodinate, ycoodinate }]);
+        setSelectedCombinationPopover(id);
     }
-
-    // const handleOnClickMoveCombinationAction = (
-    //     e: React.MouseEvent<HTMLDivElement, MouseEvent>
-    // ) => {
-    //     const { clientX, clientY } = e;
-    //     const { top, left, width, height } = e.currentTarget.getBoundingClientRect();
-    //     const xcoodinate = (clientX - left) / width;
-    //     const ycoodinate = (clientY - top) / height;
-    //     const updatedCombinations = combinations.map((combination) => {
-    //         return {
-    //             ...combination,
-    //             xcoodinate,
-    //             ycoodinate,
-    //         };
-    //     });
-    //     setCombinations(updatedCombinations);
-    // }
-
 
     const imageRef = useRef<HTMLDivElement | null>(null);
 
+    const handleOnMouseDownSelectCombination = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        // combination 을 선택하는 경우 해당 combination 의 id 를 저장한다.
+        const combinationId = e.currentTarget.dataset.combinationId;
+        combinationId && setSelectedCombinationId(combinationId);
+        combinationId && setSelectedCombinationPopover(combinationId);
+    }
 
+    const getInnerCoodinateMaxMin = (value: number, max: number, min: number): number => {
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    const handleOnMouseMoveMoveCombination = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        // 선택된 combination 을 이동한다.
+        // style로 x,y 좌표를 변경하여 렌더링 최적화를 하였음.
+        const element = e.currentTarget.querySelector(`[data-combination-id="${selectedCombinationId}"]`) as HTMLDivElement | null;
+        if (element && selectedCombinationId && imageRef.current) {
+            const { clientX, clientY } = e;
+            const wrappingElementSize = imageRef.current.getBoundingClientRect();
+            const combinationElementSize = element?.getBoundingClientRect().width / 2;
+            const xcoodinate = getInnerCoodinateMaxMin(clientX - wrappingElementSize.left, wrappingElementSize.width - combinationElementSize, combinationElementSize) / wrappingElementSize.width;
+            const ycoodinate = getInnerCoodinateMaxMin(clientY - wrappingElementSize.top, wrappingElementSize.height - combinationElementSize, combinationElementSize) / wrappingElementSize.height;
+            element.style.left = `${xcoodinate * 100}%`;
+            element.style.top = `${ycoodinate * 100}%`;
+        }
+    }
+
+    const handleOnMouseUpUnselectCombination = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        // 마지막에 저장된 위치를 속성 값에서 가져와서 form 에 갱신한다.
+        const updatedCombinations = blenderWriteForm.getValues().combinations.map((combination) => {
+            if (combination.id === selectedCombinationId) {
+                const element = e.currentTarget.querySelector(`[data-combination-id="${selectedCombinationId}"]`) as HTMLDivElement | null;
+                if (element) {
+                    const xcoodinate = element.style.left;
+                    const ycoodinate = element.style.top;
+                    console.log("xcoodinate", xcoodinate, "ycoodinate", ycoodinate)
+                    return {
+                        id: selectedCombinationId, xcoodinate: parseFloat(xcoodinate), ycoodinate: parseFloat(ycoodinate)
+                    }
+                }
+            }
+            return combination;
+        })
+        blenderWriteForm.setFieldValue('combinations', updatedCombinations);
+        // 선택된 combination 을 초기화한다.
+        setSelectedCombinationId(null);
+    }
 
     return <>
-        <Flex classNames={containerCss} direction={'column'}>
+        <Flex classNames={containerCss} direction={'column'}
+            onMouseMove={handleOnMouseMoveMoveCombination}
+            onMouseUp={handleOnMouseUpUnselectCombination}>
             <Flex py={24} gap={12} align={'center'} w={'100%'}>
                 <Flex fz={24} fw={800} lh={'40px'}>한잔 말아먹기</Flex>
                 <Divider orientation="vertical" h={16} style={{ alignSelf: 'center' }} />
                 <Flex fz={18} fw={500} lh={"24px"} >칠러님의 한 잔을 소개해주세요!</Flex>
             </Flex >
             <Divider />
-            <Flex className={containerCss['responsive']} gap={32} w={'100%'}>
-                <Flex direction={'column'} c={'#00000073'}>
-                    {blenderWriteForm.getValues().file ? <Flex ref={imageRef} bg={'#E5E6E8'} pos={'relative'} justify={'center'} align={'center'} gap={16} onClick={handleAddCombination} draggable={true}>
+            <Flex className={containerCss['responsive']} gap={32} w={'100%'} draggable={false}>
+                <Flex direction={'column'} c={'#00000073'} draggable={false}>
+                    {blenderWriteForm.getValues().file ? <Flex ref={imageRef} bg={'#E5E6E8'} pos={'relative'} justify={'center'} align={'center'} gap={16} onMouseDown={handleAddCombination} draggable={false}>
                         {imageUrl && <>
-                            <MantineImage fit="cover" w={384} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} style={{ pointerEvents: 'none' }}
-                            // draggable={true}
+                            <MantineImage fit="cover" w={384} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} style={{ pointerEvents: 'none', userSelect: 'none' }}
                             />
-                            {combinations.map((combination, index) => {
-                                return <Flex
-                                    // draggable={}
-                                    key={index}
-                                    pos={'absolute'}
-                                    w={16}
-                                    h={16}
-                                    style={{
-                                        pointerEvents: 'all',
-                                        mouse: 'grab',
-                                        top: combination.ycoodinate * 100 + '%',
-                                        left: combination.xcoodinate * 100 + '%',
-                                        transform: 'translate(-50%, -50%)',
-                                    }}
-                                    onMouseDown={(e) => {
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        setSelectedCombinationId(combination.id);
-                                    }}
-                                    onMouseMove={(e) => {
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        if (selectedCombinationId && imageRef.current) {
-                                            const { clientX, clientY } = e;
-                                            const { top, left, width, height } = imageRef.current.getBoundingClientRect();
-                                            const xcoodinate = (clientX - left) / width;
-                                            const ycoodinate = (clientY - top) / height;
-                                            const updatedCombinations = combinations.map((combination) => {
-                                                if (combination.id === selectedCombinationId) {
-                                                    return {
-                                                        ...combination,
-                                                        xcoodinate,
-                                                        ycoodinate,
-                                                    };
-                                                }
-                                                return combination;
-                                            });
-                                            setCombinations(updatedCombinations);
-                                        }
-                                    }}
-                                    onMouseUp={(e) => {
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        setSelectedCombinationId(null);
-
-                                    }}
-
-                                >
-                                    <IconCirclePlus stroke={2} width={16} height={16} color={'#956faf'} />
-                                </Flex>
+                            {blenderWriteForm.getValues().combinations.map((combination, index) => {
+                                return <SearchDrinkPopover width={'auto'} key={index}
+                                    opened={combination.id === selectedCombinationPopover}
+                                    position="bottom"
+                                    offset={0}
+                                    trapFocus
+                                    withArrow>
+                                    <Flex
+                                        data-combination-id={combination.id}
+                                        pos={'absolute'}
+                                        w={16}
+                                        h={16}
+                                        style={{
+                                            pointerEvents: 'all',
+                                            mouse: 'grab',
+                                            top: combination.ycoodinate + '%',
+                                            left: combination.xcoodinate + '%',
+                                            transform: 'translate(-50%, -50%)',
+                                        }}
+                                        onMouseDown={handleOnMouseDownSelectCombination}
+                                    >
+                                        <IconCirclePlus stroke={2} width={16} height={16} color={'#956faf'} />
+                                    </Flex>
+                                </SearchDrinkPopover>
                             })}
+                            {/* {blenderWriteForm.getValues().combinations.map((combination, index) => {
+                                return <Popover
+                                    width={200}
+                                    opened={combination.id === selectedCombinationPopover}
+                                    position="bottom"
+                                    offset={0}
+                                    withArrow
+                                    key={index}
+                                >
+                                    <Popover.Target>
+                                        <Flex
+                                            data-combination-id={combination.id}
+                                            pos={'absolute'}
+                                            w={16}
+                                            h={16}
+                                            style={{
+                                                pointerEvents: 'all',
+                                                mouse: 'grab',
+                                                top: combination.ycoodinate + '%',
+                                                left: combination.xcoodinate + '%',
+                                                transform: 'translate(-50%, -50%)',
+                                            }}
+                                            onMouseDown={handleOnMouseDownSelectCombination}
+                                        >
+                                            <IconCirclePlus stroke={2} width={16} height={16} color={'#956faf'} />
+                                        </Flex>
+                                    </Popover.Target>
+                                    <Popover.Dropdown>
+                                        <Flex>asdfqwer</Flex>
+                                    </Popover.Dropdown>
+                                </Popover>
+                            })} */}
                         </>}
                     </Flex> : <CustomDropZone
                         onDrop={(files) => {
                             console.log('accepted files', files)
-                            const file = files?.[0];
+                            const file = files?.[0] as File;
                             console.log('file', file)
-                            // if (file !== undefined) {
-                            //     blenderWriteForm.setFieldValue('file', file)
-                            // }
+                            if (file !== undefined) {
+                                blenderWriteForm.setFieldValue('file', file)
+                            }
                         }}
                         onReject={(files) => console.log('rejected files', files)}
                         maxSize={5 * 1024 ** 2}
@@ -198,7 +256,7 @@ export default function Page(): JSX.Element {
                     </Flex>
                     <Flex direction={'column'} gap={12} w={'100%'}>
                         <Flex>한 잔을 위한 재료</Flex>
-                        {Array.from({ length: 10 }).map((_, index) => {
+                        {blenderWriteForm.getValues().combinations.map((combination, index) => {
                             return < Flex gap={16} key={index}>
                                 <Input.Wrapper
                                     w={'100%'}
@@ -230,8 +288,8 @@ export default function Page(): JSX.Element {
                 </Flex>
             </Flex >
             <Flex>
-                <Button>작성 취소</Button>
-                <Button>작성 완료</Button>
+                <Button size="md" variant="primary">작성 취소</Button>
+                <Button size="md" variant="primary">작성 완료</Button>
             </Flex>
         </Flex >
     </>
