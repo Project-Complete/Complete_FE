@@ -2,6 +2,7 @@ import { Rating } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import classes from './DrinkListCard.module.scss';
+import LikeButton from '@/components/button/LikeButton';
 
 const BlenderDrinkListCard = ({
   drink_id,
@@ -12,9 +13,9 @@ const BlenderDrinkListCard = ({
 }: Omit<DetailRecommendDrink, 'review_rating'>) => {
   console.log(image_url);
   return (
-    <Link href={`/drink/${drink_id}`} className={classes['card-wrapper']}>
+    <div className={classes['card-wrapper']}>
       {/* 이미지 부분 */}
-      <div className={classes['card-image']}>
+      <Link href={`/drink/${drink_id}`} className={classes['card-image']}>
         <Image
           src={
             image_url === 'imageUrl' || image_url === null
@@ -24,24 +25,24 @@ const BlenderDrinkListCard = ({
           alt='주류 이미지'
           fill
         />
-      </div>
+      </Link>
       <div className={classes['card-content-wrapper']}>
         {/* 제조사 */}
         <div className={classes['card-content-manu-like']}>
           <div className={classes['card-content-manu']}>
             {manufacturer_name}
           </div>
-          <div className={classes['card-content-like']}>
-            {drink_like ? (
-              <Image src='/icons/like_fill.svg' alt='좋아요' fill></Image>
-            ) : (
-              <Image src='/icons/like.svg' alt='좋아요' fill></Image>
-            )}
-          </div>
+          <div className={classes['card-content-drinkname']}>{drink_name}</div>
         </div>
-        <div className={classes['card-content-drinkname']}>{drink_name}</div>
+        <div className={classes['card-content-like']}>
+          <LikeButton
+            drink_like={drink_like}
+            drink_id={drink_id ? drink_id : 0}
+            isMyPage={true}
+          />
+        </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 'use client';
-import { Avatar, Button, Divider, Flex, Input } from '@mantine/core';
+import { Avatar, Box, Button, Divider, Flex, Input, Text } from '@mantine/core';
 import Image from 'next/image';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
@@ -10,6 +10,7 @@ import { formattedDate } from '@/utils/formattedDate';
 import { date } from 'zod';
 import { Fragment } from 'react';
 import BlenderDrinkListCard from './DrinkList';
+import Point from '@/assets/Point';
 
 const Blender = () => {
   const detailId = useParams<{ detail: string }>()!;
@@ -25,7 +26,7 @@ const Blender = () => {
         </Flex>
         <Flex direction={'column'} gap={12} my={12}>
           <Flex fz={18} fw={800} lh={'40px'}>
-            주류 이름
+            {data.title}
           </Flex>
           <Flex align={'center'} gap={12} w={'100%'}>
             <Avatar size={40} radius={'100%'} src={data.profile_image_url} />
@@ -58,7 +59,7 @@ const Blender = () => {
                 width={40}
                 height={40}
               />
-              갯수
+              {data.combination_like_count}
             </Flex>
             <Flex align={'center'}>
               <Image
@@ -68,13 +69,14 @@ const Blender = () => {
                 width={40}
                 height={40}
               />
-              갯수
+              {data.combination_bookmark_count}
             </Flex>
           </Flex>
         </Flex>
         <Divider my={24} />
-        <Flex p={24} gap={12} mb={24} direction={'column'} bg={'#F2F3F3'}>
-          <Flex fz={18} fw={500} lh={'24px'}>
+        <Flex p={24} gap={12} mb={24} direction={'column'}>
+          <Flex fz={18} fw={500} lh={'24px'} gap={'0.5rem'} align='center'>
+            <Point />
             만드는 방법
           </Flex>
           <Flex fz={16} fw={400} lh={'24px'}>
@@ -82,8 +84,15 @@ const Blender = () => {
           </Flex>
         </Flex>
         <Flex direction={'column'}>
-          <Flex fz={18} fw={500} lh={'24px'} mb={12}>
-            사용 재료
+          <Flex
+            fz={18}
+            fw={500}
+            lh={'24px'}
+            mb={12}
+            align={'center'}
+            gap={'0.5rem'}
+          >
+            <Point /> 사용 재료
           </Flex>
           <Flex mb={24} gap={24}>
             {data.combinations.map((e, i) => (

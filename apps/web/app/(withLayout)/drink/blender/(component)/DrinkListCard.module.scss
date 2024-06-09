@@ -4,21 +4,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 1rem;
+    gap: 0.5rem;
     text-decoration: none;
-    min-width: 9rem;
-    max-width: 18rem;
-    min-height: 13rem;
-    max-height: 22rem;
+    width: 9rem;
+    height:14rem;
 }
 
 .card-image{
-    width: 100%;
-    height: 100%;
-    min-width: 9rem;
-    min-height: 9rem;
-    max-height: 18rem;
-    max-width: 18rem;
+    width: 9rem;
+    height: 9rem;
+
     margin-bottom: 1rem;
     position:relative;
     border-radius: var(--Corner-radius-12, 0.75rem);
@@ -29,8 +24,8 @@
 
 .card-content-wrapper{
     display: flex;
-    width: 18rem;
-    flex-direction: column;
+    width:100%;
+    flex-direction: row;
     align-items: flex-start;
     flex-shrink: 0;
     align-self: stretch;
@@ -38,9 +33,11 @@
 
 .card-content-manu-like{
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: var(--Spacing-24, 1.5rem);
+    // gap: var(--Spacing-24, 1.5rem);
     align-self: stretch;
+    
 }
 
 .card-content-manu{
@@ -49,11 +46,10 @@
     flex-direction: column;
     justify-content: center;
     flex: 1 0 0;
-
     color: var(--Font-text-muted, rgba(0, 0, 0, 0.45));
     
     /* Card/Lable-Medium */
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-sm,0.875rem);
     font-style: normal;
     font-weight: 500;
     line-height: var(--font-height-sm,1.875rem);
@@ -62,15 +58,21 @@
 
 .card-content-like{
     width: 2rem;
-    height: 2rem;
+    height: 3rem;
+    margin-left:auto;
     flex-shrink: 0;
     position:relative;
+    display: flex;
+    align-items: center;
 }
 
 .card-content-drinkname{
+    width: 7rem;
     align-self: stretch;
     color: var(--Font-text-active, rgba(0, 0, 0, 0.85));
-    
+    white-space: nowrap; // 텍스트를 한 줄로 설정
+    overflow: hidden; // 넘치는 텍스트를 숨김
+    text-overflow: ellipsis; // 넘치는 텍스트를 ...으로 표시
     /* Card/Title2-Semibold */
     font-family: Pretendard;
     font-size: var(--font-size-xl,1.25rem);
