@@ -1,5 +1,15 @@
 'use client';
-import { Avatar, Box, Button, Divider, Flex, Input, Text } from '@mantine/core';
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Input,
+  Menu,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
 import Image from 'next/image';
 import heart from '@/assets/heart.svg';
 import bookmark from '@/assets/bookmark.svg';
@@ -11,6 +21,9 @@ import { date } from 'zod';
 import { Fragment } from 'react';
 import BlenderDrinkListCard from './DrinkList';
 import Point from '@/assets/Point';
+import { useDeleteBlenderMutation } from '@/hooks/mutates/useBlenderMutate';
+import BlenderLikeButton from '@/components/button/BlenderLikeButton';
+import BlenderBookmarkButton from '@/components/button/BlenderBookmarkButton';
 
 const Blender = () => {
   const detailId = useParams<{ detail: string }>()!;
@@ -18,6 +31,7 @@ const Blender = () => {
     detailId: parseInt(detailId?.detail),
   });
   console.log(data);
+  const { mutate: deleteMutate } = useDeleteBlenderMutation();
   if (data) {
     return (
       <Flex w={600} direction={'column'} gap={12}>
@@ -39,12 +53,43 @@ const Blender = () => {
               </Flex>
             </Flex>
             <Flex w={24} h={'100%'}>
-              <Image
-                src={'/icons/더보기.svg'}
-                width={24}
-                height={24}
-                alt={'더보기'}
-              />
+              <Menu position='bottom-end'>
+                <Menu.Target>
+                  <UnstyledButton>
+                    <Image
+                      src={'/icons/더보기.svg'}
+                      width={24}
+                      height={24}
+                      alt={'더보기'}
+                    />
+                  </UnstyledButton>
+                </Menu.Target>
+                <Menu.Dropdown w={'11.6rem'}>
+                  <Menu.Item
+                    fw={'1rem'}
+                    lh={'1rem'}
+                    px={'6px'}
+                    py={'12px'}
+                    color={'rgba(0, 0, 0, 0.65)'}
+                  >
+                    수정하기
+                  </Menu.Item>
+                  <Menu.Item
+                    fw={'1rem'}
+                    lh={'1rem'}
+                    px={'6px'}
+                    py={'12px'}
+                    color={'rgba(0, 0, 0, 0.65)'}
+                    onClick={() => {
+                      deleteMutate({
+                        combinationsId: data.combination_board_id,
+                      });
+                    }}
+                  >
+                    삭제하기
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
             </Flex>
           </Flex>
           <Flex fz={16} fw={400} lh={'24px'}>
@@ -52,22 +97,23 @@ const Blender = () => {
           </Flex>
           <Flex align={'center'} justify={'flex-end'} gap={12}>
             <Flex align={'center'}>
-              <Image
-                src={heart}
-                alt='like'
-                style={{ padding: 8 }}
-                width={40}
-                height={40}
+              <BlenderLikeButton
+                combinationsId={data.combination_board_id}
+                isLike={data.combination_like}
               />
               {data.combination_like_count}
             </Flex>
             <Flex align={'center'}>
-              <Image
+              {/* <Image
                 src={bookmark}
                 alt='bookmark'
                 style={{ padding: 8 }}
                 width={40}
                 height={40}
+              /> */}
+              <BlenderBookmarkButton
+                combinationsId={data.combination_board_id}
+                isBookmark={data.combination_bookmark}
               />
               {data.combination_bookmark_count}
             </Flex>
