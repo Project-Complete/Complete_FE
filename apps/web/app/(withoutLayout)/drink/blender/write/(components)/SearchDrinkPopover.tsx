@@ -1,21 +1,24 @@
-import AnotherDrinkListCard from "@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/Card";
 import { useMainSearchDrinkInfinityQuery } from "@/hooks/queries/useMainSearchDrinkInfinityQuery";
 import { Divider, Flex, Popover, PopoverProps } from "@mantine/core";
 import { Button, Input } from "@team-complete/complete-ui";
 import { useCallback, useState } from "react";
-import cardListCss from '@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/List.module.scss';
+
 import Image from 'next/image';
+import { useBlenderWriteFormContext } from "./blenderWriteFormContext";
 
 type SearchDrinkPopoverPropsType = PopoverProps & {
     children: React.ReactNode
+    handleClosePopover: () => void
+    index: number;
 }
 
-const SearchDrinkPopover = ({ children, ...popoverProps }: SearchDrinkPopoverPropsType) => {
+const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverProps }: SearchDrinkPopoverPropsType) => {
 
     // 주류 외 재료인데 뭐라 영어로 적지
     const [isAddOtherIngredient, setIsAddOtherIngredient] = useState(false);
 
-    const [selectedDrink, setSelectedDrink] = useState<null | string>(null);
+    const [selectedDrinkName, setSelectedDrinkName] = useState<string>('');
+    const [volume, setVolume] = useState<string>('');
     const [keyword, setKeyword] = useState('');
 
     const toggleIsAddOtherIngredient = useCallback(() => {
@@ -23,9 +26,24 @@ const SearchDrinkPopover = ({ children, ...popoverProps }: SearchDrinkPopoverPro
     }, [])
 
 
+    const blenderWriteForm = useBlenderWriteFormContext();
+
     const { data, fetchNextPage, hasNextPage } = useMainSearchDrinkInfinityQuery({
         keyword,
     });
+
+    const handleWriteComplete = () => {
+        blenderWriteForm.setFieldValue('combinations', (combinations) => {
+            const newCombination = [...combinations];
+            const temp = newCombination[index];
+            if (temp === undefined) return combinations;
+            temp.name = selectedDrinkName;
+            temp.volume = volume;
+            return newCombination;
+        });
+        handleClosePopover && handleClosePopover();
+
+    }
 
 
     return <Popover
@@ -57,11 +75,13 @@ const SearchDrinkPopover = ({ children, ...popoverProps }: SearchDrinkPopoverPro
         >
             {isAddOtherIngredient
                 ? <Flex direction={'column'} justify={'center'} align={'center'}>
-                    <Input placeholder="주류 외 재료를 입력해주세요." />
+                    <Input placeholder="주류 외 재료를 입력해주세요." value={volume} onChange={(e) => {
+                        setVolume(e.currentTarget.value);
+                    }} />
                     <Divider />
                     <Flex>
                         <Button onClick={toggleIsAddOtherIngredient}>취소</Button>
-                        <Button>작성 완료</Button>
+                        <Button onClick={handleWriteComplete}>작성 완료</Button>
                     </Flex>
                 </Flex>
                 : <Flex direction={'column'}>
@@ -74,9 +94,9 @@ const SearchDrinkPopover = ({ children, ...popoverProps }: SearchDrinkPopoverPro
                     {data?.pages?.map((page, index) => {
                         return (
                             <Flex direction={'column'} key={index}>
-                                {page.search_drinks.drinks.map(drink => {
+                                {page.search_drinks.drinks.map((drink, drinkIndex) => {
                                     return (
-                                        <Flex justify={'space-between'}>
+                                        <Flex justify={'space-between'} key={drinkIndex}>
                                             <Flex align={'center'} gap={20}>
                                                 <Image
                                                     style={{ borderRadius: 4 }}
@@ -94,7 +114,10 @@ const SearchDrinkPopover = ({ children, ...popoverProps }: SearchDrinkPopoverPro
                                                     <Flex fz={'16px'} fw={500} lh={'24px'}>{drink.drink_name}</Flex>
                                                 </Flex>
                                             </Flex>
-                                            <Button>선택</Button>
+                                            <Button onClick={() => {
+                                                setSelectedDrinkName(drink.drink_name);
+                                                toggleIsAddOtherIngredient();
+                                            }}>선택</Button>
                                         </Flex>
                                     );
                                 })}

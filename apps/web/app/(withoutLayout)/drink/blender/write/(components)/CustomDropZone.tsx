@@ -3,7 +3,11 @@ import { Button, Flex, Group, Text, rem } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import Image from 'next/image';
+import { useBlenderWriteFormContext } from './blenderWriteFormContext';
 const CustomDropZone = (props: Partial<DropzoneProps>) => {
+
+    const blenderWriteForm = useBlenderWriteFormContext();
+    console.log('blenderWriteForm', blenderWriteForm)
     return (
         <Dropzone
             onDrop={() => { }}
