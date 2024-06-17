@@ -9,7 +9,7 @@ type PostCreateCombinationType = {
     description: string;
     content: string;
     combinations: {
-        drink_id: number;
+        drink_id: number | null;
         name: string;
         volume: string;
         xcoordinate: number,
@@ -19,7 +19,7 @@ type PostCreateCombinationType = {
 
 
 const postCreateCombination = async (variables: PostCreateCombinationType) => {
-    const res = api.post(`reviews`, {
+    const res = api.post(`combinations`, {
         json: variables
     }).json();
     return res;

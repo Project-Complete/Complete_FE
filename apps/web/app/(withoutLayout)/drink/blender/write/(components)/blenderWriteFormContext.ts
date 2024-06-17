@@ -9,7 +9,8 @@ const schema = z.object({
     description: z.string().min(1, '한 잔 소개는 필수 입니다.'),
     content: z.string().min(1, '어떻게 만드는 지 알려주세요.'),
     combinations: z.array(z.object({
-        drink_id: z.number(),
+        id: z.string(),
+        drink_id: z.number().nullable(),
         name: z.string(),
         volume: z.string(),
         xcoordinate: z.number(),
@@ -22,7 +23,7 @@ export type blenderWriteFormInitialValuesTypes = {
     title: string,
     description: string,
     content: string,
-    combinations: { id: string, name: string, volume: string, xcoordinate: number, ycoordinate: number }[]
+    combinations: { id: string, drink_id: number | null, name: string, volume: string, xcoordinate: number, ycoordinate: number }[]
 }
 
 export const blenderWriteFormInitialValues = {

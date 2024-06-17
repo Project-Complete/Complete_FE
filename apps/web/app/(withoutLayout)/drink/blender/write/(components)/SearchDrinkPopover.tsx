@@ -17,7 +17,10 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
     // 주류 외 재료인데 뭐라 영어로 적지
     const [isAddOtherIngredient, setIsAddOtherIngredient] = useState(false);
 
-    const [selectedDrinkName, setSelectedDrinkName] = useState<string>('');
+    const [selectedDrink, setSelectedDrink] = useState<{ drink_name: string, drink_id: number | null }>({
+        drink_name: '',
+        drink_id: null,
+    });
     const [volume, setVolume] = useState<string>('');
     const [keyword, setKeyword] = useState('');
 
@@ -37,7 +40,8 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
             const newCombination = [...combinations];
             const temp = newCombination[index];
             if (temp === undefined) return combinations;
-            temp.name = selectedDrinkName;
+            temp.name = selectedDrink.drink_name;
+            temp.drink_id = selectedDrink.drink_id;
             temp.volume = volume;
             return newCombination;
         });
@@ -115,7 +119,7 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
                                                 </Flex>
                                             </Flex>
                                             <Button onClick={() => {
-                                                setSelectedDrinkName(drink.drink_name);
+                                                setSelectedDrink({ drink_id: drink.drink_id, drink_name: drink.drink_name });
                                                 toggleIsAddOtherIngredient();
                                             }}>선택</Button>
                                         </Flex>

@@ -49,7 +49,7 @@ export default function Page(): JSX.Element {
         const xcoordinate = (clientX - left) / width * 100;
         const ycoordinate = (clientY - top) / height * 100;
         const id = randomId()
-        blenderWriteForm.setFieldValue('combinations', [...blenderWriteForm.getValues().combinations, { id, name: '', volume: '', xcoordinate, ycoordinate }]);
+        blenderWriteForm.setFieldValue('combinations', [...blenderWriteForm.getValues().combinations, { id, drink_id: null, name: '', volume: '', xcoordinate, ycoordinate }]);
         setSelectedCombinationPopover(id);
     }
 
@@ -140,7 +140,7 @@ export default function Page(): JSX.Element {
                 content: blenderWriteForm.getValues().content,
                 combinations: blenderWriteForm.getValues().combinations.map((v, index) => {
                     return {
-                        drink_id: index + 1,
+                        drink_id: v.drink_id,
                         name: v.name,
                         volume: v.volume,
                         xcoordinate: v.xcoordinate,
@@ -250,7 +250,7 @@ export default function Page(): JSX.Element {
                                             w={'100%'}
                                             label={index === 0 ? <Flex h={20} mb={8}>재료</Flex> : null}
                                         >
-                                            <Input placeholder='ex) 소주'  {...blenderWriteForm.getInputProps(`combinations.${index}.name`)} />
+                                            <Input placeholder='ex) 소주'  {...blenderWriteForm.getInputProps(`combinations.${index}.name`)} disabled={combination.drink_id !== null} />
                                         </Input.Wrapper>
                                         <Input.Wrapper
                                             w={'100%'}
