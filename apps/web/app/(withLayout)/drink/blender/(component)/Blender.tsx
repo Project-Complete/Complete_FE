@@ -11,26 +11,25 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import Image from 'next/image';
-import heart from '@/assets/heart.svg';
-import bookmark from '@/assets/bookmark.svg';
-import blenderClasses from './Blender.module.scss';
+
 import { useBlenderDetailQuery } from '@/hooks/queries/blenders/useBlenderDetailQuery';
 import { useParams } from 'next/navigation';
 import { formattedDate } from '@/utils/formattedDate';
-import { date } from 'zod';
 import { Fragment } from 'react';
 import BlenderDrinkListCard from './DrinkList';
 import Point from '@/assets/Point';
 import { useDeleteBlenderMutation } from '@/hooks/mutates/useBlenderMutate';
 import BlenderLikeButton from '@/components/button/BlenderLikeButton';
 import BlenderBookmarkButton from '@/components/button/BlenderBookmarkButton';
+import { Chip } from '@team-complete/complete-ui';
+import CommentWrapper from '../[detail]/(components)/CommentWrapper';
 
 const Blender = () => {
   const detailId = useParams<{ detail: string }>()!;
   const { data } = useBlenderDetailQuery({
     detailId: parseInt(detailId?.detail),
   });
-  console.log(data);
+  // console.log(data);
   const { mutate: deleteMutate } = useDeleteBlenderMutation();
   if (data) {
     return (
@@ -104,13 +103,6 @@ const Blender = () => {
               {data.combination_like_count}
             </Flex>
             <Flex align={'center'}>
-              {/* <Image
-                src={bookmark}
-                alt='bookmark'
-                style={{ padding: 8 }}
-                width={40}
-                height={40}
-              /> */}
               <BlenderBookmarkButton
                 combinationsId={data.combination_board_id}
                 isBookmark={data.combination_bookmark}
@@ -140,7 +132,7 @@ const Blender = () => {
           >
             <Point /> 사용 재료
           </Flex>
-          <Flex mb={24} gap={24}>
+          <Flex mb={`12px`} gap={24}>
             {data.combinations.map((e, i) => (
               <Fragment key={i}>
                 <BlenderDrinkListCard
@@ -149,67 +141,35 @@ const Blender = () => {
                   drink_name={e.name}
                   image_url={e.image_url}
                   manufacturer_name={e.manufacturer_name}
+                  volume={e.volume}
                 />
               </Fragment>
             ))}
           </Flex>
-          <Flex fz={16} fw={500} lh={'24px'} mb={24}>
-            {' '}
-            댓글
-          </Flex>
-          <Flex gap={20} direction={'column'} w={'100%'}>
-            <Flex w={'100%'} gap={8}>
-              <Avatar size={24} radius={'100%'} src={''} />
-              <Input
-                classNames={{ input: blenderClasses['mantine-input'] }}
-                w={'100%'}
-                rightSectionWidth={'70'}
-                rightSection={
-                  <Flex fz={14} fw={500} lh={'100%'}>{`(0/250)`}</Flex>
-                }
-              />
-              <Button
-                fz={16}
-                fw={500}
-                lh={'16px'}
-                h={40}
-                w={60}
-                mih={40}
-                miw={60}
-                m={0}
-                p={0}
-              >
-                입력
-              </Button>
+          <Box mt={`0.5rem`} mb={`1.5rem`}>
+            <Text fw={500} fs={`1.125rem`} lh={`1.5rem`}>
+              + 기타 재료
+            </Text>
+            <Flex gap={`0.5rem`}>
+              {data.etc_combinations.map(e => (
+                <Chip key={e.name} variant={'ghost'}>
+                  <Flex h={'100%'} align={'center'}>
+                    {e.name}{' '}
+                    <Box h={`100%`} py={`0.3rem`}>
+                      <Divider
+                        orientation='vertical'
+                        h={`100%`}
+                        mx={`1.25rem`}
+                      />
+                    </Box>
+                    {e.volume}
+                  </Flex>
+                </Chip>
+              ))}
             </Flex>
-            {Array.from({ length: 3 }).map((_, index) => {
-              return (
-                <Flex
-                  key={index}
-                  direction={'column'}
-                  gap={4}
-                  justify={'center'}
-                >
-                  <Flex gap={12} justify={'center'} align={'center'}>
-                    <Avatar size={24} radius={'100%'} src={''} />
-                    <Flex w={'100%'} direction={'column'}>
-                      <Flex fz={16} fw={500} lh={'24px'}>
-                        User Name
-                      </Flex>
-                      <Flex fz={12} fw={500} lh={'16px'}>
-                        00 전
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                  <Flex fz={16} fw={400} lh={'24px'}>
-                    댓글 쓰기 (0/100자) 댓글 쓰기 (0/100자) 댓글 쓰기 (0/100자)
-                    댓글 쓰기 (0/100자) 댓글 쓰기 (0/100자) 댓글 쓰기 (0/100자)
-                    댓글 쓰기 (0/1
-                  </Flex>
-                </Flex>
-              );
-            })}
-          </Flex>
+          </Box>
+          <Divider mb={`1.25rem`} />
+          {detailId && <CommentWrapper detailId={parseInt(detailId.detail)} />}
         </Flex>
       </Flex>
     );

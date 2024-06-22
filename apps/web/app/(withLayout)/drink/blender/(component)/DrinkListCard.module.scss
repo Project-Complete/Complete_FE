@@ -1,6 +1,6 @@
 .card-wrapper{
     margin-top: 2.25rem;
-    margin-bottom: 5.25rem;
+    
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -37,6 +37,7 @@
     align-items: flex-start;
     // gap: var(--Spacing-24, 1.5rem);
     align-self: stretch;
+    text-decoration: none;
     
 }
 

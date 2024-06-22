@@ -1,4 +1,4 @@
-import { Rating } from '@mantine/core';
+import { Rating, Text } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import classes from './DrinkListCard.module.scss';
@@ -10,8 +10,8 @@ const BlenderDrinkListCard = ({
   drink_name,
   image_url,
   manufacturer_name,
+  volume,
 }: Omit<DetailRecommendDrink, 'review_rating'>) => {
-  console.log(image_url);
   return (
     <div className={classes['card-wrapper']}>
       {/* 이미지 부분 */}
@@ -28,12 +28,23 @@ const BlenderDrinkListCard = ({
       </Link>
       <div className={classes['card-content-wrapper']}>
         {/* 제조사 */}
-        <div className={classes['card-content-manu-like']}>
+        <Link
+          href={`/drink/${drink_id}`}
+          className={classes['card-content-manu-like']}
+        >
           <div className={classes['card-content-manu']}>
             {manufacturer_name}
           </div>
           <div className={classes['card-content-drinkname']}>{drink_name}</div>
-        </div>
+          <Text
+            ml={`0.5rem`}
+            fw={`300`}
+            lh={`1.5rem`}
+            color={`rgba(0, 0, 0, 0.85)`}
+          >
+            {volume}
+          </Text>
+        </Link>
         <div className={classes['card-content-like']}>
           <LikeButton
             drink_like={drink_like}

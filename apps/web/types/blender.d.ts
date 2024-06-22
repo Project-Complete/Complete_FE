@@ -21,8 +21,15 @@ interface Blender {
     xcoordinate: number;
     ycoordinate: number;
   }[];
+  etc_combinations: BlenderEtcCombinations[];
 }
 
+interface BlenderEtcCombinations {
+  name: string;
+  volume: string;
+  ycoordinate: number;
+  xcoordinate: number;
+}
 
 interface BlenderListElement {
   combination_board_id: number;
@@ -43,5 +50,27 @@ interface PageInfo {
 
 interface BlenderList {
   combinations: BlenderListElement[];
+  page_info: PageInfo;
+}
+
+interface BlenderComment {
+  combination_comment_id: number;
+  user_id: number;
+  nickname: string;
+  content: string;
+  reply_count: number;
+  created_date: string;
+}
+
+interface PageInfo {
+  page: number;
+  size: number;
+  total_elements: number;
+  total_pages: number;
+  sort: string;
+}
+
+interface BlenderCommentResponse {
+  combination_comments: CombinationComment[];
   page_info: PageInfo;
 }
