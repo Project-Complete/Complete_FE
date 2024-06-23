@@ -1,3 +1,29 @@
 .mantine-input {
-    height:48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    align-self: stretch;
+    height:3rem;
+
+}
+
+.mantine-input-wrapper{
+  
+    :focus {
+            border: 1px solid #606770;
+        }
+}
+
+.mantine-button {
+    height:3rem;
+    width: 3.75rem;
+    border-radius: var(--Corner-radius-8, 0.5rem);
+    border: 1px solid var(--Background-Button-stroke, rgba(0, 0, 0, 0.10));
+    background: var(--Background-Button-white, #FFF);
+    color:#000000A6;
+    :hover{
+        background: var(--Background-Button-white, #FFF);
+        color:#000000A6;
+    }
 }

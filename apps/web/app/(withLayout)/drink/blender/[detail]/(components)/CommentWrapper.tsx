@@ -1,12 +1,18 @@
 'use client';
-import { Avatar, Box, Button, Flex, Input, Text } from '@mantine/core';
-import blenderClasses from '../../(component)/Blender.module.scss';
+import { Avatar, Button, Flex, Text, TextInput } from '@mantine/core';
+
 import { useBlenderCommentInfiniteQuery } from '@/hooks/queries/blenders/useBlenderDetailQuery';
 import { useIntersection } from '@mantine/hooks';
 import { Fragment, useEffect } from 'react';
 import { timeAgo } from '@/utils/formattedDate';
 
+import ReplyCommentWrapper from './ReplyCommentWrapper';
+import CommentInput from './CommentInput';
+
+import Cookies from 'js-cookie';
+
 const CommentWrapper = ({ detailId }: { detailId: number }) => {
+  const isLogin = Cookies.get('access_token') ? true : false;
   const { data, fetchNextPage, hasNextPage } = useBlenderCommentInfiniteQuery({
     detailId,
   });
@@ -29,30 +35,11 @@ const CommentWrapper = ({ detailId }: { detailId: number }) => {
           개
         </Flex>
         <Flex gap={20} direction={'column'} w={'100%'}>
-          <Flex w={'100%'} gap={8}>
-            <Avatar size={24} radius={'100%'} src={''} />
-            <Input
-              classNames={{ input: blenderClasses['mantine-input'] }}
-              w={'100%'}
-              rightSectionWidth={'70'}
-              rightSection={
-                <Flex fz={14} fw={500} lh={'100%'}>{`(0/250)`}</Flex>
-              }
-            />
-            <Button
-              fz={16}
-              fw={500}
-              lh={'16px'}
-              h={40}
-              w={60}
-              mih={40}
-              miw={60}
-              m={0}
-              p={0}
-            >
-              입력
-            </Button>
-          </Flex>
+          <CommentInput
+            initial={''}
+            isLogin={isLogin}
+            combinationsId={detailId}
+          />
           {data.pages.map((e, i) => (
             <Fragment key={i}>
               {e.combination_comments.map((comment, index) => (
@@ -81,6 +68,12 @@ const CommentWrapper = ({ detailId }: { detailId: number }) => {
                   <Flex fz={16} fw={400} lh={'24px'}>
                     {comment.content}
                   </Flex>
+                  {comment.reply_count > 0 && (
+                    <ReplyCommentWrapper
+                      combinationId={comment.combination_comment_id}
+                      replyCount={comment.reply_count}
+                    />
+                  )}
                 </Flex>
               ))}
             </Fragment>

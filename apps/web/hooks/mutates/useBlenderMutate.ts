@@ -5,6 +5,21 @@ const fetcher = (combinationsId: number) => {
   return api.delete(`combinations/${combinationsId}`);
 };
 
+const commentFetcher = (
+  combinationsId: number,
+  content: string,
+  parentId: number = 0,
+) => {
+  return api
+    .post(`combinations/${combinationsId}/comment`, {
+      json: {
+        content,
+        parentId,
+      },
+    })
+    .json();
+};
+
 const likeFetcher = (combinationsId: number, like: boolean) => {
   console.log(like);
   if (like) {
@@ -20,6 +35,28 @@ const bookmarkFetcher = (combinationsId: number, bookmarkFetcher: boolean) => {
   } else {
     return api.post(`combinations/${combinationsId}/bookmark`);
   }
+};
+
+export const useCommentBlenderMutation = (combinationsId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      combinationsId,
+      content,
+      parentId,
+    }: {
+      combinationsId: number;
+      content: string;
+      parentId?: number;
+    }) => {
+      return commentFetcher(combinationsId, content, parentId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['blender', combinationsId, 'comments'],
+      });
+    },
+  });
 };
 
 export const useDeleteBlenderMutation = () => {
