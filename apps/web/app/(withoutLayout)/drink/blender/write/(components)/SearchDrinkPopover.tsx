@@ -1,7 +1,8 @@
 import { useMainSearchDrinkInfinityQuery } from "@/hooks/queries/useMainSearchDrinkInfinityQuery";
 import { Divider, Flex, Popover, PopoverProps } from "@mantine/core";
-import { Button, Input } from "@team-complete/complete-ui";
+import { Button, Input, CloseIconButton } from "@team-complete/complete-ui";
 import { useCallback, useState } from "react";
+import { produce } from "immer";
 
 import Image from 'next/image';
 import { useBlenderWriteFormContext } from "./blenderWriteFormContext";
@@ -15,17 +16,26 @@ type SearchDrinkPopoverPropsType = PopoverProps & {
 const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverProps }: SearchDrinkPopoverPropsType) => {
 
     // 주류 외 재료인데 뭐라 영어로 적지
-    const [isAddOtherIngredient, setIsAddOtherIngredient] = useState(false);
+    // const [isAddOtherIngredient, setIsAddOtherIngredient] = useState(false);
 
     const [selectedDrink, setSelectedDrink] = useState<{ drink_name: string, drink_id: number | null }>({
         drink_name: '',
         drink_id: null,
     });
-    const [volume, setVolume] = useState<string>('');
+    // const [volume, setVolume] = useState<string>('');
     const [keyword, setKeyword] = useState('');
 
+
+    const [addOtherIngredient, setAddOtherIngredient] = useState({
+        name: '',
+        volume: '',
+        isAddOtherIngredient: false,
+    });
+
     const toggleIsAddOtherIngredient = useCallback(() => {
-        setIsAddOtherIngredient(v => !v);
+        setAddOtherIngredient(produce(draft => {
+            draft.isAddOtherIngredient = !draft.isAddOtherIngredient;
+        }));
     }, [])
 
 
@@ -40,9 +50,15 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
             const newCombination = [...combinations];
             const temp = newCombination[index];
             if (temp === undefined) return combinations;
-            temp.name = selectedDrink.drink_name;
             temp.drink_id = selectedDrink.drink_id;
-            temp.volume = volume;
+            if (addOtherIngredient.isAddOtherIngredient) {
+                temp.name = addOtherIngredient.name;
+                temp.volume = addOtherIngredient.volume;
+            }
+            else {
+                temp.name = selectedDrink.drink_name;
+                temp.volume = addOtherIngredient.volume;
+            }
             return newCombination;
         });
         handleClosePopover && handleClosePopover();
@@ -64,31 +80,38 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
             onMouseDown={(e) => {
                 e.stopPropagation();
             }}
-        // onClick={(e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // }}
-        // onMouseMove={(e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // }}
-        // onMouseDown={(e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // }}
         >
-            {isAddOtherIngredient
-                ? <Flex direction={'column'} justify={'center'} align={'center'}>
-                    <Input placeholder="주류 외 재료를 입력해주세요." value={volume} onChange={(e) => {
-                        setVolume(e.currentTarget.value);
-                    }} />
+            {addOtherIngredient.isAddOtherIngredient
+                ? <Flex direction={'column'} justify={'center'} align={'center'} gap={10}>
+                    <Input placeholder="주류 외 재료를 입력해주세요." value={addOtherIngredient.name} onChange={(e) => {
+                        setAddOtherIngredient(produce(draft => {
+                            draft.name = e.target.value;
+                        }));
+                    }} rightSection={
+                        <CloseIconButton w={8} h={8} onClick={() => {
+                            setAddOtherIngredient(produce(draft => {
+                                draft.name = ''
+                            }));
+                        }}></CloseIconButton>
+                    } />
+                    <Input placeholder="용량을 입력해주세요." value={addOtherIngredient.volume} onChange={(e) => {
+                        setAddOtherIngredient(produce(draft => {
+                            draft.volume = e.target.value;
+                        }));
+                    }} rightSection={
+                        <CloseIconButton w={8} h={8} onClick={() => {
+                            setAddOtherIngredient(produce(draft => {
+                                draft.volume = ''
+                            }));
+                        }}></CloseIconButton>
+                    } />
                     <Divider />
                     <Flex>
                         <Button onClick={toggleIsAddOtherIngredient}>취소</Button>
                         <Button onClick={handleWriteComplete}>작성 완료</Button>
                     </Flex>
                 </Flex>
-                : <Flex direction={'column'}>
+                : <Flex direction={'column'} gap={10}>
                     <Flex>
                         <Input placeholder="찾는 주류가 있으신가요?" onChange={e => setKeyword(e.target.value)} />
                         <Button >검색</Button>

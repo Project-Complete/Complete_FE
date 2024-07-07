@@ -37,11 +37,11 @@ export const blenderWriteFormInitialValues = {
 export const [BlenderWriteFormProvider, useBlenderWriteFormContext, useBlenderWriteForm] = createFormContext<blenderWriteFormInitialValuesTypes>();
 
 
-export const useCreateBlenderWriteForm = (name?: string) => {
+export const useCreateBlenderWriteForm = ({ name, initialValues }: { name?: string, initialValues?: blenderWriteFormInitialValuesTypes }) => {
     const blenderWriteForm = useForm<blenderWriteFormInitialValuesTypes>({
         mode: 'uncontrolled',
         name,
-        initialValues: blenderWriteFormInitialValues,
+        initialValues: initialValues ?? blenderWriteFormInitialValues,
         validateInputOnBlur: true,
         validate: zodResolver(schema),
     });

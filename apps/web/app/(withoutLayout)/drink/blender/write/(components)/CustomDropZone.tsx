@@ -26,14 +26,6 @@ const CustomDropZone = (props: Partial<DropzoneProps>) => {
                         stroke={1.5}
                     />
                 </Dropzone.Reject>
-                {/*  <div>
-                    <Text size="xl" inline>
-                        Drag images here or click to select files
-                    </Text>
-                    <Text size="sm" c="dimmed" inline mt={7}>
-                        Attach as many files as you like, each file should not exceed 5mb
-                    </Text>
-                </div> */}
                 <Flex w={384} h={384} bg={'#E5E6E8'} justify={'center'} align={'center'} gap={16} direction={'column'}>
                     <Flex direction={'column'} gap={8} justify={'center'} align={'center'} >
                         <Image
