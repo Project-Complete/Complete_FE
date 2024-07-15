@@ -21,10 +21,10 @@ import postPreSignedUrl from '@/lib/postPreSignedUrl';
 
 
 const BlenderWrite = ({ initialValues }: {
-    initialValues: blenderWriteFormInitialValuesTypes
+    initialValues?: blenderWriteFormInitialValuesTypes
 }) => {
     const blenderWriteForm = useCreateBlenderWriteForm({
-        initialValues: blenderWriteFormInitialValues
+        initialValues: initialValues ?? blenderWriteFormInitialValues
     });
     const [selectedCombinationId, setSelectedCombinationId] = useState<string | null>(null);
     const [selectedCombinationPopover, setSelectedCombinationPopover] = useState<string | null>(null);
