@@ -5,7 +5,7 @@ import classes from './Button.module.css';
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+  VariantProps<typeof buttonVariants> { }
 
 const buttonVariants = cva(classes.button, {
   variants: {
@@ -18,6 +18,7 @@ const buttonVariants = cva(classes.button, {
       outline: classes[`button-outline`],
       white: classes[`button-white`],
       'white-primary': classes[`button-white-primary`],
+      'purple-light': classes[`button-purple-light`],
     },
   },
   defaultVariants: {

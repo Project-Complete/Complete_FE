@@ -10717,7 +10717,7 @@ vite-plugin-dts@^3.7.0:
 
 vite-plugin-svgr@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.npmjs.org/vite-plugin-svgr/-/vite-plugin-svgr-4.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/vite-plugin-svgr/-/vite-plugin-svgr-4.2.0.tgz#9f3bf5206b0ec510287e56d16f1915e729bb4e6b"
   integrity sha512-SC7+FfVtNQk7So0XMjrrtLAbEC8qjFPifyD7+fs/E6aaNdVde6umlVVh0QuwDLdOMu7vp5RiGFsB70nj5yo0XA==
   dependencies:
     "@rollup/pluginutils" "^5.0.5"
