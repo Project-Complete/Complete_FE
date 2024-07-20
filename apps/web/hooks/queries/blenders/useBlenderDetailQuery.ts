@@ -18,6 +18,8 @@ const blenderCommentFetcher = async (detailId: number, page: number) => {
   return response;
 };
 
+
+
 const blenderReplyCommentFetcher = async (
   combinationsId: number,
   page: number,
@@ -80,11 +82,11 @@ export const useBlenderReplyCommentInfiniteQuery = ({
     initialPageParam: 1,
     getNextPageParam: lastPage => {
       const page = lastPage as BlenderCommentResponse;
-      const totalPage = Math.ceil(
-        page.page_info.total_elements / page.page_info.size,
-      );
+      console.log(page);
       const nextPage =
-        page.page_info.page + 1 >= totalPage ? null : page.page_info.page + 1;
+        page.page_info.page + 1 > page.page_info.total_pages
+          ? null
+          : page.page_info.page + 1;
       return nextPage;
     },
     gcTime: 50000,

@@ -14,10 +14,16 @@ const commentFetcher = (
     .post(`combinations/${combinationsId}/comment`, {
       json: {
         content,
-        parentId,
+        parent_combination_comment_id: parentId,
       },
     })
     .json();
+};
+
+const blenderReplyCommentDelete = async (commentId: number) => {
+  const response = await api.delete(`combinations/comment/${commentId}`).json();
+
+  return response;
 };
 
 const likeFetcher = (combinationsId: number, like: boolean) => {
@@ -37,6 +43,23 @@ const bookmarkFetcher = (combinationsId: number, bookmarkFetcher: boolean) => {
   }
 };
 
+export const useCommentBlenderDelete = (combinationsId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ commentId }: { commentId: number }) => {
+      return blenderReplyCommentDelete(commentId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['blender', combinationsId, 'comments'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [`blender`, `replyComment`],
+      });
+    },
+  });
+};
+
 export const useCommentBlenderMutation = (combinationsId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -49,11 +72,15 @@ export const useCommentBlenderMutation = (combinationsId: number) => {
       content: string;
       parentId?: number;
     }) => {
+      console.log(parentId);
       return commentFetcher(combinationsId, content, parentId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['blender', combinationsId, 'comments'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [`blender`, `replyComment`],
       });
     },
   });

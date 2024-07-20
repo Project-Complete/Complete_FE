@@ -33,7 +33,6 @@ const CommentInput = ({
       },
     },
   });
-  console.log(form.errors);
   if (isPending) {
     return <div>로딩중</div>;
   }
@@ -42,7 +41,6 @@ const CommentInput = ({
       <form
         onSubmit={form.onSubmit(values => {
           form.validate();
-
           mutate(
             {
               combinationsId,

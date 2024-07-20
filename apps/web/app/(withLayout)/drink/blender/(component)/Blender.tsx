@@ -7,6 +7,7 @@ import {
   Flex,
   Input,
   Menu,
+  ScrollArea,
   Text,
   UnstyledButton,
 } from '@mantine/core';
@@ -33,7 +34,7 @@ const Blender = () => {
   const { mutate: deleteMutate } = useDeleteBlenderMutation();
   if (data) {
     return (
-      <Flex w={600} direction={'column'} gap={12}>
+      <Flex maw={600} w={`100%`} direction={'column'} gap={12}>
         <Flex w={'100%'} h={600} bg={'#D9D9D9'}>
           빈 그림
         </Flex>
@@ -132,41 +133,45 @@ const Blender = () => {
           >
             <Point /> 사용 재료
           </Flex>
-          <Flex mb={`12px`} gap={24}>
-            {data.combinations.map((e, i) => (
-              <Fragment key={i}>
-                <BlenderDrinkListCard
-                  drink_id={e.drink_id}
-                  drink_like={e.drink_like}
-                  drink_name={e.name}
-                  image_url={e.image_url}
-                  manufacturer_name={e.manufacturer_name}
-                  volume={e.volume}
-                />
-              </Fragment>
-            ))}
-          </Flex>
-          <Box mt={`0.5rem`} mb={`1.5rem`}>
+          <ScrollArea w={`100%`} h={`100%`} scrollbars='x'>
+            <Flex mb={`12px`} gap={24}>
+              {data.combinations.map((e, i) => (
+                <Fragment key={i}>
+                  <BlenderDrinkListCard
+                    drink_id={e.drink_id}
+                    drink_like={e.drink_like}
+                    drink_name={e.name}
+                    image_url={e.image_url}
+                    manufacturer_name={e.manufacturer_name}
+                    volume={e.volume}
+                  />
+                </Fragment>
+              ))}
+            </Flex>
+          </ScrollArea>
+          <Box mt={`0.5rem`} mb={`1.5rem`} w={`100%`} h={`100%`}>
             <Text fw={500} fs={`1.125rem`} lh={`1.5rem`}>
               + 기타 재료
             </Text>
-            <Flex gap={`0.5rem`}>
-              {data.etc_combinations.map(e => (
-                <Chip key={e.name} variant={'ghost'}>
-                  <Flex h={'100%'} align={'center'}>
-                    {e.name}{' '}
-                    <Box h={`100%`} py={`0.3rem`}>
-                      <Divider
-                        orientation='vertical'
-                        h={`100%`}
-                        mx={`1.25rem`}
-                      />
-                    </Box>
-                    {e.volume}
-                  </Flex>
-                </Chip>
-              ))}
-            </Flex>
+            <ScrollArea w={`100%`} h={`3rem`} scrollbars='x'>
+              <Flex gap={`0.5rem`} w={`100%`}>
+                {data.etc_combinations.map(e => (
+                  <Chip key={e.name} variant={'ghost'}>
+                    <Flex h={'100%'} align={'center'}>
+                      {e.name}{' '}
+                      <Box h={`100%`} py={`0.3rem`}>
+                        <Divider
+                          orientation='vertical'
+                          h={`100%`}
+                          mx={`1.25rem`}
+                        />
+                      </Box>
+                      {e.volume}
+                    </Flex>
+                  </Chip>
+                ))}
+              </Flex>
+            </ScrollArea>
           </Box>
           <Divider mb={`1.25rem`} />
           {detailId && <CommentWrapper detailId={parseInt(detailId.detail)} />}
