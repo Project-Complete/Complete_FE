@@ -1,28 +1,36 @@
 import { api } from '@/utils/api';
 import {
-    InfiniteData,
+  InfiniteData,
   UseInfiniteQueryResult,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 
-const blenderListFetcher = async (page: number, sorted: 'latest') => {
-  const response = await api
-    .get(`combinations/search?page=${page}&sorted=${sorted}`)
-    .json<BlenderList>();
+const blenderListFetcher = async (
+  page: number,
+  sorted: 'latest' | `popularity`,
+  drinkId?: string | null,
+) => {
+  let url = `combinations/search?page=${page}&sorted=${sorted}`;
+  if (drinkId) {
+    url + `&drinkId=${drinkId}`;
+  }
+  const response = await api.get(url).json<BlenderList>();
   return response;
 };
 
 export const useBlenderListQuery = ({
   page,
   sorted,
+  drinkId,
 }: {
   page: number;
-  sorted: 'latest';
-}): UseInfiniteQueryResult<InfiniteData<BlenderList, Error>,Error> => {
+  sorted: 'latest' | `popularity`;
+  drinkId?: string | null;
+}): UseInfiniteQueryResult<InfiniteData<BlenderList, Error>, Error> => {
   return useInfiniteQuery({
     queryKey: ['blender', 'page', page, 'sorted', sorted],
     queryFn: () => {
-      return blenderListFetcher(page, sorted);
+      return blenderListFetcher(page, sorted, drinkId);
     },
     initialPageParam: 1,
     getNextPageParam: lastPage => {

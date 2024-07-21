@@ -33,7 +33,7 @@ interface BlenderEtcCombinations {
 
 interface BlenderListElement {
   combination_board_id: number;
-  image_url: string;
+  combination_image_url: string;
   title: string;
   nickname: string;
   combination_like: boolean;

@@ -11,14 +11,18 @@ const drinkListFetcher = async ({
   drinkType,
   sorted = 'popularity_order',
   page = 1,
+  keyword,
 }: {
   drinkType: 'all' | 'beer' | 'tradition';
   sorted?: 'popularity_order';
   page?: number;
+  keyword?: string;
 }) => {
-  const response = await api
-    .get(`drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=${page}`)
-    .json<DrinksResponse>();
+  const url = `drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=${page}`;
+  if (keyword) {
+    url + `&keyword=${keyword}`;
+  }
+  const response = await api.get(url).json<DrinksResponse>();
   return response;
 };
 
@@ -38,14 +42,16 @@ export const useMainDrinkListQuery = ({
 export const useDrinkListQuery = ({
   drinkType,
   sorted = 'popularity_order',
+  keyword,
 }: {
   drinkType: 'all' | 'beer' | 'tradition';
   sorted?: 'popularity_order';
+  keyword?: string;
 }): UseInfiniteQueryResult<InfiniteData<DrinksResponse, Error>, Error> => {
   return useInfiniteQuery({
     queryKey: ['drinkList', drinkType, sorted],
     queryFn: async ({ pageParam }: { pageParam: number }) =>
-      drinkListFetcher({ page: pageParam, drinkType, sorted }),
+      drinkListFetcher({ page: pageParam, drinkType, sorted, keyword }),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
       const page = lastPage as DrinksResponse;

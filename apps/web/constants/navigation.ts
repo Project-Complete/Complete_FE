@@ -38,7 +38,7 @@ export const NAVIGATION_LIST: NavigationType[] = [
         href: '/drink/blender?page=1',
       },
       {
-        name: '한 잔 말아먹기',
+        name: '한 잔의 칠링',
         href: '/drink/blender?page=1',
       },
     ],
