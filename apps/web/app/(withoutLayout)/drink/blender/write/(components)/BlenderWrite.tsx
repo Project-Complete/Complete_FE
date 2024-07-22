@@ -151,7 +151,7 @@ const BlenderWrite = ({ initialValues }: {
 
             mutate(
                 {
-                    image_url: preSignedUrl,
+                    image_url: preSignedUrl.split('?')[0] as string,
                     title: blenderWriteForm.getValues().title,
                     description: blenderWriteForm.getValues().description,
                     content: blenderWriteForm.getValues().content,
