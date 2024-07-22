@@ -24,6 +24,7 @@ import BlenderLikeButton from '@/components/button/BlenderLikeButton';
 import BlenderBookmarkButton from '@/components/button/BlenderBookmarkButton';
 import { Chip } from '@team-complete/complete-ui';
 import CommentWrapper from '../[detail]/(components)/CommentWrapper';
+import { dataTagSymbol } from '@tanstack/react-query';
 
 const Blender = () => {
   const detailId = useParams<{ detail: string }>()!;
@@ -35,8 +36,8 @@ const Blender = () => {
   if (data) {
     return (
       <Flex maw={600} w={`100%`} direction={'column'} gap={12}>
-        <Flex w={'100%'} h={600} bg={'#D9D9D9'}>
-          빈 그림
+        <Flex w={'100%'} h={300} bg={'#D9D9D9'} pos={'relative'}>
+          <Image src={data.combination_image_url} alt={'빈 그림'} layout='fill' style={{ objectFit: "contain" }} />
         </Flex>
         <Flex direction={'column'} gap={12} my={12}>
           <Flex fz={18} fw={800} lh={'40px'}>
