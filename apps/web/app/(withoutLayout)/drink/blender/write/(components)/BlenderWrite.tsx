@@ -18,6 +18,7 @@ import { blenderWriteFormInitialValues, blenderWriteFormInitialValuesTypes, Blen
 import { useMutation } from '@tanstack/react-query';
 import useCreateCombinationMutate from '@/hooks/mutates/useCreateCombinationMutate';
 import postPreSignedUrl from '@/lib/postPreSignedUrl';
+import { useReviewPictureUpload } from '@/hooks/mutates/useReviewWriteMutate';
 
 
 const BlenderWrite = ({ initialValues }: {
@@ -126,33 +127,52 @@ const BlenderWrite = ({ initialValues }: {
             blenderWriteForm.reset();
         }
     });
+    const { mutate: pictureUploadMutate } = useReviewPictureUpload();
+
+    const postImage = async (storageUrl: string, file: File | null) => {
+        pictureUploadMutate({ storageUrl, file: file });
+    };
 
     const handleWriteCancel = () => {
         history.back();
         blenderWriteForm.reset();
     }
     const handleWriteComplete = async () => {
-        const file = blenderWriteForm.getValues().file;
-        if (file === null) return;
-        const image_url = await postPreSignedUrl(file);
 
-        mutate(
-            {
-                image_url,
-                title: blenderWriteForm.getValues().title,
-                description: blenderWriteForm.getValues().description,
-                content: blenderWriteForm.getValues().content,
-                combinations: blenderWriteForm.getValues().combinations.map((v, index) => {
-                    return {
-                        drink_id: v.drink_id,
-                        name: v.name,
-                        volume: v.volume,
-                        xcoordinate: v.xcoordinate,
-                        ycoordinate: v.ycoordinate,
-                    }
-                })
-            }
-        )
+        const file = blenderWriteForm.getValues().file;
+
+        if (file === null) return;
+
+        try {
+            const preSignedUrl = await postPreSignedUrl(file);
+
+
+            await postImage(preSignedUrl || '', file);
+
+            mutate(
+                {
+                    image_url: preSignedUrl,
+                    title: blenderWriteForm.getValues().title,
+                    description: blenderWriteForm.getValues().description,
+                    content: blenderWriteForm.getValues().content,
+                    combinations: blenderWriteForm.getValues().combinations.map((v, index) => {
+                        return {
+                            drink_id: v.drink_id,
+                            name: v.name,
+                            volume: v.volume,
+                            xcoordinate: v.xcoordinate,
+                            ycoordinate: v.ycoordinate,
+                        }
+                    })
+                }
+            )
+        }
+
+        catch (error) {
+            console.error('image post error', error);
+            alert('리뷰 이미지 등록 실패');
+            throw new Error('리뷰 이미지 등록실패');
+        }
     }
     const handleDeleteCombination = (index: number) => {
         blenderWriteForm.setFieldValue('combinations', (combinations) => {
