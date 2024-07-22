@@ -150,7 +150,7 @@ const DrinkDetailWrapper = ({
           >
             <Flex
               justify={'center'}
-              miw={'100vw'}
+              // miw={'100vw'}
               w={'100%'}
               h={'3rem'}
               bg={'#FFF'}
@@ -163,7 +163,7 @@ const DrinkDetailWrapper = ({
                 onChange={setActiveTab}
                 className={classes['detail-age-tab-max-width']}
               >
-                <TabList>
+                <TabList >
                   <Tab
                     // ml={'1.5rem'}
                     value='상세 정보'

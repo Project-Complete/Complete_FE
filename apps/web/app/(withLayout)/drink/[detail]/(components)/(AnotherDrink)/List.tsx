@@ -39,6 +39,7 @@ const AnotherDrinkList = ({
         <div className={classes['card-list-wrapper']}>
           {drinks.map(e => (
             <AnotherDrinkListCard
+              volume=''
               key={e.drink_id}
               drink_id={e.drink_id}
               drink_like={e.drink_like}
