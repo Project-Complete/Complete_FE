@@ -1,0 +1,89 @@
+.card-wrapper{
+    margin-top: 2.25rem;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    text-decoration: none;
+    width: 9rem;
+    height:14rem;
+}
+
+.card-image{
+    width: 9rem;
+    height: 9rem;
+
+    margin-bottom: 1rem;
+    position:relative;
+    border-radius: var(--Corner-radius-12, 0.75rem);
+    background: var(--Guide-2, #C6C6C6);
+    overflow: hidden;
+    box-shadow: 0px 4px 20px 0px #00000033;
+}
+
+.card-content-wrapper{
+    display: flex;
+    width:100%;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+.card-content-manu-like{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    // gap: var(--Spacing-24, 1.5rem);
+    align-self: stretch;
+    text-decoration: none;
+    
+}
+
+.card-content-manu{
+    display: flex;
+    height: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 0;
+    color: var(--Font-text-muted, rgba(0, 0, 0, 0.45));
+    
+    /* Card/Lable-Medium */
+    font-size: var(--font-size-sm,0.875rem);
+    font-style: normal;
+    font-weight: 500;
+    line-height: var(--font-height-sm,1.875rem);
+    /* 214.286% */
+}
+
+.card-content-like{
+    width: 2rem;
+    height: 3rem;
+    margin-left:auto;
+    flex-shrink: 0;
+    position:relative;
+    display: flex;
+    align-items: center;
+}
+
+.card-content-drinkname{
+    width: 7rem;
+    align-self: stretch;
+    color: var(--Font-text-active, rgba(0, 0, 0, 0.85));
+    white-space: nowrap; // 텍스트를 한 줄로 설정
+    overflow: hidden; // 넘치는 텍스트를 숨김
+    text-overflow: ellipsis; // 넘치는 텍스트를 ...으로 표시
+    /* Card/Title2-Semibold */
+    font-family: Pretendard;
+    font-size: var(--font-size-xl,1.25rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: var(--font-height-md,2rem);
+    /* 160% */
+}
+
+.card-content-rating{
+    width:100%;
+    height:1.5rem;
+}

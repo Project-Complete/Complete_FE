@@ -110,6 +110,7 @@ interface DetailRecommendDrink {
   drink_like: boolean;
   drink_name: string;
   review_rating: number;
+  volume: string;
 }
 
 interface DetailRecommendDrinkList {

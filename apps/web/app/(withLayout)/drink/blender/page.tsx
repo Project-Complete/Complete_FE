@@ -1,9 +1,14 @@
 import { Flex } from '@mantine/core';
-import Blender from './(component)/Blender';
+import BlenderListWrapper from './(component)/ListWrapper';
 
+const BlenderListPage = () => {
+  return (
+    <Flex w={'100%'} h={'100%'} mih={'50vh'} justify={'center'}>
+      <Flex maw={'1224px'} w={'100%'} h={'100%'}>
+        <BlenderListWrapper />
+      </Flex>
+    </Flex>
+  );
+};
 
-export default function Page(): JSX.Element {
-  return <Flex justify={'center'} py={32} px={24}>
-    <Blender />
-  </Flex>
-}
+export default BlenderListPage;
