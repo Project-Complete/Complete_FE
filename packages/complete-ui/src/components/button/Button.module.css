@@ -81,6 +81,19 @@
   min-width: fit-content;
 }
 
+.button-purple-light {
+  background: #F2ECFF;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 8px;
+
+  color: rgba(0, 0, 0, 0.65);
+  &:active {
+    color: rgba(0, 0, 0, 0.85);
+    transform: translateY(2px);
+  }
+  min-width: fit-content;
+}
+
 .button-white-primary {
   min-width: fit-content;
   background: white;

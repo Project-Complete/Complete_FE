@@ -1,7 +1,7 @@
 'use client';
 
 import classes from './HeaderWrapper.module.css';
-import { Anchor, Burger, Button, Divider, Drawer, Flex, UnstyledButton } from '@mantine/core';
+import { Anchor, Box, Burger, Button, Divider, Drawer, Flex, UnstyledButton } from '@mantine/core';
 import HeaderNavWrapper from './nav';
 import HeaderCenterWrapper from './searchBar';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
@@ -27,7 +27,7 @@ const HeaderWrapper = ({
 
   return (
     <>
-      {isMobile ? <>
+      {isMobile ? <Box pos={'sticky'} top={0} style={{ zIndex: 20000 }} bg={'white'}>
         <Drawer opened={opened} onClose={close} size={260} overlayProps={{
           backgroundOpacity: 0.65,
         }}>
@@ -48,13 +48,17 @@ const HeaderWrapper = ({
         <Flex h={56} align={'center'} px={26} className={classes[`header-center`]}>
           <Flex w={'100%'} h={'100%'} align={'center'} gap={12}>
             <Burger opened={opened} onClick={toggle} size={24} />
-            <Image src={'/logo/심볼.svg'} alt={'symbol'} width={24} height={24} />
+            <Link href='/' style={{ height: '24px' }}>
+              <Image src={'/logo/심볼.svg'} alt={'symbol'} width={24} height={24} />
+            </Link>
           </Flex>
-          <Image src={"/icons/돋보기.svg"} alt={'search'} width={24} height={24} />
+          <Link href='/search' style={{
+            height: '24px',
+          }}>
+            <Image src={"/icons/돋보기.svg"} alt={'search'} width={24} height={24} />
+          </Link>
         </Flex>
-
-        {/* <Button onClick={open}>Open Drawer</Button> */}
-      </> :
+      </Box> :
         <>
           <Flex w={`100%`} h={120} className={classes[`header-center`]}>
             <HeaderCenterWrapper isCenter={isCenter} isLogin={isLogin} />

@@ -1,5 +1,5 @@
 import { api } from '@/utils/api';
-import { QueryClient, UseQueryResult, useQuery } from '@tanstack/react-query';
+import { QueryClient, UseQueryResult, keepPreviousData, useQuery } from '@tanstack/react-query';
 
 const drinkDetailFetcher = async ({ detailId }: { detailId: number }) => {
   const response = await api.get(`drinks/detail/${detailId}`).json();
@@ -31,5 +31,6 @@ export const useDrinkDetailQuery = ({
       console.log(response);
       return response;
     },
+    placeholderData: keepPreviousData
   });
 };

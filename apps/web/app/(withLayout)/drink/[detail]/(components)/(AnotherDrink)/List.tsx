@@ -7,7 +7,6 @@ import { useMediaQuery } from '@mantine/hooks';
 import { em } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import MainDrinkCard from '@/components/review/mainDrink/MainDrinkContentCard';
-import '@mantine/carousel/styles.css';
 
 const AnotherDrinkList = ({
   detailId,
