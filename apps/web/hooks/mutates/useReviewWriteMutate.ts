@@ -28,14 +28,14 @@ export const useReviewPictureUpload = () => {
   return useMutation({
     mutationFn: async ({
       storageUrl,
-      image,
+      file,
     }: {
       storageUrl: string;
-      image: { file: File | null; src: string };
+      file: File | null;
     }) => {
       try {
         const response = await ky.put(storageUrl, {
-          body: image.file,
+          body: file,
         });
 
         console.log('pose image response', response);
