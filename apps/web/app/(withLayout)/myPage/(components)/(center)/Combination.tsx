@@ -1,25 +1,17 @@
 'use client';
 
-import { useReviewListQuery } from '@/hooks/queries/useReviewQuery';
-import { MyUserInfo } from '@/types/userInfo';
-import { Box, Divider, Flex, Grid, Rating, Text } from '@mantine/core';
+import { useMyBlenderListQuery } from '@/hooks/queries/blenders/useBlenderListQuery';
+import { Box, Flex, Grid, Text } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
-import Image from 'next/image';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import classes from './center.module.scss';
-import CustomerReviewCard from '@/components/review/customerReview/ReviewCard';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [reviewId, setReviewId] = useState<number>(0);
-  const modalHandler = (id: number) => {
-    setIsModalOpen(prev => !prev);
-    setReviewId(id);
-  };
-
-  const { data, fetchNextPage, hasNextPage } = useReviewListQuery({
-    writerId: myInfoData.user_id,
-    sort: 'latest',
+const MyPageCombinationList = () => {
+  const router = useRouter();
+  const { data, fetchNextPage, hasNextPage } = useMyBlenderListQuery({
+    page: 1,
   });
 
   const { ref, entry } = useIntersection({
@@ -31,16 +23,9 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
       fetchNextPage();
     }
   }, [entry]);
-
+  console.log(data);
   return (
     <>
-      {isModalOpen && (
-        <CustomerReviewCard
-          modalOpen={isModalOpen}
-          modalHandler={() => modalHandler(0)}
-          reviewId={reviewId}
-        />
-      )}
       <Grid w={'100%'} gutter={24} mt={24} mb={24}>
         {data &&
           data.pages &&
@@ -55,7 +40,7 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                   align={`center`}
                   direction={`column`}
                 >
-                  <Box mb={16}>아직 작성한 리뷰가 없어요!</Box>
+                  <Box mb={16}>아직 작성한 게시글이 없어요!</Box>
                   <Box>
                     <Image
                       src={`/noContent.svg`}
@@ -67,16 +52,18 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                 </Flex>
               ) : (
                 <>
-                  {v.reviews.map(e => {
+                  {v.combinations.map(e => {
                     return (
                       <Grid.Col
-                        key={e.id}
+                        key={e.combination_board_id}
                         w={'100%'}
                         span={{ base: 6, sm: 4 }}
-                        onClick={() => {
-                          modalHandler(e.id);
-                        }}
                         className={classes['review-grid-col']}
+                        onClick={() => {
+                          router.push(
+                            `/drink/blender/${e.combination_board_id}`,
+                          );
+                        }}
                       >
                         <Flex gap={16} direction={'column'}>
                           <Flex
@@ -90,8 +77,9 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                           >
                             <Image
                               src={
-                                e.image_url !== 'string' && e.image_url !== ''
-                                  ? e.image_url
+                                e.combination_image_url !== 'string' &&
+                                e.combination_image_url !== ''
+                                  ? e.combination_image_url
                                   : 'https://picsum.photos/392/288.webp'
                               }
                               sizes='512px'
@@ -104,15 +92,8 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
                             />
                           </Flex>
                           <Flex gap={10}>
-                            <Text>{e.drink.name}</Text>
-                            {/* <Divider orientation='vertical' />
-                        <Text>{e.created_date}</Text> */}
+                            <Text>{e.title}</Text>
                           </Flex>
-                          <Rating
-                            value={e.review_rating}
-                            fractions={2}
-                            readOnly
-                          />
                         </Flex>
                       </Grid.Col>
                     );
@@ -127,4 +108,4 @@ const MyPageCenterReviewList = ({ myInfoData }: { myInfoData: MyUserInfo }) => {
   );
 };
 
-export default MyPageCenterReviewList;
+export default MyPageCombinationList;

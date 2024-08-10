@@ -31,7 +31,7 @@ const MyProfileMenuList = ({
       <>
         {data.items.map((e, i) => (
           <Fragment key={i}>
-            {i === data.selectedIndex ? (
+            {i === data.selectedIndex % 2 ? (
               <Flex
                 w={'100%'}
                 h={'2.5rem'}
