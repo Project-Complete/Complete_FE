@@ -57,7 +57,7 @@ const HeaderWriteButton = () => {
             bg={`none`}
           >
             <Text c={`#000`} size='0.875rem' w={`100%`}>
-              한잔 말아먹기
+              한 잔의 칠링
             </Text>
           </Button>
         </Flex>

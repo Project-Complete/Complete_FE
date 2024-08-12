@@ -51,6 +51,7 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
                   image_url={drink.image_url}
                   manufacturer_name={drink.manufacturer_name}
                   review_rating={drink.review_rating}
+                  volume={drink.volume}
                 />
               );
             })}

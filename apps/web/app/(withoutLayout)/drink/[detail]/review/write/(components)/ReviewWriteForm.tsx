@@ -190,7 +190,7 @@ const ReviewWriteForm = ({ drinkId }: { drinkId: string }) => {
   };
 
   const postImage = async (storageUrl: string) => {
-    pictureUploadMutate({ storageUrl, image });
+    pictureUploadMutate({ storageUrl, file: image.file });
   };
 
   const handleSubmit = async (values: FormValues) => {

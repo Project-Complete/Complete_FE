@@ -1,5 +1,6 @@
 'use client';
 
+import MyPageCombinationList from './Combination';
 import MyPageDrinkList from './DrinksLike';
 import MyPageCenterReviewList from './ReviewList';
 import { useMyInfoQuery } from '@/hooks/queries/useMyInfoQuery';
@@ -12,6 +13,7 @@ const MyPageCenterTabs = ({ index }: { index: number }) => {
         <MyPageCenterReviewList myInfoData={myInfoData} />
       )}
       {myInfoData && index === 1 && <MyPageDrinkList />}
+      {myInfoData && index === 2 && <MyPageCombinationList />}
     </>
   );
 };

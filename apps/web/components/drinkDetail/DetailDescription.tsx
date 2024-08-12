@@ -26,7 +26,6 @@ const DetailDescription = ({
     detailDescription.packages,
     detailDescription.packages.length,
   );
-  console.log(detailDescriptionArr);
   return (
     <Flex
       w={'100%'}

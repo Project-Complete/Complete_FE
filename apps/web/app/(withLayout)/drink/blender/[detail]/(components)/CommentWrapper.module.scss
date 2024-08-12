@@ -1,0 +1,27 @@
+.replyWrapper{
+    background: white;
+    background-image: linear-gradient(100deg, #7e3fb8 7.35%, #b24a8b 92.65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.replyItemLine{
+    outline:None;
+    border:None;
+}
+
+.replyButton{
+    width: 3.75rem;
+    height: 2.5rem;
+    padding-left:0rem;
+    padding-right:0rem;
+    padding-top:12px;
+    padding-bottom:12px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+    border:none;
+    color:rgba(0, 0, 0, 0.65);
+    text-align: center;
+}

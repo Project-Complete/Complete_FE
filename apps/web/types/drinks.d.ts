@@ -110,6 +110,7 @@ interface DetailRecommendDrink {
   drink_like: boolean;
   drink_name: string;
   review_rating: number;
+  volume: string;
 }
 
 interface DetailRecommendDrinkList {
@@ -129,6 +130,7 @@ interface DrinkListElement {
   manufacturer_name: string;
   drink_name: string;
   review_rating: number;
+  volume: string;
 }
 
 interface PageInfo {
@@ -140,8 +142,8 @@ interface PageInfo {
 }
 
 interface DrinksResponse {
-    drinks: DrinkListElement[];
-    page_info: PageInfo;
+  drinks: DrinkListElement[];
+  page_info: PageInfo;
 }
 
 interface DrinkOfBanner {
