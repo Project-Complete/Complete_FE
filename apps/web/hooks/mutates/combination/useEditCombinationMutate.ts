@@ -1,5 +1,4 @@
-import { blenderWriteFormInitialValuesTypes } from "@/app/(withoutLayout)/drink/blender/write/(components)/blenderWriteFormContext";
-import postPreSignedUrl from "@/lib/postPreSignedUrl";
+import { blenderWriteFormInitialValuesTypes } from "@/app/(withoutLayout)/drink/blender/(components)/blenderWriteFormContext";
 import { api } from "@/utils/api";
 import { MutateOptions, useMutation } from "@tanstack/react-query";
 
@@ -17,9 +16,8 @@ type PostCreateCombinationType = {
     }[]
 }
 
-
-const postCreateCombination = async (variables: PostCreateCombinationType) => {
-    const res = api.post(`combinations`, {
+const patchEditCombination = async ({ combinationBorderId, variables }: { combinationBorderId: number, variables: PostCreateCombinationType }) => {
+    const res = api.patch(`combinations/${combinationBorderId}`, {
         json: variables
     }).json();
     return res;
@@ -27,21 +25,25 @@ const postCreateCombination = async (variables: PostCreateCombinationType) => {
 
 
 
-const useCreateCombinationMutate = ({ formReset }: { formReset?: () => void }) => {
+const useEditCombinationMutate = ({ combinationBorderId, formReset }: { combinationBorderId?: number, formReset?: () => void }) => {
 
     return useMutation({
         mutationKey: ['blenderWrite'],
         onMutate: async (variables: PostCreateCombinationType) => {
             console.log('variables', variables);
-            return postCreateCombination(variables)
+            if (combinationBorderId === undefined) {
+                throw new Error('combinationBorderId is undefined');
+            }
+            return patchEditCombination({ combinationBorderId, variables })
         },
         onError: (error, variables, context) => {
             console.log('error', error)
         },
         onSuccess: (data, variables, context) => {
             console.log('data', data)
+            history.back();
             formReset && formReset();
         }
     });
 }
-export default useCreateCombinationMutate;
+export default useEditCombinationMutate;

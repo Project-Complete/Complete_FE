@@ -37,9 +37,6 @@ export const useReviewPictureUpload = () => {
         const response = await ky.put(storageUrl, {
           body: file,
         });
-
-        console.log('pose image response', response);
-
         return response;
       } catch (error) {
         console.error('image post error', error);

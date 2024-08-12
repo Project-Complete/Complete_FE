@@ -35,6 +35,10 @@ export default withBundleAnalyzer({
         protocol: 'https',
         hostname: 'img1.daumcdn.net',
       },
+      {
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+      },
     ],
   },
   reactStrictMode: false,
