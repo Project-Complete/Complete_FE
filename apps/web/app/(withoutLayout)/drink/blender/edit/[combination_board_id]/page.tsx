@@ -8,17 +8,8 @@ import { use, useEffect, useMemo, useState } from 'react';
 import { blenderWriteFormInitialValuesTypes } from '../../(components)/blenderWriteFormContext';
 import { useBlenderDetailQuery } from '@/hooks/queries/blenders/useBlenderDetailQuery';
 import { randomId } from '@mantine/hooks';
+import { convertURLtoFile } from '@/lib/convertUrlToFile';
 
-export const convertURLtoFile = async (url: string) => {
-    const response = await fetch(url, {
-        method: "GET",
-    });
-    const data = await response.blob();
-    const ext = url.split(".").pop(); // url 구조에 맞게 수정할 것
-    const filename = `${url.split("/").pop()}.jpg`; // url 구조에 맞게 수정할 것
-    const metadata = { type: `image/${ext}` };
-    return new File([data], filename!, metadata);
-};
 
 export default function Page({ params }: { params: { combination_board_id: string } }) {
     const queryClient = getQueryClient();
