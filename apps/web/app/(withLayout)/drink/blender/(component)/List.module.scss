@@ -5,6 +5,16 @@
     color: transparent;
 }
 
+.listWrapper{
+    flex-direction: row;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
 .select {
     border-top: 1px solid rgba(0, 0, 0, 0.10);
     border-radius: 0.5rem;
@@ -16,7 +26,24 @@
 
 .select [data-expanded='true'] {
     border-bottom:none;
-    
+}
+
+.textInput{
+    text-align: center;
+    font-size: 16px;
+    font-weight:500
+}
+
+.button{
+    width:60px;
+    height:40px;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    border:#0000001A 1px solid;
+    color:#000000A6;
+    padding:0.5rem;
 }
 
 .chipButton{
@@ -34,5 +61,13 @@
     font-weight: 500;
     line-height: 1rem;
     /* 100% */
-        cursor: pointer;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+        height: 2.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
 }

@@ -18,10 +18,12 @@ const drinkListFetcher = async ({
   page?: number;
   keyword?: string;
 }) => {
-  const url = `drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=${page}`;
+  console.log(`keyword`, keyword);
+  let url = `drinks/search?drink_type=${drinkType}&sorted=${sorted}&page=${page}`;
   if (keyword) {
-    url + `&keyword=${keyword}`;
+    url += `&keyword=${keyword}`;
   }
+  console.log(url);
   const response = await api.get(url).json<DrinksResponse>();
   return response;
 };

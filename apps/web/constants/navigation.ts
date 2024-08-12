@@ -18,15 +18,15 @@ export const NAVIGATION_LIST: NavigationType[] = [
     menuList: [
       {
         name: '전체',
-        href: '/drink',
+        href: '/drink?select=all',
       },
       {
         name: '전통주',
-        href: '/drink',
+        href: '/drink?select=tradition',
       },
       {
         name: '맥주',
-        href: '/drink',
+        href: '/drink?select=beer',
       },
     ],
   },
@@ -37,23 +37,23 @@ export const NAVIGATION_LIST: NavigationType[] = [
         name: '주류끼리 안주끼리',
         href: '/drink/blender?page=1',
       },
-      {
-        name: '한 잔의 칠링',
-        href: '/drink/blender?page=1',
-      },
+      // {
+      //   name: '한 잔의 칠링',
+      //   href: '/drink/blender?page=1',
+      // },
     ],
   },
-  {
-    name: '커뮤니티',
-    menuList: [
-      {
-        name: '공지사항',
-        href: '/drink',
-      },
-      {
-        name: '이벤트',
-        href: '/drink',
-      },
-    ],
-  },
+  // {
+  //   name: '커뮤니티',
+  //   menuList: [
+  //     {
+  //       name: '공지사항',
+  //       href: '/drink',
+  //     },
+  //     {
+  //       name: '이벤트',
+  //       href: '/drink',
+  //     },
+  //   ],
+  // },
 ];
