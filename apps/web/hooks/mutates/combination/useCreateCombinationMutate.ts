@@ -29,7 +29,7 @@ const postCreateCombination = async (variables: PostCreateCombinationType) => {
 const useCreateCombinationMutate = ({ formReset }: { formReset?: () => void }) => {
     return useMutation({
         mutationKey: ['blenderWrite'],
-        onMutate: async (variables: PostCreateCombinationType) => {
+        mutationFn: async (variables: PostCreateCombinationType) => {
             console.log('variables', variables);
             return postCreateCombination(variables)
         },
