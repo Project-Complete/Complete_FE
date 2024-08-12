@@ -1,6 +1,6 @@
 import { blenderWriteFormInitialValuesTypes } from "@/app/(withoutLayout)/drink/blender/(components)/blenderWriteFormContext";
 import { api } from "@/utils/api";
-import { MutateOptions, useMutation } from "@tanstack/react-query";
+import { MutateOptions, useMutation, useQueryClient } from "@tanstack/react-query";
 
 type PostCreateCombinationType = {
     image_url: string;
@@ -26,23 +26,28 @@ const patchEditCombination = async ({ combinationBorderId, variables }: { combin
 
 
 const useEditCombinationMutate = ({ combinationBorderId, formReset }: { combinationBorderId?: number, formReset?: () => void }) => {
+    const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: ['blenderWrite'],
-        onMutate: async (variables: PostCreateCombinationType) => {
-            console.log('variables', variables);
+        mutationFn: async (variables: PostCreateCombinationType) => {
             if (combinationBorderId === undefined) {
                 throw new Error('combinationBorderId is undefined');
             }
-            return patchEditCombination({ combinationBorderId, variables })
+
+            console.log('variables', variables);
+            return await patchEditCombination({ combinationBorderId, variables })
         },
         onError: (error, variables, context) => {
             console.log('error', error)
+            alert(error);
+
         },
         onSuccess: (data, variables, context) => {
             console.log('data', data)
-            history.back();
             formReset && formReset();
+            queryClient.invalidateQueries({ queryKey: ['blender', combinationBorderId] });
+            history.back();
         }
     });
 }
