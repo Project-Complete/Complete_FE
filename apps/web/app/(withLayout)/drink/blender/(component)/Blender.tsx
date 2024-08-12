@@ -14,7 +14,7 @@ import {
 import Image from 'next/image';
 
 import { useBlenderDetailQuery } from '@/hooks/queries/blenders/useBlenderDetailQuery';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { formattedDate } from '@/utils/formattedDate';
 import { Fragment } from 'react';
 import BlenderDrinkListCard from './DrinkList';
@@ -31,7 +31,7 @@ const Blender = () => {
   const { data } = useBlenderDetailQuery({
     detailId: parseInt(detailId?.detail),
   });
-  // console.log(data);
+  const router = useRouter();
   const { mutate: deleteMutate } = useDeleteBlenderMutation();
   if (data) {
     return (
@@ -72,6 +72,9 @@ const Blender = () => {
                     px={'6px'}
                     py={'12px'}
                     color={'rgba(0, 0, 0, 0.65)'}
+                    onClick={() => {
+                      router.push(`/drink/blender/edit/${data.combination_board_id}`);
+                    }}
                   >
                     수정하기
                   </Menu.Item>

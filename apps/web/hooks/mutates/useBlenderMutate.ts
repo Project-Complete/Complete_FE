@@ -1,9 +1,10 @@
 import { api } from '@/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const fetcher = (combinationsId: number) => {
+const deleteCombinationfetcher = (combinationsId: number) => {
   return api.delete(`combinations/${combinationsId}`);
 };
+
 
 const commentFetcher = (
   combinationsId: number,
@@ -89,7 +90,7 @@ export const useCommentBlenderMutation = (combinationsId: number) => {
 export const useDeleteBlenderMutation = () => {
   return useMutation({
     mutationFn: async ({ combinationsId }: { combinationsId: number }) => {
-      return fetcher(combinationsId);
+      return deleteCombinationfetcher(combinationsId);
     },
   });
 };

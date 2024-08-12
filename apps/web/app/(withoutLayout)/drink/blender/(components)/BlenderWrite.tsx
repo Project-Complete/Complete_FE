@@ -1,11 +1,11 @@
 'use client'
 import { Flex, Box, Divider, Input, Image as MantineImage, Popover, Text } from '@mantine/core';
 import { Button } from '@team-complete/complete-ui';
-import containerCss from './../container.module.scss';
+import containerCss from './container.module.scss';
 import LoginButton from '@/components/login/LoginButton';
 import Image from 'next/image';
 import camera from '@/assets/icons/카메라.svg';
-import CustomDropZone from './../(components)/CustomDropZone';
+import CustomDropZone from './CustomDropZone';
 import { Form, useForm } from '@mantine/form';
 import { zodResolver } from 'mantine-form-zod-resolver';
 import { z } from 'zod';
@@ -13,17 +13,23 @@ import { IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useCallback, useRef, useState } from 'react';
 import { IconCirclePlus } from '@tabler/icons-react';
 import { randomId } from '@mantine/hooks';
-import SearchDrinkPopover from './../(components)/SearchDrinkPopover';
-import { blenderWriteFormInitialValues, blenderWriteFormInitialValuesTypes, BlenderWriteFormProvider, useCreateBlenderWriteForm } from './../(components)/blenderWriteFormContext';
+import SearchDrinkPopover from './SearchDrinkPopover';
+import { blenderWriteFormInitialValues, blenderWriteFormInitialValuesTypes, BlenderWriteFormProvider, useCreateBlenderWriteForm } from './blenderWriteFormContext';
 import { useMutation } from '@tanstack/react-query';
-import useCreateCombinationMutate from '@/hooks/mutates/useCreateCombinationMutate';
+import useCreateCombinationMutate from '@/hooks/mutates/combination/useCreateCombinationMutate';
 import postPreSignedUrl from '@/lib/postPreSignedUrl';
 import { useReviewPictureUpload } from '@/hooks/mutates/useReviewWriteMutate';
+import useEditCombinationMutate from '@/hooks/mutates/combination/useEditCombinationMutate';
 
 
-const BlenderWrite = ({ initialValues }: {
-    initialValues?: blenderWriteFormInitialValuesTypes
+const BlenderWrite = (props: {
+    initialValues: blenderWriteFormInitialValuesTypes;
+    combinationBoardId: string;
+    defaultImage: string;
+} | {
+
 }) => {
+    const { initialValues, combinationBoardId, defaultImage } = { initialValues: undefined, combinationBoardId: undefined, defaultImage: undefined, ...props };
     const blenderWriteForm = useCreateBlenderWriteForm({
         initialValues: initialValues ?? blenderWriteFormInitialValues
     });
@@ -37,6 +43,11 @@ const BlenderWrite = ({ initialValues }: {
         setSelectedCombinationPopover(null);
     }, [])
 
+
+    // 이미지가 변경되었는지 확인하는 상태
+    // 기존 이미지 주소가 있으면 true, 없으면 false
+    const [isDefaultImage, setIsDefaultImage] = useState(defaultImage !== undefined ? true : false);
+    console.log('isChangedImage', isDefaultImage, defaultImage)
     const handleAddCombination = (
         e: React.MouseEvent<HTMLDivElement, MouseEvent>
     ) => {
@@ -122,36 +133,48 @@ const BlenderWrite = ({ initialValues }: {
 
     }
 
-    const { mutate } = useCreateCombinationMutate({
+    const { mutate: createCombinationMutate } = useCreateCombinationMutate({
         formReset: () => {
             blenderWriteForm.reset();
         }
     });
+    const { mutate: editCombinationMutate } = useEditCombinationMutate({
+        combinationBorderId: combinationBoardId ? parseInt(combinationBoardId) : undefined,
+        formReset: () => {
+            blenderWriteForm.reset();
+        }
+    });
+
+
     const { mutate: pictureUploadMutate } = useReviewPictureUpload();
 
-    const postImage = async (storageUrl: string, file: File | null) => {
-        pictureUploadMutate({ storageUrl, file: file });
+    const postImage = async (file: File) => {
+
+        if (isDefaultImage === true && defaultImage !== undefined) {
+            return { image_url: defaultImage };
+        }
+        const { image_url, pre_signed_url } = await postPreSignedUrl(file);
+        pictureUploadMutate({ storageUrl: pre_signed_url, file: file });
+        return { image_url };
     };
 
     const handleWriteCancel = () => {
         history.back();
         blenderWriteForm.reset();
     }
-    const handleWriteComplete = async () => {
 
+    const createCombinationBorder = async () => {
         const file = blenderWriteForm.getValues().file;
 
         if (file === null) return;
 
         try {
-            const preSignedUrl = await postPreSignedUrl(file);
+            const { image_url } = await postImage(file);
 
-
-            await postImage(preSignedUrl || '', file);
-
-            mutate(
+            createCombinationMutate(
                 {
-                    image_url: preSignedUrl.split('?')[0] as string,
+                    // image_url: pre_signed_url.split('?')[0] as string,
+                    image_url,
                     title: blenderWriteForm.getValues().title,
                     description: blenderWriteForm.getValues().description,
                     content: blenderWriteForm.getValues().content,
@@ -174,6 +197,49 @@ const BlenderWrite = ({ initialValues }: {
             throw new Error('리뷰 이미지 등록실패');
         }
     }
+    const editCombinationBorder = async () => {
+        const file = blenderWriteForm.getValues().file;
+
+        if (file === null) return;
+
+        try {
+            const { image_url } = await postImage(file);
+            editCombinationMutate(
+                {
+                    // image_url: pre_signed_url.split('?')[0] as string,
+                    image_url,
+                    title: blenderWriteForm.getValues().title,
+                    description: blenderWriteForm.getValues().description,
+                    content: blenderWriteForm.getValues().content,
+                    combinations: blenderWriteForm.getValues().combinations.map((v, index) => {
+                        return {
+                            drink_id: v.drink_id,
+                            name: v.name,
+                            volume: v.volume,
+                            xcoordinate: v.xcoordinate,
+                            ycoordinate: v.ycoordinate,
+                        }
+                    })
+                }
+            )
+        }
+
+        catch (error) {
+            console.error('image post error', error);
+            alert('리뷰 이미지 등록 실패');
+            throw new Error('리뷰 이미지 등록실패');
+        }
+    }
+
+    const handleWriteComplete = async () => {
+        if (combinationBoardId === undefined) {
+            await createCombinationBorder();
+        } else {
+            await editCombinationBorder();
+        }
+
+    }
+
     const handleDeleteCombination = (index: number) => {
         blenderWriteForm.setFieldValue('combinations', (combinations) => {
             const newCombination = [...combinations];
@@ -211,6 +277,7 @@ const BlenderWrite = ({ initialValues }: {
                                         setSelectedCombinationId(null);
                                         setSelectedCombinationPopover(null);
                                         blenderWriteForm.setFieldValue('file', null);
+                                        setIsDefaultImage(false);
                                     }}>
                                     <Box style={{ borderRadius: '24px' }} px={16} c={'white'} bg={'gray'}>
                                         사진 변경
@@ -252,6 +319,7 @@ const BlenderWrite = ({ initialValues }: {
                                 console.log('file', file)
                                 if (file !== undefined) {
                                     blenderWriteForm.setFieldValue('file', file)
+                                    setIsDefaultImage(false);
                                 }
                             }}
                             onReject={(files) => console.log('rejected files', files)}
@@ -319,8 +387,8 @@ const BlenderWrite = ({ initialValues }: {
                     </Flex>
                 </Flex >
                 <Flex w={'100%'} py={40} gap={24}>
-                    <Button size="md" style={{ width: '100%' }} variant='outline' onClick={handleWriteCancel} >작성 취소</Button>
-                    <Button size="md" style={{ width: '100%' }} variant='purple-light' onClick={handleWriteComplete} >작성 완료</Button>
+                    <Button size="md" style={{ width: '100%' }} variant='outline' onClick={handleWriteCancel} >{combinationBoardId === undefined ? '작성' : '수정'} 취소</Button>
+                    <Button size="md" style={{ width: '100%' }} variant='purple-light' onClick={handleWriteComplete} >{combinationBoardId === undefined ? '작성' : '수정'} 완료</Button>
                 </Flex>
             </Flex >
         </form>
