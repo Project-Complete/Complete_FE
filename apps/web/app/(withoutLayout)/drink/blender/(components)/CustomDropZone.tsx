@@ -34,7 +34,7 @@ const CustomDropZone = (props: Partial<DropzoneProps>) => {
                             width={24}
                             height={24}
                         />
-                        <Flex fz={16} fw={500} lh={'16px'}>사진을 업로드해줏세요</Flex>
+                        <Flex fz={16} fw={500} lh={'16px'}>사진을 업로드해주세요</Flex>
                     </Flex>
                     <Button w={179} h={40} radius={8} px={16} py={12} bg={'white'} c={'#000000A6'} fz={16} fw={500} lh={'16px'}>클릭해서 사진 불러오기</Button>
                 </Flex>
