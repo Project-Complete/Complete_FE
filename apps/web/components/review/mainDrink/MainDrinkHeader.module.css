@@ -7,6 +7,17 @@
   font-style: normal;
   font-weight: 800;
   line-height: 3rem;
+  height: 60px;
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    font-family: Pretendard;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 40px;
+    text-align: left;
+
+    height: 18px;
+  }
 }
 
 .review-filter-button-layout {
@@ -21,6 +32,7 @@
   font-weight: 600;
   line-height: 2.5rem;
   padding: 0rem var(--Spacing-16, 1rem);
+  width: 6rem;
 }
 
 .ChipButtonArea-active {
@@ -35,6 +47,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 2.5rem;
+  width: 6rem;
 }
 
 .another-drink-list-wrapper {

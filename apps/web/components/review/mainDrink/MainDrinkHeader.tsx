@@ -1,10 +1,11 @@
 'use client';
-import { Anchor, Box, Flex } from '@mantine/core';
+import { Anchor, Box, Flex, Text, em } from '@mantine/core';
 import Link from 'next/link';
 import { ChipButton } from '@team-complete/complete-ui';
 import AngleRight from '@/assets/angleRight.svg';
 import Image from 'next/image';
 import classes from './MainDrinkHeader.module.css';
+import { useMediaQuery } from '@mantine/hooks';
 
 const MainDrinkHeader = ({
   activeState,
@@ -13,18 +14,13 @@ const MainDrinkHeader = ({
   activeState: 'all' | 'beer' | 'tradition';
   activeStateHandler: (value: 'all' | 'beer' | 'tradition') => void;
 }) => {
+  const isMobile = useMediaQuery(`(max-width:${em(768)})`);
   return (
     <Flex w={'100%'} direction={'column'}>
-      <Flex
-        w={'100%'}
-        h={60}
-        mt={'4.5rem'}
-        className={classes['review-main-title']}
-        mb={30}
-      >
+      <Flex w={'100%'} mt={'4.5rem'} className={classes['review-main-title']}>
         나의 인생 주류, 추천합니다!
       </Flex>
-      <Flex w={'100%'} mb={24}>
+      <Flex w={'100%'} mb={24} direction={isMobile ? `column` : `row`}>
         <Flex
           w={'100%'}
           className={classes['review-filter-button-layout']}
@@ -70,7 +66,7 @@ const MainDrinkHeader = ({
             전통주
           </ChipButton>
         </Flex>
-        <Flex w={'100%'} justify={'flex-end'} align={'center'}>
+        <Flex w={'100%'} justify={'flex-end'} align={'center'} mt={`1rem`}>
           <Anchor
             href={`/drink?select=${activeState}`}
             component={Link}
@@ -85,7 +81,7 @@ const MainDrinkHeader = ({
             className={classes['another-drink-list']}
           >
             <Flex justify={'center'} align={'center'} gap={8}>
-              더보기
+              <Text>더보기</Text>
               <Image
                 src={AngleRight}
                 width={24}
