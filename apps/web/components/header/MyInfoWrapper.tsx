@@ -80,7 +80,7 @@ const HeaderMyInfoWrapper = () => {
           </Popover.Dropdown>
         </Popover>
         <Avatar src={myInfoData.profile_image_url} alt="It's me!" />
-        {/* <HeaderWriteButton /> */}
+        <HeaderWriteButton isLogin={true} />
       </Flex>
     );
   } else {
@@ -92,7 +92,7 @@ const HeaderMyInfoWrapper = () => {
         w={'100%'}
         gap={'0.75rem'}
       >
-        <HeaderWriteButton />
+        <HeaderWriteButton isLogin={false} />
       </Flex>
     );
   }

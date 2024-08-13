@@ -13,12 +13,14 @@ export default async function Page({ params }: { params: { detail: string } }) {
 
   const accessToken = cookieStore.get('access_token');
   const refreshToken = cookieStore.get('refresh_token');
+  const isLogin = cookieStore.has(`access_token`);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Flex w={'100%'} h={'100%'} align={'center'} direction={'column'}>
         <DrinkDetailWrapper
           accessToken={accessToken}
           refreshToken={refreshToken}
+          isLogin={isLogin}
         />
       </Flex>
     </HydrationBoundary>

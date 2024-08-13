@@ -17,12 +17,14 @@ import DetailWriteButton from './WriteButton';
 const DrinkDetailWrapper = ({
   accessToken,
   refreshToken,
+  isLogin,
 }: {
   accessToken: RequestCookie | undefined;
   refreshToken: RequestCookie | undefined;
+  isLogin: boolean;
 }) => {
   const params = useParams();
-  
+
   const [activeTab, setActiveTab] = useState<string | null>('상세 정보');
   const { moveToSection } = useScroll();
   const descriptionRef = useRef<HTMLHeadingElement | null>(null);
@@ -117,7 +119,7 @@ const DrinkDetailWrapper = ({
 
     return (
       <>
-        <DetailWriteButton drinkName={summaryDrink.name} />
+        {isLogin && <DetailWriteButton drinkName={summaryDrink.name} />}
         <DetailSummary
           data={summaryDrink}
           accessToken={accessToken}
@@ -163,7 +165,7 @@ const DrinkDetailWrapper = ({
                 onChange={setActiveTab}
                 className={classes['detail-age-tab-max-width']}
               >
-                <TabList >
+                <TabList>
                   <Tab
                     // ml={'1.5rem'}
                     value='상세 정보'
