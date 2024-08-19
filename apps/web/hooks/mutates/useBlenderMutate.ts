@@ -5,20 +5,28 @@ const deleteCombinationfetcher = (combinationsId: number) => {
   return api.delete(`combinations/${combinationsId}`);
 };
 
-
 const commentFetcher = (
   combinationsId: number,
   content: string,
   parentId: number = 0,
 ) => {
-  return api
-    .post(`combinations/${combinationsId}/comment`, {
+  if (parentId !== 0) {
+    return api
+      .post(`combinations/${combinationsId}/comment`, {
+        json: {
+          content,
+          parent_combination_comment_id: parentId,
+        },
+      })
+      .json();
+  } else {
+    return api.post(`combinations/${combinationsId}/comment`, {
       json: {
         content,
-        parent_combination_comment_id: parentId,
+        parent_combination_comment_id: null,
       },
-    })
-    .json();
+    });
+  }
 };
 
 const blenderReplyCommentDelete = async (commentId: number) => {
