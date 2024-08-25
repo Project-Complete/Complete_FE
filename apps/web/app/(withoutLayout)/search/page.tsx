@@ -35,7 +35,8 @@ export default function Page(): JSX.Element {
   const searchParams = useSearchParams();
 
   const keywordParam = searchParams?.get('keyword') || '';
-  const tabTypeParam = searchParams?.get('tabType') || 'drinkReview';
+  const tabTypeParam = (searchParams?.get('tabType') || 'drinkReview') as SearchTabType;
+  const drinkTypeParam = (searchParams?.get('drinkType') || 'all') as DrinkType;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -48,9 +49,13 @@ export default function Page(): JSX.Element {
     [searchParams],
   );
 
-  const form = useForm({
+  const form = useForm<{
+    keyword: string;
+    tabType: SearchTabType;
+    drinkType: DrinkType;
+  }>({
     mode: 'uncontrolled',
-    initialValues: { keyword: keywordParam, tabType: tabTypeParam },
+    initialValues: { keyword: keywordParam, tabType: tabTypeParam, drinkType: drinkTypeParam },
     enhanceGetInputProps: payload => {
       if (payload.options.fieldType === 'searchAutocomplete') {
         return {
@@ -124,11 +129,41 @@ export default function Page(): JSX.Element {
     );
   };
 
+  const handleOnClickKeyword = (keyword: string) => {
+    router.push(pathname + '?' + createQueryString('keyword', keyword));
+    form.setFieldValue('keyword', keyword);
+    setSubmittedValues(
+      produce(prev => {
+        prev.keyword = keyword;
+      }),
+    );
+  }
+
+  const handleOnClickDrinkType = (drinkType: DrinkType) => {
+    if (drinkType === form.getValues().drinkType) {
+      router.push(pathname + '?' + createQueryString('drinkType', 'all'));
+      form.setFieldValue('drinkType', 'all');
+      setSubmittedValues(
+        produce(prev => {
+          prev.drinkType = 'all';
+        }),
+      );
+    }
+    else {
+      router.push(pathname + '?' + createQueryString('drinkType', drinkType));
+      form.setFieldValue('drinkType', drinkType);
+      setSubmittedValues(
+        produce(prev => {
+          prev.drinkType = drinkType;
+        }),
+      );
+    }
+  }
+
   return (
     <>
       <form
         onSubmit={form.onSubmit((data, event) => {
-          console.log('aS???', data);
           setSubmittedValues(data);
           addRecentSearch(data.keyword);
         })}
@@ -194,10 +229,13 @@ export default function Page(): JSX.Element {
             {isEmptyKeyword ? (
               <Flex mt={24} w={'100%'} direction={'column'}>
                 <DefaultSearchView
+                  currentDrinkType={form.getValues().drinkType}
                   recentSearches={recentSearches}
                   deleteRecentSearch={deleteRecentSearch}
+                  handleOnClickKeyword={handleOnClickKeyword}
+                  handleOnClickDrinkType={handleOnClickDrinkType}
                 />
-                <MainDrinkContent drinkType={'all'} />
+                <MainDrinkContent drinkType={form.getValues().drinkType} />
               </Flex>
             ) : (
               <Tabs

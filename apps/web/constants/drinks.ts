@@ -47,13 +47,13 @@ export const foods: { [key: string]: string } = {
 export const DRINKS_TYPE = {
   beer: {
     sort: 1,
-    label: 'Beer',
+    label: 'beer',
     exposeLabel: '맥주',
     image: '/주종/맥주.svg',
   },
   traditional: {
     sort: 2,
-    label: 'Traditional Liquor',
+    label: 'tradition',
     exposeLabel: '전통주',
     image: '/주종/전통주.svg',
   },

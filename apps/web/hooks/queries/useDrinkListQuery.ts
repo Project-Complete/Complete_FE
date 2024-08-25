@@ -13,7 +13,7 @@ const drinkListFetcher = async ({
   page = 1,
   keyword,
 }: {
-  drinkType: 'all' | 'beer' | 'tradition';
+  drinkType: DrinkType
   sorted?: 'popularity';
   page?: number;
   keyword?: string;
@@ -32,7 +32,7 @@ export const useMainDrinkListQuery = ({
   drinkType,
   sorted = 'popularity',
 }: {
-  drinkType: 'all' | 'beer' | 'tradition';
+  drinkType: DrinkType
   sorted?: 'popularity';
 }): UseQueryResult<DrinksResponse, Error> => {
   return useQuery({
@@ -46,7 +46,7 @@ export const useDrinkListQuery = ({
   sorted = 'popularity',
   keyword,
 }: {
-  drinkType: 'all' | 'beer' | 'tradition';
+  drinkType: DrinkType
   sorted?: 'popularity';
   keyword?: string;
 }): UseInfiniteQueryResult<InfiniteData<DrinksResponse, Error>, Error> => {

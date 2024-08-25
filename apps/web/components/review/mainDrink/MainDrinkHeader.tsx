@@ -11,7 +11,7 @@ const MainDrinkHeader = ({
   activeState,
   activeStateHandler,
 }: {
-  activeState: 'all' | 'beer' | 'tradition';
+  activeState: DrinkType
   activeStateHandler: (value: 'all' | 'beer' | 'tradition') => void;
 }) => {
   const isMobile = useMediaQuery(`(max-width:${em(768)})`);

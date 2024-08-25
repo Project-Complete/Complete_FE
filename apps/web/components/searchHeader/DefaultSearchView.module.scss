@@ -1,0 +1,10 @@
+.drink-type{
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.drink-type[data-selected='true'] {
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 20px 0px;
+}

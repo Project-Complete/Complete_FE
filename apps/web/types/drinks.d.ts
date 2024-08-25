@@ -167,3 +167,5 @@ interface DrinkBannerResponseDto {
   drinks: DrinkOfBanner[];
   page_info: PageInfo;
 }
+
+type DrinkType = DrinkType

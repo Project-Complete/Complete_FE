@@ -12,7 +12,7 @@ import classes from "./ListWrapper.module.scss"
 const DrinkList = ({
   drinkType,
 }: {
-  drinkType: 'all' | 'beer' | 'tradition';
+  drinkType: DrinkType
 }) => {
   const { data, fetchNextPage, hasNextPage } = useDrinkListQuery({
     drinkType,
@@ -55,8 +55,8 @@ const DrinkList = ({
                           <Image
                             src={
                               e.image_url !== 'string' &&
-                              e.image_url !== '' &&
-                              e.image_url !== 'imageUrl'
+                                e.image_url !== '' &&
+                                e.image_url !== 'imageUrl'
                                 ? e.image_url
                                 : 'https://picsum.photos/392/288.webp'
                             }
