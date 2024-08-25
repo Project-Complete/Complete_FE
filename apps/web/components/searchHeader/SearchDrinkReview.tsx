@@ -1,19 +1,19 @@
 'use client';
 import AnotherDrinkListCard from '@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/Card';
-import { useMainSearchDrinkInfinityQuery } from '@/hooks/queries/useMainSearchDrinkInfinityQuery';
-import { Flex } from '@mantine/core';
+import { Container, Flex } from '@mantine/core';
 import { useIntersection } from '@mantine/hooks';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import cardListCss from '@/app/(withLayout)/drink/[detail]/(components)/(AnotherDrink)/List.module.scss';
+import { useDrinkListQuery } from '@/hooks/queries/useDrinkListQuery';
 
 type SearchDrinkReviewPropsType = {
   keyword: string;
 };
 const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
-  const { data, fetchNextPage, hasNextPage } = useMainSearchDrinkInfinityQuery({
+  const { data, fetchNextPage, hasNextPage } = useDrinkListQuery({
     keyword,
+    drinkType: 'all'
   });
-
   const { ref, entry } = useIntersection({
     root: null,
     threshold: 0.3,
@@ -24,10 +24,10 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
     }
   }, [entry]);
 
-  const totalElements = data?.pages[0]?.search_drinks.page_info?.total_elements;
+  const totalElements = data?.pages[0]?.page_info?.total_elements;
 
   return (
-    <div>
+    <Container className={cardListCss['card-list-container']} >
       {totalElements !== undefined && (
         <Flex
           c={'h2'}
@@ -37,28 +37,31 @@ const SearchDrinkReview = ({ keyword }: SearchDrinkReviewPropsType) => {
           ref={ref}
         >{`"${keyword}"에 대 검색 결과 ${totalElements}개`}</Flex>
       )}
-      <h1>SearchDrinkReview</h1>
-      {data?.pages?.map((page, index) => {
-        return (
-          <div key={index} className={cardListCss['card-list-wrapper']}>
-            {page.search_drinks.drinks.map(drink => {
-              return (
-                <AnotherDrinkListCard
-                  key={drink.drink_id}
-                  drink_id={drink.drink_id}
-                  drink_like={drink.drink_like}
-                  drink_name={drink.drink_name}
-                  image_url={drink.image_url}
-                  manufacturer_name={drink.manufacturer_name}
-                  review_rating={drink.review_rating}
-                  volume={drink.volume}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
+      <div className={cardListCss['card-list-wrapper']}>
+        {data?.pages?.map((page, index) => {
+          return (
+            <Fragment key={index}>
+              {page.drinks.map(drink => {
+                return (
+                  <AnotherDrinkListCard
+                    key={drink.drink_id}
+                    drink_id={drink.drink_id}
+                    drink_like={drink.drink_like}
+                    drink_name={drink.drink_name}
+                    image_url={drink.image_url}
+                    manufacturer_name={drink.manufacturer_name}
+                    review_rating={drink.review_rating}
+                    volume={drink.volume}
+                  />
+                );
+              })}
+            </Fragment>
+
+
+          );
+        })}
+      </div>
+    </Container >
   );
 };
 export default SearchDrinkReview;

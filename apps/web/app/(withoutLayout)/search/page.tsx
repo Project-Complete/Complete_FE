@@ -216,8 +216,8 @@ export default function Page(): JSX.Element {
                   defaultValue={tabTypeParam}
                 >
                   <Tab value='drinkReview'>주류</Tab>
-                  {/* <Tab value='chilling'>본격적 칠링</Tab>
-                  <Tab value='community'>커뮤니티</Tab> */}
+                  <Tab value='chilling'>본격적 칠링</Tab>
+                  {/*<Tab value='community'>커뮤니티</Tab> */}
                 </TabList>
                 <Tabs.Panel value='drinkReview'>
                   <SearchDrinkReview keyword={submittedValues?.keyword ?? ''} />
@@ -225,9 +225,9 @@ export default function Page(): JSX.Element {
                 <Tabs.Panel value='chilling'>
                   <SearchChilling keyword={submittedValues?.keyword ?? ''} />
                 </Tabs.Panel>
-                <Tabs.Panel value='community'>
+                {/* <Tabs.Panel value='community'>
                   <SearchCommunity keyword={submittedValues?.keyword ?? ''} />
-                </Tabs.Panel>
+                </Tabs.Panel> */}
               </Tabs>
             )}
           </Flex>

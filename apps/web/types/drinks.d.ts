@@ -146,6 +146,11 @@ interface DrinksResponse {
   page_info: PageInfo;
 }
 
+interface CombinationsResponse {
+  combinations: DrinkListElement[];
+  page_info: PageInfo;
+}
+
 interface DrinkOfBanner {
   drink_id: number;
   name: string;

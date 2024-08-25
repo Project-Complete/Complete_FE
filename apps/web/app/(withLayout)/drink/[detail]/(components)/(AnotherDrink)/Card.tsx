@@ -10,6 +10,7 @@ const AnotherDrinkListCard = ({
   image_url,
   manufacturer_name,
   review_rating,
+  volume
 }: DetailRecommendDrink) => {
   console.log(image_url);
   return (
