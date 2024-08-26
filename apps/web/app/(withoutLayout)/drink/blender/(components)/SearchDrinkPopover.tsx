@@ -1,4 +1,3 @@
-import { useMainSearchDrinkInfinityQuery } from "@/hooks/queries/useMainSearchDrinkInfinityQuery";
 import { Divider, Flex, Popover, PopoverProps } from "@mantine/core";
 import { Button, Input, CloseIconButton } from "@team-complete/complete-ui";
 import { useCallback, useState } from "react";
@@ -6,6 +5,7 @@ import { produce } from "immer";
 
 import Image from 'next/image';
 import { useBlenderWriteFormContext } from "./blenderWriteFormContext";
+import { useDrinkListQuery } from "@/hooks/queries/useDrinkListQuery";
 
 type SearchDrinkPopoverPropsType = PopoverProps & {
     children: React.ReactNode
@@ -41,8 +41,9 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
 
     const blenderWriteForm = useBlenderWriteFormContext();
 
-    const { data, fetchNextPage, hasNextPage } = useMainSearchDrinkInfinityQuery({
+    const { data, fetchNextPage, hasNextPage } = useDrinkListQuery({
         keyword,
+        drinkType: 'all'
     });
 
     const handleWriteComplete = () => {
@@ -121,7 +122,7 @@ const SearchDrinkPopover = ({ children, handleClosePopover, index, ...popoverPro
                     {data?.pages?.map((page, index) => {
                         return (
                             <Flex direction={'column'} key={index}>
-                                {page.search_drinks.drinks.map((drink, drinkIndex) => {
+                                {page.drinks.map((drink, drinkIndex) => {
                                     return (
                                         <Flex justify={'space-between'} key={drinkIndex}>
                                             <Flex align={'center'} gap={20}>
