@@ -1,5 +1,9 @@
-.card-list-wrapper{
+.card-list-container{
     display: flex;
-    align-items: flex-start;
-    gap: var(--Spacing-24, 1.5rem);
+    flex-direction: column;
+}
+.card-list-wrapper{
+    display: grid;
+    gap: var(--Spacing-24, 1.5rem); /* 카드 사이 간격 */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 최소 300px, 최대 1fr로 자동 조절 */
 }

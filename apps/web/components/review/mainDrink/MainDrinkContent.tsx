@@ -16,7 +16,7 @@ import MainDrinkCard from './MainDrinkContentCard';
 const MainDrinkContent = ({
   drinkType,
 }: {
-  drinkType: 'all' | 'beer' | 'tradition';
+  drinkType: DrinkType
 }) => {
   const { data } = useMainDrinkListQuery({
     drinkType: drinkType,
